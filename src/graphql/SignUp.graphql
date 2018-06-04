@@ -1,0 +1,5 @@
+mutation signUp($email: String, $password: String, $role: EnumUserRole) {
+  signUp(email: $email, password: $password, role: $role) {
+    accessToken
+  }
+}
