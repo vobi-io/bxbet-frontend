@@ -9,10 +9,10 @@ import Home from './pages/home'
 import Artists from './pages/artists'
 import Browse from './pages/browse'
 import FourOFour from './pages/errors/404'
-import Wizard from './pages/user/wizard/Wizard'
 import ProtectedRoute from './components/protectedRoute'
 import Request from './pages/request'
 import HomePage from './pages/HomePage'
+
 const App = ({
   signInOpened,
   signUpOpened,
@@ -25,7 +25,7 @@ const App = ({
     <Header
       toggleSignIn={toggleSignIn}
       toggleSignUp={toggleSignUp}
-      brandName="BookingBravo"
+      brandName="BX.BET"
       rightPages={[
         // {
         //   title: 'Artists',
@@ -58,7 +58,6 @@ const App = ({
       <Route path="/artists" component={Artists} />
       <Route path="/browse" component={Browse} />
       <Route path="/request" component={Request} />
-      <ProtectedRoute path="/wizard" component={Wizard} />
       <Route component={FourOFour} />
     </Switch>
     {signInOpened && (

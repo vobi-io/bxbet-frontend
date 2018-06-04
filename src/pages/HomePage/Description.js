@@ -37,17 +37,17 @@ const Paragraph = styled.div`
 `
 
 const Description = () => (
-    <Container>
-        <Title>
-            <span>Hire a talent for your party in the best way possible!</span>
-        </Title>
-        <Paragraph>
-            <span>
-                Birthday party, wedding, funeral, you name it – BookingBravo can help you
+  <Container>
+    <Title>
+      <span>Hire a talent for your party in the best way possible!</span>
+    </Title>
+    <Paragraph>
+      <span>
+                Birthday party, wedding, funeral, you name it – bxbet can help you
                 find a talent for any occasion.
             </span>
-        </Paragraph>
-    </Container>
+    </Paragraph>
+  </Container>
 )
 
 export default Description

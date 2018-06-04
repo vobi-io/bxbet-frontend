@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import {Rating} from 'vobi-components'
+import { Rating } from 'vobi-components'
 import BtnArrow from './BtnArrow'
 
 const Container = styled.div`
@@ -19,7 +19,7 @@ const Container = styled.div`
     }
 `
 const Title = styled.div`
-    height: 104px;	
+    height: 104px;
     width: 834px;
     color: #2f3033;
     font-size: 42px;
@@ -164,48 +164,46 @@ const ButtonBack = styled.button`
 `
 
 const Reviews = props => (
-    <Container>
-        <div className="titleWrapper">
-            <Title><span>What people are saying about BookingBravo</span></Title>
+  <Container>
+      <div className="titleWrapper">
+          <Title><span>What people are saying about BX.BET</span></Title>
         </div>
-        <Div>
-            <ReviewContainer>
-                {props.reviews.map((item, index) => (
-                    <Review key={index}>
-                        <Wrapper>
-                            <Raitings>
-                                <Rating color2={"#07730d"} value={item.value} size= {25}/>
-                                <Date><span>{item.date}</span></Date>
+      <Div>
+          <ReviewContainer>
+              {props.reviews.map((item, index) => (
+                  <Review key={index}>
+                      <Wrapper>
+                          <Raitings>
+                              <Rating color2={'#07730d'} value={item.value} size={25} />
+                              <Date><span>{item.date}</span></Date>
                             </Raitings>
-                            <ReviewDescription>
-                                <span>{item.service}</span>
-                                <span className="description">{item.description}</span>
+                          <ReviewDescription>
+                              <span>{item.service}</span>
+                              <span className="description">{item.description}</span>
                             </ReviewDescription>
-                            <Person>
-                                <Avatar src={item.avatar} />
-                                <MarginLeft>
-                                    <Name>{item.name}</Name>
-                                    <Profession>{item.profession}</Profession>
+                          <Person>
+                              <Avatar src={item.avatar} />
+                              <MarginLeft>
+                                  <Name>{item.name}</Name>
+                                  <Profession>{item.profession}</Profession>
                                 </MarginLeft>
                             </Person>
                         </Wrapper>
                     </Review>
                 ))}
             </ReviewContainer>
-            <ChangeContainer>
-                <div className="emptyDiv">
-
-                </div>
-                <CirclesContainer>
-                    <span className="circleActive"></span>
-                    <span className="circle"></span>
-                    <span className="circle"></span>
-                    <span className="circle"></span>
-                    <span className="circle"></span>
+          <ChangeContainer>
+              <div className="emptyDiv" />
+              <CirclesContainer>
+                  <span className="circleActive" />
+                  <span className="circle" />
+                  <span className="circle" />
+                  <span className="circle" />
+                  <span className="circle" />
                 </CirclesContainer>
-                <BtnContainer>
-                    <ButtonBack><BtnArrow/></ButtonBack>
-                    <ButtonForward><BtnArrow /></ButtonForward>
+              <BtnContainer>
+                  <ButtonBack><BtnArrow /></ButtonBack>
+                  <ButtonForward><BtnArrow /></ButtonForward>
                 </BtnContainer>
             </ChangeContainer>
         </Div>
@@ -213,7 +211,7 @@ const Reviews = props => (
 )
 
 Reviews.propTypes = {
-    reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 }
 
 export default Reviews

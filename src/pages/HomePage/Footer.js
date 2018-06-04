@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import FacebookIcon from './FacebookIcon'
 import TwitterIcon from './TwitterIcon'
 import PinterestIcon from './PinterestIcon'
-import InstagramIcon from './InstagramIcon';
+import InstagramIcon from './InstagramIcon'
 
 const Container = styled.div`
     margin-top: 128px;
@@ -40,22 +40,22 @@ const FlexDiv = styled.div`
     align-items: center;
 `
 const Footer = () => (
-    <Container>
-        <Div>
-            <div>
-                <Title>BookingBravo</Title>
-                <CopyRight>
-                    <span>
-                        © 2017 BookingBravo<br />
+  <Container>
+      <Div>
+          <div>
+              <Title>BX.BET</Title>
+              <CopyRight>
+                  <span>
+                        © 2017 BX.BET<br />
                         All rights reserved.
                     </span>
                 </CopyRight>
             </div>
-            <FlexDiv>
-                <FacebookIcon />
-                <TwitterIcon />
-                <PinterestIcon />
-                <InstagramIcon />
+          <FlexDiv>
+              <FacebookIcon />
+              <TwitterIcon />
+              <PinterestIcon />
+              <InstagramIcon />
             </FlexDiv>
         </Div>
     </Container>

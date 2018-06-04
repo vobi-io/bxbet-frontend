@@ -175,7 +175,7 @@ const SignUpContentContainer = compose(
 
         setToken(accessToken)
 
-        window.location.href = '/wizard'
+        window.location.href = '/'
       } catch (e) {
         setSubmissionError(e.message)
       }
