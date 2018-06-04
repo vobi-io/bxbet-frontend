@@ -119,7 +119,7 @@ const SignInContent = ({
     </form>
     <Divider mt={'28px'} />
     <SecondaryHeader>
-      Not have a Booking Genius account yet?{' '}
+      Not have a BEX.BET account yet?{' '}
       <Span
         onClick={() => {
           openSignup()

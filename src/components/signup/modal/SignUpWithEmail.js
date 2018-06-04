@@ -137,7 +137,7 @@ const SignUpContent = ({
     </form>
     <Divider mt={'28px'} />
     <SecondaryHeader>
-      Already have a Booking Genius account?{' '}
+      Already have a BX.BET account?{' '}
       <Span
         onClick={() => {
           openLogin()

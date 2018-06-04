@@ -89,7 +89,7 @@ const ModalContent = ({ onRequestClose, openLogin, toggleSignUpWithEmail }) => (
     </Button>
     <Divider mt={'15px'} />
     <SecondaryHeader>
-      Already have a Booking Genius account?{' '}
+      Already have a BX.BET account?{' '}
       <Span
         onClick={() => {
           openLogin()

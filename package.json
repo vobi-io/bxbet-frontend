@@ -1,9 +1,9 @@
 {
-  "name": "BookingGenius-Front",
+  "name": "bxbet-Front",
   "version": "1.0.0",
-  "description": "BookingGenius Front",
+  "description": "BX.BET Front",
   "main": "src/index.js",
-  "repository": "git@github.com/btomashvili/BookingGenius-Front.git",
+  "repository": "git@github.com/btomashvili/bxbet-frontend.git",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.production.config.js --progress --profile --colors",
     "build:test": "NODE_ENV=testing ./node_modules/.bin/webpack --config webpack.testing.config.js --progress --profile --colors",

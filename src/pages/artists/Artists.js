@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BookingGenius } from 'vobi-components'
 
 const Wrapper = styled.div`
   display: flex;

@@ -5,8 +5,8 @@ Quick Start
 -----------
 
 ```shell
-$ git clone https://github.com/btomashvili/BookingGenius-Front
-$ cd BookingGenius-Front
+$ git clone https://github.com/btomashvili/bxbet-frontend
+$ cd bxbet-frontend
 $ npm install
 $ npm start:local
 ```
