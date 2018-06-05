@@ -24,7 +24,7 @@ const App = ({
   <div>
     <Header
       toggleSignIn={toggleSignIn}
-      toggleSignUp={toggleSignUp}
+      toggleSignUp={toggleSignUpWithEmail}
       brandName="BX.BET"
       rightPages={[
         // {
@@ -35,22 +35,22 @@ const App = ({
           title: 'About',
           to: '/about',
         },
-        {
-          title: 'Service',
-          to: '/service',
-        },
-        {
-          title: 'Browse',
-          to: '/browse',
-        },
-        {
-          title: 'Dashboard',
-          to: '/dashboard',
-        },
-        {
-          title: 'FAQ',
-          to: '/faq',
-        },
+        // {
+        //   title: 'Games',
+        //   to: '/game',
+        // },
+        // {
+        //   title: 'Browse',
+        //   to: '/browse',
+        // },
+        // {
+        //   title: 'Dashboard',
+        //   to: '/dashboard',
+        // },
+        // {
+        //   title: 'FAQ',
+        //   to: '/faq',
+        // },
       ]}
     />
     <Switch>
@@ -64,7 +64,7 @@ const App = ({
       <Route
         path="/"
         render={() => (
-          <SignInModal isOpen={signInOpened} openSignup={toggleSignUpWithEmail} onRequestClose={toggleSignIn} />
+          <SignInModal isOpen={toggleSignUpWithEmail} openSignup={toggleSignUpWithEmail} onRequestClose={toggleSignIn} />
         )}
       />
     )}
