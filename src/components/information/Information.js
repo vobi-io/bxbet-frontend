@@ -65,7 +65,7 @@ class Information extends Component {
 
     const Line = styled.div`
       height: 40px;
-      width: 1px;
+      width: 2px;
       background-color: #92acfe;
     `
 
@@ -78,8 +78,8 @@ class Information extends Component {
         </StyledSubTitle>
         <StyledContent>
           {
-            this.props.buy.map(item =>
-              <div className="rows">
+            this.props.buy.map((item, index) =>
+              <div className="rows" key={index}>
                 <div className="odds">
                   {item[0]}
                 </div>
