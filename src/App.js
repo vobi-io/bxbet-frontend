@@ -26,30 +26,25 @@ const App = ({
       toggleSignIn={toggleSignIn}
       toggleSignUp={toggleSignUp}
       brandName="BX.BET"
-      rightPages={[
+      centeredPages={[
         // {
         //   title: 'Artists',
         //   to: '/artists',
         // },
         {
-          title: 'About',
-          to: '/about',
+          title: 'betting',
+          to: '/betting',
+          status: 'active',
         },
         {
-          title: 'Service',
-          to: '/service',
+          title: 'outcome',
+          to: '/outcome',
+          status: 'passive',
         },
         {
-          title: 'Browse',
-          to: '/browse',
-        },
-        {
-          title: 'Dashboard',
-          to: '/dashboard',
-        },
-        {
-          title: 'FAQ',
-          to: '/faq',
+          title: 'create',
+          to: '/create',
+          status: 'passive',
         },
       ]}
     />
