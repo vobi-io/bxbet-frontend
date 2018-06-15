@@ -5,16 +5,17 @@ import styled from 'styled-components'
 import authAware from '../../authAware'
 import AuthMenu from './AuthMenu'
 import UserMenu from './UserMenu'
+import Logo from '../../resources/assets/img/bx-logo-color-horizontal.png'
 
 const StyledHeader = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0px 100px 0px 100px;
+  padding: 0px 40px;
   // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.27);
   background-color: white;
-  width:1200px;
-  height:84px;
+  width:1320px;
+  height:57px;
   // border: 1px solid #CCCCCC;
 `
 const HeaderParent = styled.span`
@@ -32,9 +33,8 @@ const BrandName = styled.span`
   font-size: 28px;
   font-weight: bold;
   color: #2f3033;
-  font-family: Raleway;		
+  font-family: Montserrat;		
   line-height: 33px;
-
 `
 
 const Nav = styled.ul`
@@ -45,14 +45,27 @@ const Nav = styled.ul`
 `
 
 const NavItem = styled.li`
+  display: flex;
   float: left;
-  padding: 22px 15px;
-  color: #2F3033;
-  font-family: Raleway;
-  font-size: 16px;
-  font-weight: 500;
+  padding: 22px 0 22px 15px;
+  color: #0f334b;
+  font-family: Montserrat;
+  font-size: 18px;
   line-height: 19px;
   text-align: center;
+  opacity: 0.7;
+  text-transform: uppercase;
+  border-bottom: ${props => props.status === 'active' ? '3px solid #0f334b' : 'none'};
+`
+
+const NavCircle = styled.div`
+  margin-left: 15px;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #758590;
+  display: inline-block;
+  align-self: center;
 `
 
 const NavLink = styled(Link)`
@@ -61,7 +74,7 @@ const NavLink = styled(Link)`
   color: #2f3033;
   transition: 0.2s;
   &:hover {
-    color: #06c953;
+    opacity: 1;
   }
 `
 const LogoLink = styled(Link)`
@@ -74,13 +87,16 @@ const Header = ({
   brandName,
   leftPages,
   rightPages,
+  centeredPages,
   toggleSignIn,
   toggleSignUp,
 }) => (
   <HeaderParent>
     <StyledHeader>
       <Wrapper>
-        <LogoLink to={'/'}><BrandName>{brandName}</BrandName></LogoLink>
+        <LogoLink to={'/'}>
+          <img src={Logo} alt="Logo" style={{ width: '132px' }} />
+        </LogoLink>
         {leftPages &&
           <Nav>
             {leftPages.map(item => (
@@ -91,17 +107,22 @@ const Header = ({
           </Nav>}
       </Wrapper>
       <Wrapper>
-        {rightPages &&
+        {centeredPages &&
           <Nav>
-            {rightPages.map(item => (
-              <NavItem key={item.title}>
+            {centeredPages.map((item, index, fullObj) => (
+              <NavItem key={item.title} status={item.status}>
                 <NavLink to={item.to}>{item.title}</NavLink>
+                {
+                  index < fullObj.length - 1 ? <NavCircle /> : null
+                }
               </NavItem>
             ))}
           </Nav>}
-        {authenticated && <UserMenu />}
-        {!authenticated
-          && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />}
+      </Wrapper>
+      <Wrapper>
+        {true && <UserMenu balanceCounter={1550} username={'Mrs. Jolie'} />}
+        {/* {!authenticated
+          && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />} */}
       </Wrapper>
     </StyledHeader>
   </HeaderParent>
