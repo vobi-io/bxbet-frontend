@@ -47,7 +47,7 @@ const Nav = styled.ul`
 const NavItem = styled.li`
   display: flex;
   float: left;
-  padding: 22px 0 22px 15px;
+  padding: 22px 0 16px 16px;
   color: #0f334b;
   font-family: Montserrat;
   font-size: 18px;

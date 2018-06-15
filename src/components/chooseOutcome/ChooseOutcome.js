@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Card from '../card'
 import Button from '../button'
 
-function ChooseOutcome(props) {
+const ChooseOutcome = () => {
   const StyledContainer = styled.div`
     display: flex;
   `
@@ -22,7 +22,7 @@ function ChooseOutcome(props) {
     </StyledContainer>
     )
 
-  return <Card title={'Choose Outcome Pleace'} content={Buttons} />
+  return <Card title={'Choose Outcome Pleace'} content={Buttons} width="534px" />
 }
 
 export default ChooseOutcome

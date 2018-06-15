@@ -17,7 +17,7 @@ class Information extends Component {
   Table(props) {
     const Container = styled.div`
       width: 243px;
-      height: 415px;
+      height: 486px;
       border-radius: 5px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
@@ -112,7 +112,7 @@ class Information extends Component {
   }
 
   render() {
-    return <Card title={'Information'} content={this.Tables} />
+    return <Card title={'Information'} content={this.Tables} width="534px" />
   }
 
 }

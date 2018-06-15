@@ -3,10 +3,7 @@ import styled from 'styled-components'
 
 function Card(props) {
   const StyledCard = styled.div`
-
-    margin-top:50px;
-    width: 534px;
-
+    width: ${props.width};
     border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1); 
