@@ -81,7 +81,7 @@ const YourBetes = (props) => {
     )
   }
 
-  return <Card title={'Your Betes'} content={Body} width="790px" />
+  return <Card title={'Your Betes'} content={Body} width="850px" />
 }
 
 export default YourBetes

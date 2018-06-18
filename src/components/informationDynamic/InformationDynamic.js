@@ -81,7 +81,7 @@ const InformationDynamic = () => {
     )
   }
 
-  return <Card title={'Information'} content={Body} width="790px" />
+  return <Card title={'Information'} content={Body} width="850px" />
 }
 
 export default InformationDynamic

@@ -12,6 +12,7 @@ import FourOFour from './pages/errors/404'
 import ProtectedRoute from './components/protectedRoute'
 import Request from './pages/request'
 import HomePage from './pages/HomePage'
+import Sidebar from './components/sidebar'
 
 const App = ({
   signInOpened,
@@ -21,41 +22,44 @@ const App = ({
   toggleSignUp,
   toggleSignUpWithEmail,
 }) => (
-  <div>
-    <Header
-      toggleSignIn={toggleSignIn}
-      toggleSignUp={toggleSignUp}
-      brandName="BX.BET"
-      centeredPages={[
+  <div id="main-container">
+    <Sidebar />
+    <div id="conten-container">
+      <Header
+        toggleSignIn={toggleSignIn}
+        toggleSignUp={toggleSignUp}
+        brandName="BX.BET"
+        centeredPages={[
         // {
         //   title: 'Artists',
         //   to: '/artists',
         // },
-        {
-          title: 'betting',
-          to: '/betting',
-          status: 'active',
-        },
-        {
-          title: 'outcome',
-          to: '/outcome',
-          status: 'passive',
-        },
-        {
-          title: 'create',
-          to: '/create',
-          status: 'passive',
-        },
-      ]}
-    />
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/artists" component={Artists} />
-      <Route path="/browse" component={Browse} />
-      <Route path="/request" component={Request} />
-      <Route component={FourOFour} />
-    </Switch>
-    {signInOpened && (
+          {
+            title: 'betting',
+            to: '/betting',
+            status: 'active',
+          },
+          {
+            title: 'outcome',
+            to: '/outcome',
+            status: 'passive',
+          },
+          {
+            title: 'create',
+            to: '/create',
+            status: 'passive',
+          },
+        ]}
+      />
+
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/artists" component={Artists} />
+        <Route path="/browse" component={Browse} />
+        <Route path="/request" component={Request} />
+        <Route component={FourOFour} />
+      </Switch>
+      {signInOpened && (
       <Route
         path="/"
         render={() => (
@@ -63,31 +67,19 @@ const App = ({
         )}
       />
     )}
-    {signUpOpened && (
+      {signUpOpened && (
       <Route
         path="/"
         render={() => (
-          <SelectSignupType
+          <SignUpWithEmail
             isOpen={signUpOpened}
             openLogin={toggleSignIn}
-            toggleSignUpWithEmail={toggleSignUpWithEmail}
             onRequestClose={toggleSignUp}
           />
         )}
       />
     )}
-    {signUpWithEmailOpened && (
-      <Route
-        path="/"
-        render={() => (
-          <SignUpWithEmail
-            isOpen={signUpWithEmailOpened}
-            openLogin={toggleSignIn}
-            onRequestClose={toggleSignUpWithEmail}
-          />
-        )}
-      />
-    )}
+    </div>
   </div>
 )
 

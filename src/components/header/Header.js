@@ -14,7 +14,7 @@ const StyledHeader = styled.span`
   padding: 0px 40px;
   // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.27);
   background-color: white;
-  width:1320px;
+  width: 100%;
   height:57px;
   // border: 1px solid #CCCCCC;
 `
@@ -120,9 +120,9 @@ const Header = ({
           </Nav>}
       </Wrapper>
       <Wrapper>
-        {true && <UserMenu balanceCounter={1550} username={'Mrs. Jolie'} />}
-        {/* {!authenticated
-          && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />} */}
+        {authenticated && <UserMenu balanceCounter={1550} username={'Mrs. Jolie'} />}
+        {!authenticated
+          && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />}
       </Wrapper>
     </StyledHeader>
   </HeaderParent>

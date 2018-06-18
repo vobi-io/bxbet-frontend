@@ -158,11 +158,11 @@ const UserMenu = ({ email, signOut, balanceCounter, username }) => (
         {username}
       </p>
     </AvatarContainer>
-    <UserDropDown >
+    {/* <UserDropDown >
       <ProfileMenu>Profile</ProfileMenu>
       <ProfileMenu>Settings</ProfileMenu>
       <ProfileMenu onClick={signOut}>Logout</ProfileMenu>
-    </UserDropDown>
+    </UserDropDown> */}
 
 
     {/* <ul>

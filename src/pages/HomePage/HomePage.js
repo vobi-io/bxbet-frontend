@@ -11,6 +11,7 @@ import MoreInfo from '../../components/moreInfo'
 import Flag from '../../resources/assets/img/germany-flag.png'
 
 const Container = styled.div`
+    width: 100%;
     height: 3000px;
     background-color: rgba(231, 231, 231, 0.7);
     padding: 0 30px;
