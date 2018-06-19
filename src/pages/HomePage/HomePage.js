@@ -7,6 +7,8 @@ import Information from '../../components/information'
 import InformationDynamic from '../../components/InformationDynamic'
 import YourBetes from '../../components/YourBetes'
 import MoreInfo from '../../components/moreInfo'
+import Table from '../../components/table'
+import PieChart from '../../components/pieChart'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 
@@ -111,6 +113,17 @@ const betes = [
 
 const someData = ['Germay Wins', 'England Wins', 'Draw']
 
+const tableData = [
+  { Flag, country: 'Gemany', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
+  { Flag, country: 'England', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
+  { Flag, country: 'Draw', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
+]
+
+const pieData = {
+  totalBets: 54,
+  percentage: [{ title: 'Germany Wins', percent: 50 }, { title: 'England Wins', percent: 25 }, { title: 'Draw', percent: 25 }],
+}
+
 const HomePage = () => (
 
 
@@ -134,6 +147,8 @@ const HomePage = () => (
       </VerticalWrapper>
       <VerticalWrapper>
         <MoreInfo data={someData} />
+        <PieChart data={pieData} />
+        <Table data={tableData} />
       </VerticalWrapper>
     </Container>
   </Wrapper>

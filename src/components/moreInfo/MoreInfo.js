@@ -43,7 +43,7 @@ const MoreInfo = (props) => {
     )
   }
 
-  return <Card title={'Information'} content={Body} width="534px" />
+  return <Card title={'Information'} content={Body} width="368px" />
 }
 
 export default MoreInfo
