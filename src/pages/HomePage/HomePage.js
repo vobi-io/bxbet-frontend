@@ -9,6 +9,7 @@ import YourBetes from '../../components/YourBetes'
 import MoreInfo from '../../components/moreInfo'
 import Table from '../../components/table'
 import PieChart from '../../components/pieChart'
+import { compose, withStateHandlers, withProps } from 'recompose'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 
@@ -106,7 +107,14 @@ const pieData = {
   percentage: [{ title: 'Germany Wins', percent: 50 }, { title: 'England Wins', percent: 25 }, { title: 'Draw', percent: 25 }],
 }
 
-const HomePage = () => (
+const HomePage = ({
+  signInOpened,
+  signUpOpened,
+  signUpWithEmailOpened,
+  toggleSignIn,
+  toggleSignUp,
+  toggleSignUpWithEmail,
+}) => (
 
 
   <Wrapper>
@@ -121,7 +129,14 @@ const HomePage = () => (
           <Information buy={buyArr} sell={sellArr} />
           <Brick />
           <div style={{ width: '100%' }}>
-            <InformationDynamic />
+            <InformationDynamic
+              signInOpened={signInOpened}
+              signUpOpened={signUpOpened}
+              toggleSignIn={toggleSignIn}
+              toggleSignUp={toggleSignUp}
+              signUpWithEmailOpened={signUpWithEmailOpened}
+              toggleSignUpWithEmail={toggleSignUpWithEmail}
+            />
             <Brick />
             <YourBetes data={betes} />
           </div>
@@ -136,4 +151,24 @@ const HomePage = () => (
   </Wrapper>
 )
 
-export default HomePage
+export default compose(
+  withProps(props => props),
+  withStateHandlers(
+    () => ({
+      signInOpened: false,
+      signUpOpened: false,
+      signUpWithEmailOpened: false,
+    }),
+    {
+      toggleSignIn: ({ signInOpened }) => () => ({
+        signInOpened: !signInOpened,
+      }),
+      toggleSignUp: ({ signUpOpened }) => () => ({
+        signUpOpened: !signUpOpened,
+      }),
+      toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
+        signUpWithEmailOpened: !signUpWithEmailOpened,
+      }),
+    }
+  )
+)(HomePage)
