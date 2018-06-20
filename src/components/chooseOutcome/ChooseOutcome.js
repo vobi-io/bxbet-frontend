@@ -3,8 +3,14 @@ import styled from 'styled-components'
 
 import Card from '../card'
 import Button from '../button'
+import enhance from './enhance'
 
-const ChooseOutcome = () => {
+const ChooseOutcome = ({
+  activeButton1,
+  activeButton2,
+  activeButton3,
+  toggleActiveButton,
+}) => {
   const StyledContainer = styled.div`
     display: flex;
   `
@@ -14,15 +20,15 @@ const ChooseOutcome = () => {
 
   const Buttons = () => (
     <StyledContainer>
-      <Button text={'Germany'} active />
+      <Button text={'Germany'} activeButton={activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
       <Brick />
-      <Button text={'Draw'} />
+      <Button text={'Draw'} activeButton={activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
       <Brick />
-      <Button text={'England'} />
+      <Button text={'England'} activeButton={activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
     </StyledContainer>
     )
 
   return <Card title={'Choose Outcome Pleace'} content={Buttons} width="100%" />
 }
 
-export default ChooseOutcome
+export default enhance(ChooseOutcome)
