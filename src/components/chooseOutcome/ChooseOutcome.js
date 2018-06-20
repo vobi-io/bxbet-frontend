@@ -16,9 +16,9 @@ const ChooseOutcome = () => {
     <StyledContainer>
       <Button text={'Germany'} active />
       <Brick />
-      <Button text={'Draw'} main />
+      <Button text={'Draw'} />
       <Brick />
-      <Button text={'England'} main />
+      <Button text={'England'} />
     </StyledContainer>
     )
 

@@ -42,7 +42,7 @@ const InformationDynamic = () => {
         margin-bottom: 4px;
       }
     `
-    const StyledTab = styled.div`
+    const StyledTab = styled.button`
       background-image: ${props => props.green ? 'linear-gradient(to bottom, #7fac30, #288702 99%)' : 'linear-gradient(to bottom, #ed2b3b, #9f041b)'};
       height: 33px;
       width: 183px;
@@ -54,6 +54,8 @@ const InformationDynamic = () => {
       color: white;
       font-family: Montserrat;
       font-size: 18px;
+      border: none;
+      cursor: pointer;
     `
 
     return (
