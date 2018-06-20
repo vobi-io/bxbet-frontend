@@ -6,7 +6,7 @@ import coverPhoto from '../../resources/assets/img/stadium.png'
 function Cover(props) {
   const StyledCover = styled.div`
     width: 100%;
-    height: 122px;
+    height: 105px;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
@@ -25,9 +25,12 @@ function Cover(props) {
 
 
   return (
-    <StyledCover>
-      {props.text}
-    </StyledCover>
+    <div style={{ width: '100%', height: '105px' }}>
+      <StyledCover>
+        {props.text}
+      </StyledCover>
+    </div>
+
   )
 }
 

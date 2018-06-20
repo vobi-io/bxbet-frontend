@@ -13,6 +13,7 @@ const ChooseOutcome = ({
 }) => {
   const StyledContainer = styled.div`
     display: flex;
+    height: 100%;
   `
   const Brick = styled.div`
     width: 24px;
@@ -20,11 +21,13 @@ const ChooseOutcome = ({
 
   const Buttons = () => (
     <StyledContainer>
-      <Button text={'Germany'} activeButton={activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
-      <Brick />
-      <Button text={'Draw'} activeButton={activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
-      <Brick />
-      <Button text={'England'} activeButton={activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
+      <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
+        <Button text={'Germany'} activeButton={activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
+        <Brick />
+        <Button text={'Draw'} activeButton={activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
+        <Brick />
+        <Button text={'England'} activeButton={activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
+      </div>
     </StyledContainer>
     )
 

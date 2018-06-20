@@ -15,7 +15,7 @@ import Flag from '../../resources/assets/img/germany-flag.png'
 const Container = styled.div`
     width: 100%;
     background-color: rgba(231, 231, 231, 0.7);
-    padding: 0 30px 30px 30px;
+    padding: 5px 26px 26px 26px;
 `
 const Wrapper = styled.div`
     display:flex;
@@ -24,13 +24,13 @@ const Wrapper = styled.div`
 `
 const VerticalWrapper = styled.div`
     display: flex;
-    margin-top: 2%;
+    margin-top: 13px;
     justify-content: space-between;
     width: 100%;
 `
 const Brick = styled.div`
-    height: 2%;
-    width: 2%;
+    height: 10px;
+    width: 20px;
 `
 
 const buyArr = [
@@ -55,27 +55,9 @@ const buyArr = [
   [
     3, '100 BX',
   ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
 ]
 
 const sellArr = [
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
   [
     3, '100 BX',
   ],

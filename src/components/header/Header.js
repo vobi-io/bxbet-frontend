@@ -11,7 +11,7 @@ const StyledHeader = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0px 40px;
+  padding: 0px 26px;
   // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.27);
   background-color: white;
   width: 100%;

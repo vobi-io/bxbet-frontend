@@ -6,9 +6,7 @@ import Card from '../card'
 const ConttentContainer = styled.div`
   border-radius: 0 0 5px 5px;
   background-color: #0f334b;
-  margin: -20px;
-  padding: 6px 20px;
-  height: 84%;
+  padding: 0px 9px;
 `
 const TableItem = styled.div`
   display: flex;
@@ -55,6 +53,7 @@ const TableItem = styled.div`
       }
       .bigOnes{
           padding: 10px 20px;
+          line-height: 32px;
       }
       .green{
         background-image: linear-gradient(to bottom, #7fac30, #288702 99%);
@@ -111,7 +110,7 @@ const Table = (props) => {
     )
   }
 
-  return <Card title="Table" content={Body} width="48%" bgColor="#0f334b" />
+  return <Card title="Table" content={Body} width="53.5%" bgColor="#0f334b" />
 }
 
 export default Table

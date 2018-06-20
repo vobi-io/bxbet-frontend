@@ -21,7 +21,7 @@ function Card(props) {
     text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
   `
   const StyledContent = styled.div`
-    padding: 20px;
+    padding: 9px;
   `
 
   return (

@@ -17,7 +17,7 @@ class Information extends Component {
   Table(props) {
     const Container = styled.div`
       width: 100%;
-      height: 481px;
+      height: 456px;
       border-radius: 5px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
