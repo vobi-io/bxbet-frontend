@@ -22,7 +22,7 @@ const ChooseOutcome = () => {
     </StyledContainer>
     )
 
-  return <Card title={'Choose Outcome Pleace'} content={Buttons} width="534px" />
+  return <Card title={'Choose Outcome Pleace'} content={Buttons} width="100%" />
 }
 
 export default ChooseOutcome

@@ -14,9 +14,8 @@ import Flag from '../../resources/assets/img/germany-flag.png'
 
 const Container = styled.div`
     width: 100%;
-    height: 3000px;
     background-color: rgba(231, 231, 231, 0.7);
-    padding: 0 30px;
+    padding: 0 30px 30px 30px;
 `
 const Wrapper = styled.div`
     display:flex;
@@ -25,12 +24,13 @@ const Wrapper = styled.div`
 `
 const VerticalWrapper = styled.div`
     display: flex;
-    margin-top: 20px;
+    margin-top: 2%;
     justify-content: space-between;
+    width: 100%;
 `
 const Brick = styled.div`
-    height: 16px;
-    width: 16px;
+    height: 2%;
+    width: 2%;
 `
 
 const buyArr = [
@@ -135,10 +135,10 @@ const HomePage = () => (
         <Cover text={'germany vs england'} />
       </VerticalWrapper>
       <VerticalWrapper>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', width: '100%' }}>
           <Information buy={buyArr} sell={sellArr} />
           <Brick />
-          <div>
+          <div style={{ width: '100%' }}>
             <InformationDynamic />
             <Brick />
             <YourBetes data={betes} />

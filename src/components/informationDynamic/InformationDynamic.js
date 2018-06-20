@@ -18,6 +18,7 @@ const InformationDynamic = () => {
       padding: 20px;
     `
     const StyledInfo = styled.div`
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -36,6 +37,7 @@ const InformationDynamic = () => {
     `
 
     const StyledForm = styled.div`
+      width: 100%;
       & > div {
         margin-bottom: 4px;
       }
@@ -72,7 +74,7 @@ const InformationDynamic = () => {
           </StyledForm>
           <Brick />
           <StyledInfo>
-            <div>Potential Return: <span style={{ color: '#37b14f', fontSize: '32px', fontWeigth: 'bold' }}>1457 BX</span></div>
+            <div>Potential Return: <span style={{ color: '#37b14f', fontSize: '24px', fontWeigth: 'bold' }}>1457 BX</span></div>
             <div className="subInfo">Potential Win: <span style={{ color: '#fc8109' }}>1457 BX</span> | Potential Win: <span style={{ color: '#fc8109' }}>1457 BX</span></div>
             <Button cta text="Place Order" />
           </StyledInfo>
@@ -81,7 +83,7 @@ const InformationDynamic = () => {
     )
   }
 
-  return <Card title={'Information'} content={Body} width="850px" />
+  return <Card title={'Information'} content={Body} width="100%" />
 }
 
 export default InformationDynamic

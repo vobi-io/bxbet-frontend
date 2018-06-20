@@ -10,7 +10,7 @@ const Container = styled.div`
 
     .text_on_pie{
         position: absolute;
-        transform: translate(50px, -105px);
+        transform: translate(58px,-112px);
         text-align: center;
         font-family: Montserrat;
         font-size: 18px;
@@ -24,6 +24,7 @@ const Container = styled.div`
 
     .chart_info{
         margin-left: 34px;
+        width: 100%;
 
 
         .chart_item{
@@ -91,7 +92,7 @@ const PieChart = (props) => {
   const Body = () => (
     <Container>
       <div className="pie_chart">
-        <Doughnut data={chartData} options={options} height={157} width={157} />
+        <Doughnut data={chartData} options={options} height={170} width={170} />
         <div className="text_on_pie">
             TOTAL
             <br /><span>{props.data.totalBets}</span><br />
@@ -123,11 +124,7 @@ const PieChart = (props) => {
       )
 
 
-  return (
-    <div>
-      <Card title="Pie Chart" content={Body} />
-    </div>
-  )
+  return <Card title="Pie Chart" content={Body} width="30%" />
 }
 
 export default PieChart

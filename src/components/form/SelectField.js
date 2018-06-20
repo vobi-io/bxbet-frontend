@@ -4,7 +4,6 @@ import styled from 'styled-components'
 function SelectField(props) {
   const Container = styled.div`
     display: flex;
-    width: 350px;
     justify-content: space-between;
     align-items: center;
   `
@@ -12,10 +11,12 @@ function SelectField(props) {
     font-family: Myriad Pro;
     font-size: 14px;
     color: white;
+    width: 24%;
   `
 
   const StyledSelect = styled.select`
-        width: 258px;
+        width: 100%;
+        margin-left: 4%;
         height: 40px;
         opacity: 0.9;
         border-radius: 3px;

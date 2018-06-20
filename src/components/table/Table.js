@@ -8,17 +8,19 @@ const ConttentContainer = styled.div`
   background-color: #0f334b;
   margin: -20px;
   padding: 6px 20px;
+  height: 84%;
 `
 const TableItem = styled.div`
   display: flex;
   align-items: center;
-  margin: 12px 0;
+  margin: 6px 0;
+  height: 100%;
 
   .country-info {
     display: flex;
     margin-right: 20px;
     align-items: center;
-    width: 120px;
+    width: 0;
 
     img {
       width: 32px;
@@ -37,6 +39,9 @@ const TableItem = styled.div`
   .table{
       display: flex;
       color: #314b5b;
+      width: 100%;
+      justify-content: space-evenly;
+      margin-left: 100px;
       
       span{
         padding: 3px 20px;
@@ -71,7 +76,7 @@ const Table = (props) => {
           <h2>{item.country}</h2>
         </div>
         <div className="table">
-          <div style={{ marginRight: '40px' }}>
+          <div style={{ marginRight: '2%' }}>
             {item.buy.map((element, i) => {
               let classNm = i > 0 && (i + 1) % 3 === 0 ? 'green' : ''
               classNm = i < 3 ? classNm.concat(' bigOnes') : classNm.concat('')
@@ -106,11 +111,7 @@ const Table = (props) => {
     )
   }
 
-  return (
-    <div>
-      <Card title="Table" content={Body} />
-    </div>
-  )
+  return <Card title="Table" content={Body} width="48%" bgColor="#0f334b" />
 }
 
 export default Table

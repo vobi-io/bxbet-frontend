@@ -25,6 +25,7 @@ const YourBetes = (props) => {
 
       & > div > .flag {
         width: 32px;
+        height: 22px;
         margin-right: 9px;
       }
 
@@ -62,7 +63,7 @@ const YourBetes = (props) => {
         {props.data.map((row, index) => (
           <div key={index}>
             <StyledRow status={row[2]}>
-              <div>
+              <div style={{ display: 'flex' }}>
                 <img src={row[0]} alt="flag" className="flag" />
                 {row[1]}
               </div>
@@ -81,7 +82,7 @@ const YourBetes = (props) => {
     )
   }
 
-  return <Card title={'Your Betes'} content={Body} width="850px" />
+  return <Card title={'Your Betes'} content={Body} width="100%" />
 }
 
 export default YourBetes

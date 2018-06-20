@@ -5,7 +5,7 @@ function Card(props) {
   const StyledCard = styled.div`
     width: ${props.width};
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: ${props.bgColor ? props.bgColor : '#ffffff'};
     box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1); 
   `
   const StyledCardTitle = styled.div`

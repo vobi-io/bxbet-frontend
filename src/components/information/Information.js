@@ -16,8 +16,8 @@ class Information extends Component {
 
   Table(props) {
     const Container = styled.div`
-      width: 243px;
-      height: 486px;
+      width: 100%;
+      height: 481px;
       border-radius: 5px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
@@ -97,9 +97,11 @@ class Information extends Component {
   Tables() {
     const StyledTables = styled.div`
       display: flex;
+      justify-content: center;
+      width: 100%;
     `
     const Brick = styled.div`
-      width: 12px;
+      width: 2%;
     `
 
     return (
@@ -112,7 +114,7 @@ class Information extends Component {
   }
 
   render() {
-    return <Card title={'Information'} content={this.Tables} width="534px" />
+    return <Card title={'Information'} content={this.Tables} width="100%" />
   }
 
 }
