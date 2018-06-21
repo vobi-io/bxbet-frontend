@@ -57,6 +57,7 @@ const App = ({
         <Route path="/artists" component={Artists} />
         <Route path="/browse" component={Browse} />
         <Route path="/request" component={Request} />
+        <Route path="/:id" component={HomePage} />
         <Route component={FourOFour} />
       </Switch>
       {signInOpened && (

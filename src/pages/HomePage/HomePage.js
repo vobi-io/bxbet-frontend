@@ -12,6 +12,7 @@ import PieChart from '../../components/pieChart'
 import { compose, withStateHandlers, withProps } from 'recompose'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
+import pattern from '../../resources/assets/img/ptrn.png'
 
 const Container = styled.div`
     width: 100%;
@@ -32,6 +33,14 @@ const VerticalWrapper = styled.div`
 const Brick = styled.div`
     height: 10px;
     width: 20px;
+`
+const BackgroundPattern = styled.div`
+    width: 685px;
+    height: 399px;
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    background-image: url(${pattern});
 `
 
 const buyArr = [
@@ -114,15 +123,17 @@ const HomePage = ({
   toggleSignIn,
   toggleSignUp,
   toggleSignUpWithEmail,
+  match,
 }) => (
 
 
   <Wrapper>
+    <BackgroundPattern />
     <Container>
       <VerticalWrapper>
         <ChooseOutcome />
         <Brick />
-        <Cover text={'germany vs england'} />
+        <Cover text={'germany vs england'} gameId={match.params.id} />
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>

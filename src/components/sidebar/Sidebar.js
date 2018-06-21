@@ -5,6 +5,7 @@ import { slide as Menu } from 'react-burger-menu'
 import burgerNavIcon from '../../resources/assets/img/icons/burger-navigation.svg'
 import { SearchField } from '../form'
 import InfoList from './InfoList'
+import enhance from './enhance'
 
 const SidebarContainer = styled.div`
     width: 59px;
@@ -42,38 +43,13 @@ const SidebarContainer = styled.div`
     }
 `
 
-const showSettings = (e) => {
-  console.log(e)
-}
-
-const data = [
-  {
-    status: 'In Progress',
-    countryOne: 'Argentina',
-    countryTwo: 'Iceland',
-    time: '14/05 15:00',
-  },
-  {
-    status: 'In Progress',
-    countryOne: 'Argentina',
-    countryTwo: 'Iceland',
-    time: '14/05 15:00',
-  },
-  {
-    status: 'Done',
-    countryOne: 'Argentina',
-    countryTwo: 'Iceland',
-    time: '14/05 15:00',
-  },
-]
-
-const Sidebar = () => (
+const Sidebar = ({ data, loading }) => (
   <SidebarContainer>
     <Menu customBurgerIcon={<img src={burgerNavIcon} />}>
       <SearchField />
-      <InfoList data={data} />
+      <InfoList data={data} loading={loading} />
     </Menu>
   </SidebarContainer>
     )
 
-export default Sidebar
+export default enhance(Sidebar)

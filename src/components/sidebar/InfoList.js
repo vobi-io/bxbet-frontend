@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { Link } from 'react-router-dom'
+
 const InfoList = (props) => {
   const ItemContainer = styled.div`
     background-color: #44555d;
@@ -37,11 +39,13 @@ const InfoList = (props) => {
     <ItemContainer key={index}>
       <Status status={item.status} />
       <div>
-        <h2>
-          {item.countryOne} - {item.countryTwo}
-        </h2>
+        <Link to={`/${item.gameId}`} style={{ textDecoration: 'none' }}>
+          <h2>
+            {item.team1} - {item.team2}
+          </h2>
+        </Link>
         <span>
-          {item.time}
+          {item.date}
         </span>
       </div>
     </ItemContainer>
@@ -49,7 +53,9 @@ const InfoList = (props) => {
 
   return (
     <div style={{ marginTop: '3px' }}>
-      <List />
+      {
+        props.loading ? <div style={{ color: 'white', marginTop: '10px' }}>Loading...</div> : <List />
+      }
     </div>
   )
 }

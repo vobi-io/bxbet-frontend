@@ -1,0 +1,11 @@
+query GameMany {
+ gameMany(limit:10) {  
+    _id
+    gameId,
+    team1,
+    team2,
+    startDate,
+    endDate,
+    status
+ }
+}
