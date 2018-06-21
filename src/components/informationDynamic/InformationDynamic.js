@@ -9,13 +9,14 @@ import Button from '../button'
 import authAware from '../../authAware'
 import SignUpWithEmail from '../signup/modal/SignUpWithEmail'
 import SignInModal from '../signin'
+import enhance from './enhance'
 
 const InformationDynamic = (props) => {
   function Body() {
     const selectorOptions = ['Germany', 'Drow', 'England']
 
     const Container = styled.div`
-      border-radius: 0 6px 6px 6px;
+      border-radius: 0 0 6px 6px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
       display: flex;
@@ -62,6 +63,14 @@ const InformationDynamic = (props) => {
       cursor: pointer;
     `
 
+    const ActiveUnderline = styled.div`
+      width: 100%;
+      height: 7px;
+      background-color: ${args => args.activeTab === 'green' ? '#288702' : '#9f041b'};
+      border-radius: 0 6px 0 0;
+      align-self: flex-end;
+    `
+
     const placeOrderHandler = (e) => {
       if (!props.authenticated) {
         e.preventDefault()
@@ -72,13 +81,14 @@ const InformationDynamic = (props) => {
     return (
       <div>
         <div style={{ display: 'flex' }}>
-          <StyledTab green>
+          <StyledTab green onClick={() => props.toggleActiveButton('green')}>
             BUY
           </StyledTab>
-          <StyledTab>
+          <StyledTab onClick={() => props.toggleActiveButton('red')}>
             SELL
           </StyledTab>
         </div>
+        <ActiveUnderline activeTab={props.activeTab} />
         <Container>
           <StyledForm>
             <SelectField title="Outcome" options={selectorOptions} />
@@ -126,4 +136,4 @@ const InformationDynamic = (props) => {
   return <Card title={'Information'} content={Body} width="100%" />
 }
 
-export default authAware(InformationDynamic)
+export default enhance(authAware(InformationDynamic))

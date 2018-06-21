@@ -12,7 +12,7 @@ function Cover(props) {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(${coverPhoto});
+    background-image: url(https://www.barcelona-tourist-guide.com/images/int/sport/barcelona-fc/L/fc-barcelona-0609.jpg);
     background-size: cover;
     font-family: Open Sans;
     font-size: 32px;
