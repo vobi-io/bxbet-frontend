@@ -6,6 +6,6 @@ query GameMany {
     team2,
     startDate,
     endDate,
-    status
+    status,
  }
 }

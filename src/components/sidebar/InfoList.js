@@ -16,6 +16,7 @@ const InfoList = (props) => {
         font-size: 14px;
         color: #e7ebed;
         margin: 0;
+        font-weight: normal;
     }
 
     & span{
@@ -31,9 +32,22 @@ const InfoList = (props) => {
     height: 9px;
     margin: 0 14px 0 9px;
     border-radius: 5px;
-    background-color: ${props => props.status === 'In Progress' ? '#30ff00' : '#000'};
+    background-color: ${props => props.status === 0 ? '#30ff00' : '#000'};
     border: solid 1px #000000; 
   `
+
+  const timeFormater = (timestamp) => {
+    const date = new Date()
+
+    const day = date.getDay(timestamp)
+    const month = date.getMonth(timestamp)
+    const hour = date.getHours(timestamp)
+    const minute = date.getMinutes(timestamp)
+
+    const Text = `${day}/${month} ${hour}:${minute}`
+
+    return Text
+  }
 
   const List = () => props.data.map((item, index) => (
     <ItemContainer key={index}>
@@ -45,7 +59,7 @@ const InfoList = (props) => {
           </h2>
         </Link>
         <span>
-          {item.date}
+          {timeFormater(item.startDate)}
         </span>
       </div>
     </ItemContainer>

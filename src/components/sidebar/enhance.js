@@ -1,34 +1,26 @@
-import { compose, withStateHandlers, renderNothing } from 'recompose'
+import { compose, withStateHandlers, renderNothing, branch, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
 import query from './query.graphql'
 
 export default compose(
     graphql(query),
-    // branch(
-    //     props => props.data.loading,
-    //     renderNothing,
-    // ),
-    // withProps(
-    //     props => {
+    branch(
+        ({ data: { loading } }) => loading,
+        renderNothing,
+      ),
+      withProps(
+        (props) => {
+          const data = props.data.gameMany
+          const loading = props.data.loading
+          return { data, loading }
+        }
 
-    //     }
-    // ),
+      ),
     withStateHandlers(
-        () => ({
-          loading: false,
-          data: [
-            {
-              _id: '787878',
-              gameId: '78787',
-
-              status: 'In Progress',
-              team1: 'Argentina',
-              team2: 'Iceland',
-              date: '14/05 15:00',
-            },
-          ],
-        }),
-      { getData: ({ data }) => () => data }
+        ({ data, loading }) => ({
+          loading,
+          data,
+        })
     )
 )

@@ -20,7 +20,7 @@ const StyledInput = styled.input`
 `
 
 const StyledSearchIcon = styled.img`
-    position: absolute;
+    transform: translate(226px, -27px);
     width: 16px;
     top: 25px;
     right: 25px;
