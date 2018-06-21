@@ -9,13 +9,14 @@ import YourBetes from '../../components/YourBetes'
 import MoreInfo from '../../components/moreInfo'
 import Table from '../../components/table'
 import PieChart from '../../components/pieChart'
+import { compose, withStateHandlers, withProps } from 'recompose'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 
 const Container = styled.div`
     width: 100%;
     background-color: rgba(231, 231, 231, 0.7);
-    padding: 0 30px 30px 30px;
+    padding: 5px 26px 26px 26px;
 `
 const Wrapper = styled.div`
     display:flex;
@@ -24,13 +25,13 @@ const Wrapper = styled.div`
 `
 const VerticalWrapper = styled.div`
     display: flex;
-    margin-top: 2%;
+    margin-top: 13px;
     justify-content: space-between;
     width: 100%;
 `
 const Brick = styled.div`
-    height: 2%;
-    width: 2%;
+    height: 10px;
+    width: 20px;
 `
 
 const buyArr = [
@@ -55,27 +56,9 @@ const buyArr = [
   [
     3, '100 BX',
   ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
 ]
 
 const sellArr = [
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
   [
     3, '100 BX',
   ],
@@ -124,7 +107,14 @@ const pieData = {
   percentage: [{ title: 'Germany Wins', percent: 50 }, { title: 'England Wins', percent: 25 }, { title: 'Draw', percent: 25 }],
 }
 
-const HomePage = () => (
+const HomePage = ({
+  signInOpened,
+  signUpOpened,
+  signUpWithEmailOpened,
+  toggleSignIn,
+  toggleSignUp,
+  toggleSignUpWithEmail,
+}) => (
 
 
   <Wrapper>
@@ -139,7 +129,14 @@ const HomePage = () => (
           <Information buy={buyArr} sell={sellArr} />
           <Brick />
           <div style={{ width: '100%' }}>
-            <InformationDynamic />
+            <InformationDynamic
+              signInOpened={signInOpened}
+              signUpOpened={signUpOpened}
+              toggleSignIn={toggleSignIn}
+              toggleSignUp={toggleSignUp}
+              signUpWithEmailOpened={signUpWithEmailOpened}
+              toggleSignUpWithEmail={toggleSignUpWithEmail}
+            />
             <Brick />
             <YourBetes data={betes} />
           </div>
@@ -154,4 +151,24 @@ const HomePage = () => (
   </Wrapper>
 )
 
-export default HomePage
+export default compose(
+  withProps(props => props),
+  withStateHandlers(
+    () => ({
+      signInOpened: false,
+      signUpOpened: false,
+      signUpWithEmailOpened: false,
+    }),
+    {
+      toggleSignIn: ({ signInOpened }) => () => ({
+        signInOpened: !signInOpened,
+      }),
+      toggleSignUp: ({ signUpOpened }) => () => ({
+        signUpOpened: !signUpOpened,
+      }),
+      toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
+        signUpWithEmailOpened: !signUpWithEmailOpened,
+      }),
+    }
+  )
+)(HomePage)

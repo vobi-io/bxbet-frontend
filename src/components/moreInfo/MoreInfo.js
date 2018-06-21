@@ -19,7 +19,7 @@ const MoreInfo = (props) => {
   const StyledItem = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 37px;
+    margin: 36px 0 0 26px;
 
     & > .item {
         font-family: Montserrat;
@@ -43,7 +43,7 @@ const MoreInfo = (props) => {
     )
   }
 
-  return <Card title={'Information'} content={Body} width="20%" />
+  return <Card title={'Information'} content={Body} width="15%" />
 }
 
 export default MoreInfo

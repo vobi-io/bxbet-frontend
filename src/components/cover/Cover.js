@@ -6,13 +6,13 @@ import coverPhoto from '../../resources/assets/img/stadium.png'
 function Cover(props) {
   const StyledCover = styled.div`
     width: 100%;
-    height: 122px;
+    height: 105px;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(${coverPhoto});
+    background-image: url(https://www.barcelona-tourist-guide.com/images/int/sport/barcelona-fc/L/fc-barcelona-0609.jpg);
     background-size: cover;
     font-family: Open Sans;
     font-size: 32px;
@@ -25,9 +25,12 @@ function Cover(props) {
 
 
   return (
-    <StyledCover>
-      {props.text}
-    </StyledCover>
+    <div style={{ width: '100%', height: '105px' }}>
+      <StyledCover>
+        {props.text}
+      </StyledCover>
+    </div>
+
   )
 }
 

@@ -7,6 +7,8 @@ import Card from '../card'
 
 const Container = styled.div`
     display: flex;
+    align-items: center;
+    height: 200px;
 
     .text_on_pie{
         position: absolute;

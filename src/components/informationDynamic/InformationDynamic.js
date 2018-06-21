@@ -1,17 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Route } from 'react-router-dom'
 
 import Card from '../card'
 import { TextField } from '../form'
 import { SelectField } from '../form'
 import Button from '../button'
+import authAware from '../../authAware'
+import SignUpWithEmail from '../signup/modal/SignUpWithEmail'
+import SignInModal from '../signin'
+import enhance from './enhance'
 
-const InformationDynamic = () => {
+const InformationDynamic = (props) => {
   function Body() {
     const selectorOptions = ['Germany', 'Drow', 'England']
 
     const Container = styled.div`
-      border-radius: 0 6px 6px 6px;
+      border-radius: 0 0 6px 6px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
       display: flex;
@@ -58,16 +63,32 @@ const InformationDynamic = () => {
       cursor: pointer;
     `
 
+    const ActiveUnderline = styled.div`
+      width: 100%;
+      height: 7px;
+      background-color: ${args => args.activeTab === 'green' ? '#288702' : '#9f041b'};
+      border-radius: 0 6px 0 0;
+      align-self: flex-end;
+    `
+
+    const placeOrderHandler = (e) => {
+      if (!props.authenticated) {
+        e.preventDefault()
+        props.toggleSignUpWithEmail()
+      }
+    }
+
     return (
       <div>
         <div style={{ display: 'flex' }}>
-          <StyledTab green>
+          <StyledTab green onClick={() => props.toggleActiveButton('green')}>
             BUY
           </StyledTab>
-          <StyledTab>
+          <StyledTab onClick={() => props.toggleActiveButton('red')}>
             SELL
           </StyledTab>
         </div>
+        <ActiveUnderline activeTab={props.activeTab} />
         <Container>
           <StyledForm>
             <SelectField title="Outcome" options={selectorOptions} />
@@ -78,9 +99,36 @@ const InformationDynamic = () => {
           <StyledInfo>
             <div>Potential Return: <span style={{ color: '#37b14f', fontSize: '24px', fontWeigth: 'bold' }}>1457 BX</span></div>
             <div className="subInfo">Potential Win: <span style={{ color: '#fc8109' }}>1457 BX</span> | Potential Win: <span style={{ color: '#fc8109' }}>1457 BX</span></div>
-            <Button cta text="Place Order" />
+            <Button cta text="Place Order" onClick={placeOrderHandler} />
           </StyledInfo>
         </Container>
+
+        {props.signInOpened && (
+        <Route
+          path="/"
+          render={() => (
+            <SignInModal
+              isOpen={props.signInOpened}
+              openSignup={props.toggleSignUpWithEmail}
+              onRequestClose={props.toggleSignIn}
+            />
+        )}
+        />
+    )}
+        {props.signUpWithEmailOpened && (
+        <Route
+          path="/"
+          render={() => (
+            <SignUpWithEmail
+              isOpen={props.signUpWithEmailOpened}
+              openLogin={props.toggleSignIn}
+              onRequestClose={props.toggleSignUpWithEmail}
+            />
+        )}
+        />
+    )}
+
+
       </div>
     )
   }
@@ -88,4 +136,4 @@ const InformationDynamic = () => {
   return <Card title={'Information'} content={Body} width="100%" />
 }
 
-export default InformationDynamic
+export default enhance(authAware(InformationDynamic))
