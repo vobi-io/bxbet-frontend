@@ -12,6 +12,7 @@ import MoreInfo from '../../components/moreInfo'
 import Table from '../../components/table'
 import PieChart from '../../components/pieChart'
 import gameById from './query/gameById.graphql'
+import orderMany from './query/orderMany.graphql'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
@@ -44,54 +45,6 @@ const BackgroundPattern = styled.div`
     right: 0;
     background-image: url(${pattern});
 `
-
-const buyArr = [
-  [
-    7, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-]
-
-const sellArr = [
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-  [
-    3, '100 BX',
-  ],
-]
 
 const betes = [
   [
@@ -140,7 +93,7 @@ const HomePage = ({
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
-          <Information buy={buyArr} sell={sellArr} />
+          <Information data={data.orderMany} />
           <Brick />
           <div style={{ width: '100%' }}>
             <InformationDynamic
@@ -176,8 +129,14 @@ export default compose(
     ({ data: { loading } }) => loading,
     renderNothing,
   ),
+  graphql(orderMany),
+  branch(
+    ({ data: { loading } }) => loading,
+    renderNothing,
+  ),
   withProps((props) => {
     const data = props.data.gameById
+    const orderMany = props.data.orderMany
   }),
   withStateHandlers(
     () => ({

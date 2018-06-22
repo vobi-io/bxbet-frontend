@@ -1,0 +1,7 @@
+query OrderMany{
+  orderMany(limit: 14){
+    orderType
+    odd
+    amount
+  }
+}

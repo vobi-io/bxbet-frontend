@@ -1,20 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Card from '../card'
+import sortData from './sortData'
 
-class Information extends Component {
-  constructor(props) {
-    super()
-    this.state = {
-      buy: props.buy,
-      sell: props.sell,
-    }
 
-    this.Tables = this.Tables.bind(this)
-  }
-
-  Table(props) {
+const Information = (props) => {
+  const Table = (props) => {
     const Container = styled.div`
       width: 100%;
       height: 456px;
@@ -69,6 +61,19 @@ class Information extends Component {
       background-color: #92acfe;
     `
 
+    const printData = data => data.map((item, index) => (
+      <div className="rows" key={index}>
+        <div className="odds">
+          {item[0]}
+        </div>
+        <Line />
+        <div className="amount">
+          {item[1]}
+        </div>
+      </div>
+    ))
+
+
     return (
       <Container>
         <StyledTitle>{props.title}</StyledTitle>
@@ -77,24 +82,13 @@ class Information extends Component {
           <div> Amount </div>
         </StyledSubTitle>
         <StyledContent>
-          {
-            this.props.buy.map((item, index) =>
-              <div className="rows" key={index}>
-                <div className="odds">
-                  {item[0]}
-                </div>
-                <Line />
-                <div className="amount">
-                  {item[1]}
-                </div>
-              </div>)
-          }
+          {printData(props.data)}
         </StyledContent>
       </Container>
     )
   }
 
-  Tables() {
+  const Tables = () => {
     const StyledTables = styled.div`
       display: flex;
       justify-content: center;
@@ -104,19 +98,19 @@ class Information extends Component {
       width: 2%;
     `
 
+    const sortedData = sortData(props.data)
+
+
     return (
       <StyledTables>
-        {this.Table({ title: 'buy' })}
+        {Table({ title: 'buy', data: sortedData.buy })}
         <Brick />
-        {this.Table({ title: 'sell' })}
+        {Table({ title: 'sell', data: sortedData.sell })}
       </StyledTables>
     )
   }
 
-  render() {
-    return <Card title={'Information'} content={this.Tables} width="100%" />
-  }
-
+  return <Card title={'Information'} content={Tables} width="100%" />
 }
 
 export default Information
