@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import { graphql, compose as gqlCompose } from 'react-apollo'
 import { compose, withStateHandlers, withProps, branch, renderNothing } from 'recompose'
 
 import ChooseOutcome from '../../components/chooseOutcome'
@@ -80,6 +80,9 @@ const HomePage = ({
   toggleSignUpWithEmail,
   match,
   data,
+  gameById,
+  orderMany,
+  ...props
 }) => (
 
 
@@ -87,13 +90,13 @@ const HomePage = ({
     <BackgroundPattern />
     <Container>
       <VerticalWrapper>
-        <ChooseOutcome teams={data.gameById ? [data.gameById.team1, data.gameById.team2] : null} />
+        <ChooseOutcome teams={gameById.gameById ? [gameById.gameById.team1, gameById.gameById.team2] : null} />
         <Brick />
-        <Cover text={data.gameById ? data.gameById.title : 'Germany vs england'} />
+        <Cover text={gameById.gameById ? gameById.gameById.title : 'Germany vs england'} />
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
-          <Information data={data.orderMany} />
+          <Information data={orderMany.orderMany} />
           <Brick />
           <div style={{ width: '100%' }}>
             <InformationDynamic
@@ -119,25 +122,39 @@ const HomePage = ({
 )
 
 export default compose(
-  graphql(gameById, {
-    options: ({ match }) => {
-      const variables = { _id: match.params.id }
-      return ({ variables })
-    },
-  }),
-  branch(
-    ({ data: { loading } }) => loading,
-    renderNothing,
+  gqlCompose(
+    graphql(gameById, {
+      name: 'gameById',
+      options: ({ match }) => {
+        const variables = { _id: match.params.id }
+        return ({ variables })
+      },
+    }),
+    branch(
+      ({ gameById: { loading } }) => loading,
+      renderNothing,
+    ),
+    // withProps((props) => {
+    //   const orderMany = props.data.orderMany
+    // }),
+
+    graphql(orderMany, { name: 'orderMany' }),
+    branch(
+      ({ orderMany: { loading } }) => loading,
+      renderNothing,
+    ),
+    // withProps((props) => {
+    //   console.log(props)
+    //   const orderMany = props.data.orderMany
+    //   const gameById = props.data.gameById
+    // }),
+    // withProps(
+    //   props => Object.assign({}, props, {
+    //     data: { orderMany: props.orderMany, gameById: props.gameById },
+    //   })
+    // ),
   ),
-  graphql(orderMany),
-  branch(
-    ({ data: { loading } }) => loading,
-    renderNothing,
-  ),
-  withProps((props) => {
-    const data = props.data.gameById
-    const orderMany = props.data.orderMany
-  }),
+
   withStateHandlers(
     () => ({
       signInOpened: false,
