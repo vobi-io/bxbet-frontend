@@ -9,14 +9,14 @@ export default compose(
         ({ data: { loading } }) => loading,
         renderNothing,
       ),
-      withProps(
-        (props) => {
-          const data = props.data.gameMany
-          const loading = props.data.loading
-          return { data, loading }
-        }
+    withProps(
+      (props) => {
+        const data = props.data.gameMany
+        const loading = props.data.loading
+        return { data, loading }
+      }
 
-      ),
+    ),
     withStateHandlers(
         ({ data, loading }) => ({
           loading,

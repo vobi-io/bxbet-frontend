@@ -21,6 +21,7 @@ function Cover(props) {
     color: #e6f1f8;
     text-shadow: 0px 3px 9.5px rgba(0, 0, 0, 0.28);
     cursor: pointer;
+    text-align: center;
   `
 
 

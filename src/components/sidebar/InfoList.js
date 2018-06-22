@@ -53,7 +53,7 @@ const InfoList = (props) => {
     <ItemContainer key={index}>
       <Status status={item.status} />
       <div>
-        <Link to={`/${item.gameId}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/${item._id}`} style={{ textDecoration: 'none' }}>
           <h2>
             {item.team1} - {item.team2}
           </h2>

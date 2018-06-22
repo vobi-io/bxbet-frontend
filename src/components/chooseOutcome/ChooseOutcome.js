@@ -6,27 +6,42 @@ import Button from '../button'
 import enhance from './enhance'
 
 const ChooseOutcome = ({
-  activeButton1,
-  activeButton2,
-  activeButton3,
   toggleActiveButton,
+  teams,
+  ...buttons
 }) => {
   const StyledContainer = styled.div`
     display: flex;
     height: 100%;
+
+    .buttons{
+      width: 100%;
+      display: flex;
+    }
   `
   const Brick = styled.div`
-    width: 24px;
+    width: 13px;
   `
 
   const Buttons = () => (
     <StyledContainer>
       <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
-        <Button text={'Germany'} activeButton={activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
-        <Brick />
-        <Button text={'Draw'} activeButton={activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
-        <Brick />
-        <Button text={'England'} activeButton={activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
+        {
+          teams ? teams.map((team, index) => (
+            <div key={index} className="buttons">
+              <Button text={team} activeButton={buttons[`activeButton${index + 1}`]} onClick={() => { toggleActiveButton(`activeButton${index + 1}`) }} />
+              {index === 0 ? <Brick /> : null}
+            </div>
+            ))
+          :
+          <div className="buttons">
+            <Button text={'Draw'} activeButton={buttons.activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
+            <Brick />
+            <Button text={'Draw'} activeButton={buttons.activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
+            <Brick />
+            <Button text={'England'} activeButton={buttons.activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
+          </div>
+        }
       </div>
     </StyledContainer>
     )

@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { graphql } from 'react-apollo'
+import { compose, withStateHandlers, withProps, branch, renderNothing } from 'recompose'
 
 import ChooseOutcome from '../../components/chooseOutcome'
 import Cover from '../../components/cover'
@@ -9,7 +11,7 @@ import YourBetes from '../../components/YourBetes'
 import MoreInfo from '../../components/moreInfo'
 import Table from '../../components/table'
 import PieChart from '../../components/pieChart'
-import { compose, withStateHandlers, withProps } from 'recompose'
+import gameById from './query/gameById.graphql'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
@@ -124,6 +126,7 @@ const HomePage = ({
   toggleSignUp,
   toggleSignUpWithEmail,
   match,
+  data,
 }) => (
 
 
@@ -131,9 +134,9 @@ const HomePage = ({
     <BackgroundPattern />
     <Container>
       <VerticalWrapper>
-        <ChooseOutcome />
+        <ChooseOutcome teams={data.gameById ? [data.gameById.team1, data.gameById.team2] : null} />
         <Brick />
-        <Cover text={'germany vs england'} gameId={match.params.id} />
+        <Cover text={data.gameById ? data.gameById.title : 'Germany vs england'} />
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
@@ -163,7 +166,19 @@ const HomePage = ({
 )
 
 export default compose(
-  withProps(props => props),
+  graphql(gameById, {
+    options: ({ match }) => {
+      const variables = { _id: match.params.id }
+      return ({ variables })
+    },
+  }),
+  branch(
+    ({ data: { loading } }) => loading,
+    renderNothing,
+  ),
+  withProps((props) => {
+    const data = props.data.gameById
+  }),
   withStateHandlers(
     () => ({
       signInOpened: false,
