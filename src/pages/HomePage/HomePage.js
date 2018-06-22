@@ -134,25 +134,23 @@ export default compose(
       ({ gameById: { loading } }) => loading,
       renderNothing,
     ),
-    // withProps((props) => {
-    //   const orderMany = props.data.orderMany
-    // }),
 
-    graphql(orderMany, { name: 'orderMany' }),
+    graphql(orderMany,
+      { name: 'orderMany',
+        options: ({ match }) => {
+          let variables = {}
+          if (match.params.id) {
+            variables = { game: match.params.id }
+            return ({ variables })
+          }
+          return ({ variables })
+        },
+      }
+    ),
     branch(
       ({ orderMany: { loading } }) => loading,
       renderNothing,
     ),
-    // withProps((props) => {
-    //   console.log(props)
-    //   const orderMany = props.data.orderMany
-    //   const gameById = props.data.gameById
-    // }),
-    // withProps(
-    //   props => Object.assign({}, props, {
-    //     data: { orderMany: props.orderMany, gameById: props.gameById },
-    //   })
-    // ),
   ),
 
   withStateHandlers(

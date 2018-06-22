@@ -1,5 +1,5 @@
-query OrderMany{
-  orderMany(limit: 14){
+query OrderMany($game: MongoID){
+  orderMany(limit: 14, filter: { game: $game }){
     orderType
     odd
     amount
