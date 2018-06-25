@@ -36,7 +36,7 @@ const App = ({
         // },
           {
             title: 'betting',
-            to: '/betting',
+            to: '/',
             status: 'active',
           },
           {
