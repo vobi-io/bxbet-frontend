@@ -68,7 +68,7 @@ const Information = (props) => {
         </div>
         <Line />
         <div className="amount">
-          {item[1]}
+          {item[1]} BX
         </div>
       </div>
     ))

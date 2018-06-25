@@ -70,7 +70,7 @@ const YourBetes = (props) => {
               <div className="rigth-side">
                 <div>{row[2]}</div>
                 <div>{row[3]}</div>
-                <div>{row[4]}</div>
+                <div>{row[4]} BX </div>
                 <div>{row[5]}</div>
               </div>
             </StyledRow>

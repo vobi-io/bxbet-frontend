@@ -55,7 +55,7 @@ const NavItem = styled.li`
   text-align: center;
   opacity: 0.7;
   text-transform: uppercase;
-  border-bottom: ${props => props.status === 'active' ? '3px solid #0f334b' : 'none'};
+  border-bottom: ${props => props.isActive ? '3px solid #0f334b' : 'none'};
 `
 
 const NavCircle = styled.div`
@@ -90,6 +90,7 @@ const Header = ({
   centeredPages,
   toggleSignIn,
   toggleSignUp,
+  location,
 }) => (
   <HeaderParent>
     <StyledHeader>
@@ -110,7 +111,7 @@ const Header = ({
         {centeredPages &&
           <Nav>
             {centeredPages.map((item, index, fullObj) => (
-              <NavItem key={item.title} status={item.status}>
+              <NavItem key={item.title} isActive={item.to === location.pathname}>
                 <NavLink to={item.to}>{item.title}</NavLink>
                 {
                   index < fullObj.length - 1 ? <NavCircle /> : null

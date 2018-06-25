@@ -13,6 +13,7 @@ import ProtectedRoute from './components/protectedRoute'
 import Request from './pages/request'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
+import Create from './pages/create'
 
 const App = ({
   signInOpened,
@@ -21,42 +22,43 @@ const App = ({
   toggleSignIn,
   toggleSignUp,
   toggleSignUpWithEmail,
+  toggleHeaderActivePage,
 }) => (
   <div id="main-container">
     <Sidebar />
     <div id="conten-container">
-      <Header
-        toggleSignIn={toggleSignIn}
-        toggleSignUp={toggleSignUp}
-        brandName="BX.BET"
-        centeredPages={[
-        // {
-        //   title: 'Artists',
-        //   to: '/artists',
-        // },
-          {
-            title: 'betting',
-            to: '/',
-            status: 'active',
-          },
-          {
-            title: 'outcome',
-            to: '/outcome',
-            status: 'passive',
-          },
-          {
-            title: 'create',
-            to: '/create',
-            status: 'passive',
-          },
-        ]}
+
+      <Route
+        exact
+        render={props => <Header
+          {...props}
+          toggleSignIn={toggleSignIn}
+          toggleSignUp={toggleSignUp}
+          brandName="BX.BET"
+          centeredPages={[
+            {
+              title: 'betting',
+              to: '/',
+              toggleHeaderActivePage,
+            },
+            {
+              title: 'outcome',
+              to: '/outcome',
+              toggleHeaderActivePage,
+            },
+            {
+              title: 'create',
+              to: '/create',
+              toggleHeaderActivePage,
+            },
+          ]}
+        />
+        }
       />
 
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/artists" component={Artists} />
-        <Route path="/browse" component={Browse} />
-        <Route path="/request" component={Request} />
+        <Route path="/create" component={Create} />
         <Route path="/:id" component={HomePage} />
         <Route component={FourOFour} />
       </Switch>

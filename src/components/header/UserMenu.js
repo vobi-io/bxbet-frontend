@@ -135,12 +135,12 @@ const styles = {
 }
 
 
-const UserMenu = ({ email, signOut, balanceCounter, username }) => (
+const UserMenu = ({ email, signOut, balanceCounter }) => (
   <StyledUserMenu>
     <Balance>
       <p style={styles.balance}> Balance: </p>
       <p style={styles.balanceCounter}>
-        {balanceCounter}
+        {balanceCounter} BX
       </p>
       <div style={styles.deviderLine} />
     </Balance>
@@ -155,7 +155,7 @@ const UserMenu = ({ email, signOut, balanceCounter, username }) => (
         </Icon>
       </IconAvatar> */}
       <p style={styles.username}>
-        {username}
+        {email}
       </p>
     </AvatarContainer>
     <UserDropDown >
