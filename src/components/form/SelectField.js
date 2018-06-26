@@ -37,8 +37,8 @@ function SelectField(props) {
   return (
     <Container >
       <StyledLabel>{props.title}</StyledLabel>
-      <StyledSelect >
-        {props.options.map((option, index) => <option value={option} key={index}>{option}</option>)}
+      <StyledSelect onChange={props.onChange} name={props.title} value={props.selected}>
+        {props.options.map((option, index) => <option value={option} key={index} >{option}</option>)}
       </StyledSelect>
     </Container>
   )

@@ -3,9 +3,8 @@ import styled from 'styled-components'
 
 import Card from '../card'
 
-const YourBetes = (props) => {
-  function Body() {
-    const Container = styled.div`
+
+const Container = styled.div`
       border-radius: 6px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
@@ -14,7 +13,7 @@ const YourBetes = (props) => {
       padding: 20px;
       overflow: hidden;
     `
-    const StyledRow = styled.div`
+const StyledRow = styled.div`
       font-family: Montserrat;
       font-size: 14px;
       color: ${props => props.status === 'Sell' ? '#cc3c40' : '#fff'};
@@ -40,14 +39,15 @@ const YourBetes = (props) => {
         }
       }
     `
-    const Line = styled.div`
+const Line = styled.div`
       height: 1px;
       opacity: 0.2;
       background-color: #447491;
       margin: 8px 0;
     `
 
-
+const YourBetes = (props) => {
+  function Body() {
     return (
       <Container>
         <StyledRow>
@@ -82,7 +82,7 @@ const YourBetes = (props) => {
     )
   }
 
-  return <Card title={'Your Betes'} content={Body} width="100%" />
+  return <Card title={'Your Betes'} width="100%"><Body /> </Card>
 }
 
 export default YourBetes

@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import coverPhoto from '../../resources/assets/img/stadium.png'
-
 function Cover(props) {
   const StyledCover = styled.div`
     width: 100%;

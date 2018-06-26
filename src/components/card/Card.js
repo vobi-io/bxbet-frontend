@@ -30,7 +30,7 @@ function Card(props) {
         {props.title}
       </StyledCardTitle>
       <StyledContent>
-        {props.content()}
+        {props.children}
       </StyledContent>
     </StyledCard>
   )

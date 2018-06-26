@@ -5,12 +5,7 @@ import Card from '../card'
 import Button from '../button'
 import enhance from './enhance'
 
-const ChooseOutcome = ({
-  toggleActiveButton,
-  teams,
-  ...buttons
-}) => {
-  const StyledContainer = styled.div`
+const StyledContainer = styled.div`
     display: flex;
     height: 100%;
 
@@ -19,13 +14,18 @@ const ChooseOutcome = ({
       display: flex;
     }
   `
-  const Brick = styled.div`
+const Brick = styled.div`
     width: 13px;
   `
 
+const ChooseOutcome = ({
+  toggleActiveButton,
+  teams,
+  ...buttons
+}) => {
   const stringShorter = (word) => {
-    if (word.length > 25) {
-      let newWord = word.substr(0, 25)
+    if (word.length > 20) {
+      let newWord = word.substr(0, 20)
       newWord += '...'
       return newWord
     }
@@ -35,29 +35,18 @@ const ChooseOutcome = ({
   const Buttons = () => (
     <StyledContainer>
       <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
-        {
-          teams ?
-            <div className="buttons">
-              <Button text={stringShorter(teams[0])} activeButton={buttons.activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
-              <Brick />
-              <Button text={'Draw'} activeButton={buttons.activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
-              <Brick />
-              <Button text={stringShorter(teams[1])} activeButton={buttons.activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
-            </div>
-          :
-            <div className="buttons">
-              <Button text={'Germany'} activeButton={buttons.activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
-              <Brick />
-              <Button text={'Draw'} activeButton={buttons.activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
-              <Brick />
-              <Button text={'England'} activeButton={buttons.activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
-            </div>
-        }
+        <div className="buttons">
+          <Button text={stringShorter(teams[0])} activeButton={buttons.activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
+          <Brick />
+          <Button text={'Draw'} activeButton={buttons.activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
+          <Brick />
+          <Button text={stringShorter(teams[1])} activeButton={buttons.activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
+        </div>
       </div>
     </StyledContainer>
     )
 
-  return <Card title={'Choose Outcome Please'} content={Buttons} width="100%" />
+  return <Card title={'Choose Outcome Please'} width="100%" ><Buttons /> </Card>
 }
 
 export default enhance(ChooseOutcome)

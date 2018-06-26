@@ -110,7 +110,7 @@ const Table = (props) => {
     )
   }
 
-  return <Card title="Table" content={Body} width="53.5%" bgColor="#0f334b" />
+  return <Card title="Table" width="53.5%" bgColor="#0f334b" ><Body /> </Card>
 }
 
 export default Table

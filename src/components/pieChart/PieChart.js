@@ -126,7 +126,7 @@ const PieChart = (props) => {
       )
 
 
-  return <Card title="Pie Chart" content={Body} width="30%" />
+  return <Card title="Pie Chart" width="30%"><Body /> </Card>
 }
 
 export default PieChart

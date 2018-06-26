@@ -3,8 +3,7 @@ import styled from 'styled-components'
 
 import Card from '../card'
 
-const MoreInfo = (props) => {
-  const BlueBrick = styled.div`
+const BlueBrick = styled.div`
     width: 15px;
     height: 15px;
     border-radius: 5px;
@@ -12,11 +11,11 @@ const MoreInfo = (props) => {
     box-shadow: 0px 3px 9.5px 0.5px rgba(0, 0, 0, 0.1);
     margin-right: 6px;
   `
-  const Container = styled.div`
+const Container = styled.div`
     margin-bottom: -37px;
   `
 
-  const StyledItem = styled.div`
+const StyledItem = styled.div`
     display: flex;
     align-items: center;
     margin: 36px 0 0 26px;
@@ -28,7 +27,7 @@ const MoreInfo = (props) => {
     }
   `
 
-
+const MoreInfo = (props) => {
   function Body() {
     const Data = props.data.map((item, index) => (
 
@@ -43,7 +42,7 @@ const MoreInfo = (props) => {
     )
   }
 
-  return <Card title={'Information'} content={Body} width="15%" />
+  return <Card title={'Information'} width="15%"><Body /> </Card>
 }
 
 export default MoreInfo

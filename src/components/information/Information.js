@@ -4,10 +4,7 @@ import styled from 'styled-components'
 import Card from '../card'
 import sortData from './sortData'
 
-
-const Information = (props) => {
-  const Table = (props) => {
-    const Container = styled.div`
+const Container = styled.div`
       width: 100%;
       height: 456px;
       border-radius: 5px;
@@ -19,6 +16,39 @@ const Information = (props) => {
       overflow: hidden;
     `
 
+const StyledContent = styled.div`
+border-top: solid 1px #92acfe;
+
+& .rows {
+  display: flex;
+  border-bottom: solid 1px #92acfe;
+  align-items: center;
+
+  & .odds, & .amount {
+    width: 100%;
+    text-align: center;
+  }
+}
+`
+
+const Line = styled.div`
+height: 40px;
+width: 2px;
+background-color: #92acfe;
+`
+
+const StyledTables = styled.div`
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    `
+const Brick = styled.div`
+      width: 2%;
+    `
+
+
+const Information = (props) => {
+  const Table = (props) => {
     const StyledTitle = styled.div`
       text-transform: uppercase;
       color: white;
@@ -39,28 +69,6 @@ const Information = (props) => {
         text-align: center;
       }
     `
-
-    const StyledContent = styled.div`
-      border-top: solid 1px #92acfe;
-
-      & .rows {
-        display: flex;
-        border-bottom: solid 1px #92acfe;
-        align-items: center;
-
-        & .odds, & .amount {
-          width: 100%;
-          text-align: center;
-        }
-      }
-    `
-
-    const Line = styled.div`
-      height: 40px;
-      width: 2px;
-      background-color: #92acfe;
-    `
-
     const printData = data => data.map((item, index) => (
       <div className="rows" key={index}>
         <div className="odds">
@@ -89,15 +97,6 @@ const Information = (props) => {
   }
 
   const Tables = () => {
-    const StyledTables = styled.div`
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    `
-    const Brick = styled.div`
-      width: 2%;
-    `
-
     const sortedData = sortData(props.data)
 
 
@@ -110,7 +109,7 @@ const Information = (props) => {
     )
   }
 
-  return <Card title={'Information'} content={Tables} width="100%" />
+  return <Card title={'Information'} width="100%"><Tables /> </Card>
 }
 
 export default Information

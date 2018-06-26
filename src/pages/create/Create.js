@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { TextField, SelectField } from '../../components/form'
 import Button from '../../components/button'
+import createEnhance from './createEnhance'
 
 const Container = styled.div`
       border-radius: 6px;
@@ -32,30 +35,73 @@ const StyledForm = styled.div`
       width: 100%;
       margin-bottom: 8px;
       & > div {
-        margin-bottom: 4px;
+        margin-bottom: 8px;
       }
     `
+const StyledDatePicker = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-const Create = () => {
-  const categoryOptions = ['Football', 'Basketball', 'Rugby']
-  const statusOptions = ['Open', 'Finished']
+    & > div {
+      width: 100%;
+      margin-left: 4%;
+      height: 40px;
+      opacity: 0.9;
+      border-radius: 3px;
+      background-color: #ffffff;
+      font-family: Myriad Pro;
+      font-size: 14px;
+      color: #314b5b;
+      border: none;
+      ::placeholder {
+          font-family: Myriad Pro;
+          font-size: 14px;
+          color: #314b5b;
+      }
+      padding-left: 16px;
 
-  return (
-    <Container>
-      <StyledTitle>Create</StyledTitle>
-      <Line />
-      <StyledForm>
-        <TextField title="Game Title" placeholder="Type Game Title" />
-        <TextField title="Team One" placeholder="Type Team One" />
-        <TextField title="Team Two" placeholder="Type Team One" />
-        <TextField title="Start Date" placeholder="Type Start Date" />
-        <TextField title="End Date" placeholder="Type End Date" />
-        <SelectField title="Category" options={categoryOptions} />
-        <SelectField title="Status" options={statusOptions} />
-      </StyledForm>
-      <Button text="Create Game" cta />
-    </Container>
+      input{
+        border: none;
+        margin-top: 12px;
+      }
+    }
+`
+
+const StyledLabel = styled.p`
+    font-family: Myriad Pro;
+    font-size: 14px;
+    color: white;
+    width: 25%;
+    margin: 0;
+`
+
+
+const Create = ({ categories, team1, team2, startDate, endDate, category, onChangeHandler, onStartDateSelection, onEndDateSelection, onSelectorChange, createGame, mutate, ...rest }) =>
+
+   (
+     <Container>
+       <StyledTitle>Create</StyledTitle>
+       <Line />
+       <StyledForm>
+         <TextField title="Team One" value={team1} onChange={onChangeHandler} />
+         <TextField title="Team Two" value={team2} onChange={onChangeHandler} />
+         <StyledDatePicker>
+           <StyledLabel>
+             Start Date
+          </StyledLabel>
+           <DatePicker selected={startDate} dateFormat="DD/MM/YYYY" onChange={onStartDateSelection} />
+         </StyledDatePicker>
+         <StyledDatePicker>
+           <StyledLabel>
+             End Date
+          </StyledLabel>
+           <DatePicker selected={endDate} dateFormat="DD/MM/YYYY" onChange={onEndDateSelection} />
+         </StyledDatePicker>
+         <SelectField title="Category" selected={category} options={categories} onChange={onSelectorChange} />
+       </StyledForm>
+       <Button text="Create Game" cta onClick={() => createGame(mutate)} />
+     </Container>
   )
-}
 
-export default Create
+export default createEnhance(Create)

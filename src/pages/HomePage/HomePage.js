@@ -13,6 +13,7 @@ import Table from '../../components/table'
 import PieChart from '../../components/pieChart'
 import gameById from './query/gameById.graphql'
 import orderMany from './query/orderMany.graphql'
+import gameOne from './query/gameOne.graphql'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
@@ -82,6 +83,7 @@ const HomePage = ({
   data,
   gameById,
   orderMany,
+  gameOne,
   ...props
 }) => (
 
@@ -90,9 +92,9 @@ const HomePage = ({
     <BackgroundPattern />
     <Container>
       <VerticalWrapper>
-        <ChooseOutcome teams={gameById.gameById ? [gameById.gameById.team1, gameById.gameById.team2] : null} />
+        <ChooseOutcome teams={gameById.gameById ? [gameById.gameById.team1, gameById.gameById.team2] : [gameOne.gameOne.team1, gameOne.gameOne.team2]} />
         <Brick />
-        <Cover text={gameById.gameById ? gameById.gameById.title : 'Germany vs england'} />
+        <Cover text={gameById.gameById ? `${gameById.gameById.team1} vs ${gameById.gameById.team2}` : `${gameOne.gameOne.team1} vs ${gameOne.gameOne.team2}`} />
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
@@ -106,6 +108,8 @@ const HomePage = ({
               toggleSignUp={toggleSignUp}
               signUpWithEmailOpened={signUpWithEmailOpened}
               toggleSignUpWithEmail={toggleSignUpWithEmail}
+              teams={gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById.team2] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]}
+              gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
             />
             <Brick />
             <YourBetes data={betes} />
@@ -135,13 +139,18 @@ export default compose(
       renderNothing,
     ),
 
+    graphql(gameOne, { name: 'gameOne' }),
+    branch(
+      ({ gameOne: { loading } }) => loading,
+      renderNothing,
+    ),
+
     graphql(orderMany,
       { name: 'orderMany',
         options: ({ match }) => {
           let variables = {}
           if (match.params.id) {
             variables = { game: match.params.id }
-            return ({ variables })
           }
           return ({ variables })
         },
