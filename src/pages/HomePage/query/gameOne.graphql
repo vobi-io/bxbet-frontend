@@ -3,5 +3,6 @@ query GameOne{
     _id
     team1
     team2
+    gameId
   }
 }

@@ -3,22 +3,17 @@ import { Switch, Route } from 'react-router-dom'
 import { compose, withStateHandlers, withProps } from 'recompose'
 
 import { SignInModal } from './components/signin'
-import { SelectSignupType, SignUpWithEmail } from './components/signup/modal'
+import { SignUpWithEmail } from './components/signup/modal'
 import Header from './components/header'
-import Home from './pages/home'
-import Artists from './pages/artists'
-import Browse from './pages/browse'
 import FourOFour from './pages/errors/404'
-import ProtectedRoute from './components/protectedRoute'
-import Request from './pages/request'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
 import Create from './pages/create'
+import Outcome from './pages/outcome/index'
 
 const App = ({
   signInOpened,
   signUpOpened,
-  signUpWithEmailOpened,
   toggleSignIn,
   toggleSignUp,
   toggleSignUpWithEmail,
@@ -27,7 +22,6 @@ const App = ({
   <div id="main-container">
     <Sidebar />
     <div id="conten-container">
-
       <Route
         exact
         render={props => <Header
@@ -43,7 +37,7 @@ const App = ({
             },
             {
               title: 'outcome',
-              to: '/outcome',
+              to: `/outcome/${props.history.location.pathname.split('/')[1]}`,
               toggleHeaderActivePage,
             },
             {
@@ -59,6 +53,7 @@ const App = ({
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/create" component={Create} />
+        <Route path="/outcome" component={Outcome} />
         <Route path="/:id" component={HomePage} />
         <Route component={FourOFour} />
       </Switch>

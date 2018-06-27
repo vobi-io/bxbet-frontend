@@ -1,11 +1,15 @@
-import { compose, withStateHandlers, renderNothing, branch } from 'recompose'
+import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
 
-import placeOrder from './placeOrder.graphql'
+import placeOrderMutation from './placeOrder.graphql'
 
 
 export default compose(
-    graphql(placeOrder, { name: 'placeOrder' }),
+    graphql(placeOrderMutation, {
+      props: ({ mutate }) => ({
+        placeOrder: variables => mutate({ variables }),
+      }),
+    }),
     branch(
       ({ placeOrder: { loading } }) => loading,
       renderNothing,
@@ -32,7 +36,10 @@ export default compose(
           return newState
         },
         onSelectorChange: () => e => ({ selected: e.target.value }),
-        onPlaceOrder: ({ gameId, odd, stake, activeTab, selected, teams }) => async (props) => {
+      },
+      ),
+      withHandlers({
+        onPlaceOrder: ({ placeOrder, gameId, odd, stake, activeTab, selected, teams }) => async () => {
           const orderType = activeTab === 'buy' ? 0 : 1
           const oddFloat = parseFloat(odd)
           const amount = parseFloat(stake)
@@ -52,14 +59,11 @@ export default compose(
             outcome,
           }
 
-          try {
-            await props.placeOrder({
-              variables,
-            })
-          } catch (error) {
-            console.log(error)
-          }
+          const data = placeOrder({
+            variables,
+          })
+          console.log(data)
         },
-      },
-      )
+
+      })
 )

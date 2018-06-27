@@ -85,18 +85,14 @@ const LogoLink = styled(Link)`
 
 const Header = ({
   authenticated,
-  brandName,
   leftPages,
-  rightPages,
   centeredPages,
   toggleSignIn,
   toggleSignUp,
   location,
-  data,
-  ...rest
+  getBalance,
 }) => (
   <HeaderParent>
-
     <StyledHeader>
       <Wrapper>
         <LogoLink to={'/'}>
@@ -125,7 +121,7 @@ const Header = ({
           </Nav>}
       </Wrapper>
       <Wrapper>
-        {authenticated && <UserMenu balanceCounter={data.getBalance.amount} username={'Mrs. Jolie'} />}
+        {authenticated && <UserMenu balanceCounter={getBalance.getBalance.amount} username={'Mrs. Jolie'} />}
         {!authenticated
           && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />}
       </Wrapper>

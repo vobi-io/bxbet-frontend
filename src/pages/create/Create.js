@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { Redirect } from 'react-router-dom'
 
 import { TextField, SelectField } from '../../components/form'
 import Button from '../../components/button'

@@ -1,0 +1,5 @@
+mutation finishGame($gameId: Float, $outcome: Float){
+  finishGame(gameId: $gameId, outcome: $outcome){
+    gameId
+  }
+}

@@ -1,13 +1,14 @@
 import { compose, renderNothing, branch } from 'recompose'
-import { graphql } from 'react-apollo'
+import { graphql, compose as composeGraphql } from 'react-apollo'
 
-
-import getBalance from './getBalance.graphql'
+import getBalanceQuery from './getBalance.graphql'
 
 export default compose(
-    graphql(getBalance),
-    branch(
-        ({ data: { loading } }) => loading,
-        renderNothing,
-      ),
+    composeGraphql(
+        graphql(getBalanceQuery, { name: 'getBalance' }),
+        branch(
+            ({ getBalance: { loading } }) => loading,
+            renderNothing,
+        ),
+    ),
 )

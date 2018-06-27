@@ -71,7 +71,7 @@ const placeOrderHandler = (props) => {
   if (!props.props.authenticated) {
     props.props.toggleSignUpWithEmail()
   } else {
-    props.onPlaceOrder(props)
+    props.onPlaceOrder()
   }
 }
 
