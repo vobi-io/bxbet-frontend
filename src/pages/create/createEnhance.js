@@ -1,12 +1,18 @@
-import { compose, withStateHandlers } from 'recompose'
+import { compose, withStateHandlers, withHandlers } from 'recompose'
 import moment from 'moment'
 import { graphql } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
-import createGame from './createGame.graphql'
-
+import createGameMutation from './createGame.graphql'
 
 export default compose(
-    graphql(createGame),
+    graphql(createGameMutation, {
+      props: ({ mutate }) => ({
+        createGame: variables => mutate({
+          variables,
+        }),
+      }),
+    }),
     withStateHandlers(
         () => ({
           team1: '',
@@ -51,18 +57,20 @@ export default compose(
           newState.category = e.target.value
           return newState
         },
-        createGame: ({ team1, team2, category, selectedStartDate, selectedEndDate }) => (mutate) => {
-          const variables = {
-            team1,
-            team2,
-            category,
-            startDate: selectedStartDate,
-            endDate: selectedEndDate,
-          }
-          mutate({
-            variables,
-          })
-        },
       }
-    )
+    ),
+    withRouter,
+    withHandlers({
+      createGame: ({ createGame, history, team1, team2, category, selectedStartDate, selectedEndDate }) => async () => {
+        const variables = {
+          team1,
+          team2,
+          category,
+          startDate: selectedStartDate,
+          endDate: selectedEndDate,
+        }
+        const { data } = await createGame(variables)
+        history.push(`/${data.createGame._id}`)
+      },
+    })
 )

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { Redirect } from 'react-router-dom'
 
 import { TextField, SelectField } from '../../components/form'
 import Button from '../../components/button'
@@ -77,7 +78,7 @@ const StyledLabel = styled.p`
 `
 
 
-const Create = ({ categories, team1, team2, startDate, endDate, category, onChangeHandler, onStartDateSelection, onEndDateSelection, onSelectorChange, createGame, mutate, ...rest }) =>
+const Create = ({ categories, team1, team2, startDate, endDate, category, onChangeHandler, onStartDateSelection, onEndDateSelection, onSelectorChange, createGame, ...rest }) =>
 
    (
      <Container>
@@ -100,7 +101,7 @@ const Create = ({ categories, team1, team2, startDate, endDate, category, onChan
          </StyledDatePicker>
          <SelectField title="Category" selected={category} options={categories} onChange={onSelectorChange} />
        </StyledForm>
-       <Button text="Create Game" cta onClick={() => createGame(mutate)} />
+       <Button text="Create Game" cta onClick={createGame} />
      </Container>
   )
 
