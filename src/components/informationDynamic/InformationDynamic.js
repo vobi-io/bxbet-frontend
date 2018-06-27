@@ -91,7 +91,7 @@ const CardBody = props => (
       <StyledForm>
         <SelectField title="Outcome" options={props.teams} selected={props.selected} onChange={props.onSelectorChange} />
         <TextField title="Odd" onChange={props.onChangeHandler} value={props.odd} />
-        <TextField title="Stake" icon="BX" onChange={props.onChangeHandler} value={props.stake} />
+        <TextField title="Stake" icon="BX" onChange={props.onChangeHandler} value={props.stake} isValidInput={props.isValidInput} />
       </StyledForm>
       <Brick />
       <StyledInfo>

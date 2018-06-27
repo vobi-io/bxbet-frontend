@@ -23,7 +23,7 @@ const StyledInput = styled.input `
     font-family: Myriad Pro;
     font-size: 14px;
     color: #314b5b;
-    border: none;
+    border: ${props => props.isValidInput ? 'none' : '2px solid red'};
     ::placeholder {
         font-family: Myriad Pro;
         font-size: 14px;
@@ -40,7 +40,7 @@ const Icon = styled.div `
     width: 0;
 `
 
-const TextField = ({ title, value, onChange, icon }) => (
+const TextField = ({ title, value, onChange, icon, isValidInput }) => (
   <Container>
     <StyledLabel>{title}</StyledLabel>
     <StyledInput
@@ -48,6 +48,7 @@ const TextField = ({ title, value, onChange, icon }) => (
       name={title.toLowerCase()}
       value={value}
       onChange={onChange}
+      isValidInput={isValidInput === undefined ? true : isValidInput}
     />
     {icon
       ? <Icon>{icon}</Icon>

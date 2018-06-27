@@ -2,6 +2,7 @@ import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 
 import { graphql } from 'react-apollo'
 
 import placeOrderMutation from './placeOrder.graphql'
+import getBalanceQuery from '../header/getBalance.graphql'
 
 
 export default compose(
@@ -14,24 +15,35 @@ export default compose(
       ({ placeOrder: { loading } }) => loading,
       renderNothing,
     ),
-
+    graphql(getBalanceQuery, { name: 'getBalance' }),
+    branch(
+      ({ getBalance: { loading } }) => loading,
+      renderNothing,
+    ),
     withStateHandlers(
-        ({ teams, gameId }) => ({
+        ({ teams, gameId, getBalance }) => ({
           activeTab: 'buy',
           odd: 1.45,
-          stake: 54000,
+          stake: 0,
           selected: teams[0],
           teams,
           gameId,
+          isValidInput: true,
+          getBalance,
         }),
       {
         toggleActiveButton: () => props => ({ activeTab: props }),
-        onChangeHandler: () => (e) => {
+        onChangeHandler: ({ getBalance }) => (e) => {
           const newState = {}
+          const value = e.target.value
+
           if (e.target.name === 'odd') {
-            newState.odd = e.target.value
-          } else if (e.target.name === 'stake') {
-            newState.stake = e.target.value
+            newState.odd = value
+          } else {
+            newState.stake = value
+            if (value <= 0 || value > getBalance.getBalance.amount) {
+              newState.isValidInput = false
+            } else newState.isValidInput = true
           }
           return newState
         },
@@ -52,17 +64,14 @@ export default compose(
           }
 
           const variables = {
-            gameId,
-            orderType,
             amount,
             odd: oddFloat,
+            orderType,
             outcome,
+            gameId,
           }
 
-          const data = placeOrder({
-            variables,
-          })
-          console.log(data)
+          await placeOrder(variables)
         },
 
       })
