@@ -6,6 +6,7 @@ import authAware from '../../authAware'
 import AuthMenu from './AuthMenu'
 import UserMenu from './UserMenu'
 import Logo from '../../resources/assets/img/bx-logo-color-horizontal.png'
+import headerEnhance from './headerEnhance'
 
 const StyledHeader = styled.span`
   display: flex;
@@ -91,8 +92,11 @@ const Header = ({
   toggleSignIn,
   toggleSignUp,
   location,
+  data,
+  ...rest
 }) => (
   <HeaderParent>
+
     <StyledHeader>
       <Wrapper>
         <LogoLink to={'/'}>
@@ -121,7 +125,7 @@ const Header = ({
           </Nav>}
       </Wrapper>
       <Wrapper>
-        {authenticated && <UserMenu balanceCounter={1550} username={'Mrs. Jolie'} />}
+        {authenticated && <UserMenu balanceCounter={data.getBalance.amount} username={'Mrs. Jolie'} />}
         {!authenticated
           && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />}
       </Wrapper>
@@ -129,4 +133,4 @@ const Header = ({
   </HeaderParent>
 )
 
-export default authAware(Header)
+export default authAware(headerEnhance(Header))
