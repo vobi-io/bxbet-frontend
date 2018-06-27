@@ -63,5 +63,14 @@ export default compose(
         await finishGame(variables)
         history.push('/')
       },
+      redirectIfGameFinished: ({ history, gameById, gameOne }) => () => {
+        if (gameById.gameById) {
+          if (gameById.gameById.status === 1) {
+            history.push('/')
+          }
+        } else if (gameOne.gameOne.status === 1) {
+          history.push('/')
+        }
+      },
     })
 )

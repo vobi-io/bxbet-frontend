@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
 
 import { SelectField } from '../../components/form'
 import Button from '../../components/button'
@@ -38,8 +39,11 @@ const StyledForm = styled.div`
 `
 
 
-const Outcome = ({ teams, selectedTeam, onSelectorChange, finishGame }) => (
+const Outcome = ({ teams, selectedTeam, onSelectorChange, finishGame, redirectIfGameFinished }) => (
   <Container>
+    {
+        redirectIfGameFinished()
+    }
     <StyledTitle>Outcome</StyledTitle>
     <Line />
     <StyledForm>

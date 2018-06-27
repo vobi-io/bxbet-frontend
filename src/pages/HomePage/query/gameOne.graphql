@@ -4,5 +4,6 @@ query GameOne{
     team1
     team2
     gameId
+    status
   }
 }
