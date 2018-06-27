@@ -1,0 +1,11 @@
+query orderMany($player: String) {
+  orderMany(filter: { player: $player }){
+   	_id
+    gameId
+    outcome
+    status
+    odd
+    amount
+    orderType
+  }
+}

@@ -33,7 +33,7 @@ export default compose(
         }),
       {
         toggleActiveButton: () => props => ({ activeTab: props }),
-        onChangeHandler: ({ getBalance }) => (e) => {
+        onChangeHandler: ({ getBalance, activeTab }) => (e) => {
           const newState = {}
           const value = e.target.value
 
@@ -41,7 +41,7 @@ export default compose(
             newState.odd = value
           } else {
             newState.stake = value
-            if (value <= 0 || value > getBalance.getBalance.amount) {
+            if (value <= 0 || (value > getBalance.getBalance.amount && activeTab === 'buy')) {
               newState.isValidInput = false
             } else newState.isValidInput = true
           }

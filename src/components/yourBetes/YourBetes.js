@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Card from '../card'
+import enhance from './yourBetesEnhance'
 
 
 const Container = styled.div`
@@ -50,6 +51,7 @@ const YourBetes = (props) => {
   function Body() {
     return (
       <Container>
+        {console.log(props)}
         <StyledRow>
           <div>Outcome</div>
           <div className="rigth-side">
@@ -85,4 +87,4 @@ const YourBetes = (props) => {
   return <Card title={'Your Betes'} width="100%"><Body /> </Card>
 }
 
-export default YourBetes
+export default enhance(YourBetes)
