@@ -47,9 +47,8 @@ const StyledDatePicker = styled.div`
       width: 100%;
       margin-left: 4%;
       height: 40px;
-      opacity: 0.9;
       border-radius: 3px;
-      background-color: #ffffff;
+      background-color: #E7EAED;
       font-family: Myriad Pro;
       font-size: 14px;
       color: #314b5b;
@@ -64,6 +63,7 @@ const StyledDatePicker = styled.div`
       input{
         border: none;
         margin-top: 12px;
+        background: none;
       }
     }
 `
