@@ -71,7 +71,8 @@ export default compose(
             gameId,
           }
 
-          await placeOrder(variables)
+          const { data } = await placeOrder(variables)
+          console.log(data)
         },
 
       })

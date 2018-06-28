@@ -17,7 +17,11 @@ export default compose(
         graphql(yourBetesQuery, {
           name: 'yourBetes',
           options: ({ me }) => {
-            const variables = { player: me.me.blockChain.address }
+            let variables = {}
+            if (me.me) {
+              variables = { player: me.me.blockChain.address }
+            }
+
             return ({ variables })
           },
         }),
