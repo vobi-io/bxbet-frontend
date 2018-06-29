@@ -65,10 +65,10 @@ export default compose(
       },
       redirectIfGameFinished: ({ history, gameById, gameOne }) => () => {
         if (gameById.gameById) {
-          if (gameById.gameById.status === 1) {
+          if (gameById.gameById.status !== 3) {
             history.push('/')
           }
-        } else if (gameOne.gameOne.status === 1) {
+        } else if (gameOne.gameOne.status !== 3) {
           history.push('/')
         }
       },

@@ -112,7 +112,16 @@ const HomePage = ({
         </div>
       </VerticalWrapper>
       <VerticalWrapper>
-        <MoreInfo data={someData} />
+        <MoreInfo
+          data={someData} gameId={
+          gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
+        }
+          teams={
+          gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById
+            .team2,
+          ] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]
+        }
+        />
         < PieChart
           gameId={
           gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
