@@ -67,11 +67,6 @@ const tableData = [
   { Flag, country: 'Draw', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
 ]
 
-const pieData = {
-  totalBets: 54,
-  percentage: [{ title: 'Germany Wins', percent: 50 }, { title: 'England Wins', percent: 25 }, { title: 'Draw', percent: 25 }],
-}
-
 const HomePage = ({
   signInOpened,
   signUpOpened,
@@ -118,7 +113,16 @@ const HomePage = ({
       </VerticalWrapper>
       <VerticalWrapper>
         <MoreInfo data={someData} />
-        <PieChart data={pieData} />
+        < PieChart
+          gameId={
+          gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
+        }
+          teams={
+          gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById
+            .team2,
+          ] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]
+        }
+        />
         <Table data={tableData} />
       </VerticalWrapper>
     </Container>

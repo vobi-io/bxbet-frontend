@@ -51,7 +51,7 @@ const YourBetes = (props) => {
   function Body() {
     return (
       <Container>
-        {console.log(props)}
+        {/* {console.log(props)} */}
         <StyledRow>
           <div>Outcome</div>
           <div className="rigth-side">

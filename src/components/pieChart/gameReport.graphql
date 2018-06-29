@@ -1,0 +1,8 @@
+query gameReport($gameId: Float){
+  gameReport(gameId: $gameId) {
+    total
+    team1
+    team2
+    draw
+  }
+}

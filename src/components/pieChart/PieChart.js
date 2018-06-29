@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2'
 import styled from 'styled-components'
 
 import Card from '../card'
+import enhance from './pieChartEnhance'
 
 
 const Container = styled.div`
@@ -69,11 +70,10 @@ const Container = styled.div`
 `
 
 
-const PieChart = (props) => {
-  const percents = []
-  props.data.percentage.forEach((item) => {
-    percents.push(item.percent)
-  })
+const PieChart = ({ pieData }) => {
+  const data = pieData()
+  const percents = data.percentages
+  const titles = data.titles
 
   const chartData = {
     datasets: [{
@@ -93,11 +93,12 @@ const PieChart = (props) => {
 
   const Body = () => (
     <Container>
+      {/* {console.log(pieData())} */}
       <div className="pie_chart">
         <Doughnut data={chartData} options={options} height={170} width={170} />
         <div className="text_on_pie">
             TOTAL
-            <br /><span>{props.data.totalBets}</span><br />
+            <br /><span>{data.totalGame}</span><br />
             BETS
         </div>
       </div>
@@ -105,14 +106,14 @@ const PieChart = (props) => {
       <div className="chart_info">
         {
              (function () {
-               return props.data.percentage.map((item, index) => (
+               return percents.map((item, index) => (
                  <div key={index} className="chart_item">
                    <div className="item_top_section">
                      <div className="color" style={{ backgroundColor: chartData.datasets[0].backgroundColor[index] }} />
-                     <div>{item.percent}%</div>
+                     <div>{item}%</div>
                    </div>
                    <div className="info_title">
-                     {item.title}
+                     {titles[index]}
                    </div>
                    {index < 2 ? <div className="line" /> : null}
                  </div>
@@ -129,4 +130,4 @@ const PieChart = (props) => {
   return <Card title="Pie Chart" width="30%"><Body /> </Card>
 }
 
-export default PieChart
+export default enhance(PieChart)
