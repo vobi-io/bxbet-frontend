@@ -47,11 +47,12 @@ const Line = styled.div`
       margin: 8px 0;
     `
 
-const YourBetes = (props) => {
+const YourBetes = ({ yourBetesData, teams }) => {
+  const data = yourBetesData()
+
   function Body() {
     return (
       <Container>
-        {/* {console.log(props)} */}
         <StyledRow>
           <div>Outcome</div>
           <div className="rigth-side">
@@ -62,18 +63,18 @@ const YourBetes = (props) => {
           </div>
         </StyledRow>
         <Line />
-        {props.data.map((row, index) => (
+        {data.map((item, index) => (
           <div key={index}>
-            <StyledRow status={row[2]}>
-              <div style={{ display: 'flex' }}>
-                <img src={row[0]} alt="flag" className="flag" />
-                {row[1]}
+            <StyledRow status={item.orderType}>
+              <div style={{ display: 'flex', width: '150px' }}>
+                {/* <img src={row[0]} alt="flag" className="flag" /> */}
+                {teams[index]}
               </div>
               <div className="rigth-side">
-                <div>{row[2]}</div>
-                <div>{row[3]}</div>
-                <div>{row[4]} BX </div>
-                <div>{row[5]}</div>
+                <div>{item.orderType}</div>
+                <div>{item.odd}</div>
+                <div>{item.stake} BX </div>
+                <div>{item.status}</div>
               </div>
             </StyledRow>
             <Line />

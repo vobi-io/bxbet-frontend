@@ -47,18 +47,6 @@ const BackgroundPattern = styled.div`
     background-image: url(${pattern});
 `
 
-const betes = [
-  [
-    Flag, 'Germany', 'Buy', 2.9, 109, 'Matched',
-  ],
-  [
-    Flag, 'England', 'Buy', 2.9, 109, 'open',
-  ],
-  [
-    Flag, 'Draw', 'Sell', 2.9, 109, 'open',
-  ],
-]
-
 const someData = ['Germay Wins', 'England Wins', 'Draw']
 
 const tableData = [
@@ -107,7 +95,13 @@ const HomePage = ({
               gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
             />
             <Brick />
-            <YourBetes data={betes} />
+            <YourBetes
+              teams={
+              gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById
+                .team2,
+              ] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]
+            }
+            />
           </div>
         </div>
       </VerticalWrapper>
