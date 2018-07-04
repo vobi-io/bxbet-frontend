@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Redirect } from 'react-router-dom'
 
 import { SelectField } from '../../components/form'
 import Button from '../../components/button'

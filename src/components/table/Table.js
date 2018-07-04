@@ -53,7 +53,7 @@ const TableItem = styled.div`
       }
       .bigOnes{
           padding: 10px 20px;
-          line-height: 32px;
+          line-height: 40px;
       }
       .green{
         background-image: linear-gradient(to bottom, #7fac30, #288702 99%);
