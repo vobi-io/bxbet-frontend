@@ -75,6 +75,24 @@ text-align: left;
 
 input{
   margin-bottom: 7px;
+  opacity: 0;
+  margin-left: 12px;
+}
+.circle{
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  border: 3px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(20px);
+  div{
+    width: 7px;
+    height: 7px;
+    background-color: green;
+    border-radius: 8px;
+  }
 }
 `
 
@@ -87,7 +105,7 @@ const placeOrderHandler = (props) => {
 }
 
 
-const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons, placeOrderCalculation, isLiabilitiesActive, isPayoutActive, ...props }) => (
+const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons, placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
   <div>
     <div style={{ display: 'flex' }}>
       <StyledTab green onClick={() => toggleActiveButton('buy')}>
@@ -114,8 +132,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
               </div>
               :
                 <StyledButtons onChange={toggleButtons}>
-                  <input type="radio" name="sell_type" checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
-                  <input type="radio" name="sell_type" checked={isPayoutActive} value="payout" /> Payout <br />
+                  {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
+                  {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" checked={isPayoutActive} value="payout" /> Payout <br />
                 </StyledButtons>
           }
           <div>{placeOrderCalculation()}</div>

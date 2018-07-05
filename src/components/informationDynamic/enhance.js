@@ -1,3 +1,4 @@
+import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
 
@@ -107,10 +108,15 @@ export default compose(
           }
           if (isPayoutActive) {
             profit = amount
-            return profit
+            return isNaN(profit) ? '?' : `${profit} BX`
           }
-
           return profit
+        },
+        buttonSwitcher: () => (checked) => {
+          if (checked) {
+            return <div className="circle"><div /></div>
+          }
+          return <div className="circle" />
         },
       })
 )
