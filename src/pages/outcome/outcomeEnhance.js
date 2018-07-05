@@ -31,9 +31,9 @@ export default compose(
         ),
     withStateHandlers(
         ({ gameById, gameOne }) => ({
-          teams: gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById.team2] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2],
+          teams: gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam],
 
-          selectedTeam: gameById.gameById ? gameById.gameById.team1 : gameOne.gameOne.team1,
+          selectedTeam: gameById.gameById ? gameById.gameById.homeTeam : gameOne.gameOne.homeTeam,
           gameId: gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId,
         }),
       {

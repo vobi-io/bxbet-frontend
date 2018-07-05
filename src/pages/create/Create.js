@@ -77,15 +77,15 @@ const StyledLabel = styled.p`
 `
 
 
-const Create = ({ categories, team1, team2, startDate, endDate, category, onChangeHandler, onStartDateSelection, onEndDateSelection, onSelectorChange, createGame, ...rest }) =>
+const Create = ({ categories, homeTeam, awayTeam, startDate, endDate, category, onChangeHandler, onStartDateSelection, onEndDateSelection, onSelectorChange, createGame, ...rest }) =>
 
    (
      <Container>
        <StyledTitle>Create</StyledTitle>
        <Line />
        <StyledForm>
-         <TextField title="Team One" value={team1} onChange={onChangeHandler} />
-         <TextField title="Team Two" value={team2} onChange={onChangeHandler} />
+         <TextField title="Team One" value={homeTeam} onChange={onChangeHandler} />
+         <TextField title="Team Two" value={awayTeam} onChange={onChangeHandler} />
          <StyledDatePicker>
            <StyledLabel>
              Start Date

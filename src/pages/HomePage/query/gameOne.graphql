@@ -1,8 +1,8 @@
 query GameOne{
   gameOne{
     _id
-    team1
-    team2
+    homeTeam
+    awayTeam
     gameId
     status
   }

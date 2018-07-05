@@ -24,14 +24,14 @@ export default compose(
         const gameReportData = gameReport.gameReport
         const titles = [`${teams[0]} Wins`, `${teams[2]} Wins`, 'Draw']
 
-        const calculatePercents = (total, team1, team2, draw) => {
+        const calculatePercents = (total, homeTeam, awayTeam, draw) => {
           const drawPercent = Math.floor((draw / total) * 100)
-          const team1Percent = Math.floor((team1 / total) * 100)
-          const team2Percent = Math.floor((team2 / total) * 100)
-          return [team1Percent, team2Percent, drawPercent]
+          const homeTeamPercent = Math.floor((homeTeam / total) * 100)
+          const awayTeamPercent = Math.floor((awayTeam / total) * 100)
+          return [homeTeamPercent, awayTeamPercent, drawPercent]
         }
 
-        percentages = calculatePercents(gameReportData.total, gameReportData.team1, gameReportData.team2, gameReportData.draw)
+        percentages = calculatePercents(gameReportData.total, gameReportData.homeTeam, gameReportData.awayTeam, gameReportData.draw)
         return { percentages, titles, totalGame: gameReport.gameReport.total }
       },
     })

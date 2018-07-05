@@ -75,9 +75,9 @@ const HomePage = ({
     <BackgroundPattern />
     <Container>
       <VerticalWrapper>
-        <ChooseOutcome teams={gameById.gameById ? [gameById.gameById.team1, gameById.gameById.team2] : [gameOne.gameOne.team1, gameOne.gameOne.team2]} />
+        <ChooseOutcome teams={gameById.gameById ? [gameById.gameById.homeTeam, gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]} />
         <Brick />
-        <Cover text={gameById.gameById ? `${gameById.gameById.team1} vs ${gameById.gameById.team2}` : `${gameOne.gameOne.team1} vs ${gameOne.gameOne.team2}`} />
+        <Cover text={gameById.gameById ? `${gameById.gameById.homeTeam} vs ${gameById.gameById.awayTeam}` : `${gameOne.gameOne.homeTeam} vs ${gameOne.gameOne.awayTeam}`} />
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
@@ -91,15 +91,15 @@ const HomePage = ({
               toggleSignUp={toggleSignUp}
               signUpWithEmailOpened={signUpWithEmailOpened}
               toggleSignUpWithEmail={toggleSignUpWithEmail}
-              teams={gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById.team2] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]}
+              teams={gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]}
               gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
             />
             <Brick />
             <YourBetes
               teams={
-              gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById
-                .team2,
-              ] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]
+              gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById
+                .awayTeam,
+              ] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
             }
             />
           </div>
@@ -111,9 +111,9 @@ const HomePage = ({
           gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
         }
           teams={
-          gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById
-            .team2,
-          ] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]
+          gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById
+            .awayTeam,
+          ] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
         }
         />
         < PieChart
@@ -121,9 +121,9 @@ const HomePage = ({
           gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
         }
           teams={
-          gameById.gameById ? [gameById.gameById.team1, 'Draw', gameById.gameById
-            .team2,
-          ] : [gameOne.gameOne.team1, 'Draw', gameOne.gameOne.team2]
+          gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById
+            .awayTeam,
+          ] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
         }
         />
         <Table data={tableData} />

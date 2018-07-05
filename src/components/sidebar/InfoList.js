@@ -55,7 +55,7 @@ const InfoList = (props) => {
       <div>
         <Link to={`/${item._id}`} style={{ textDecoration: 'none' }}>
           <h2>
-            {item.team1} - {item.team2}
+            {item.homeTeam} - {item.awayTeam}
           </h2>
         </Link>
         <span>

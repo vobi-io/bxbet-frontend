@@ -15,8 +15,8 @@ export default compose(
     }),
     withStateHandlers(
         () => ({
-          team1: '',
-          team2: '',
+          homeTeam: '',
+          awayTeam: '',
           startDate: moment(),
           endDate: moment(),
           categories: ['Football', 'Basketball', 'Rugby'],
@@ -30,10 +30,10 @@ export default compose(
           const newState = {}
           switch (e.target.name) {
           case 'team one':
-            newState.team1 = e.target.value
+            newState.homeTeam = e.target.value
             break
           case 'team two':
-            newState.team2 = e.target.value
+            newState.awayTeam = e.target.value
             break
           default:
             break
@@ -61,10 +61,10 @@ export default compose(
     ),
     withRouter,
     withHandlers({
-      createGame: ({ createGame, history, team1, team2, category, selectedStartDate, selectedEndDate }) => async () => {
+      createGame: ({ createGame, history, homeTeam, awayTeam, category, selectedStartDate, selectedEndDate }) => async () => {
         const variables = {
-          team1,
-          team2,
+          homeTeam,
+          awayTeam,
           category,
           startDate: selectedStartDate,
           endDate: selectedEndDate,

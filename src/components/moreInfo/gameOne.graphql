@@ -1,8 +1,8 @@
 query gameOne($gameId: Float) {
   gameOne(filter: { gameId: $gameId }) {
     gameId
-    team1
-    team2
+    homeTeam
+    awayTeam
     status
   }
 }
