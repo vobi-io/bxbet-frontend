@@ -30,6 +30,8 @@ export default compose(
           gameId,
           isValidInput: true,
           getBalance,
+          isLiabilitiesActive: true,
+          isPayoutActive: false,
         }),
       {
         toggleActiveButton: () => props => ({ activeTab: props }),
@@ -48,6 +50,21 @@ export default compose(
           return newState
         },
         onSelectorChange: () => e => ({ selected: e.target.value }),
+        toggleButtons: () => (e) => {
+          let newState = {}
+          if (e.target.value === 'liabilities') {
+            newState = {
+              isLiabilitiesActive: true,
+              isPayoutActive: false,
+            }
+          } else {
+            newState = {
+              isLiabilitiesActive: false,
+              isPayoutActive: true,
+            }
+          }
+          return newState
+        },
       },
       ),
       withHandlers({
@@ -75,6 +92,25 @@ export default compose(
           // console.log(data)
           await placeOrder(variables)
         },
+        placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
+          const oddFloat = parseFloat(odd)
+          const amount = parseFloat(stake)
+          let profit
 
+          if (activeTab === 'buy') {
+            profit = Math.floor((oddFloat * amount) - amount)
+            return isNaN(profit) ? '?' : `${profit} BX`
+          }
+          if (isLiabilitiesActive) {
+            profit = Math.floor(oddFloat * amount)
+            return isNaN(profit) ? '?' : `${profit} BX`
+          }
+          if (isPayoutActive) {
+            profit = amount
+            return profit
+          }
+
+          return profit
+        },
       })
 )

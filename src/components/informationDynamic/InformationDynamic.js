@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { Route } from 'react-router-dom'
 
 import Card from '../card'
-import { TextField } from '../form'
-import { SelectField } from '../form'
+import { TextField, SelectField } from '../form'
 import Button from '../button'
 import authAware from '../../authAware'
 import SignUpWithEmail from '../signup/modal/SignUpWithEmail'
@@ -29,8 +28,12 @@ color: white;
 font-family: Montserrat;
 font-size: 18px;
 
-& > .subInfo{
-  font-size: 14px;
+.calculations{
+  display: flex;
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  justify-content: space-between;
 }
 `
 const Brick = styled.div`
@@ -67,6 +70,14 @@ border-radius: 0 6px 0 0;
 align-self: flex-end;
 `
 
+const StyledButtons = styled.form`
+text-align: left;
+
+input{
+  margin-bottom: 7px;
+}
+`
+
 const placeOrderHandler = (props) => {
   if (!props.props.authenticated) {
     props.props.toggleSignUpWithEmail()
@@ -76,27 +87,41 @@ const placeOrderHandler = (props) => {
 }
 
 
-const CardBody = props => (
+const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons, placeOrderCalculation, isLiabilitiesActive, isPayoutActive, ...props }) => (
   <div>
     <div style={{ display: 'flex' }}>
-      <StyledTab green onClick={() => props.toggleActiveButton('buy')}>
+      <StyledTab green onClick={() => toggleActiveButton('buy')}>
           BUY
         </StyledTab>
-      <StyledTab onClick={() => props.toggleActiveButton('sell')}>
+      <StyledTab onClick={() => toggleActiveButton('sell')}>
           SELL
         </StyledTab>
     </div>
-    <ActiveUnderline activeTab={props.activeTab} />
+    <ActiveUnderline activeTab={activeTab} />
     <Container>
       <StyledForm>
-        <SelectField title="Outcome" options={props.teams} selected={props.selected} onChange={props.onSelectorChange} />
-        <TextField title="Odd" onChange={props.onChangeHandler} value={props.odd} />
-        <TextField title="Stake" icon="BX" onChange={props.onChangeHandler} value={props.stake} isValidInput={props.isValidInput} />
+        <SelectField title="Outcome" options={teams} selected={selected} onChange={onSelectorChange} />
+        <TextField title="Odd" onChange={onChangeHandler} value={odd} />
+        <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} />
       </StyledForm>
       <Brick />
       <StyledInfo>
-        <div>Potential Return: <span style={{ color: '#37b14f', fontSize: '24px', fontWeigth: 'bold' }}>1457 BX</span></div>
-        <div className="subInfo">Potential Win: <span style={{ color: '#fc8109' }}>1457 BX</span> | Potential Win: <span style={{ color: '#fc8109' }}>1457 BX</span></div>
+        <div className="calculations">
+          {
+              activeTab === 'buy' ?
+                <div className="profit_text">
+                Profit:
+              </div>
+              :
+                <StyledButtons onChange={toggleButtons}>
+                  <input type="radio" name="sell_type" checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
+                  <input type="radio" name="sell_type" checked={isPayoutActive} value="payout" /> Payout <br />
+                </StyledButtons>
+          }
+          <div>{placeOrderCalculation()}</div>
+        </div>
+
+
         <Button cta text="Place Order" onClick={() => placeOrderHandler(props)} />
       </StyledInfo>
     </Container>
