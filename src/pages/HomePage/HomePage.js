@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql, compose as gqlCompose } from 'react-apollo'
-import { compose, withStateHandlers, withProps, branch, renderNothing } from 'recompose'
+import { compose, withStateHandlers, withProps, branch, renderNothing, withHandlers } from 'recompose'
 
 import ChooseOutcome from '../../components/chooseOutcome'
 import Cover from '../../components/cover'
@@ -14,6 +14,7 @@ import PieChart from '../../components/pieChart'
 import gameById from './query/gameById.graphql'
 import orderMany from './query/orderMany.graphql'
 import gameOne from './query/gameOne.graphql'
+import refetchData from '../../hocs/refetchData'
 
 import placeOrderEnhancer from '../../components/informationDynamic/enhance'
 
@@ -91,6 +92,7 @@ const HomePage = ({
   isPayoutActive,
   buttonSwitcher,
   onPlaceOrder,
+  refetchOrderManyData,
   ...props
 }) => (
 
@@ -112,7 +114,7 @@ const HomePage = ({
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
-          <Information data={orderMany.orderMany} />
+          <Information data={orderMany.orderMany} refetchData={refetchOrderManyData} />
           <Brick />
           <div style={{ width: '100%' }}>
             <InformationDynamic
@@ -231,5 +233,12 @@ export default compose(
         signUpWithEmailOpened: !signUpWithEmailOpened,
       }),
     }
-  )
+  ),
+  withHandlers({
+    refetchOrderManyData: ({ orderMany }) => () => {
+      const fetchUpdatedData = refetchData('placeOrder', orderMany)
+
+      return fetchUpdatedData
+    },
+  })
 )(placeOrderEnhancer(HomePage))

@@ -74,7 +74,6 @@ const PieChart = ({ pieData }) => {
   const data = pieData()
   const percents = data.percentages
   const titles = data.titles
-
   const chartData = {
     datasets: [{
       data: percents,
@@ -93,7 +92,6 @@ const PieChart = ({ pieData }) => {
 
   const Body = () => (
     <Container>
-      {/* {console.log(pieData())} */}
       <div className="pie_chart">
         <Doughnut data={chartData} options={options} height={170} width={170} />
         <div className="text_on_pie">
@@ -120,8 +118,6 @@ const PieChart = ({ pieData }) => {
                    ))
              }())
          }
-
-
       </div>
     </Container>
       )

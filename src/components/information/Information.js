@@ -47,7 +47,8 @@ const Brick = styled.div`
     `
 
 
-const Information = (props) => {
+const Information = ({ refetchData, ...props }) => {
+  refetchData()
   const Table = (props) => {
     const StyledTitle = styled.div`
       text-transform: uppercase;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
+import emmiter from '../../eventEmmiter'
 
 import placeOrderMutation from './placeOrder.graphql'
 import getBalanceQuery from '../header/getBalance.graphql'
@@ -47,7 +48,6 @@ export default compose(
               newState.isValidInput = false
             } else newState.isValidInput = true
           }
-
           return newState
         },
         onSelectorChange: () => (val) => {
@@ -97,10 +97,8 @@ export default compose(
             gameId,
           }
 
-          // console.log(variables)
-          // const { data } = await placeOrder(variables)
-          // console.log(data)
-          await placeOrder(variables)
+          const { data } = await placeOrder(variables)
+          emmiter.emit('placeOrder', data)
         },
         placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
           const oddFloat = parseFloat(odd)

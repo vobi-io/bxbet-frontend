@@ -1,5 +1,6 @@
 import { compose, withHandlers, branch, renderNothing } from 'recompose'
 import { graphql } from 'react-apollo'
+import refetchData from '../../hocs/refetchData'
 
 import gameReportQuery from './gameReport.graphql'
 
@@ -31,8 +32,10 @@ export default compose(
           return [homeTeamPercent, awayTeamPercent, drawPercent]
         }
 
+        const refetchPieData = refetchData('placeOrder', gameReport)
+
         percentages = calculatePercents(gameReportData.total, gameReportData.homeTeam, gameReportData.awayTeam, gameReportData.draw)
-        return { percentages, titles, totalGame: gameReport.gameReport.total }
+        return { percentages, titles, totalGame: gameReport.gameReport.total, refetchPieData }
       },
     })
 )

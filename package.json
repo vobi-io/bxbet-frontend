@@ -79,6 +79,7 @@
     "chart.js": "2.7.2",
     "classnames": "2.2.6",
     "express": "^4.14.0",
+    "fbemitter": "2.1.1",
     "graphql": "0.13.2",
     "graphql-tag": "2.9.2",
     "history": "4.7.2",

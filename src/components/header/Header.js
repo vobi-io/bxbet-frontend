@@ -91,8 +91,10 @@ const Header = ({
   toggleSignUp,
   location,
   getBalance,
+  refetchDataHandler,
 }) => (
   <HeaderParent>
+    {console.log('balance refetched', refetchDataHandler())}
     <StyledHeader>
       <Wrapper>
         <LogoLink to={'/'}>
