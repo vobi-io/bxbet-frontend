@@ -11,3 +11,7 @@ body {
   width: 100%;
   margin-left: 59px;
 }
+
+button:focus{
+  outline: none;
+}

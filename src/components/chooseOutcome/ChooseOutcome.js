@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import Card from '../card'
 import Button from '../button'
-import enhance from './enhance'
 
 const StyledContainer = styled.div`
     display: flex;
@@ -18,35 +17,44 @@ const Brick = styled.div`
     width: 13px;
   `
 
-const ChooseOutcome = ({
-  toggleActiveButton,
-  teams,
-  ...buttons
-}) => {
-  const stringShorter = (word) => {
-    if (word.length > 20) {
-      let newWord = word.substr(0, 20)
-      newWord += '...'
-      return newWord
-    }
-    return word
+const stringShorter = (word) => {
+  if (word.length > 20) {
+    let newWord = word.substr(0, 20)
+    newWord += '...'
+    return newWord
   }
-
-  const Buttons = () => (
-    <StyledContainer>
-      <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
-        <div className="buttons">
-          <Button text={stringShorter(teams[0])} activeButton={buttons.activeButton1} onClick={() => { toggleActiveButton('activeButton1') }} />
-          <Brick />
-          <Button text={'Draw'} activeButton={buttons.activeButton2} onClick={() => { toggleActiveButton('activeButton2') }} />
-          <Brick />
-          <Button text={stringShorter(teams[1])} activeButton={buttons.activeButton3} onClick={() => { toggleActiveButton('activeButton3') }} />
-        </div>
-      </div>
-    </StyledContainer>
-    )
-
-  return <Card title={'Choose Outcome Please'} width="100%" ><Buttons /> </Card>
+  return word
 }
 
-export default enhance(ChooseOutcome)
+const Buttons = ({
+    teams,
+    onSelectorChange,
+    selected,
+}) => (
+  <StyledContainer>
+    <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
+      <div className="buttons">
+        <Button text={stringShorter(teams[0])} activeButton={selected === teams[0]} onClick={() => { onSelectorChange(teams[0]) }} />
+        <Brick />
+        <Button text={'Draw'} activeButton={selected === 'Draw'} onClick={() => { onSelectorChange('Draw') }} />
+        <Brick />
+        <Button text={stringShorter(teams[1])} activeButton={selected === teams[1]} onClick={() => { onSelectorChange(teams[1]) }} />
+      </div>
+    </div>
+  </StyledContainer>
+  )
+
+const ChooseOutcome = ({
+  teams,
+  onSelectorChange,
+  selected,
+}) =>
+  <Card title={'Choose Outcome Please'} width="100%" >
+    <Buttons
+      teams={teams}
+      onSelectorChange={onSelectorChange}
+      selected={selected}
+    />
+  </Card>
+
+export default ChooseOutcome

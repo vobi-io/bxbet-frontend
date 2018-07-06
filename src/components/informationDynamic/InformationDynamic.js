@@ -8,7 +8,6 @@ import Button from '../button'
 import authAware from '../../authAware'
 import SignUpWithEmail from '../signup/modal/SignUpWithEmail'
 import SignInModal from '../signin'
-import enhance from './enhance'
 
 const Container = styled.div`
 border-radius: 0 0 6px 6px;
@@ -100,7 +99,7 @@ const placeOrderHandler = (props) => {
   if (!props.props.authenticated) {
     props.props.toggleSignUpWithEmail()
   } else {
-    props.onPlaceOrder()
+    props.props.onPlaceOrder()
   }
 }
 
@@ -118,9 +117,9 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
     <ActiveUnderline activeTab={activeTab} />
     <Container>
       <StyledForm>
-        <SelectField title="Outcome" options={teams} selected={selected} onChange={onSelectorChange} />
-        <TextField title="Odd" onChange={onChangeHandler} value={odd} />
-        <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} />
+        <SelectField title="Outcome" options={teams} selected={selected} onChange={e => onSelectorChange(e.target.value)} />
+        <TextField title="Odd" onChange={onChangeHandler} value={odd} key={['odd', 'place-order-input-1']} />
+        <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} key={'stake'} />
       </StyledForm>
       <Brick />
       <StyledInfo>
@@ -172,12 +171,40 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
   </div>
   )
 
-const Body = enhance(CardBody)
-
-const InformationDynamic = ({ teams, gameId, ...rest }) => (
-  <Card title={'Information'} width="100%">
-    <Body teams={teams} gameId={gameId} props={rest} />
-  </Card>
+const InformationDynamic = ({
+    teams,
+    gameId,
+    toggleActiveButton,
+    activeTab,
+    selected,
+    onSelectorChange,
+    onChangeHandler,
+    odd, stake,
+    isValidInput, toggleButtons,
+    placeOrderCalculation,
+    isLiabilitiesActive,
+    isPayoutActive, buttonSwitcher,
+    ...rest }) => (
+      <Card title={'Information'} width="100%">
+        <CardBody
+          teams={teams}
+          gameId={gameId}
+          toggleActiveButton={toggleActiveButton}
+          activeTab={activeTab}
+          selected={selected}
+          onSelectorChange={onSelectorChange}
+          onChangeHandler={onChangeHandler}
+          odd={odd}
+          stake={stake}
+          isValidInput={isValidInput}
+          toggleButtons={toggleButtons}
+          placeOrderCalculation={placeOrderCalculation}
+          isLiabilitiesActive={isLiabilitiesActive}
+          isPayoutActive={isPayoutActive}
+          buttonSwitcher={buttonSwitcher}
+          props={rest}
+        />
+      </Card>
 )
 
 export default authAware(InformationDynamic)

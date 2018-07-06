@@ -22,17 +22,16 @@ export default compose(
       renderNothing,
     ),
     withStateHandlers(
-        ({ teams, gameId, getBalance }) => ({
+        ({ getBalance, ...props }) => ({
           activeTab: 'buy',
-          odd: 1.45,
+          odd: 1.4,
           stake: 0,
-          selected: teams[0],
-          teams,
-          gameId,
+          selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
           isValidInput: true,
           getBalance,
           isLiabilitiesActive: true,
           isPayoutActive: false,
+          props,
         }),
       {
         toggleActiveButton: () => props => ({ activeTab: props }),
@@ -41,16 +40,21 @@ export default compose(
           const value = e.target.value
 
           if (e.target.name === 'odd') {
-            newState.odd = value
+            newState.odd = parseFloat(value)
           } else {
-            newState.stake = value
+            newState.stake = parseFloat(value)
             if (value <= 0 || (value > getBalance.getBalance.amount && activeTab === 'buy')) {
               newState.isValidInput = false
             } else newState.isValidInput = true
           }
+
           return newState
         },
-        onSelectorChange: () => e => ({ selected: e.target.value }),
+        onSelectorChange: () => (val) => {
+          const newState = {}
+          newState.selected = val
+          return newState
+        },
         toggleButtons: () => (e) => {
           let newState = {}
           if (e.target.value === 'liabilities') {
@@ -69,7 +73,11 @@ export default compose(
       },
       ),
       withHandlers({
-        onPlaceOrder: ({ placeOrder, gameId, odd, stake, activeTab, selected, teams }) => async () => {
+        onPlaceOrder: ({ placeOrder, odd, stake, activeTab, selected, ...props }) => async () => {
+          const game = props.gameById.error ? props.gameOne.gameOne : props.gameById.gameById
+          const gameId = game.gameId
+          const teams = [game.homeTeam, 'Draw', game.awayTeam]
+
           const orderType = activeTab === 'buy' ? 0 : 1
           const oddFloat = parseFloat(odd)
           const amount = parseFloat(stake)
@@ -89,6 +97,7 @@ export default compose(
             gameId,
           }
 
+          // console.log(variables)
           // const { data } = await placeOrder(variables)
           // console.log(data)
           await placeOrder(variables)

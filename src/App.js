@@ -10,6 +10,9 @@ import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
 import Create from './pages/create'
 import Outcome from './pages/outcome/index'
+// import placeOrderEnhancer from './components/informationDynamic/enhance'
+
+// const homePageWithPlaceOrderEnhancer = placeOrderEnhancer(HomePage)
 
 const App = ({
   signInOpened,

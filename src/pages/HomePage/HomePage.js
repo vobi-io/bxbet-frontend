@@ -15,6 +15,8 @@ import gameById from './query/gameById.graphql'
 import orderMany from './query/orderMany.graphql'
 import gameOne from './query/gameOne.graphql'
 
+import placeOrderEnhancer from '../../components/informationDynamic/enhance'
+
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
 
@@ -67,6 +69,28 @@ const HomePage = ({
   gameById,
   orderMany,
   gameOne,
+
+  // choose outcome props
+  activeButton1,
+  activeButton2,
+  activeButton3,
+  onSelectorChange,
+  selected,
+
+  // place order props
+  toggleActiveButton,
+  activeTab,
+  teams,
+  onChangeHandler,
+  odd,
+  stake,
+  isValidInput,
+  toggleButtons,
+  placeOrderCalculation,
+  isLiabilitiesActive,
+  isPayoutActive,
+  buttonSwitcher,
+  onPlaceOrder,
   ...props
 }) => (
 
@@ -75,7 +99,14 @@ const HomePage = ({
     <BackgroundPattern />
     <Container>
       <VerticalWrapper>
-        <ChooseOutcome teams={gameById.gameById ? [gameById.gameById.homeTeam, gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]} />
+        <ChooseOutcome
+          teams={gameById.gameById ? [gameById.gameById.homeTeam, gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]}
+          activeButton1={activeButton1}
+          activeButton2={activeButton2}
+          activeButton3={activeButton3}
+          onSelectorChange={onSelectorChange}
+          selected={selected}
+        />
         <Brick />
         <Cover text={gameById.gameById ? `${gameById.gameById.homeTeam} vs ${gameById.gameById.awayTeam}` : `${gameOne.gameOne.homeTeam} vs ${gameOne.gameOne.awayTeam}`} />
       </VerticalWrapper>
@@ -93,6 +124,20 @@ const HomePage = ({
               toggleSignUpWithEmail={toggleSignUpWithEmail}
               teams={gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]}
               gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
+              toggleActiveButton={toggleActiveButton}
+              activeTab={activeTab}
+              selected={selected}
+              onSelectorChange={onSelectorChange}
+              onChangeHandler={onChangeHandler}
+              odd={odd}
+              stake={stake}
+              isValidInput={isValidInput}
+              toggleButtons={toggleButtons}
+              placeOrderCalculation={placeOrderCalculation}
+              isLiabilitiesActive={isLiabilitiesActive}
+              isPayoutActive={isPayoutActive}
+              buttonSwitcher={buttonSwitcher}
+              onPlaceOrder={onPlaceOrder}
             />
             <Brick />
             <YourBetes
@@ -187,4 +232,4 @@ export default compose(
       }),
     }
   )
-)(HomePage)
+)(placeOrderEnhancer(HomePage))

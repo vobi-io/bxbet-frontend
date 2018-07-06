@@ -1,14 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Card(props) {
-  const StyledCard = styled.div`
-    width: ${props.width};
+const StyledCard = styled.div`
+    width: ${({ width }) => width};
     border-radius: 5px;
-    background-color: ${props.bgColor ? props.bgColor : '#ffffff'};
+    background-color: ${({ bgColor }) => bgColor || '#ffffff'};
     box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1); 
   `
-  const StyledCardTitle = styled.div`
+const StyledCardTitle = styled.div`
     height: 30px;
     border-radius: 5px 5px 0 0;
     display: flex;
@@ -20,12 +19,13 @@ function Card(props) {
     font-size: 16px;
     text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
   `
-  const StyledContent = styled.div`
+const StyledContent = styled.div`
     padding: 9px;
   `
 
+function Card(props) {
   return (
-    <StyledCard>
+    <StyledCard width={props.width} bgColor={props.bgColor}>
       <StyledCardTitle>
         {props.title}
       </StyledCardTitle>
