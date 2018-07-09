@@ -34,10 +34,10 @@ const AvatarContainer = styled.div`
   &:hover:before {
     border-color: #06c953 transparent transparent transparent;
   }
-  &:hover ~ .dropDownTmpClass{
-    display:block;
+  &:hover ~ .dropDownTmpClass {
+    display: block;
   }
-  cursor:pointer;
+  cursor: pointer;
 `
 const Avatar = styled.img`
   width: 37px;
@@ -68,40 +68,39 @@ const Icon = styled.div`
 const UserDropDown = styled.div.attrs({
   className: 'dropDownTmpClass',
 })`
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 2;
-    margin-top: 95px;
-    margin-left: -11px;
-    &:hover {
-      display:block;
-    }
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  margin-top: 95px;
+  margin-left: -11px;
+  &:hover {
+    display: block;
+  }
 `
 const ProfileMenu = styled.div`
-    height: 50px;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    text-align:center;
-    font-family: "Proxima Nova";
-    cursor:pointer;
-    &:hover {
-      background: #F2F2F2
-    }
+  height: 50px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Proxima Nova';
+  cursor: pointer;
+  &:hover {
+    background: #f2f2f2;
+  }
 `
 const Balance = styled.div`
-    font-family: Open Sans;
-    font-size: 14px;
-    color: #183f5a;
-    display: flex;
-    margin-right: 24px;
-    display: flex;
-    align-items: center;
+  font-family: Open Sans;
+  font-size: 14px;
+  color: #183f5a;
+  display: flex;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
 `
-
 
 const styles = {
   userIcon: {
@@ -134,36 +133,28 @@ const styles = {
   },
 }
 
-
-const UserMenu = ({ email, signOut, balanceCounter }) => (
+const UserMenu = ({ email, signOut, balanceCounter, userImageUrl }) => (
   <StyledUserMenu>
     <Balance>
       <p style={styles.balance}> Balance: </p>
-      <p style={styles.balanceCounter}>
-        {balanceCounter} BX
-      </p>
+      <p style={styles.balanceCounter}>{balanceCounter} BX</p>
       <div style={styles.deviderLine} />
     </Balance>
     <AvatarContainer>
-      <Avatar
-        src="https://www.hellomagazine.com/imagenes/celebrities/2017101143124/angelina-jolie-womens-rights-harpers-bazaar/0-220-355/angelina-jolie-womens-rights-t.jpg"
-        alt={email}
-      />
+      {userImageUrl ? <Avatar src={userImageUrl} alt={email} /> : <UserIcon />}
+
       {/* <IconAvatar>
         <Icon style={styles.userIcon}>
           <i style={{ fontSize: '24px' }} className="far fa-user" />
         </Icon>
       </IconAvatar> */}
-      <p style={styles.username}>
-        {email}
-      </p>
+      <p style={styles.username}>{email}</p>
     </AvatarContainer>
-    <UserDropDown >
+    <UserDropDown>
       <ProfileMenu>Profile</ProfileMenu>
       <ProfileMenu>Settings</ProfileMenu>
       <ProfileMenu onClick={signOut}>Logout</ProfileMenu>
     </UserDropDown>
-
 
     {/* <ul>
       <li>

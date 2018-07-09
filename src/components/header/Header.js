@@ -94,7 +94,6 @@ const Header = ({
   refetchDataHandler,
 }) => (
   <HeaderParent>
-    {console.log('balance refetched', refetchDataHandler())}
     <StyledHeader>
       <Wrapper>
         <LogoLink to={'/'}>
