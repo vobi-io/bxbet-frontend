@@ -1,11 +1,11 @@
 query GameMany {
- gameMany(limit:10) {  
+  gameMany {
     _id
-    gameId,
-    homeTeam,
-    awayTeam,
-    startDate,
-    endDate,
-    status,
- }
+    gameId
+    homeTeam
+    awayTeam
+    startDate
+    endDate
+    status
+  }
 }

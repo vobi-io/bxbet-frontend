@@ -1,0 +1,28 @@
+query getGameMaxOdds($gameId: Float) {
+  getGameMaxOdds(gameId: $gameId) {
+    drawBuy {
+      odd
+      amount
+    }
+    drawSell {
+      odd
+      amount
+    }
+    homeTeamBuy {
+      odd
+      amount
+    }
+    homeTeamSell {
+      odd
+      amount
+    }
+    awayTeamBuy {
+      odd
+      amount
+    }
+    awayTeamSell {
+      odd
+      amount
+    }
+  }
+}

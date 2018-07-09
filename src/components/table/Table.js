@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import enhancer from './tableEnhancer'
 import Card from '../card'
 
 const ConttentContainer = styled.div`
@@ -27,47 +28,50 @@ const TableItem = styled.div`
     }
 
     h2 {
-        margin: 0;
-        font-family: Montserrat;
-        font-size: 14px;
-        color: white;
-        font-weight: normal;
+      margin: 0;
+      font-family: Montserrat;
+      font-size: 14px;
+      color: white;
+      font-weight: normal;
     }
   }
-  .table{
-      display: flex;
-      color: #314b5b;
-      width: 100%;
-      justify-content: space-evenly;
-      margin-left: 100px;
-      
-      span{
-        padding: 3px 20px;
-        margin: 3px;
-        text-align: center;
-        opacity: 0.9;
-        border-radius: 3px;
-        background-image: linear-gradient(to top, #ffffff, #d7d7d7 51%, #ffffff 99%);
-        font-family: Myriad Pro;
-        font-size: 14px;
-      }
-      .bigOnes{
-          padding: 10px 20px;
-          line-height: 40px;
-      }
-      .green{
-        background-image: linear-gradient(to bottom, #7fac30, #288702 99%);
-        color: white;
-      }
-      .red{
-        background-image: linear-gradient(to bottom, #ed2b3b, #9f041b);
-        color: white;
-      }
+  .table {
+    display: flex;
+    color: #314b5b;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-left: 100px;
+
+    span {
+      padding: 3px 20px;
+      margin: 3px;
+      text-align: center;
+      opacity: 0.9;
+      border-radius: 3px;
+      background-image: linear-gradient(to top, #ffffff, #d7d7d7 51%, #ffffff 99%);
+      font-family: Myriad Pro;
+      font-size: 14px;
+    }
+    .bigOnes {
+      padding: 10px 20px;
+      line-height: 40px;
+    }
+    .green {
+      background-image: linear-gradient(to bottom, #7fac30, #288702 99%);
+      color: white;
+    }
+    .red {
+      background-image: linear-gradient(to bottom, #ed2b3b, #9f041b);
+      color: white;
+    }
   }
 `
 
 const Table = (props) => {
   const Body = () => {
+    {
+      console.log(props)
+    }
     const content = props.data.map((item, index) => (
       <TableItem key={index}>
         <div className="country-info">
@@ -82,7 +86,11 @@ const Table = (props) => {
               return (
                 <div style={{ display: 'inline' }} key={i}>
                   <span className={classNm}>{element}</span>
-                  {i === 2 ? <div style={{ display: 'inline', lineHeight: '35px' }}><br /></div> : null}
+                  {i === 2 ? (
+                    <div style={{ display: 'inline', lineHeight: '35px' }}>
+                      <br />
+                    </div>
+                  ) : null}
                 </div>
               )
             })}
@@ -94,23 +102,27 @@ const Table = (props) => {
               return (
                 <div style={{ display: 'inline' }} key={i}>
                   <span className={classNm}>{element}</span>
-                  {i === 2 ? <div style={{ display: 'inline', lineHeight: '35px' }}><br /></div> : null}
+                  {i === 2 ? (
+                    <div style={{ display: 'inline', lineHeight: '35px' }}>
+                      <br />
+                    </div>
+                  ) : null}
                 </div>
               )
             })}
           </div>
         </div>
       </TableItem>
-        ))
+    ))
 
-    return (
-      <ConttentContainer>
-        {content}
-      </ConttentContainer>
-    )
+    return <ConttentContainer>{content}</ConttentContainer>
   }
 
-  return <Card title="Table" width="53.5%" bgColor="#0f334b" ><Body /> </Card>
+  return (
+    <Card title="Table" width="53.5%" bgColor="#0f334b">
+      <Body />{' '}
+    </Card>
+  )
 }
 
-export default Table
+export default enhancer(Table)
