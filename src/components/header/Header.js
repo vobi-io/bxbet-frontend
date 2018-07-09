@@ -16,12 +16,12 @@ const StyledHeader = styled.span`
   // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.27);
   background-color: white;
   width: 100%;
-  height:57px;
+  height: 57px;
   // border: 1px solid #CCCCCC;
 `
 const HeaderParent = styled.span`
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 `
 const Wrapper = styled.div`
@@ -34,7 +34,7 @@ const BrandName = styled.span`
   font-size: 28px;
   font-weight: bold;
   color: #2f3033;
-  font-family: Montserrat;		
+  font-family: Montserrat;
   line-height: 33px;
 `
 
@@ -56,7 +56,7 @@ const NavItem = styled.li`
   text-align: center;
   opacity: 0.7;
   text-transform: uppercase;
-  border-bottom: ${props => props.isActive ? '3px solid #0f334b' : 'none'};
+  border-bottom: ${props => (props.isActive ? '3px solid #0f334b' : 'none')};
 `
 
 const NavCircle = styled.div`
@@ -80,7 +80,7 @@ const NavLink = styled(Link)`
 `
 const LogoLink = styled(Link)`
   text-decoration: none;
-  cursor:pointer;
+  cursor: pointer;
 `
 
 const Header = ({
@@ -94,37 +94,37 @@ const Header = ({
   refetchDataHandler,
 }) => (
   <HeaderParent>
+    {console.log(refetchDataHandler())}
     <StyledHeader>
       <Wrapper>
         <LogoLink to={'/'}>
           <img src={Logo} alt="Logo" style={{ width: '132px' }} />
         </LogoLink>
-        {leftPages &&
+        {leftPages && (
           <Nav>
             {leftPages.map(item => (
               <NavItem key={item.title}>
                 <NavLink to={item.to}>{item.title}</NavLink>
               </NavItem>
             ))}
-          </Nav>}
+          </Nav>
+        )}
       </Wrapper>
       <Wrapper>
-        {centeredPages &&
+        {centeredPages && (
           <Nav>
             {centeredPages.map((item, index, fullObj) => (
               <NavItem key={item.title} isActive={item.to === location.pathname}>
                 <NavLink to={item.to}>{item.title}</NavLink>
-                {
-                  index < fullObj.length - 1 ? <NavCircle /> : null
-                }
+                {index < fullObj.length - 1 ? <NavCircle /> : null}
               </NavItem>
             ))}
-          </Nav>}
+          </Nav>
+        )}
       </Wrapper>
       <Wrapper>
         {authenticated && <UserMenu balanceCounter={getBalance.getBalance.amount} username={'Mrs. Jolie'} />}
-        {!authenticated
-          && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />}
+        {!authenticated && <AuthMenu toggleSignUp={toggleSignUp} toggleSignIn={toggleSignIn} />}
       </Wrapper>
     </StyledHeader>
   </HeaderParent>

@@ -5,17 +5,14 @@ import refetchData from '../../hocs/refetchData'
 import getBalanceQuery from './getBalance.graphql'
 
 export default compose(
-    composeGraphql(
-        graphql(getBalanceQuery, { name: 'getBalance' }),
-        branch(
-            ({ getBalance: { loading } }) => loading,
-            renderNothing,
-        ),
-        withHandlers({
-          refetchDataHandler: ({ getBalance }) => ({ ...props }) => {
-            const refetch = refetchData('placeOrder', getBalance)
-            return refetch
-          },
-        })
-    ),
+  composeGraphql(
+    graphql(getBalanceQuery, { name: 'getBalance' }),
+    branch(({ getBalance: { loading } }) => loading, renderNothing),
+    withHandlers({
+      refetchDataHandler: ({ getBalance }) => () => {
+        const refetch = refetchData('placeOrder', getBalance)
+        return refetch
+      },
+    })
+  )
 )
