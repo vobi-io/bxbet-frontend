@@ -1,8 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import Stadium from '../../resources/assets/img/stadium.png'
 
 function Cover(props) {
   const StyledCover = styled.div`
+    background-size: 100% 114%;
+    background-position-x: 3px;
+    background-position-y: -4px;
+    background-repeat: no-repeat;
     width: 100%;
     height: 105px;
     box-sizing: border-box;
@@ -10,8 +15,7 @@ function Cover(props) {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(https://www.barcelona-tourist-guide.com/images/int/sport/barcelona-fc/L/fc-barcelona-0609.jpg);
-    background-size: cover;
+    background-image: url(${Stadium});
     font-family: Open Sans;
     font-size: 32px;
     font-weight: bold;
