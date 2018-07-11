@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import enhancer from './tableEnhancer'
 import Card from '../card'
+import returnFlagUrl from '../../hocs/returnFlagUrl/returnFlagUrl'
 
 const ConttentContainer = styled.div`
   border-radius: 0 0 5px 5px;
@@ -19,11 +20,10 @@ const TableItem = styled.div`
     display: flex;
     margin-right: 20px;
     align-items: center;
-    width: 0;
+    width: 170px;
 
     img {
       width: 32px;
-      height: 20px;
       margin-right: 9px;
     }
 
@@ -38,9 +38,7 @@ const TableItem = styled.div`
   .table {
     display: flex;
     color: #314b5b;
-    width: 100%;
     justify-content: space-evenly;
-    margin-left: 100px;
 
     span {
       padding: 3px 20px;
@@ -54,7 +52,6 @@ const TableItem = styled.div`
     }
     .bigOnes {
       padding: 10px 20px;
-      line-height: 40px;
     }
     .green {
       background-image: linear-gradient(to bottom, #7fac30, #288702 99%);
@@ -65,62 +62,62 @@ const TableItem = styled.div`
       color: white;
     }
   }
+  .table > div {
+    display: flex;
+  }
+  .buy-items,
+  .sell-items {
+    display: flex;
+    .table-item {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .buy-items {
+    margin-right: 15px;
+  }
 `
 
-const Table = (props) => {
+const Table = ({ sortedData, teams }) => {
   const Body = () => {
-    {
-      console.log(props)
-    }
-    const content = props.data.map((item, index) => (
-      <TableItem key={index}>
-        <div className="country-info">
-          <img src={item.Flag} alt="Flag" />
-          <h2>{item.country}</h2>
-        </div>
-        <div className="table">
-          <div style={{ marginRight: '2%' }}>
-            {item.buy.map((element, i) => {
-              let classNm = i > 0 && (i + 1) % 3 === 0 ? 'green' : ''
-              classNm = i < 3 ? classNm.concat(' bigOnes') : classNm.concat('')
-              return (
-                <div style={{ display: 'inline' }} key={i}>
-                  <span className={classNm}>{element}</span>
-                  {i === 2 ? (
-                    <div style={{ display: 'inline', lineHeight: '35px' }}>
-                      <br />
-                    </div>
-                  ) : null}
-                </div>
-              )
-            })}
-          </div>
-          <div>
-            {item.sell.map((element, i) => {
-              let classNm = i % 3 === 0 ? 'red' : ''
-              classNm = i < 3 ? classNm.concat(' bigOnes') : classNm.concat('')
-              return (
-                <div style={{ display: 'inline' }} key={i}>
-                  <span className={classNm}>{element}</span>
-                  {i === 2 ? (
-                    <div style={{ display: 'inline', lineHeight: '35px' }}>
-                      <br />
-                    </div>
-                  ) : null}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </TableItem>
-    ))
+    const tableArray = []
+    let index = 0
 
-    return <ConttentContainer>{content}</ConttentContainer>
+    for (const key in sortedData) {
+      const Buy = sortedData[key].buy.map((obj, i, arr) => (
+        <div className="table-item" key={i}>
+          <span className={arr.length === i + 1 ? 'bigOnes green' : 'bigOnes'}>{obj.amount}</span>
+          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.odd}</span>{' '}
+        </div>
+      ))
+      const Sell = sortedData[key].sell.map((obj, i, arr) => (
+        <div className="table-item" key={i}>
+          <span className={arr.length === i + 1 ? 'bigOnes red' : 'bigOnes'}>{obj.amount}</span>
+          <span className={arr.length === i + 1 ? 'red' : ''}>{obj.odd}</span>{' '}
+        </div>
+      ))
+      tableArray.push(
+        <TableItem key={index}>
+          <div className="country-info">
+            {returnFlagUrl(teams[index], true)}
+            <h2>{teams[index]}</h2>
+          </div>
+          <div className="table">
+            <div>
+              <div className="buy-items">{Buy}</div>
+              <div className="sell-items">{Sell}</div>
+            </div>
+          </div>
+        </TableItem>
+      )
+      index += 1
+    }
+    return <ConttentContainer>{tableArray}</ConttentContainer>
   }
 
   return (
     <Card title="Table" width="53.5%" bgColor="#0f334b">
-      <Body />{' '}
+      <Body />
     </Card>
   )
 }

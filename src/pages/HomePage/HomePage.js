@@ -22,32 +22,32 @@ import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
 
 const Container = styled.div`
-    width: 100%;
-    background-color: rgba(231, 231, 231, 0.7);
-    padding: 5px 26px 26px 26px;
+  width: 100%;
+  background-color: rgba(231, 231, 231, 0.7);
+  padding: 5px 26px 26px 26px;
 `
 const Wrapper = styled.div`
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `
 const VerticalWrapper = styled.div`
-    display: flex;
-    margin-top: 13px;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  margin-top: 13px;
+  justify-content: space-between;
+  width: 100%;
 `
 const Brick = styled.div`
-    height: 10px;
-    width: 20px;
+  height: 10px;
+  width: 20px;
 `
 const BackgroundPattern = styled.div`
-    width: 685px;
-    height: 399px;
-    position: absolute;
-    z-index: -1;
-    right: 0;
-    background-image: url(${pattern});
+  width: 685px;
+  height: 399px;
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  background-image: url(${pattern});
 `
 
 const someData = ['Germay Wins', 'England Wins', 'Draw']
@@ -95,14 +95,16 @@ const HomePage = ({
   refetchOrderManyData,
   ...props
 }) => (
-
-
   <Wrapper>
     <BackgroundPattern />
     <Container>
       <VerticalWrapper>
         <ChooseOutcome
-          teams={gameById.gameById ? [gameById.gameById.homeTeam, gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]}
+          teams={
+            gameById.gameById
+              ? [gameById.gameById.homeTeam, gameById.gameById.awayTeam]
+              : [gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]
+          }
           activeButton1={activeButton1}
           activeButton2={activeButton2}
           activeButton3={activeButton3}
@@ -110,7 +112,13 @@ const HomePage = ({
           selected={selected}
         />
         <Brick />
-        <Cover text={gameById.gameById ? `${gameById.gameById.homeTeam} vs ${gameById.gameById.awayTeam}` : `${gameOne.gameOne.homeTeam} vs ${gameOne.gameOne.awayTeam}`} />
+        <Cover
+          text={
+            gameById.gameById
+              ? `${gameById.gameById.homeTeam} vs ${gameById.gameById.awayTeam}`
+              : `${gameOne.gameOne.homeTeam} vs ${gameOne.gameOne.awayTeam}`
+          }
+        />
       </VerticalWrapper>
       <VerticalWrapper>
         <div style={{ display: 'flex', width: '100%' }}>
@@ -124,7 +132,11 @@ const HomePage = ({
               toggleSignUp={toggleSignUp}
               signUpWithEmailOpened={signUpWithEmailOpened}
               toggleSignUpWithEmail={toggleSignUpWithEmail}
-              teams={gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]}
+              teams={
+                gameById.gameById
+                  ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
+                  : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
+              }
               gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
               toggleActiveButton={toggleActiveButton}
               activeTab={activeTab}
@@ -144,36 +156,41 @@ const HomePage = ({
             <Brick />
             <YourBetes
               teams={
-              gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById
-                .awayTeam,
-              ] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-            }
+                gameById.gameById
+                  ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
+                  : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
+              }
             />
           </div>
         </div>
       </VerticalWrapper>
       <VerticalWrapper>
         <MoreInfo
-          data={someData} gameId={
-          gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
-        }
+          data={someData}
+          gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
           teams={
-          gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById
-            .awayTeam,
-          ] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-        }
+            gameById.gameById
+              ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
+              : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
+          }
         />
-        < PieChart
-          gameId={
-          gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId
-        }
+        <PieChart
+          gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
           teams={
-          gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById
-            .awayTeam,
-          ] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-        }
+            gameById.gameById
+              ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
+              : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
+          }
         />
-        <Table data={tableData} />
+        <Table
+          data={tableData}
+          gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
+          teams={
+            gameById.gameById
+              ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
+              : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
+          }
+        />
       </VerticalWrapper>
     </Container>
   </Wrapper>
@@ -185,35 +202,25 @@ export default compose(
       name: 'gameById',
       options: ({ match }) => {
         const variables = { _id: match.params.id }
-        return ({ variables })
+        return { variables }
       },
     }),
-    branch(
-      ({ gameById: { loading } }) => loading,
-      renderNothing,
-    ),
+    branch(({ gameById: { loading } }) => loading, renderNothing),
 
     graphql(gameOne, { name: 'gameOne' }),
-    branch(
-      ({ gameOne: { loading } }) => loading,
-      renderNothing,
-    ),
+    branch(({ gameOne: { loading } }) => loading, renderNothing),
 
-    graphql(orderMany,
-      { name: 'orderMany',
-        options: ({ match }) => {
-          let variables = {}
-          if (match.params.id) {
-            variables = { game: match.params.id }
-          }
-          return ({ variables })
-        },
-      }
-    ),
-    branch(
-      ({ orderMany: { loading } }) => loading,
-      renderNothing,
-    ),
+    graphql(orderMany, {
+      name: 'orderMany',
+      options: ({ match }) => {
+        let variables = {}
+        if (match.params.id) {
+          variables = { game: match.params.id }
+        }
+        return { variables }
+      },
+    }),
+    branch(({ orderMany: { loading } }) => loading, renderNothing)
   ),
 
   withStateHandlers(
