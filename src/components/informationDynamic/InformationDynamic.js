@@ -46,7 +46,7 @@ width: 100%;
 }
 `
 const StyledTab = styled.button`
-background-image: ${props => props.green ? 'linear-gradient(to bottom, #7fac30, #288702 99%)' : 'linear-gradient(to bottom, #ed2b3b, #9f041b)'};
+background-image: ${props => (props.green ? 'linear-gradient(to bottom, #7fac30, #288702 99%)' : 'linear-gradient(to bottom, #ed2b3b, #9f041b)')};
 height: 33px;
 width: 183px;
 display: flex;
@@ -64,18 +64,18 @@ cursor: pointer;
 const ActiveUnderline = styled.div`
 width: 100%;
 height: 7px;
-background-color: ${args => args.activeTab === 'buy' ? '#288702' : '#9f041b'};
+background-color: ${args => (args.activeTab === 'buy' ? '#288702' : '#9f041b')};
 border-radius: 0 6px 0 0;
 align-self: flex-end;
 `
 
 const StyledButtons = styled.form`
 text-align: left;
-
 input{
-  margin-bottom: 7px;
   opacity: 0;
-  margin-left: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 7px;
 }
 .circle{
   width: 15px;
@@ -86,6 +86,7 @@ input{
   justify-content: center;
   align-items: center;
   transform: translateY(20px);
+  cursor: pointer;
   div{
     width: 7px;
     height: 7px;
