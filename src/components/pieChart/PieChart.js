@@ -108,7 +108,7 @@ const PieChart = ({ pieData }) => {
                  <div key={index} className="chart_item">
                    <div className="item_top_section">
                      <div className="color" style={{ backgroundColor: chartData.datasets[0].backgroundColor[index] }} />
-                     <div>{item}%</div>
+                     <div>{isNaN(item) ? 0 : item}%</div>
                    </div>
                    <div className="info_title">
                      {titles[index]}
