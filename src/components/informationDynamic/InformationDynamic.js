@@ -110,7 +110,7 @@ const StyledToastContainer = styled(ToastContainer)`
 `
 const placeOrderHandler = (props) => {
   if (!props.props.authenticated) {
-    props.props.toggleSignUpWithEmail()
+    props.props.toggleSignIn()
   } else {
     props.props.onPlaceOrder()
   }
@@ -162,9 +162,10 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
           }
           <div>{placeOrderCalculation()}</div>
         </div>
-
-        <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput)} />
-        <StyledToastContainer toastClassName={'toastClassName'} position="bottom-left" />
+        <div style={{ width: '100%' }}>
+          <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput)} />
+          <StyledToastContainer toastClassName={'toastClassName'} position="bottom-left" />
+        </div>
       </StyledInfo>
     </Container>
 
@@ -174,8 +175,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
         render={() => (
           <SignInModal
             isOpen={props.signInOpened}
-            openSignup={props.toggleSignUpWithEmail}
-            onRequestClose={props.toggleSignIn}
+            openSignup={props.props.toggleSignUpWithEmail}
+            onRequestClose={props.props.toggleSignIn}
           />
           )}
       />
@@ -209,6 +210,7 @@ const InformationDynamic = ({
     placeOrderCalculation,
     isLiabilitiesActive,
     isPayoutActive, buttonSwitcher,
+    signInOpened,
     ...rest }) => (
       <Card title={'Bet Slip'} width="100%">
         <CardBody
@@ -227,6 +229,7 @@ const InformationDynamic = ({
           isLiabilitiesActive={isLiabilitiesActive}
           isPayoutActive={isPayoutActive}
           buttonSwitcher={buttonSwitcher}
+          signInOpened={signInOpened}
           props={rest}
         />
       </Card>
