@@ -34,9 +34,9 @@ export default compose(
         const value = e.target.value
 
         if (e.target.name === 'odd') {
-          newState.odd = parseFloat(value)
+          newState.odd = parseFloat(value) || ' '
         } else {
-          newState.stake = parseFloat(value)
+          newState.stake = parseFloat(value) || ' '
           if (value <= 0 || (value > getBalance.getBalance.amount && activeTab === 'buy')) {
             newState.isValidInput = false
           } else newState.isValidInput = true
@@ -99,15 +99,15 @@ export default compose(
 
       if (activeTab === 'buy') {
         profit = Math.floor(oddFloat * amount - amount)
-        return isNaN(profit) ? '?' : `${profit} BX`
+        return isNaN(profit) ? '0 BX' : `${profit} BX`
       }
       if (isLiabilitiesActive) {
         profit = Math.floor(oddFloat * amount)
-        return isNaN(profit) ? '?' : `${profit} BX`
+        return isNaN(profit) ? '0 BX' : `${profit} BX`
       }
       if (isPayoutActive) {
         profit = amount
-        return isNaN(profit) ? '?' : `${profit} BX`
+        return isNaN(profit) ? '0 BX' : `${profit} BX`
       }
       return profit
     },
