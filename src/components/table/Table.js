@@ -85,7 +85,6 @@ const Table = ({ sortedData, teams }) => {
   const Body = () => {
     const tableArray = []
     let index = 0
-
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
         <div className="table-item" key={i}>
@@ -93,10 +92,10 @@ const Table = ({ sortedData, teams }) => {
           <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}BX</span>
         </div>
       ))
-      const Sell = sortedData[key].sell.map((obj, i, arr) => (
+      const Sell = sortedData[key].sell.map((obj, i) => (
         <div className="table-item" key={i}>
-          <span className={arr.length === i + 1 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
-          <span className={arr.length === i + 1 ? 'red' : ''}>{obj.amount}BX</span>
+          <span className={i === 0 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
+          <span className={i === 0 ? 'red' : ''}>{obj.amount}BX</span>
         </div>
       ))
       tableArray.push(
