@@ -45,6 +45,27 @@ export default compose(
       sortedData.awayRow.buy = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
       sortedData.awayRow.sell = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []
 
+      for (const key in sortedData) {
+        if (sortedData[key].sell.length === 0) {
+          for (let i = 0; i < 3; i++) {
+            sortedData[key].sell.push({ odd: 0, amount: 0 })
+          }
+        } else if (sortedData[key].sell.length < 3 && sortedData[key].sell.length > 0) {
+          for (let i = sortedData[key].sell.length; i < 3; i++) {
+            sortedData[key].sell.unshift({ odd: 0, amount: 0 })
+          }
+        }
+        if (sortedData[key].buy.length === 0) {
+          for (let i = 0; i < 3; i++) {
+            sortedData[key].buy.push({ odd: 0, amount: 0 })
+          }
+        } else if (sortedData[key].buy.length < 3 && sortedData[key].buy.length > 0) {
+          for (let i = sortedData[key].buy.length; i < 3; i++) {
+            sortedData[key].buy.unshift({ odd: 0, amount: 0 })
+          }
+        }
+      }
+
       return { sortedData }
     })
   )

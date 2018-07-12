@@ -42,9 +42,10 @@ const TableItem = styled.div`
     justify-content: space-evenly;
 
     span {
-      padding: 3px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 3px;
-      text-align: center;
       opacity: 0.9;
       border-radius: 3px;
       background-image: linear-gradient(to top, #ffffff, #d7d7d7 51%, #ffffff 99%);
@@ -52,7 +53,8 @@ const TableItem = styled.div`
       font-size: 14px;
     }
     .bigOnes {
-      padding: 10px 20px;
+      width: 50px;
+      height: 35px;
     }
     .green {
       background-image: linear-gradient(to bottom, #7fac30, #288702 99%);
