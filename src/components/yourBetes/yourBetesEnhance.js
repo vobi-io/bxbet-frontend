@@ -1,19 +1,18 @@
-import { compose, branch, renderNothing, withHandlers } from 'recompose'
+import { compose, branch, renderNothing, withHandlers, lifecycle } from 'recompose'
 import { compose as gqlCompose, graphql } from 'react-apollo'
 
+import refetchData from '../../hocs/refetchData'
 
 import yourBetesQuery from './yourBetes.graphql'
 import meQuery from '../../graphql/Me.graphql'
 
 export default compose(
-
     gqlCompose(
         graphql(meQuery, { name: 'me' }),
         branch(
             ({ me: { loading } }) => loading,
             renderNothing
         ),
-
         graphql(yourBetesQuery, {
           name: 'yourBetes',
           options: ({ me }) => {
@@ -32,6 +31,8 @@ export default compose(
     ),
     withHandlers({
       yourBetesData: ({ yourBetes }) => () => {
+        refetchData('placeOrder', yourBetes)
+
         const data = yourBetes.orderMany
 
         const formatedData = data.map((item) => {
@@ -62,11 +63,12 @@ export default compose(
             orderType: item.orderType === 0 ? 'Buy' : 'Sell',
             status,
           }
+
           return obj
         })
 
         return formatedData
       },
-    })
+    }),
 
 )

@@ -12,7 +12,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow: hidden;
+  overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
+  max-height: ${p => (p.isScrollable ? '171px' : '')};
 `
 const StyledRow = styled.div`
   font-family: Montserrat;
@@ -48,11 +49,10 @@ const Line = styled.div`
 
 const YourBetes = ({ yourBetesData, teams }) => {
   const data = yourBetesData()
-
   function Body() {
     return (
-      <Container>
-        <StyledRow>
+      <Container isScrollable={!!(data.length > 3)}>
+        <StyledRow >
           <div>Outcome</div>
           <div className="rigth-side">
             <div>Buy/Sell</div>
