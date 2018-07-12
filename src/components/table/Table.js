@@ -89,14 +89,14 @@ const Table = ({ sortedData, teams }) => {
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
         <div className="table-item" key={i}>
-          <span className={arr.length === i + 1 ? 'bigOnes green' : 'bigOnes'}>{obj.amount}</span>
-          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.odd}</span>{' '}
+          <span className={arr.length === i + 1 ? 'green bigOnes' : 'bigOnes'}>{obj.odd}</span>
+          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}BX</span>
         </div>
       ))
       const Sell = sortedData[key].sell.map((obj, i, arr) => (
         <div className="table-item" key={i}>
-          <span className={arr.length === i + 1 ? 'bigOnes red' : 'bigOnes'}>{obj.amount}</span>
-          <span className={arr.length === i + 1 ? 'red' : ''}>{obj.odd}</span>{' '}
+          <span className={arr.length === i + 1 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
+          <span className={arr.length === i + 1 ? 'red' : ''}>{obj.amount}BX</span>
         </div>
       ))
       tableArray.push(
