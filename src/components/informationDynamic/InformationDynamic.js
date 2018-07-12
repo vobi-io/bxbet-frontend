@@ -210,7 +210,7 @@ const InformationDynamic = ({
     isLiabilitiesActive,
     isPayoutActive, buttonSwitcher,
     ...rest }) => (
-      <Card title={'Information'} width="100%">
+      <Card title={'Bet Slip'} width="100%">
         <CardBody
           teams={teams}
           gameId={gameId}

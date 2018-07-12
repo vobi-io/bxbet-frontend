@@ -44,7 +44,7 @@ const MoreInfo = ({ moreInfoData, teams }) => {
     )
   }
 
-  return <Card title={'Information'} width="15%"><Body /> </Card>
+  return <Card title={'Market Insights'} width="15%"><Body /> </Card>
 }
 
 export default enhance(MoreInfo)

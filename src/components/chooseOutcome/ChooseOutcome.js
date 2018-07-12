@@ -49,7 +49,7 @@ const ChooseOutcome = ({
   onSelectorChange,
   selected,
 }) =>
-  <Card title={'Choose Outcome Please'} width="100%" >
+  <Card title={'Outcome'} width="100%" >
     <Buttons
       teams={teams}
       onSelectorChange={onSelectorChange}

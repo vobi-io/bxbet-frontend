@@ -118,7 +118,7 @@ const Table = ({ sortedData, teams }) => {
   }
 
   return (
-    <Card title="Table" width="53.5%" bgColor="#0f334b">
+    <Card title="Available odds" width="53.5%" bgColor="#0f334b">
       <Body />
     </Card>
   )

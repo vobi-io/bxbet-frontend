@@ -84,7 +84,7 @@ const YourBetes = ({ yourBetesData, teams }) => {
   }
 
   return (
-    <Card title={'Your Betes'} width="100%">
+    <Card title={'Your Orders'} width="100%">
       <Body />{' '}
     </Card>
   )

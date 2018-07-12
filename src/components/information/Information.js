@@ -110,7 +110,7 @@ const Information = ({ refetchData, ...props }) => {
     )
   }
 
-  return <Card title={'Information'} width="100%"><Tables /> </Card>
+  return <Card title={'Order Book'} width="100%"><Tables /> </Card>
 }
 
 export default Information
