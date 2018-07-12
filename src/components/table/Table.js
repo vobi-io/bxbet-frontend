@@ -20,9 +20,10 @@ const TableItem = styled.div`
     display: flex;
     margin-right: 20px;
     align-items: center;
-    width: 170px;
+    width: 150px;
 
-    img {
+    img,
+    .flag {
       width: 32px;
       margin-right: 9px;
     }

@@ -25,7 +25,6 @@ const StyledRow = styled.div`
 
   & > div > .flag {
     width: 32px;
-    height: 22px;
     margin-right: 9px;
   }
 
@@ -45,11 +44,6 @@ const Line = styled.div`
   opacity: 0.2;
   background-color: #447491;
   margin: 8px 0;
-`
-
-const StyledFlag = styled.img`
-  margin-right: 8px;
-  height: 32px;
 `
 
 const YourBetes = ({ yourBetesData, teams }) => {
@@ -72,7 +66,7 @@ const YourBetes = ({ yourBetesData, teams }) => {
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
-                <StyledFlag src={returnFlagUrl(teams[index])} />
+                {returnFlagUrl(teams[index], true)}
                 <span>{teams[index]}</span>
               </div>
               <div className="rigth-side">
