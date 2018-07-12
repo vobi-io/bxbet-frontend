@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Route } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Card from '../card'
 import { TextField, SelectField } from '../form'
@@ -95,7 +97,17 @@ input{
   }
 }
 `
-
+const StyledToastContainer = styled(ToastContainer)`
+  .toastClassName {
+    background-color: #0f334b;
+    color: white;
+    font-size: bold;
+  }
+  .Toastify__close-button--default {
+    color: #ffffff;
+    opacity: 0.8;
+  }
+`
 const placeOrderHandler = (props) => {
   if (!props.props.authenticated) {
     props.props.toggleSignUpWithEmail()
@@ -103,7 +115,19 @@ const placeOrderHandler = (props) => {
     props.props.onPlaceOrder()
   }
 }
-
+const notify = (props, isValidInput) => {
+  if (isValidInput && props.props.authenticated) {
+    toast('Order has been added successfully')
+  } else if (!isValidInput && props.props.authenticated) {
+    toast('Stake is not Valid')
+  } else {
+    return
+  }
+}
+const handleClick = (props, isValidInput) => {
+  placeOrderHandler(props)
+  notify(props, isValidInput)
+}
 
 const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons, placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
   <div>
@@ -139,8 +163,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
           <div>{placeOrderCalculation()}</div>
         </div>
 
-
-        <Button cta text="Place Order" onClick={() => placeOrderHandler(props)} />
+        <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput)} />
+        <StyledToastContainer toastClassName={'toastClassName'} position="bottom-left" />
       </StyledInfo>
     </Container>
 
