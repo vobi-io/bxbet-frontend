@@ -96,7 +96,7 @@ const HomePage = ({
   game,
   ...props
 }) => {
-  const teams = [game.homeTeam, 'Draw', game.awayTeam]
+  const teams = ['Draw', game.homeTeam, game.awayTeam]
 
   return (
     <Wrapper>

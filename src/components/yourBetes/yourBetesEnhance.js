@@ -21,6 +21,7 @@ export default compose(
 
         return { variables }
       },
+      fetchPolicy: 'network-only',
     }),
 
   ),

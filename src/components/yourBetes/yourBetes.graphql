@@ -1,5 +1,5 @@
-query orderMany($player: String) {
-  orderMany(filter: { player: $player }){
+query orderMany($player: String, $gameId: Float ) {
+  orderMany(filter: { player: $player, gameId: $gameId }){
    	_id
     gameId
     outcome
