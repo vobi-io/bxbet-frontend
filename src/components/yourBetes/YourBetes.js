@@ -47,8 +47,15 @@ const Line = styled.div`
   background-color: #447491;
   margin: 8px 0;
 `
+const Message = styled.div`
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  font-family: Montserrat;
+  margin-top: 60px;
+`
 
-const YourBetes = ({ yourBetesData, teams }) => {
+const YourBetes = ({ yourBetesData, teams, ...props }) => {
   const data = yourBetesData()
   function Body() {
     return (
@@ -63,7 +70,7 @@ const YourBetes = ({ yourBetesData, teams }) => {
           </div>
         </StyledRow>
         <Line />
-        {data.map((item, index) => (
+        {props.me.me && data.map((item, index) => (
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
@@ -80,6 +87,9 @@ const YourBetes = ({ yourBetesData, teams }) => {
             <Line />
           </div>
         ))}
+        {!props.me.me &&
+          <Message>Please log in</Message>
+        }
       </Container>
     )
   }
