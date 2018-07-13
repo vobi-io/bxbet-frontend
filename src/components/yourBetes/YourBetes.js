@@ -12,7 +12,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow: hidden;
+  overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
+  max-height: ${p => (p.isScrollable ? '171px' : '')};
 `
 const StyledRow = styled.div`
   font-family: Montserrat;
@@ -48,10 +49,9 @@ const Line = styled.div`
 
 const YourBetes = ({ yourBetesData, teams }) => {
   const data = yourBetesData()
-
   function Body() {
     return (
-      <Container>
+      <Container isScrollable={!!(data.length > 3)}>
         <StyledRow>
           <div>Outcome</div>
           <div className="rigth-side">
@@ -66,8 +66,8 @@ const YourBetes = ({ yourBetesData, teams }) => {
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
-                {returnFlagUrl(teams[index], true)}
-                <span>{teams[index]}</span>
+                {returnFlagUrl(teams[item.outcome], true)}
+                <span>{teams[item.outcome]}</span>
               </div>
               <div className="rigth-side">
                 <div>{item.orderType}</div>
@@ -84,8 +84,8 @@ const YourBetes = ({ yourBetesData, teams }) => {
   }
 
   return (
-    <Card title={'Your Betes'} width="100%">
-      <Body />{' '}
+    <Card title={'Your Orders'} width="100%">
+      <Body />
     </Card>
   )
 }

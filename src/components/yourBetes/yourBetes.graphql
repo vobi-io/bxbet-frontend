@@ -1,5 +1,5 @@
 query orderMany($player: String) {
-  orderMany(filter: { player: $player }, limit: 3){
+  orderMany(filter: { player: $player }){
    	_id
     gameId
     outcome

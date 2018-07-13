@@ -74,7 +74,7 @@ const UserDropDown = styled.div.attrs({
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
-  margin-top: 95px;
+  margin-top: 42px;
   margin-left: -11px;
   &:hover {
     display: block;
@@ -151,8 +151,8 @@ const UserMenu = ({ email, signOut, balanceCounter, userImageUrl }) => (
       <p style={styles.username}>{email}</p>
     </AvatarContainer>
     <UserDropDown>
-      <ProfileMenu>Profile</ProfileMenu>
-      <ProfileMenu>Settings</ProfileMenu>
+      {/* <ProfileMenu>Profile</ProfileMenu>
+      <ProfileMenu>Settings</ProfileMenu> */}
       <ProfileMenu onClick={signOut}>Logout</ProfileMenu>
     </UserDropDown>
 

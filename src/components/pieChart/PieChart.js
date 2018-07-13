@@ -123,7 +123,7 @@ const PieChart = ({ pieData }) => {
       )
 
 
-  return <Card title="Pie Chart" width="30%"><Body /> </Card>
+  return <Card title="Market Sentiments" width="30%"><Body /> </Card>
 }
 
 export default enhance(PieChart)
