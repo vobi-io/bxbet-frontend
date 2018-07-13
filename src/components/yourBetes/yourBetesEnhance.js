@@ -1,4 +1,4 @@
-import { compose, branch, renderNothing, withHandlers, lifecycle } from 'recompose'
+import { compose, branch, renderNothing, withHandlers, lifecycle, withProps } from 'recompose'
 import { compose as gqlCompose, graphql } from 'react-apollo'
 
 import refetchData from '../../hocs/refetchData'
@@ -12,6 +12,7 @@ export default compose(
     branch(({ me: { loading } }) => loading, renderNothing),
     graphql(yourBetesQuery, {
       name: 'yourBetes',
+      skip: props => !props.me.me,
       options: ({ me }) => {
         let variables = {}
         if (me.me) {
@@ -21,8 +22,15 @@ export default compose(
         return { variables }
       },
     }),
-    branch(({ yourBetes: { loading } }) => loading, renderNothing)
+
   ),
+  withProps(
+    (props) => {
+      const result = props.yourBetes ? {} : { yourBetes: { loading: false, orderMany: [] } }
+      return result
+    }
+  ),
+  branch(({ yourBetes: { loading } }) => loading, renderNothing),
   withHandlers({
     yourBetesData: ({ yourBetes }) => () => {
       refetchData('placeOrder', yourBetes)
