@@ -157,8 +157,8 @@ const HomePage = ({
             <YourBetes
               teams={
                 gameById.gameById
-                  ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
-                  : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
+                  ? ['Draw', gameById.gameById.homeTeam, gameById.gameById.awayTeam]
+                  : ['Draw', gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]
               }
             />
           </div>

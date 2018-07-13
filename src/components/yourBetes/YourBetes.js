@@ -52,7 +52,7 @@ const YourBetes = ({ yourBetesData, teams }) => {
   function Body() {
     return (
       <Container isScrollable={!!(data.length > 3)}>
-        <StyledRow >
+        <StyledRow>
           <div>Outcome</div>
           <div className="rigth-side">
             <div>Buy/Sell</div>
@@ -66,8 +66,8 @@ const YourBetes = ({ yourBetesData, teams }) => {
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
-                {returnFlagUrl(teams[index], true)}
-                <span>{teams[index]}</span>
+                {returnFlagUrl(teams[item.outcome], true)}
+                <span>{teams[item.outcome]}</span>
               </div>
               <div className="rigth-side">
                 <div>{item.orderType}</div>
@@ -85,7 +85,7 @@ const YourBetes = ({ yourBetesData, teams }) => {
 
   return (
     <Card title={'Your Orders'} width="100%">
-      <Body />{' '}
+      <Body />
     </Card>
   )
 }
