@@ -98,7 +98,6 @@ const HomePage = ({
 }) => {
   const teams = [game.homeTeam, 'Draw', game.awayTeam]
 
-
   return (
     <Wrapper>
       <BackgroundPattern />
