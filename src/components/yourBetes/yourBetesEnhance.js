@@ -12,11 +12,11 @@ export default compose(
     branch(({ me: { loading } }) => loading, renderNothing),
     graphql(yourBetesQuery, {
       name: 'yourBetes',
-      skip: props => !props.me.me,
-      options: ({ me }) => {
+      skip: props => !props.me.me || !props.game,
+      options: ({ me, game }) => {
         let variables = {}
         if (me.me) {
-          variables = { player: me.me.blockChain.address }
+          variables = { player: me.me.blockChain.address, gameId: game.gameId }
         }
 
         return { variables }

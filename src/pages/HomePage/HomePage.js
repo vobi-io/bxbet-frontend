@@ -160,6 +160,7 @@ const HomePage = ({
                   ? ['Draw', gameById.gameById.homeTeam, gameById.gameById.awayTeam]
                   : ['Draw', gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]
               }
+              game={gameById.gameById}
             />
           </div>
         </div>
