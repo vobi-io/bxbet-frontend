@@ -12,6 +12,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  min-height: 171px;
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
   max-height: ${p => (p.isScrollable ? '171px' : '')};
 `
