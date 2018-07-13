@@ -65,11 +65,11 @@ const HomePage = ({
   toggleSignIn,
   toggleSignUp,
   toggleSignUpWithEmail,
-  match,
-  data,
-  gameById,
+  // match,
+  // data,
+  // gameById,
   orderMany,
-  gameOne,
+  // gameOne,
 
   // choose outcome props
   activeButton1,
@@ -81,7 +81,7 @@ const HomePage = ({
   // place order props
   toggleActiveButton,
   activeTab,
-  teams,
+  // teams,
   onChangeHandler,
   odd,
   stake,
@@ -93,109 +93,88 @@ const HomePage = ({
   buttonSwitcher,
   onPlaceOrder,
   refetchOrderManyData,
+  game,
   ...props
-}) => (
-  <Wrapper>
-    <BackgroundPattern />
-    <Container>
-      <VerticalWrapper>
-        <ChooseOutcome
-          teams={
-            gameById.gameById
-              ? [gameById.gameById.homeTeam, gameById.gameById.awayTeam]
-              : [gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]
-          }
-          activeButton1={activeButton1}
-          activeButton2={activeButton2}
-          activeButton3={activeButton3}
-          onSelectorChange={onSelectorChange}
-          selected={selected}
-        />
-        <Brick />
-        <Cover
-          text={
-            gameById.gameById
-              ? `${gameById.gameById.homeTeam} vs ${gameById.gameById.awayTeam}`
-              : `${gameOne.gameOne.homeTeam} vs ${gameOne.gameOne.awayTeam}`
-          }
-        />
-      </VerticalWrapper>
-      <VerticalWrapper>
-        <div style={{ display: 'flex', width: '100%' }}>
-          <Information data={orderMany.orderMany} refetchData={refetchOrderManyData} />
+}) => {
+  const teams = [game.homeTeam, 'Draw', game.awayTeam]
+
+
+  return (
+    <Wrapper>
+      <BackgroundPattern />
+      <Container>
+        <VerticalWrapper>
+          <ChooseOutcome
+            teams={teams}
+            activeButton1={activeButton1}
+            activeButton2={activeButton2}
+            activeButton3={activeButton3}
+            onSelectorChange={onSelectorChange}
+            selected={selected}
+          />
           <Brick />
-          <div style={{ width: '100%' }}>
-            <InformationDynamic
-              signInOpened={signInOpened}
-              signUpOpened={signUpOpened}
-              toggleSignIn={toggleSignIn}
-              toggleSignUp={toggleSignUp}
-              signUpWithEmailOpened={signUpWithEmailOpened}
-              toggleSignUpWithEmail={toggleSignUpWithEmail}
-              teams={
-                gameById.gameById
-                  ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
-                  : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-              }
-              gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
-              toggleActiveButton={toggleActiveButton}
-              activeTab={activeTab}
-              selected={selected}
-              onSelectorChange={onSelectorChange}
-              onChangeHandler={onChangeHandler}
-              odd={odd}
-              stake={stake}
-              isValidInput={isValidInput}
-              toggleButtons={toggleButtons}
-              placeOrderCalculation={placeOrderCalculation}
-              isLiabilitiesActive={isLiabilitiesActive}
-              isPayoutActive={isPayoutActive}
-              buttonSwitcher={buttonSwitcher}
-              onPlaceOrder={onPlaceOrder}
-            />
+          <Cover
+            text={`${game.homeTeam} vs ${game.awayTeam}`
+          }
+          />
+        </VerticalWrapper>
+        <VerticalWrapper>
+          <div style={{ display: 'flex', width: '100%' }}>
+            <Information data={orderMany.orderMany} refetchData={refetchOrderManyData} />
             <Brick />
-            <YourBetes
-              teams={
-                gameById.gameById
-                  ? ['Draw', gameById.gameById.homeTeam, gameById.gameById.awayTeam]
-                  : ['Draw', gameOne.gameOne.homeTeam, gameOne.gameOne.awayTeam]
-              }
-              game={gameById.gameById}
-            />
+            <div style={{ width: '100%' }}>
+              <InformationDynamic
+                signInOpened={signInOpened}
+                signUpOpened={signUpOpened}
+                toggleSignIn={toggleSignIn}
+                toggleSignUp={toggleSignUp}
+                signUpWithEmailOpened={signUpWithEmailOpened}
+                toggleSignUpWithEmail={toggleSignUpWithEmail}
+                teams={teams}
+                gameId={game.gameId}
+                toggleActiveButton={toggleActiveButton}
+                activeTab={activeTab}
+                selected={selected}
+                onSelectorChange={onSelectorChange}
+                onChangeHandler={onChangeHandler}
+                odd={odd}
+                stake={stake}
+                isValidInput={isValidInput}
+                toggleButtons={toggleButtons}
+                placeOrderCalculation={placeOrderCalculation}
+                isLiabilitiesActive={isLiabilitiesActive}
+                isPayoutActive={isPayoutActive}
+                buttonSwitcher={buttonSwitcher}
+                onPlaceOrder={onPlaceOrder}
+              />
+              <Brick />
+              <YourBetes
+                teams={teams}
+                game={game}
+              />
+            </div>
           </div>
-        </div>
-      </VerticalWrapper>
-      <VerticalWrapper>
-        <MoreInfo
-          data={someData}
-          gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
-          teams={
-            gameById.gameById
-              ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
-              : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-          }
-        />
-        <PieChart
-          gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
-          teams={
-            gameById.gameById
-              ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
-              : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-          }
-        />
-        <Table
-          data={tableData}
-          gameId={gameById.gameById ? gameById.gameById.gameId : gameOne.gameOne.gameId}
-          teams={
-            gameById.gameById
-              ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam]
-              : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam]
-          }
-        />
-      </VerticalWrapper>
-    </Container>
-  </Wrapper>
-)
+        </VerticalWrapper>
+        <VerticalWrapper>
+          <MoreInfo
+            data={someData}
+            gameId={game.gameId}
+            teams={teams}
+          />
+          <PieChart
+            gameId={game.gameId}
+            teams={teams}
+          />
+          <Table
+            data={tableData}
+            gameId={game.gameId}
+            teams={teams}
+          />
+        </VerticalWrapper>
+      </Container>
+    </Wrapper>
+  )
+}
 
 export default compose(
   gqlCompose(
@@ -210,20 +189,22 @@ export default compose(
 
     graphql(gameOne, { name: 'gameOne' }),
     branch(({ gameOne: { loading } }) => loading, renderNothing),
-
-    graphql(orderMany, {
-      name: 'orderMany',
-      options: ({ match }) => {
-        let variables = {}
-        if (match.params.id) {
-          variables = { game: match.params.id }
-        }
-        return { variables }
-      },
-    }),
-    branch(({ orderMany: { loading } }) => loading, renderNothing)
   ),
-
+  withProps(
+    (props) => {
+      const result = props.gameById.gameById ? { game: props.gameById.gameById } : { game: props.gameOne.gameOne }
+      return result
+    }
+  ),
+  graphql(orderMany, {
+    name: 'orderMany',
+    options: ({ game }) => {
+      let variables = {}
+      variables = { game: game._id }
+      return { variables }
+    },
+  }),
+  branch(({ orderMany: { loading } }) => loading, renderNothing),
   withStateHandlers(
     () => ({
       signInOpened: false,
