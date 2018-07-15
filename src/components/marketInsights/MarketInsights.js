@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Card from '../card'
-import enhance from './moreInfoEnhance'
+import enhance from './marketInsightsEnhance'
 
 const BlueBrick = styled.div`
     width: 15px;

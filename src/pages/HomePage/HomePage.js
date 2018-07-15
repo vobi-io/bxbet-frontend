@@ -65,12 +65,7 @@ const HomePage = ({
   toggleSignIn,
   toggleSignUp,
   toggleSignUpWithEmail,
-  // match,
-  // data,
-  // gameById,
   orderMany,
-  // gameOne,
-
   // choose outcome props
   activeButton1,
   activeButton2,
@@ -81,7 +76,6 @@ const HomePage = ({
   // place order props
   toggleActiveButton,
   activeTab,
-  // teams,
   onChangeHandler,
   odd,
   stake,
@@ -94,7 +88,6 @@ const HomePage = ({
   onPlaceOrder,
   refetchOrderManyData,
   game,
-  ...props
 }) => {
   const teams = ['Draw', game.homeTeam, game.awayTeam]
 

@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2'
 import styled from 'styled-components'
 
 import Card from '../card'
-import enhance from './pieChartEnhance'
+import enhance from './marketSentimentsEnhance'
 
 
 const Container = styled.div`
@@ -49,7 +49,7 @@ const Container = styled.div`
                 margin-right: 8px;
                 box-shadow: 0px 3px 9.5px 0.5px rgba(0, 0, 0, 0.1);
                 }
-            } 
+            }
         }
 
         .info_title{
@@ -70,7 +70,7 @@ const Container = styled.div`
 `
 
 
-const PieChart = ({ pieData }) => {
+const MarketSentiments = ({ pieData }) => {
   const data = pieData()
   const percents = data.percentages
   const titles = data.titles
@@ -126,4 +126,4 @@ const PieChart = ({ pieData }) => {
   return <Card title="Market Sentiments" width="30%"><Body /> </Card>
 }
 
-export default enhance(PieChart)
+export default enhance(MarketSentiments)
