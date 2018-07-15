@@ -33,8 +33,9 @@ export default compose(
         const newState = {}
         const value = e.target.value
 
+        // debugger
         if (e.target.name === 'odd') {
-          newState.odd = parseFloat(value) || ' '
+          newState.odd = value // parseFloat(value) || ' '
         } else {
           newState.stake = parseFloat(value) || ' '
           if (value <= 0 || (value > getBalance.getBalance.amount && activeTab === 'buy')) {
