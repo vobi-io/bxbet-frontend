@@ -16,7 +16,7 @@ import orderManyQuery from './query/orderMany.graphql'
 import gameOne from './query/gameOne.graphql'
 import refetchData from '../../hocs/refetchData'
 
-import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhance'
+import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
