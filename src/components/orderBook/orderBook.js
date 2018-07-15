@@ -47,9 +47,9 @@ const Brick = styled.div`
     `
 
 
-const Information = ({ refetchData, ...props }) => {
+const OrderBook = ({ refetchData, ...props }) => {
   refetchData()
-  const Table = (props) => {
+  const getTable = (props) => {
     const StyledTitle = styled.div`
       text-transform: uppercase;
       color: white;
@@ -103,9 +103,9 @@ const Information = ({ refetchData, ...props }) => {
 
     return (
       <StyledTables>
-        {Table({ title: 'buy', data: sortedData.buy })}
+        {getTable({ title: 'buy', data: sortedData.buy })}
         <Brick />
-        {Table({ title: 'sell', data: sortedData.sell })}
+        {getTable({ title: 'sell', data: sortedData.sell })}
       </StyledTables>
     )
   }
@@ -113,4 +113,4 @@ const Information = ({ refetchData, ...props }) => {
   return <Card title={'Order Book'} width="100%"><Tables /> </Card>
 }
 
-export default Information
+export default OrderBook

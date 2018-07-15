@@ -5,18 +5,18 @@ import { compose, withStateHandlers, withProps, branch, renderNothing, withHandl
 
 import ChooseOutcome from '../../components/chooseOutcome'
 import Cover from '../../components/cover'
-import Information from '../../components/information'
-import InformationDynamic from '../../components/informationDynamic'
+import OrderBook from '../../components/orderBook'
+import PlaceOrder from '../../components/placeOrder'
 import YourBetes from '../../components/yourBetes'
-import MoreInfo from '../../components/moreInfo'
-import Table from '../../components/table'
-import PieChart from '../../components/pieChart'
+import MarketInsights from '../../components/marketInsights'
+import AvailableOdds from '../../components/availableOdds'
+import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
-import orderMany from './query/orderMany.graphql'
+import orderManyQuery from './query/orderMany.graphql'
 import gameOne from './query/gameOne.graphql'
 import refetchData from '../../hocs/refetchData'
 
-import placeOrderEnhancer from '../../components/informationDynamic/enhance'
+import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhance'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
@@ -50,10 +50,10 @@ const BackgroundPattern = styled.div`
   background-image: url(${pattern});
 `
 
-const someData = ['Germay Wins', 'England Wins', 'Draw']
+const someData = ['Germany Wins', 'England Wins', 'Draw']
 
 const tableData = [
-  { Flag, country: 'Gemany', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
+  { Flag, country: 'Germany', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
   { Flag, country: 'England', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
   { Flag, country: 'Draw', buy: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1], sell: [1.7, 2.8, 1.6, 1.2, 2.1, 1.1] },
 ]
@@ -119,10 +119,10 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <Information data={orderMany.orderMany} refetchData={refetchOrderManyData} />
+            <OrderBook data={orderMany.orderMany} refetchData={refetchOrderManyData} />
             <Brick />
             <div style={{ width: '100%' }}>
-              <InformationDynamic
+              <PlaceOrder
                 signInOpened={signInOpened}
                 signUpOpened={signUpOpened}
                 toggleSignIn={toggleSignIn}
@@ -155,16 +155,16 @@ const HomePage = ({
           </div>
         </VerticalWrapper>
         <VerticalWrapper>
-          <MoreInfo
+          <MarketInsights
             data={someData}
             gameId={game.gameId}
             teams={teams}
           />
-          <PieChart
+          <MarketSentiments
             gameId={game.gameId}
             teams={teams}
           />
-          <Table
+          <AvailableOdds
             data={tableData}
             gameId={game.gameId}
             teams={teams}
@@ -195,7 +195,7 @@ export default compose(
       return result
     }
   ),
-  graphql(orderMany, {
+  graphql(orderManyQuery, {
     name: 'orderMany',
     options: ({ game }) => {
       let variables = {}

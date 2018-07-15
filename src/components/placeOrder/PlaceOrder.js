@@ -129,27 +129,29 @@ const handleClick = (props, isValidInput) => {
   notify(props, isValidInput)
 }
 
-const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons, placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
-  <div>
-    <div style={{ display: 'flex' }}>
-      <StyledTab green onClick={() => toggleActiveButton('buy')}>
+const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
+  onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons,
+  placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
+    <div>
+      <div style={{ display: 'flex' }}>
+        <StyledTab green onClick={() => toggleActiveButton('buy')}>
           BUY
         </StyledTab>
-      <StyledTab onClick={() => toggleActiveButton('sell')}>
+        <StyledTab onClick={() => toggleActiveButton('sell')}>
           SELL
         </StyledTab>
-    </div>
-    <ActiveUnderline activeTab={activeTab} />
-    <Container>
-      <StyledForm>
-        <SelectField title="Outcome" options={teams} selected={selected} onChange={e => onSelectorChange(e.target.value)} />
-        <TextField title="Odd" onChange={onChangeHandler} value={odd} key={['odd', 'place-order-input-1']} />
-        <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} key={'stake'} />
-      </StyledForm>
-      <Brick />
-      <StyledInfo>
-        <div className="calculations">
-          {
+      </div>
+      <ActiveUnderline activeTab={activeTab} />
+      <Container>
+        <StyledForm>
+          <SelectField title="Outcome" options={teams} selected={selected} onChange={e => onSelectorChange(e.target.value)} />
+          <TextField title="Odd" onChange={onChangeHandler} value={odd} key={['odd', 'place-order-input-1']} />
+          <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} key={'stake'} />
+        </StyledForm>
+        <Brick />
+        <StyledInfo>
+          <div className="calculations">
+            {
               activeTab === 'buy' ?
                 <div className="profit_text">
                 Profit:
@@ -160,16 +162,16 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
                   {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" checked={isPayoutActive} value="payout" /> Payout <br />
                 </StyledButtons>
           }
-          <div>{placeOrderCalculation()}</div>
-        </div>
-        <div style={{ width: '100%' }}>
-          <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput)} />
-          <StyledToastContainer toastClassName={'toastClassName'} position="bottom-left" />
-        </div>
-      </StyledInfo>
-    </Container>
+            <div>{placeOrderCalculation()}</div>
+          </div>
+          <div style={{ width: '100%' }}>
+            <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput)} />
+            <StyledToastContainer toastClassName={'toastClassName'} position="bottom-left" />
+          </div>
+        </StyledInfo>
+      </Container>
 
-    {props.signInOpened && (
+      {props.signInOpened && (
       <Route
         path="/"
         render={() => (
@@ -181,7 +183,7 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
           )}
       />
       )}
-    {props.signUpWithEmailOpened && (
+      {props.signUpWithEmailOpened && (
       <Route
         path="/"
         render={() => (
@@ -194,10 +196,10 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
       />
       )}
 
-  </div>
+    </div>
   )
 
-const InformationDynamic = ({
+const PlaceOrder = ({
     teams,
     gameId,
     toggleActiveButton,
@@ -235,4 +237,4 @@ const InformationDynamic = ({
       </Card>
 )
 
-export default authAware(InformationDynamic)
+export default authAware(PlaceOrder)

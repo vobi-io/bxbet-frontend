@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import enhancer from './tableEnhancer'
+import enhancer from './availableOddsEnhancer'
 import Card from '../card'
 import returnFlagUrl from '../../hocs/returnFlagUrl/returnFlagUrl'
 
-const ConttentContainer = styled.div`
+const ContentContainer = styled.div`
   border-radius: 0 0 5px 5px;
   background-color: #0f334b;
   padding: 0px 9px;
@@ -81,7 +81,7 @@ const TableItem = styled.div`
   }
 `
 
-const Table = ({ sortedData, teams }) => {
+const AvailableOdds = ({ sortedData, teams }) => {
   const Body = () => {
     const tableArray = []
     let index = 0
@@ -114,7 +114,7 @@ const Table = ({ sortedData, teams }) => {
       )
       index += 1
     }
-    return <ConttentContainer>{tableArray}</ConttentContainer>
+    return <ContentContainer>{tableArray}</ContentContainer>
   }
 
   return (
@@ -124,4 +124,4 @@ const Table = ({ sortedData, teams }) => {
   )
 }
 
-export default enhancer(Table)
+export default enhancer(AvailableOdds)

@@ -28,7 +28,7 @@ const StyledItem = styled.div`
     }
   `
 
-const MoreInfo = ({ moreInfoData, teams }) => {
+const MarketInsights = ({ moreInfoData, teams }) => {
   const status = moreInfoData()
   function Body() {
     const Data = teams.map((team, index) => (
@@ -47,4 +47,4 @@ const MoreInfo = ({ moreInfoData, teams }) => {
   return <Card title={'Market Insights'} width="15%"><Body /> </Card>
 }
 
-export default enhance(MoreInfo)
+export default enhance(MarketInsights)

@@ -18,7 +18,7 @@ export default compose(
   withStateHandlers(
     ({ getBalance, ...props }) => ({
       activeTab: 'buy',
-      odd: 1.4,
+      odd: 1.5,
       stake: 0,
       selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
       isValidInput: true,
