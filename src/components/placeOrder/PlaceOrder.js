@@ -145,8 +145,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
       <Container>
         <StyledForm>
           <SelectField title="Outcome" options={teams} selected={selected} onChange={e => onSelectorChange(e.target.value)} />
-          <TextField title="Odd" onChange={onChangeHandler} value={odd} key={['odd', 'place-order-input-1']} />
-          <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} key={'stake'} />
+          <TextField type="number" title="Odd" onChange={onChangeHandler} value={odd} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
         <StyledInfo>
@@ -158,8 +158,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
               </div>
               :
                 <StyledButtons onChange={toggleButtons}>
-                  {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
-                  {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" checked={isPayoutActive} value="payout" /> Payout <br />
+                  {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
+                  {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isPayoutActive} value="payout" /> Payout <br />
                 </StyledButtons>
           }
             <div>{placeOrderCalculation()}</div>
