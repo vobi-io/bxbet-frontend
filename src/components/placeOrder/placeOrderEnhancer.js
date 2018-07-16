@@ -1,7 +1,6 @@
 import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
-import emmiter from '../../eventEmitter'
 import { mutation } from '../../hocs'
 import placeOrderMutation from './placeOrder.graphql'
 import getBalanceQuery from '../header/getBalance.graphql'
@@ -60,10 +59,25 @@ export default compose(
         }
         return newState
       },
+      resetToDefault: () => (props, getBalance) => {
+        let newState = {}
+        newState = {
+          activeTab: 'buy',
+          odd: 1.5,
+          stake: 0,
+          isValidInput: false,
+          isLiabilitiesActive: true,
+          isPayoutActive: false,
+          getBalance,
+          selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
+          props,
+        }
+        return newState
+      },
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ data: game, placeOrder, odd, stake, activeTab, selected, ...props }) => async () => {
+    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, ...props }) => async () => {
       const gameId = game.gameById.gameId
       const teams = ['Draw', game.gameById.homeTeam, game.gameById.awayTeam]
 
@@ -86,6 +100,7 @@ export default compose(
         gameId,
       }
       await placeOrder(variables)
+      resetToDefault(props, getBalance)
     },
     placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
       const oddFloat = parseFloat(odd)
