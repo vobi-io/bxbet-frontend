@@ -9,7 +9,7 @@ import FourOFour from './pages/errors/404'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
 import Create from './pages/create'
-import Outcome from './pages/outcome/index'
+import FinishGame from './pages/finishGame'
 // import placeOrderEnhancer from './components/informationDynamic/enhance'
 
 // const homePageWithPlaceOrderEnhancer = placeOrderEnhancer(HomePage)
@@ -56,7 +56,7 @@ const App = ({
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/create" component={Create} />
-        <Route path="/outcome" component={Outcome} />
+        <Route path="/finish-game/:id" component={FinishGame} />
         <Route path="/:id" component={HomePage} />
         <Route component={FourOFour} />
       </Switch>
