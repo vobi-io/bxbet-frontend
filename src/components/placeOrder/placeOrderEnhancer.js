@@ -1,6 +1,7 @@
 import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
+import { toast } from 'react-toastify'
 import { mutation } from '../../hocs'
 import placeOrderMutation from './placeOrder.graphql'
 import getBalanceQuery from '../header/getBalance.graphql'
@@ -59,6 +60,11 @@ export default compose(
         }
         return newState
       },
+      notification: () => (props) => {
+        if (props.isValidInput && props.game.status === 3) {
+          toast('Order has been added successfully')
+        }
+      },
       resetToDefault: () => (props, getBalance) => {
         let newState = {}
         newState = {
@@ -77,7 +83,7 @@ export default compose(
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, ...props }) => async () => {
+    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, notification, ...props }) => async () => {
       const gameId = game.gameById.gameId
       const teams = ['Draw', game.gameById.homeTeam, game.gameById.awayTeam]
 
@@ -100,6 +106,7 @@ export default compose(
         gameId,
       }
       await placeOrder(variables)
+      notification(props)
       resetToDefault(props, getBalance)
     },
     placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
