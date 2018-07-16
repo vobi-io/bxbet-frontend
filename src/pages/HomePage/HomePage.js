@@ -150,7 +150,7 @@ const HomePage = ({
         <VerticalWrapper>
           <MarketInsights
             data={someData}
-            gameId={game.gameId}
+            game={game}
             teams={teams}
           />
           <MarketSentiments

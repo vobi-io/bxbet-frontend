@@ -28,13 +28,13 @@ const StyledItem = styled.div`
     }
   `
 
-const MarketInsights = ({ moreInfoData, teams }) => {
-  const status = moreInfoData()
+const MarketInsights = ({ game, teams }) => {
+  const { status } = game
+  console.log(status, teams, 'aaaa')
   function Body() {
     const Data = teams.map((team, index) => (
-
       <StyledItem key={index}>
-        <BlueBrick active={index === status.status} />
+        <BlueBrick active={index === status} />
         <span className="item">{team} {index !== 1 ? 'Wins' : null}</span>
       </StyledItem>
         ))
