@@ -112,7 +112,7 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook data={orderMany.orderMany} refetchData={refetchOrderManyData} />
+            <OrderBook data={orderMany} refetchData={refetchOrderManyData} />
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder

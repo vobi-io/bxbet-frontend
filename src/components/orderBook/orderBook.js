@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Card from '../card'
-import sortData from './sortData'
+// import sortData from './sortData'
 
 const Container = styled.div`
       width: 100%;
@@ -73,11 +73,11 @@ const OrderBook = ({ refetchData, ...props }) => {
     const printData = data => data.map((item, index) => (
       <div className="rows" key={index}>
         <div className="odds">
-          {item[0]}
+          {item.odd}
         </div>
         <Line />
         <div className="amount">
-          {item[1]} BX
+          {item.amount} BX
         </div>
       </div>
     ))
@@ -97,18 +97,13 @@ const OrderBook = ({ refetchData, ...props }) => {
     )
   }
 
-  const Tables = () => {
-    const sortedData = sortData(props.data)
-
-
-    return (
-      <StyledTables>
-        {getTable({ title: 'buy', data: sortedData.buy })}
-        <Brick />
-        {getTable({ title: 'sell', data: sortedData.sell })}
-      </StyledTables>
+  const Tables = () => (
+    <StyledTables>
+      {getTable({ title: 'buy', data: props.data.buyOrders })}
+      <Brick />
+      {getTable({ title: 'sell', data: props.data.sellOrders })}
+    </StyledTables>
     )
-  }
 
   return <Card title={'Order Book'} width="100%"><Tables /> </Card>
 }

@@ -1,5 +1,10 @@
 query OrderMany($game: MongoID){
-  orderMany(limit: 20, filter: { game: $game }, sort: ODD_DESC){
+  sellOrders: orderMany(limit: 10, filter: { game: $game, orderType: 1}, sort: ODD_DESC){
+    orderType
+    odd
+    amount
+  }
+  buyOrders: orderMany(limit: 10, filter: { game: $game, orderType: 0}, sort: ODD_DESC){
     orderType
     odd
     amount
