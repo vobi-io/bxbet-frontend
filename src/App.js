@@ -39,8 +39,8 @@ const App = ({
               toggleHeaderActivePage,
             },
             {
-              title: 'outcome',
-              to: `/outcome/${props.history.location.pathname.split('/')[1]}`,
+              title: 'finish Game',
+              to: `/finish-game/${props.history.location.pathname.split('/')[1]}`,
               toggleHeaderActivePage,
             },
             {

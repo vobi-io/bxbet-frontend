@@ -185,6 +185,10 @@ export default compose(
   withProps(
     (props) => {
       const result = props.gameById.gameById ? { game: props.gameById.gameById } : { game: props.gameOne.gameOne }
+
+      if (!props.gameById.gameById) {
+        props.history.push(`/${result.game._id}`)
+      }
       return result
     }
   ),
