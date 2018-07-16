@@ -14,14 +14,14 @@ export default compose(
       }),
     }),
     graphql(gameByIdQuery, {
-      name: 'gameGQL',
+      name: 'gameById',
       options: ({ match }) => {
         const variables = { _id: match.params.id }
         return ({ variables })
       },
     }),
-    branch(({ gameGQL: { loading } }) => loading, renderNothing),
-    withProps(props => ({ game: props.gameGQL.gameById })),
+    branch(({ gameById: { loading } }) => loading, renderNothing),
+    withProps(props => ({ game: props.gameById.gameById })),
     withStateHandlers(
         ({ game }) => ({
           teams: ['Draw', game.homeTeam, game.awayTeam],
