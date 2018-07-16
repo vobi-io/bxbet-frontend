@@ -64,10 +64,24 @@ export default compose(
         }
         return newState
       },
+      resetToDefault: () => (props) => {
+        let newState = {}
+        newState = {
+          activeTab: 'buy',
+          odd: 1.5,
+          stake: 0,
+          isValidInput: false,
+          isLiabilitiesActive: true,
+          isPayoutActive: false,
+          selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
+          props,
+        }
+        return newState
+      },
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ placeOrder, odd, stake, activeTab, selected, ...props }) => async () => {
+    onPlaceOrder: ({ placeOrder, odd, stake, activeTab, selected, resetToDefault, ...props }) => async () => {
       const game = props.gameById.error ? props.gameOne.gameOne : props.gameById.gameById
       const gameId = game.gameId
       const teams = ['Draw', game.homeTeam, game.awayTeam]
@@ -92,6 +106,7 @@ export default compose(
       }
       const { data } = await placeOrder(variables)
       emmiter.emit('placeOrder', data)
+      resetToDefault(props)
     },
     placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
       const oddFloat = parseFloat(odd)
