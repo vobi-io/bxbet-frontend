@@ -40,12 +40,12 @@ const Icon = styled.div `
     width: 0;
 `
 
-const TextField = ({ title, value, onChange, icon, isValidInput, key }) => (
+const TextField = ({ title, value, onChange, icon, isValidInput, typeStyle, type }) => (
   <Container>
     <StyledLabel>{title}</StyledLabel>
     <StyledInput
-      className={key}
-      type="text"
+      className={typeStyle}
+      type={type}
       name={title.toLowerCase()}
       value={value}
       onChange={onChange}
