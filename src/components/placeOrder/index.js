@@ -1,1 +1,1 @@
-export { default } from './placeOrder'
+export { default } from './PlaceOrder'
