@@ -123,6 +123,7 @@ const HomePage = ({
                 signUpWithEmailOpened={signUpWithEmailOpened}
                 toggleSignUpWithEmail={toggleSignUpWithEmail}
                 teams={teams}
+                game={game}
                 gameId={game.gameId}
                 toggleActiveButton={toggleActiveButton}
                 activeTab={activeTab}
