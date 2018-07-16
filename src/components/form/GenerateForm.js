@@ -81,7 +81,6 @@ class GenerateForm extends Component {
   render() {
     return (
       <form>
-        {console.log(this.state.fields)}
         {this.renderFields(this.fields)}
       </form>
     )

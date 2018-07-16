@@ -13,22 +13,14 @@ export default compose(
         finishGame: variables => mutate({ variables }),
       }),
     }),
-    graphql(gameOneQuery, { name: 'gameOne' }),
-        branch(
-            ({ gameOne: { loading } }) => loading,
-            renderNothing,
-        ),
-        graphql(gameByIdQuery, {
-          name: 'gameById',
-          options: ({ history }) => {
-            const variables = { _id: history.location.pathname.split('/')[2] }
-            return ({ variables })
-          },
-        }),
-        branch(
-            ({ gameById: { loading } }) => loading,
-            renderNothing,
-        ),
+    graphql(gameByIdQuery, {
+      name: 'gameById',
+      options: ({ match }) => {
+        const variables = { _id: match.params.id }
+        return ({ variables })
+      },
+    }),
+    branch(({ gameById: { loading } }) => loading, renderNothing),
     withStateHandlers(
         ({ gameById, gameOne }) => ({
           teams: gameById.gameById ? [gameById.gameById.homeTeam, 'Draw', gameById.gameById.awayTeam] : [gameOne.gameOne.homeTeam, 'Draw', gameOne.gameOne.awayTeam],
@@ -46,7 +38,7 @@ export default compose(
     ),
     withRouter,
     withHandlers({
-      finishGame: ({ history, selectedTeam, teams, gameId, finishGame }) => async () => {
+      finishGame: ({ history, selectedTeam, teams, gameId, gameById, finishGame }) => async () => {
         let outcome
 
         for (let i = 0; i < teams.length; i++) {
@@ -61,7 +53,7 @@ export default compose(
         }
 
         await finishGame(variables)
-        history.push('/')
+        history.push(`/${gameById.gameById._id}`)
       },
       redirectIfGameFinished: ({ history, gameById, gameOne }) => () => {
         if (gameById.gameById) {
