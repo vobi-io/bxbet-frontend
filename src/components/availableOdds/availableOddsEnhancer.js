@@ -1,11 +1,12 @@
 import { compose, branch, renderNothing, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
+import { loadData, refetchOn } from '../../hocs'
 import getGameMaxOddsQuery from './getGameMaxOdds.graphql'
 
 export default compose(
   graphql(getGameMaxOddsQuery, {
-    name: 'getGameMaxOdds',
+    name: 'data',
     options: ({ gameId }) => {
       const variables = {
         gameId,
@@ -13,10 +14,10 @@ export default compose(
       return variables
     },
   }),
-  branch(({ getGameMaxOdds: { loading } }) => loading, renderNothing),
+  branch(({ data: { loading } }) => loading, renderNothing),
   branch(
     props => props,
-    withProps(({ getGameMaxOdds: { getGameMaxOdds } }) => {
+    withProps(({ data: { getGameMaxOdds } }) => {
       const gameData = JSON.parse(JSON.stringify(getGameMaxOdds))
       const sortedData = {
         homeRow: {
@@ -68,5 +69,6 @@ export default compose(
 
       return { sortedData }
     })
-  )
+  ),
+  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
 )

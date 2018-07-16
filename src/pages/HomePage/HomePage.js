@@ -12,9 +12,8 @@ import MarketInsights from '../../components/marketInsights'
 import AvailableOdds from '../../components/availableOdds'
 import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
-import orderManyQuery from './query/orderMany.graphql'
 import gameOne from './query/gameOne.graphql'
-import refetchData from '../../hocs/refetchData'
+import { refetchOn } from '../../hocs'
 
 import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
 
@@ -112,7 +111,7 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook data={orderMany} refetchData={refetchOrderManyData} />
+            <OrderBook game={game} />
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder
@@ -171,38 +170,28 @@ const HomePage = ({
 export default compose(
   gqlCompose(
     graphql(gameById, {
-      name: 'gameById',
+      name: 'data',
       options: ({ match }) => {
         const variables = { _id: match.params.id }
         return { variables }
       },
       fetchPolicy: 'network-only',
     }),
-    branch(({ gameById: { loading } }) => loading, renderNothing),
+    branch(({ data: { loading } }) => loading, renderNothing),
 
     graphql(gameOne, { name: 'gameOne', fetchPolicy: 'network-only' }),
     branch(({ gameOne: { loading } }) => loading, renderNothing),
   ),
   withProps(
     (props) => {
-      const result = props.gameById.gameById ? { game: props.gameById.gameById } : { game: props.gameOne.gameOne }
+      const result = props.data.gameById ? { game: props.data.gameById } : { game: props.gameOne.gameOne }
 
-      if (!props.gameById.gameById) {
+      if (!props.data.gameById) {
         props.history.push(`/${result.game._id}`)
       }
       return result
     }
   ),
-  graphql(orderManyQuery, {
-    name: 'orderMany',
-    options: ({ game }) => {
-      let variables = {}
-      variables = { game: game._id }
-      return { variables }
-    },
-    fetchPolicy: 'network-only',
-  }),
-  branch(({ orderMany: { loading } }) => loading, renderNothing),
   withStateHandlers(
     () => ({
       signInOpened: false,
@@ -221,11 +210,5 @@ export default compose(
       }),
     }
   ),
-  withHandlers({
-    refetchOrderManyData: ({ orderMany }) => () => {
-      const fetchUpdatedData = refetchData('placeOrder', orderMany)
-
-      return fetchUpdatedData
-    },
-  })
+  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
 )(placeOrderEnhancer(HomePage))

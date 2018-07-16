@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Card from '../card'
+import enhance from './orderBookEnhance'
 // import sortData from './sortData'
 
 const Container = styled.div`
@@ -47,8 +48,7 @@ const Brick = styled.div`
     `
 
 
-const OrderBook = ({ refetchData, ...props }) => {
-  refetchData()
+const OrderBook = ({ ...props }) => {
   const getTable = (props) => {
     const StyledTitle = styled.div`
       text-transform: uppercase;
@@ -108,4 +108,4 @@ const OrderBook = ({ refetchData, ...props }) => {
   return <Card title={'Order Book'} width="100%"><Tables /> </Card>
 }
 
-export default OrderBook
+export default enhance(OrderBook)

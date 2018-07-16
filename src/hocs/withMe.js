@@ -6,7 +6,7 @@ import whileLoading from './whileLoading'
 // import loadData from './loadData'
 // import loadDataAsync from './loadDataAsync'
 
-import meQuery from '../graphql/me.graphql'
+import meQuery from '../graphql/Me.graphql'
 
 // const withMe = (options = { async: false }) => {
 //   const hoc = options.async ? loadDataAsync : loadData

@@ -2,17 +2,13 @@ import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
 import emmiter from '../../eventEmitter'
-
+import { mutation } from '../../hocs'
 import placeOrderMutation from './placeOrder.graphql'
 import getBalanceQuery from '../header/getBalance.graphql'
 
 export default compose(
-  graphql(placeOrderMutation, {
-    props: ({ mutate }) => ({
-      placeOrder: variables => mutate({ variables }),
-    }),
-  }),
-  branch(({ placeOrder: { loading } }) => loading, renderNothing),
+  mutation(placeOrderMutation, 'placeOrder'),
+  // branch(({ placeOrder: { loading } }) => loading, renderNothing),
   graphql(getBalanceQuery, { name: 'getBalance' }),
   branch(({ getBalance: { loading } }) => loading, renderNothing),
   withStateHandlers(
@@ -20,7 +16,7 @@ export default compose(
       activeTab: 'buy',
       odd: 1.5,
       stake: 0,
-      selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
+      selected: props.data.gameById.homeTeam,
       isValidInput: false,
       getBalance,
       isLiabilitiesActive: true,
@@ -67,10 +63,9 @@ export default compose(
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ placeOrder, odd, stake, activeTab, selected, ...props }) => async () => {
-      const game = props.gameById.error ? props.gameOne.gameOne : props.gameById.gameById
-      const gameId = game.gameId
-      const teams = ['Draw', game.homeTeam, game.awayTeam]
+    onPlaceOrder: ({ data: game, placeOrder, odd, stake, activeTab, selected, ...props }) => async () => {
+      const gameId = game.gameById.gameId
+      const teams = ['Draw', game.gameById.homeTeam, game.gameById.awayTeam]
 
       const orderType = activeTab === 'buy' ? 0 : 1
       const oddFloat = parseFloat(odd)
@@ -90,8 +85,7 @@ export default compose(
         outcome,
         gameId,
       }
-      const { data } = await placeOrder(variables)
-      emmiter.emit('placeOrder', data)
+      await placeOrder(variables)
     },
     placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
       const oddFloat = parseFloat(odd)

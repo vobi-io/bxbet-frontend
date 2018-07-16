@@ -18,6 +18,10 @@ export const startSocket = (user) => {
     console.log('socket disconnect')
   })
 
+  socket.on('update', (data) => {
+    console.log(data, 'socketData')
+  })
+
   return socket
 }
 

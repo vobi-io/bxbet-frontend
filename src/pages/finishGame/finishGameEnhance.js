@@ -1,18 +1,14 @@
 import { compose, withStateHandlers, withHandlers, branch, renderNothing, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-
+import { mutation } from '../../hocs'
 // import gameOneQuery from '../../pages/HomePage/query/gameOne.graphql'
 import gameByIdQuery from '../../pages/HomePage/query/gameById.graphql'
 import finishGameMutation from './finishGame.graphql'
 
 export default compose(
     withRouter,
-    graphql(finishGameMutation, {
-      props: ({ mutate }) => ({
-        finishGame: variables => mutate({ variables }),
-      }),
-    }),
+    mutation(finishGameMutation, 'finishGame'),
     graphql(gameByIdQuery, {
       name: 'gameById',
       options: ({ match }) => {

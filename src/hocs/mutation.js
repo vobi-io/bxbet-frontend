@@ -13,7 +13,7 @@ const mutation = (query, qName = null) => {
 
   return graphql(query, {
     props: ({ mutate }) => ({
-      [name]: async variables => {
+      [name]: async (variables) => {
         const res = await mutate({
           variables,
         })
