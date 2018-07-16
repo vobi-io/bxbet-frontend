@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { SelectField } from '../../components/form'
 import Button from '../../components/button'
-import outcomeEnhance from './outcomeEnhance'
+import finishGameEnhance from './finishGameEnhance'
 
 const Container = styled.div`
       border-radius: 6px;
@@ -38,7 +38,7 @@ const StyledForm = styled.div`
 `
 
 
-const Outcome = ({ teams, selectedTeam, onSelectorChange, finishGame, redirectIfGameFinished }) => (
+const FinishGame = ({ teams, selectedTeam, onSelectorChange, finishGame, redirectIfGameFinished }) => (
   <Container>
     {
         redirectIfGameFinished()
@@ -52,4 +52,4 @@ const Outcome = ({ teams, selectedTeam, onSelectorChange, finishGame, redirectIf
   </Container>
   )
 
-export default outcomeEnhance(Outcome)
+export default finishGameEnhance(FinishGame)
