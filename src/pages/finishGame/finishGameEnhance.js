@@ -56,9 +56,7 @@ export default compose(
           gameId: game.gameId,
         }
 
-        const aaa = await finishGame(variables)
-        console.log(gameById.gameById, 'gameById')
-        console.log(aaa, 'wwww')
+        await finishGame(variables)
         history.push(`/${gameById.gameById._id}`)
       },
     })
