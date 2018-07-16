@@ -176,10 +176,11 @@ export default compose(
         const variables = { _id: match.params.id }
         return { variables }
       },
+      fetchPolicy: 'network-only',
     }),
     branch(({ gameById: { loading } }) => loading, renderNothing),
 
-    graphql(gameOne, { name: 'gameOne' }),
+    graphql(gameOne, { name: 'gameOne', fetchPolicy: 'network-only' }),
     branch(({ gameOne: { loading } }) => loading, renderNothing),
   ),
   withProps(

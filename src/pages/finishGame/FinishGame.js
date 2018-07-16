@@ -38,12 +38,9 @@ const StyledForm = styled.div`
 `
 
 
-const FinishGame = ({ teams, selectedTeam, onSelectorChange, finishGame, redirectIfGameFinished }) => (
+const FinishGame = ({ teams, selectedTeam, onSelectorChange, finishGame, gameById }) => (
   <Container>
-    {
-        redirectIfGameFinished()
-    }
-    <StyledTitle>Outcome</StyledTitle>
+    <StyledTitle>Outcome {gameById.gameById.status !== 3 && '(Game is already finished)'}</StyledTitle>
     <Line />
     <StyledForm>
       <SelectField title="Select Outcome" selected={selectedTeam} options={teams} onChange={onSelectorChange} />

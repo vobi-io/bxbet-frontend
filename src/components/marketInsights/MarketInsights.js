@@ -30,7 +30,6 @@ const StyledItem = styled.div`
 
 const MarketInsights = ({ game, teams }) => {
   const { status } = game
-  console.log(status, teams, 'aaaa')
   function Body() {
     const Data = teams.map((team, index) => (
       <StyledItem key={index}>
