@@ -69,7 +69,7 @@ export default compose(
           isLiabilitiesActive: true,
           isPayoutActive: false,
           getBalance,
-          selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
+          selected: props.game.homeTeam,
           props,
         }
         return newState

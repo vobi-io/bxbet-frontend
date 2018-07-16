@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql, compose as gqlCompose } from 'react-apollo'
-import { compose, withStateHandlers, withProps, branch, renderNothing, withHandlers, lifecycle } from 'recompose'
+import { compose, withStateHandlers, withProps, branch, renderNothing } from 'recompose'
 
 import ChooseOutcome from '../../components/chooseOutcome'
 import Cover from '../../components/cover'
