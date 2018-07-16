@@ -14,7 +14,6 @@ import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
 import { refetchOn } from '../../hocs'
-import { startSocket } from '../../socket'
 import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
@@ -64,7 +63,6 @@ const HomePage = ({
   toggleSignIn,
   toggleSignUp,
   toggleSignUpWithEmail,
-  orderMany,
   // choose outcome props
   activeButton1,
   activeButton2,
@@ -85,7 +83,6 @@ const HomePage = ({
   isPayoutActive,
   buttonSwitcher,
   onPlaceOrder,
-  refetchOrderManyData,
   game,
 }) => {
   const teams = ['Draw', game.homeTeam, game.awayTeam]
@@ -192,17 +189,6 @@ export default compose(
       return result
     }
   ),
-  lifecycle({
-    componentcoDidMount() {
-      if (this.props.authenticated && this.props.me) {
-        const user = { id: this.props.me._id }
-        const socket = startSocket(user)
-        socket.on('update', (data) => {
-          console.log('update', data)
-        })
-      }
-    },
-  }),
   withStateHandlers(
     () => ({
       signInOpened: false,

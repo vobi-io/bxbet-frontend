@@ -5,13 +5,12 @@ import config from './../config'
 let socket = null
 
 export const startSocket = (user) => {
-  console.log('dawdnawiodaidniawndniaindawiodnawdi')
   if (!socket) {
     socket = io.connect(config.apiSocketUrl)
   }
 
   socket.on('connect', () => {
-    console.log('socket connect')
+    console.log('socket connect 1')
     socket.emit('login', user)
   })
 

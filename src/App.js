@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { compose, withStateHandlers, withProps } from 'recompose'
+import { compose, withStateHandlers, withProps, lifecycle } from 'recompose'
 
 import { SignInModal } from './components/signin'
 import { SignUpWithEmail } from './components/signup/modal'
@@ -9,8 +9,9 @@ import FourOFour from './pages/errors/404'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
 import Create from './pages/create'
-
+import { withMe } from './hocs'
 import FinishGame from './pages/finishGame'
+import { startSocket } from './socket'
 // import placeOrderEnhancer from './components/informationDynamic/enhance'
 
 // const homePageWithPlaceOrderEnhancer = placeOrderEnhancer(HomePage)
@@ -87,6 +88,18 @@ const App = ({
 
 export default compose(
   withProps(props => props),
+  withMe(),
+  lifecycle({
+    componentDidMount() {
+      if (this.props.me) {
+        const user = { id: this.props.me._id }
+        const socket = startSocket(user)
+        socket.on('update', (data) => {
+          console.log('update ssss', data)
+        })
+      }
+    },
+  }),
   withStateHandlers(
     () => ({
       signInOpened: false,
