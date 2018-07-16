@@ -113,15 +113,19 @@ const placeOrderHandler = (props, isValidInput) => {
     props.props.toggleSignIn()
   } else if (!isValidInput) {
     return
+  } else if (props.props.game.status !== 3) {
+    return
   } else {
     props.props.onPlaceOrder()
   }
 }
 const notify = (props, isValidInput) => {
-  if (isValidInput && props.props.authenticated) {
+  if (isValidInput && props.props.authenticated && props.props.game.status === 3) {
     toast('Order has been added successfully')
   } else if (!isValidInput && props.props.authenticated) {
     toast('Stake is not Valid')
+  } else if (props.props.authenticated && props.props.game.status !== 3) {
+    toast('Game is finished')
   } else {
     return
   }
