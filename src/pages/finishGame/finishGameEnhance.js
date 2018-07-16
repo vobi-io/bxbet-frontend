@@ -1,4 +1,4 @@
-import { compose, withStateHandlers, withHandlers, branch, renderNothing } from 'recompose'
+import { compose, withStateHandlers, withHandlers, branch, renderNothing, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
@@ -14,17 +14,18 @@ export default compose(
       }),
     }),
     graphql(gameByIdQuery, {
-      name: 'gameById',
+      name: 'gameGQL',
       options: ({ match }) => {
         const variables = { _id: match.params.id }
         return ({ variables })
       },
     }),
-    branch(({ gameById: { loading } }) => loading, renderNothing),
+    branch(({ gameGQL: { loading } }) => loading, renderNothing),
+    withProps(props => ({ game: props.gameGQL.gameById })),
     withStateHandlers(
-        ({ gameById }) => ({
-          teams: ['Draw', gameById.gameById.homeTeam, gameById.gameById.awayTeam],
-          selectedTeam: gameById.gameById.homeTeam,
+        ({ game }) => ({
+          teams: ['Draw', game.homeTeam, game.awayTeam],
+          selectedTeam: game.homeTeam,
         }),
       {
         onSelectorChange: () => (e) => {
@@ -36,9 +37,8 @@ export default compose(
     ),
     withRouter,
     withHandlers({
-      finishGame: ({ history, selectedTeam, gameById, finishGame }) => async () => {
+      finishGame: ({ history, selectedTeam, game, finishGame }) => async () => {
         let outcome = 0
-        const game = gameById.gameById
         switch (selectedTeam) {
         case game.homeTeam:
           outcome = 1
@@ -57,7 +57,7 @@ export default compose(
         }
 
         await finishGame(variables)
-        history.push(`/${gameById.gameById._id}`)
+        history.push(`/${game._id}`)
       },
     })
 )
