@@ -98,6 +98,7 @@
     "react-router-dom": "4.2.2",
     "react-toastify": "4.1.0",
     "recompose": "0.27.0",
+    "socket.io-client": "2.1.1",
     "styled-components": "3.2.6",
     "validator": "10.2.0",
     "vobi-components": "github:btomashvili/vobi-components"

@@ -1,7 +1,7 @@
 import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
-import emmiter from '../../eventEmmiter'
+import emmiter from '../../eventEmitter'
 
 import placeOrderMutation from './placeOrder.graphql'
 import getBalanceQuery from '../header/getBalance.graphql'

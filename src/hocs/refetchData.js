@@ -1,4 +1,4 @@
-import emmiter from '../eventEmmiter'
+import emmiter from '../eventEmitter'
 
 const refetchData = (eventStringName, refetchQuery) => emmiter.addListener(eventStringName, () => {
   refetchQuery.refetch()
