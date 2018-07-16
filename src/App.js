@@ -107,7 +107,7 @@ export default compose(
     }
   ),
   lifecycle({
-    componentDidMount() {
+    componentcoDidMount() {
       if (this.props.authenticated && this.props.me) {
         const user = { id: this.props.me._id }
         const socket = startSocket(user)

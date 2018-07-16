@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql, compose as gqlCompose } from 'react-apollo'
-import { compose, withStateHandlers, withProps, branch, renderNothing, withHandlers } from 'recompose'
+import { compose, withStateHandlers, withProps, branch, renderNothing, withHandlers, lifecycle } from 'recompose'
 
 import ChooseOutcome from '../../components/chooseOutcome'
 import Cover from '../../components/cover'
@@ -14,7 +14,7 @@ import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
 import { refetchOn } from '../../hocs'
-
+import { startSocket } from '../../socket'
 import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
 
 import Flag from '../../resources/assets/img/germany-flag.png'
@@ -192,6 +192,17 @@ export default compose(
       return result
     }
   ),
+  lifecycle({
+    componentcoDidMount() {
+      if (this.props.authenticated && this.props.me) {
+        const user = { id: this.props.me._id }
+        const socket = startSocket(user)
+        socket.on('update', (data) => {
+          console.log('update', data)
+        })
+      }
+    },
+  }),
   withStateHandlers(
     () => ({
       signInOpened: false,

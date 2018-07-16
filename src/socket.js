@@ -5,6 +5,7 @@ import config from './../config'
 let socket = null
 
 export const startSocket = (user) => {
+  console.log('dawdnawiodaidniawndniaindawiodnawdi')
   if (!socket) {
     socket = io.connect(config.apiSocketUrl)
   }
