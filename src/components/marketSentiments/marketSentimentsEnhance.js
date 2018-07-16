@@ -1,12 +1,13 @@
 import { compose, withHandlers, branch, renderNothing } from 'recompose'
 import { graphql } from 'react-apollo'
-import refetchData from '../../hocs/refetchData'
+// import refetchData from '../../hocs/refetchData'
 
 import gameReportQuery from './gameReport.graphql'
+import { refetchOn } from '../../hocs'
 
 export default compose(
     graphql(gameReportQuery, {
-      name: 'gameReport',
+      name: 'data',
       options: ({ gameId }) => {
         let variables = {}
         if (gameId) {
@@ -15,14 +16,14 @@ export default compose(
         return variables
       },
     }),
-    branch(
-      ({ gameReport: { loading } }) => loading,
-      renderNothing,
-    ),
+    // branch(
+    //   ({ data: { loading } }) => loading,
+    //   renderNothing,
+    // ),
     withHandlers({
-      pieData: ({ gameReport, teams }) => () => {
+      pieData: ({ data, teams }) => () => {
         let percentages = []
-        const gameReportData = gameReport.gameReport
+        const gameReportData = data.gameReport || []
         const titles = [`${teams[0]} Wins`, `${teams[2]} Wins`, 'Draw']
 
         const calculatePercents = (total, homeTeam, awayTeam, draw) => {
@@ -32,10 +33,11 @@ export default compose(
           return [homeTeamPercent, awayTeamPercent, drawPercent]
         }
 
-        const refetchPieData = refetchData('placeOrder', gameReport)
+        const total = data.gameReport ? data.gameReport.total : 0
 
         percentages = calculatePercents(gameReportData.total, gameReportData.homeTeam, gameReportData.awayTeam, gameReportData.draw)
-        return { percentages, titles, totalGame: gameReport.gameReport.total, refetchPieData }
+        return { percentages, titles, totalGame: total }
       },
-    })
+    }),
+    refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket'])
 )

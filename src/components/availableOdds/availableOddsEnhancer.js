@@ -14,11 +14,10 @@ export default compose(
       return variables
     },
   }),
-  branch(({ data: { loading } }) => loading, renderNothing),
+  // branch(({ data: { loading } }) => loading, renderNothing),
   branch(
     props => props,
     withProps(({ data: { getGameMaxOdds } }) => {
-      const gameData = JSON.parse(JSON.stringify(getGameMaxOdds))
       const sortedData = {
         homeRow: {
           sell: [],
@@ -33,6 +32,15 @@ export default compose(
           buy: [],
         },
       }
+      const isEmptyData = {
+        homeTeamBuy: [],
+        homeTeamSell: [],
+        drawBuy: [],
+        drawSell: [],
+        awayTeamBuy: [],
+        awayTeamSell: [],
+      }
+      const gameData = getGameMaxOdds ? JSON.parse(JSON.stringify(getGameMaxOdds)) : isEmptyData
 
       const returnSortedArray = arr => arr.sort((a, b) => a.amount - b.amount)
       const isEmpty = arr => !(arr.length > 0)
