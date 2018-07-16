@@ -1,17 +1,15 @@
 import { compose, branch, renderNothing, withHandlers, lifecycle, withProps } from 'recompose'
 import { compose as gqlCompose, graphql } from 'react-apollo'
-
-import refetchData from '../../hocs/refetchData'
-
 import yourBetesQuery from './yourBetes.graphql'
 import meQuery from '../../graphql/Me.graphql'
+import { loadData, refetchOn } from '../../hocs'
 
 export default compose(
   gqlCompose(
     graphql(meQuery, { name: 'me' }),
     branch(({ me: { loading } }) => loading, renderNothing),
     graphql(yourBetesQuery, {
-      name: 'yourBetes',
+      name: 'data',
       skip: props => !props.me.me || !props.game,
       options: ({ me, game }) => {
         let variables = {}
@@ -27,18 +25,16 @@ export default compose(
   ),
   withProps(
     (props) => {
-      const result = props.yourBetes ? {} : { yourBetes: { loading: false, orderMany: [] } }
+      const result = props.data ? {} : { data: { loading: false, orderMany: [] } }
       return result
     }
   ),
-  branch(({ yourBetes: { loading } }) => loading, renderNothing),
+  // branch(({ yourBetes: { loading } }) => loading, renderNothing),
   withHandlers({
-    yourBetesData: ({ yourBetes }) => () => {
-      refetchData('placeOrder', yourBetes)
+    yourBetesData: ({ data }) => () => {
+      const items = data.orderMany || []
 
-      const data = yourBetes.orderMany
-
-      const formatedData = data.map((item) => {
+      const formatedData = items.map((item) => {
         let obj = {}
         let status = 'Open'
 
@@ -72,5 +68,6 @@ export default compose(
       })
       return formatedData
     },
-  })
+  }),
+  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket'])
 )

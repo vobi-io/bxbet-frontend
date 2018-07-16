@@ -208,5 +208,5 @@ export default compose(
       }),
     }
   ),
-  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
+  // refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
 )(placeOrderEnhancer(HomePage))

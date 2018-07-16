@@ -70,7 +70,7 @@ const YourBetes = ({ yourBetesData, teams, ...props }) => {
           </div>
         </StyledRow>
         <Line />
-        {props.me.me && data.map((item, index) => (
+        {props.me.me && data && data.map((item, index) => (
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>

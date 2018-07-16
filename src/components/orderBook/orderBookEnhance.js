@@ -13,6 +13,6 @@ export default compose(
     },
     fetchPolicy: 'network-only',
   }),
-  branch(({ data: { loading } }) => loading, renderNothing),
+  // branch(({ data: { loading } }) => loading, renderNothing),
   refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket'])
 )

@@ -91,7 +91,7 @@ const OrderBook = ({ ...props }) => {
           <div> Amount </div>
         </StyledSubTitle>
         <StyledContent>
-          {printData(props.data)}
+          {props.data && printData(props.data)}
         </StyledContent>
       </Container>
     )
