@@ -6,7 +6,7 @@ import getBalanceQuery from './getBalance.graphql'
 
 export default compose(
   composeGraphql(
-    graphql(getBalanceQuery, { name: 'getBalance' }),
+    graphql(getBalanceQuery, { name: 'getBalance', fetchPolicy: 'network-only' }),
     branch(({ getBalance: { loading } }) => loading, renderNothing),
     withHandlers({
       refetchDataHandler: ({ getBalance }) => () => {

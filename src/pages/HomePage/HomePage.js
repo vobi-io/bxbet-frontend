@@ -200,6 +200,7 @@ export default compose(
       variables = { game: game._id }
       return { variables }
     },
+    fetchPolicy: 'network-only',
   }),
   branch(({ orderMany: { loading } }) => loading, renderNothing),
   withStateHandlers(
