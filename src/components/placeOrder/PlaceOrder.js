@@ -108,9 +108,11 @@ const StyledToastContainer = styled(ToastContainer)`
     opacity: 0.8;
   }
 `
-const placeOrderHandler = (props) => {
+const placeOrderHandler = (props, isValidInput) => {
   if (!props.props.authenticated) {
     props.props.toggleSignIn()
+  } else if (!isValidInput) {
+    return
   } else {
     props.props.onPlaceOrder()
   }
@@ -125,7 +127,7 @@ const notify = (props, isValidInput) => {
   }
 }
 const handleClick = (props, isValidInput) => {
-  placeOrderHandler(props)
+  placeOrderHandler(props, isValidInput)
   notify(props, isValidInput)
 }
 

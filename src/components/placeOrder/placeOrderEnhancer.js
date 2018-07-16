@@ -21,7 +21,7 @@ export default compose(
       odd: 1.5,
       stake: 0,
       selected: props.gameById.error ? props.gameOne.gameOne.homeTeam : props.gameById.gameById.homeTeam,
-      isValidInput: true,
+      isValidInput: false,
       getBalance,
       isLiabilitiesActive: true,
       isPayoutActive: false,
