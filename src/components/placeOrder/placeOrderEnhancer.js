@@ -91,7 +91,7 @@ export default compose(
       const oddFloat = parseFloat(odd)
       const amount = parseFloat(stake)
       let outcome
-
+      
       for (let i = 0; i < teams.length; i++) {
         if (teams[i] === selected) {
           outcome = i
