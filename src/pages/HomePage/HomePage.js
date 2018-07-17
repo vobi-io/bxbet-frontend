@@ -13,7 +13,6 @@ import AvailableOdds from '../../components/availableOdds'
 import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
-import { refetchOn } from '../../hocs'
 import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
 
 import Flag from '../../resources/assets/img/germany-flag.png'

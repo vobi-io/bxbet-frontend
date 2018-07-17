@@ -4,6 +4,8 @@ import authAware from '../../authAware'
 
 import Card from '../card'
 import Button from '../button'
+import emitter from '../../eventEmitter'
+import TOGGLE_SIGN_IN from '../../eventTypes'
 
 const StyledContainer = styled.div`
     display: flex;
@@ -29,7 +31,7 @@ const stringShorter = (word) => {
 
 const handleClick = (props, onSelectorChange, obj) => {
   if (!props.props.authenticated) {
-    props.props.toggleSignIn()
+    emitter.emit(TOGGLE_SIGN_IN)
   } else {
     onSelectorChange(obj)
   }
