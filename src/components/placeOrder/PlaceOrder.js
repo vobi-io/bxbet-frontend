@@ -132,6 +132,9 @@ const handleClick = (props, isValidInput) => {
   placeOrderHandler(props, isValidInput)
   notify(props, isValidInput)
 }
+const handleChange = (props) => {
+  props.props.toggleSignIn()
+}
 
 const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
   onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons,
@@ -148,9 +151,9 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
       <ActiveUnderline activeTab={activeTab} />
       <Container>
         <StyledForm>
-          <SelectField title="Outcome" options={teams} selected={selected} onChange={e => onSelectorChange(e.target.value)} />
-          <TextField type="number" title="Odd" onChange={onChangeHandler} value={odd} typeStyle={['odd', 'place-order-input-1']} />
-          <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
+          <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
+          <TextField type="number" title="Odd" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField title="Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
         <StyledInfo>

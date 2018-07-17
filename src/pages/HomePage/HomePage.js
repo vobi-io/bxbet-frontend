@@ -99,6 +99,7 @@ const HomePage = ({
             activeButton3={activeButton3}
             onSelectorChange={onSelectorChange}
             selected={selected}
+            toggleSignIn={toggleSignIn}
           />
           <Brick />
           <Cover
