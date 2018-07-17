@@ -33,10 +33,10 @@ export default compose(
   withHandlers({
     yourBetesData: ({ data }) => () => {
       const items = data.orderMany || []
-
       const formatedData = items.map((item) => {
         let obj = {}
         let status = 'Open'
+        let out
 
         switch (item.status) {
         case 1:
@@ -55,13 +55,21 @@ export default compose(
           status = 'Open'
           break
         }
+        // {item.outcome === 0 ? flag = 2 : 'item.outcome === 1 ? flag = 1 : 0'}
+        if (item.outcome === 0) {
+          out = 2
+        } else if (item.outcome === 1) {
+          out = 0
+        } else if (item.outcome === 2) {
+          out = 1
+        }
 
         obj = {
           stake: item.amount,
           odd: item.odd,
           orderType: item.orderType === 0 ? 'Buy' : 'Sell',
           status,
-          outcome: item.outcome,
+          outcome: out,
         }
 
         return obj

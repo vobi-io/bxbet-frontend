@@ -85,17 +85,28 @@ export default compose(
   withHandlers({
     onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, notification, ...props }) => async () => {
       const gameId = game.gameById.gameId
-      const teams = ['Draw', game.gameById.homeTeam, game.gameById.awayTeam]
+      const teams = [game.gameById.homeTeam, game.gameById.awayTeam, 'Draw']
 
       const orderType = activeTab === 'buy' ? 0 : 1
       const oddFloat = parseFloat(odd)
       const amount = parseFloat(stake)
       let outcome
-      
-      for (let i = 0; i < teams.length; i++) {
-        if (teams[i] === selected) {
-          outcome = i
-        }
+
+      // for (let i = 0; i < teams.length; i++) {
+      //   if (teams[i] === selected && i === 0) {
+      //     outcome = 1
+      //   } else if (teams[i] === selected && i === 1) {
+      //     outcome = 2
+      //   } else if (teams[i] === selected && i === 2) {
+      //     outcome = 0
+      //   }
+      // }
+      if (teams[0] === selected) {
+        outcome = 1
+      } else if (teams[1] === selected) {
+        outcome = 2
+      } else if (teams[2] === selected) {
+        outcome = 0
       }
 
       const variables = {
