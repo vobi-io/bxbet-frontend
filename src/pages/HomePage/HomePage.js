@@ -85,7 +85,7 @@ const HomePage = ({
   onPlaceOrder,
   game,
 }) => {
-  const teams = ['Draw', game.homeTeam, game.awayTeam]
+  const teams = [game.homeTeam, game.awayTeam, 'Draw']
 
   return (
     <Wrapper>

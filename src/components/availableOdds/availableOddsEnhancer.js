@@ -19,15 +19,15 @@ export default compose(
     props => props,
     withProps(({ data: { getGameMaxOdds } }) => {
       const sortedData = {
-        drawRow: {
-          sell: [],
-          buy: [],
-        },
         homeRow: {
           sell: [],
           buy: [],
         },
         awayRow: {
+          sell: [],
+          buy: [],
+        },
+        drawRow: {
           sell: [],
           buy: [],
         },

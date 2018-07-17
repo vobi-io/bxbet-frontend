@@ -24,7 +24,7 @@ export default compose(
       pieData: ({ data, teams }) => () => {
         let percentages = []
         const gameReportData = data.gameReport || []
-        const titles = [`${teams[1]} Wins`, `${teams[2]} Wins`, 'Draw']
+        const titles = [`${teams[0]} Wins`, `${teams[1]} Wins`, 'Draw']
 
         const calculatePercents = (total, homeTeam, awayTeam, draw) => {
           const drawPercent = Math.floor((draw / total) * 100)
