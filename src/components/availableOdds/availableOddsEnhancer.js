@@ -14,7 +14,7 @@ export default compose(
       const variables = {
         gameId: game.gameId,
       }
-      return variables
+      return { variables }
     },
   }),
   // branch(({ data: { loading } }) => loading, renderNothing),

@@ -12,11 +12,11 @@ export default compose(
     graphql(gameReportQuery, {
       name: 'data',
       options: ({ game }) => {
-        let variables = {}
+        let variables = { }
         if (game && game.gameId) {
           variables = { gameId: game.gameId }
         }
-        return variables
+        return { variables }
       },
     }),
     // branch(
@@ -27,6 +27,7 @@ export default compose(
       pieData: ({ data, teams }) => () => {
         let percentages = []
         const gameReportData = data.gameReport || []
+        console.log(gameReportData, 'gameReportDatagameReportDatagameReportData')
         const titles = [`${teams[0]} Wins`, `${teams[1]} Wins`, 'Draw']
 
         const calculatePercents = (total, homeTeam, awayTeam, draw) => {
@@ -38,6 +39,7 @@ export default compose(
 
         const total = data.gameReport ? data.gameReport.total : 0
 
+        console.log('aaaaaaa', total)
         percentages = calculatePercents(gameReportData.total, gameReportData.homeTeam, gameReportData.awayTeam, gameReportData.draw)
         return { percentages, titles, totalGame: total }
       },
