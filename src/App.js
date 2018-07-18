@@ -97,7 +97,7 @@ export default compose(
         const user = { id: this.props.me.email }
         const socket = startSocket(user)
         socket.on('update', (data) => {
-          console.log('update ssss', data)
+          emitter.emit('placeOrderFromSocket', data)
         })
       }
     },
@@ -123,7 +123,6 @@ export default compose(
   lifecycle({
     componentDidMount() {
       emitter.addListener(TOGGLE_SIGN_IN, (...args) => {
-        console.log(...args)
         this.props.toggleSignIn()
       })
     },

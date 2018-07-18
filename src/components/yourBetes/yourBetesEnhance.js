@@ -2,7 +2,8 @@ import { compose, branch, renderNothing, withHandlers, lifecycle, withProps } fr
 import { compose as gqlCompose, graphql } from 'react-apollo'
 import yourBetesQuery from './yourBetes.graphql'
 import meQuery from '../../graphql/Me.graphql'
-import { loadData, refetchOn } from '../../hocs'
+import { loadData, refetchOn, catchEmitOn } from '../../hocs'
+import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET } from '../../eventTypes'
 
 export default compose(
   gqlCompose(
@@ -77,5 +78,11 @@ export default compose(
       return formatedData
     },
   }),
-  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket'])
+  // refetchOn(['finishGame', 'finishGameFromSocket']),
+  catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
+    if ((args.order && props.game._id === args.order.game) ||
+        (args.game && props.game._id === args.game._id)) {
+      props.data.refetch()
+    }
+  })
 )

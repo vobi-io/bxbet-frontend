@@ -1,15 +1,16 @@
 import { compose, branch, renderNothing, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
-import { loadData, refetchOn } from '../../hocs'
 import getGameMaxOddsQuery from './getGameMaxOdds.graphql'
+import { catchEmitOn } from '../../hocs'
+import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET } from '../../eventTypes'
 
 export default compose(
   graphql(getGameMaxOddsQuery, {
     name: 'data',
-    options: ({ gameId }) => {
+    options: ({ game }) => {
       const variables = {
-        gameId,
+        gameId: game.gameId,
       }
       return variables
     },
@@ -78,5 +79,10 @@ export default compose(
       return { sortedData }
     })
   ),
-  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
+  catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
+    if ((args.order && props.game._id === args.order.game) ||
+        (args.game && props.game._id === args.game._id)) {
+      props.data.refetch()
+    }
+  })
 )

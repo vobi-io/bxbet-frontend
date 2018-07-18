@@ -151,12 +151,12 @@ const HomePage = ({
             teams={teams}
           />
           <MarketSentiments
-            gameId={game.gameId}
+            game={game}
             teams={teams}
           />
           <AvailableOdds
             data={tableData}
-            gameId={game.gameId}
+            game={game}
             teams={teams}
           />
         </VerticalWrapper>

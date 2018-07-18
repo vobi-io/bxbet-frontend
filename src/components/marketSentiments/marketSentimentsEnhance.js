@@ -3,15 +3,16 @@ import { graphql } from 'react-apollo'
 // import refetchData from '../../hocs/refetchData'
 
 import gameReportQuery from './gameReport.graphql'
-import { refetchOn } from '../../hocs'
+import { catchEmitOn } from '../../hocs'
+import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET } from '../../eventTypes'
 
 export default compose(
     graphql(gameReportQuery, {
       name: 'data',
-      options: ({ gameId }) => {
+      options: ({ game }) => {
         let variables = {}
-        if (gameId) {
-          variables = { gameId }
+        if (game && game.gameId) {
+          variables = { gameId: game.gameId }
         }
         return variables
       },
@@ -39,5 +40,11 @@ export default compose(
         return { percentages, titles, totalGame: total }
       },
     }),
-    refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket'])
+    // refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket'])
+    catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
+      if ((args.order && props.game._id === args.order.game) ||
+          (args.game && props.game._id === args.game._id)) {
+        props.data.refetch()
+      }
+    })
 )
