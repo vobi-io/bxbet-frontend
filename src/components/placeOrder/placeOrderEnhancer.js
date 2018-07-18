@@ -16,7 +16,7 @@ export default compose(
       activeTab: 'buy',
       odd: 1.5,
       stake: 0,
-      selected: props.data.gameById.homeTeam,
+      selected: props.data.gameById ? props.data.gameById.homeTeam : null,
       isValidInput: false,
       getBalance,
       isLiabilitiesActive: true,
