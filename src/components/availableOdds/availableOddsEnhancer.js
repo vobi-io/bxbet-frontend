@@ -23,11 +23,11 @@ export default compose(
           sell: [],
           buy: [],
         },
-        drawRow: {
+        awayRow: {
           sell: [],
           buy: [],
         },
-        awayRow: {
+        drawRow: {
           sell: [],
           buy: [],
         },
@@ -44,12 +44,12 @@ export default compose(
 
       const returnSortedArray = arr => arr.sort((a, b) => a.amount - b.amount)
       const isEmpty = arr => !(arr.length > 0)
+      sortedData.drawRow.buy = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
+      sortedData.drawRow.sell = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
 
       sortedData.homeRow.buy = isEmpty(!gameData.homeTeamBuy) ? returnSortedArray(gameData.homeTeamBuy) : []
       sortedData.homeRow.sell = isEmpty(!gameData.homeTeamSell) ? returnSortedArray(gameData.homeTeamSell) : []
 
-      sortedData.drawRow.buy = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
-      sortedData.drawRow.sell = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
 
       sortedData.awayRow.buy = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
       sortedData.awayRow.sell = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []

@@ -4,6 +4,8 @@ import authAware from '../../authAware'
 
 import Card from '../card'
 import Button from '../button'
+import emitter from '../../eventEmitter'
+import TOGGLE_SIGN_IN from '../../eventTypes'
 
 const StyledContainer = styled.div`
     display: flex;
@@ -29,7 +31,7 @@ const stringShorter = (word) => {
 
 const handleClick = (props, onSelectorChange, obj) => {
   if (!props.props.authenticated) {
-    props.props.toggleSignIn()
+    emitter.emit(TOGGLE_SIGN_IN)
   } else {
     onSelectorChange(obj)
   }
@@ -44,11 +46,11 @@ const Buttons = ({
   <StyledContainer>
     <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
       <div className="buttons">
+        <Button text={stringShorter(teams[0])} activeButton={selected === teams[0]} onClick={() => { handleClick(props, onSelectorChange, teams[0]) }} />
+        <Brick />
         <Button text={stringShorter(teams[1])} activeButton={selected === teams[1]} onClick={() => { handleClick(props, onSelectorChange, teams[1]) }} />
         <Brick />
         <Button text={'Draw'} activeButton={selected === 'Draw'} onClick={() => { handleClick(props, onSelectorChange, 'Draw') }} />
-        <Brick />
-        <Button text={stringShorter(teams[2])} activeButton={selected === teams[2]} onClick={() => { handleClick(props, onSelectorChange, teams[2]) }} />
       </div>
     </div>
   </StyledContainer>

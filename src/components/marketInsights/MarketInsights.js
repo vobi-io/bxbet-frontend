@@ -34,7 +34,7 @@ const MarketInsights = ({ game, teams }) => {
     const Data = teams.map((team, index) => (
       <StyledItem key={index}>
         <BlueBrick active={index === status} />
-        <span className="item">{team} {index !== 1 ? 'Wins' : null}</span>
+        <span className="item">{team} {index !== 2 ? 'Wins' : null}</span>
       </StyledItem>
         ))
 

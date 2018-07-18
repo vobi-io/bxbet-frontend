@@ -9,9 +9,11 @@ import FourOFour from './pages/errors/404'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
 import Create from './pages/create'
-import { withMe } from './hocs'
+import { withMe, listenerOn } from './hocs'
+import emitter from './eventEmitter'
 import FinishGame from './pages/finishGame'
 import { startSocket } from './socket'
+import TOGGLE_SIGN_IN from './eventTypes'
 // import placeOrderEnhancer from './components/informationDynamic/enhance'
 
 // const homePageWithPlaceOrderEnhancer = placeOrderEnhancer(HomePage)
@@ -117,5 +119,16 @@ export default compose(
         signUpWithEmailOpened: !signUpWithEmailOpened,
       }),
     }
-  )
+  ),
+  lifecycle({
+    componentDidMount() {
+      emitter.addListener(TOGGLE_SIGN_IN, (...args) => {
+        console.log(...args)
+        this.props.toggleSignIn()
+      })
+    },
+    componentWillUnmount() {
+      emitter.removeListener(TOGGLE_SIGN_IN)
+    },
+  }),
 )(App)
