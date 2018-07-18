@@ -24,7 +24,6 @@ const withMe = () =>
     withProps(props => ({
       me: props.me.me,
     })),
-    // pure,
   )
 
 export default withMe

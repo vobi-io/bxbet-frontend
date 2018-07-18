@@ -33,7 +33,7 @@ const InfoList = (props) => {
     margin: 0 14px 0 9px;
     border-radius: 5px;
     background-color: ${props => props.status === 3 ? '#30ff00' : '#000'};
-    border: solid 1px #000000; 
+    border: solid 1px #000000;
   `
 
   const timeFormater = (timestamp) => {

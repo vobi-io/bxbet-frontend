@@ -1,8 +1,7 @@
-import { compose, branch, renderNothing, withHandlers, lifecycle, withProps } from 'recompose'
+import { compose, withHandlers, withProps } from 'recompose'
 import { compose as gqlCompose, graphql } from 'react-apollo'
 import yourBetesQuery from './yourBetes.graphql'
-import meQuery from '../../graphql/Me.graphql'
-import { loadData, refetchOn, catchEmitOn, withMe } from '../../hocs'
+import { refetchOn, catchEmitOn, withMe } from '../../hocs'
 import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET,
   PLACE_ORDER, FINISH_GAME,
  } from '../../eventTypes'
