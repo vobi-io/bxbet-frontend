@@ -7,7 +7,7 @@ import enhance from './orderBookEnhance'
 
 const Container = styled.div`
       width: 100%;
-      height: 456px;
+      height: 488px;
       border-radius: 5px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
@@ -64,7 +64,7 @@ const OrderBook = ({ ...props }) => {
     `
     const StyledSubTitle = styled.div`
       display: flex;
-      padding: 20px 0;
+      padding: 13px 0;
       & > div {
         width: 100%;
         text-align: center;

@@ -11,8 +11,8 @@ const Container = styled.div`
   box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  min-height: 171px;
+  padding: 14px;
+  min-height: 183px;
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
   max-height: ${p => (p.isScrollable ? '171px' : '')};
 `
