@@ -1,7 +1,7 @@
 import { compose, withStateHandlers, renderNothing, branch, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
-import query from './query.graphql'
+import query from './gameMany.graphql'
 
 export default compose(
     graphql(query),
