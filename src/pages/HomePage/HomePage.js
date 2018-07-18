@@ -83,6 +83,7 @@ const HomePage = ({
   buttonSwitcher,
   onPlaceOrder,
   game,
+  me,
 }) => {
   const teams = [game.homeTeam, game.awayTeam, 'Draw']
 
@@ -108,7 +109,7 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook game={game} />
+            <OrderBook game={game} me={me} />
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder
@@ -149,15 +150,18 @@ const HomePage = ({
             data={someData}
             game={game}
             teams={teams}
+            me={me}
           />
           <MarketSentiments
             game={game}
             teams={teams}
+            me={me}
           />
           <AvailableOdds
             data={tableData}
             game={game}
             teams={teams}
+            me={me}
           />
         </VerticalWrapper>
       </Container>
