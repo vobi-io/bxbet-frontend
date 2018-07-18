@@ -94,7 +94,7 @@ export default compose(
   lifecycle({
     componentDidMount() {
       if (this.props.me) {
-        const user = { id: this.props.me._id }
+        const user = { id: this.props.me.email }
         const socket = startSocket(user)
         socket.on('update', (data) => {
           console.log('update ssss', data)

@@ -11,6 +11,7 @@ export const startSocket = (user) => {
 
   socket.on('connect', () => {
     console.log('socket connect 1')
+    console.log(user, 'wwwwwwwwwwwwwwww')
     socket.emit('login', user)
   })
 
