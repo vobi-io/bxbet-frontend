@@ -89,17 +89,17 @@ const App = ({
 export default compose(
   withProps(props => props),
   withMe(),
-  // lifecycle({
-  //   componentDidMount() {
-  //     if (this.props.me) {
-  //       const user = { id: this.props.me._id }
-  //       const socket = startSocket(user)
-  //       socket.on('update', (data) => {
-  //         console.log('update ssss', data)
-  //       })
-  //     }
-  //   },
-  // }),
+  lifecycle({
+    componentDidMount() {
+      if (this.props.me) {
+        const user = { id: this.props.me._id }
+        const socket = startSocket(user)
+        socket.on('update', (data) => {
+          console.log('update ssss', data)
+        })
+      }
+    },
+  }),
   withStateHandlers(
     () => ({
       signInOpened: false,
