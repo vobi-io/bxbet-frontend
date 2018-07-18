@@ -68,7 +68,7 @@ const App = ({
       <Route
         path="/"
         render={() => (
-          <SignInModal isOpen={signInOpened} openSignup={toggleSignUpWithEmail} onRequestClose={toggleSignIn} />
+          <SignInModal isOpen={signInOpened} openSignup={toggleSignUp} onRequestClose={toggleSignIn} />
         )}
       />
     )}
