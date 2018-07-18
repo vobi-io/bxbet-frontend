@@ -2,15 +2,14 @@ import { compose, branch, renderNothing, withHandlers, lifecycle, withProps } fr
 import { compose as gqlCompose, graphql } from 'react-apollo'
 import yourBetesQuery from './yourBetes.graphql'
 import meQuery from '../../graphql/Me.graphql'
-import { loadData, refetchOn, catchEmitOn } from '../../hocs'
+import { loadData, refetchOn, catchEmitOn, withMe } from '../../hocs'
 import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET,
   PLACE_ORDER, FINISH_GAME,
  } from '../../eventTypes'
 
 export default compose(
   gqlCompose(
-    graphql(meQuery, { name: 'me' }),
-    branch(({ me: { loading } }) => loading, renderNothing),
+    withMe(),
     graphql(yourBetesQuery, {
       name: 'data',
       skip: props => !props.me.me || !props.game,
@@ -82,6 +81,7 @@ export default compose(
   }),
   refetchOn([PLACE_ORDER, FINISH_GAME]),
   catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
+    debugger
     if (props.me._id !== args.fromUserId &&
         ((args.order && props.game._id === args.order.game) ||
         (args.game && props.game._id === args.game._id))) {
