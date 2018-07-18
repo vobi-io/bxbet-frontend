@@ -16,7 +16,7 @@ function SelectField(props) {
 
   const StyledSelect = styled.select`
         width: 100%;
-        margin-left: 4%;
+        margin-left: 3.7%;
         height: 40px;
         opacity: 0.9;
         border-radius: 3px;
