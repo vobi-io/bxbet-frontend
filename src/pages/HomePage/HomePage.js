@@ -14,7 +14,7 @@ import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
 import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
-
+import { withMe } from '../../hocs'
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
 
@@ -170,6 +170,7 @@ const HomePage = ({
 }
 
 export default compose(
+  withMe(),
   gqlCompose(
     graphql(gameById, {
       name: 'data',
