@@ -12,11 +12,11 @@ export default compose(
     withMe(),
     graphql(yourBetesQuery, {
       name: 'data',
-      skip: props => !props.me.me || !props.game,
+      skip: props => !props.me || !props.game,
       options: ({ me, game }) => {
         let variables = {}
-        if (me.me) {
-          variables = { player: me.me.blockChain.address, gameId: game.gameId }
+        if (me) {
+          variables = { player: me.blockChain.address, gameId: game.gameId }
         }
 
         return { variables }
@@ -81,7 +81,6 @@ export default compose(
   }),
   refetchOn([PLACE_ORDER, FINISH_GAME]),
   catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
-    debugger
     if (props.me._id !== args.fromUserId &&
         ((args.order && props.game._id === args.order.game) ||
         (args.game && props.game._id === args.game._id))) {

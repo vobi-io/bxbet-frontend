@@ -16,8 +16,9 @@ export default compose(
     },
     fetchPolicy: 'network-only',
   }),
-  refetchOn([PLACE_ORDER, FINISH_GAME]),
-  catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
+  refetchOn([PLACE_ORDER]),
+  catchEmitOn([PLACE_ORDER_FROM_SOCKET], (props, args) => {
+    debugger
     if (props.me._id !== args.fromUserId &&
         ((args.order && props.game._id === args.order.game) ||
         (args.game && props.game._id === args.game._id))) {

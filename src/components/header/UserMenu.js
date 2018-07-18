@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { compose, withHandlers, withProps, branch, renderNothing } from 'recompose'
 import { Button } from 'vobi-components'
+import { withMe, listenerOn } from '../../hocs'
 
 import { clearToken } from '../../services/auth'
 import meQuery from '../../graphql/Me.graphql'
@@ -177,9 +178,5 @@ export default compose(
       window.location.href = '/'
     },
   }),
-  graphql(meQuery, { options: { fetchPolicy: 'network-only' }, name: 'me' }),
-  withProps(({ me }) => ({
-    ...me.me,
-  })),
-  branch(({ me }) => me && me.loading, renderNothing)
+  withMe(),
 )(UserMenu)
