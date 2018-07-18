@@ -29,7 +29,6 @@ export default compose(
         const newState = {}
         const value = e.target.value
 
-        // debugger
         if (e.target.name === 'odd') {
           newState.odd = value // parseFloat(value) || ' '
         } else {
