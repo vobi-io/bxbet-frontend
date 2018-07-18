@@ -2,8 +2,10 @@ import { compose, branch, renderNothing, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
 import getGameMaxOddsQuery from './getGameMaxOdds.graphql'
-import { catchEmitOn } from '../../hocs'
-import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET } from '../../eventTypes'
+import { catchEmitOn, refetchOn } from '../../hocs'
+import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET,
+  PLACE_ORDER, FINISH_GAME,
+ } from '../../eventTypes'
 
 export default compose(
   graphql(getGameMaxOddsQuery, {
@@ -79,9 +81,11 @@ export default compose(
       return { sortedData }
     })
   ),
+  refetchOn([PLACE_ORDER, FINISH_GAME]),
   catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
-    if ((args.order && props.game._id === args.order.game) ||
-        (args.game && props.game._id === args.game._id)) {
+    if (props.me._id !== args.fromUserId &&
+        ((args.order && props.game._id === args.order.game) ||
+        (args.game && props.game._id === args.game._id))) {
       props.data.refetch()
     }
   })
