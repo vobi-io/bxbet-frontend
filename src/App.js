@@ -12,8 +12,8 @@ import Create from './pages/create'
 import { withMe } from './hocs'
 import FinishGame from './pages/finishGame'
 import { startSocket } from './socket'
-// import placeOrderEnhancer from './components/informationDynamic/enhance'
 
+// import placeOrderEnhancer from './components/informationDynamic/enhance'
 // const homePageWithPlaceOrderEnhancer = placeOrderEnhancer(HomePage)
 
 const App = ({

@@ -3,10 +3,10 @@ version: '3.5'
 services:
 
   dev-local:
-    container_name: bx-bet-front-dev-local
+    container_name: bxfront
     build:
       context: .
-      dockerfile: Dockerfile-dev-local
+      dockerfile: Dockerfile
     volumes:
       - '.:/usr/src/app'
       - '/usr/src/app/node_modules'
