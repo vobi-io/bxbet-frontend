@@ -11,8 +11,8 @@ const Container = styled.div`
   box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  min-height: 171px;
+  padding: 14px;
+  min-height: 183px;
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
   max-height: ${p => (p.isScrollable ? '171px' : '')};
 `
@@ -70,7 +70,7 @@ const YourBetes = ({ yourBetesData, teams, ...props }) => {
           </div>
         </StyledRow>
         <Line />
-        {props.me.me && data.map((item, index) => (
+        {props.me && data && data.map((item, index) => (
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
@@ -87,7 +87,7 @@ const YourBetes = ({ yourBetesData, teams, ...props }) => {
             <Line />
           </div>
         ))}
-        {!props.me.me &&
+        {!props.me &&
           <Message>Please log in</Message>
         }
       </Container>

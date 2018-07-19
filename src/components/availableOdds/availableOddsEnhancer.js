@@ -1,30 +1,28 @@
 import { compose, branch, renderNothing, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
-import { loadData, refetchOn } from '../../hocs'
 import getGameMaxOddsQuery from './getGameMaxOdds.graphql'
+import { catchEmitOn, refetchOn } from '../../hocs'
+import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET,
+  PLACE_ORDER, FINISH_GAME,
+ } from '../../eventTypes'
 
 export default compose(
   graphql(getGameMaxOddsQuery, {
     name: 'data',
-    options: ({ gameId }) => {
+    options: ({ game }) => {
       const variables = {
-        gameId,
+        gameId: game.gameId,
       }
-      return variables
+      return { variables }
     },
   }),
-  branch(({ data: { loading } }) => loading, renderNothing),
+  // branch(({ data: { loading } }) => loading, renderNothing),
   branch(
     props => props,
     withProps(({ data: { getGameMaxOdds } }) => {
-      const gameData = JSON.parse(JSON.stringify(getGameMaxOdds))
       const sortedData = {
         homeRow: {
-          sell: [],
-          buy: [],
-        },
-        drawRow: {
           sell: [],
           buy: [],
         },
@@ -32,16 +30,29 @@ export default compose(
           sell: [],
           buy: [],
         },
+        drawRow: {
+          sell: [],
+          buy: [],
+        },
       }
+      const isEmptyData = {
+        homeTeamBuy: [],
+        homeTeamSell: [],
+        drawBuy: [],
+        drawSell: [],
+        awayTeamBuy: [],
+        awayTeamSell: [],
+      }
+      const gameData = getGameMaxOdds ? JSON.parse(JSON.stringify(getGameMaxOdds)) : isEmptyData
 
       const returnSortedArray = arr => arr.sort((a, b) => a.amount - b.amount)
       const isEmpty = arr => !(arr.length > 0)
+      sortedData.drawRow.buy = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
+      sortedData.drawRow.sell = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
 
       sortedData.homeRow.buy = isEmpty(!gameData.homeTeamBuy) ? returnSortedArray(gameData.homeTeamBuy) : []
       sortedData.homeRow.sell = isEmpty(!gameData.homeTeamSell) ? returnSortedArray(gameData.homeTeamSell) : []
 
-      sortedData.drawRow.buy = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
-      sortedData.drawRow.sell = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
 
       sortedData.awayRow.buy = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
       sortedData.awayRow.sell = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []
@@ -70,5 +81,12 @@ export default compose(
       return { sortedData }
     })
   ),
-  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
+  refetchOn([PLACE_ORDER, FINISH_GAME]),
+  catchEmitOn([PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET], (props, args) => {
+    if (props.me._id !== args.fromUserId &&
+        ((args.order && props.game._id === args.order.game) ||
+        (args.game && props.game._id === args.game._id))) {
+      props.data.refetch()
+    }
+  })
 )

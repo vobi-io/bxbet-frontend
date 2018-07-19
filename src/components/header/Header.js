@@ -49,6 +49,7 @@ const NavItem = styled.li`
   display: flex;
   float: left;
   padding: 22px 0 16px 16px;
+  padding-right: ${p => (p.padding ? '16px' : '0px')};
   color: #0f334b;
   font-family: Montserrat;
   font-size: 18px;
@@ -113,12 +114,19 @@ const Header = ({
       <Wrapper>
         {centeredPages && (
           <Nav>
-            {centeredPages.map((item, index, fullObj) => (
-              <NavItem key={item.title} isActive={item.to === location.pathname}>
-                <NavLink to={item.to}>{item.title}</NavLink>
-                {index < fullObj.length - 1 ? <NavCircle /> : null}
+            {!authenticated && (
+              <NavItem key={centeredPages[0].title} isActive={centeredPages[0].to === location.pathname} padding>
+                <NavLink to={centeredPages[0].to}>{centeredPages[0].title}</NavLink>
               </NavItem>
-            ))}
+            )}
+            {authenticated && (
+              centeredPages.map((item, index, fullObj) => (
+                <NavItem key={item.title} isActive={item.to === location.pathname}>
+                  <NavLink to={item.to}>{item.title}</NavLink>
+                  {index < fullObj.length - 1 ? <NavCircle /> : null}
+                </NavItem>
+              ))
+            )}
           </Nav>
         )}
       </Wrapper>

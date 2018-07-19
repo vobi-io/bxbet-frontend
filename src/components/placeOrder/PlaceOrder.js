@@ -8,8 +8,8 @@ import Card from '../card'
 import { TextField, SelectField } from '../form'
 import Button from '../button'
 import authAware from '../../authAware'
-import SignUpWithEmail from '../signup/modal/SignUpWithEmail'
-import SignInModal from '../signin'
+import emitter from '../../eventEmitter'
+import { TOGGLE_SIGN_IN } from '../../eventTypes'
 
 const Container = styled.div`
 border-radius: 0 0 6px 6px;
@@ -110,7 +110,7 @@ const StyledToastContainer = styled(ToastContainer)`
 `
 const placeOrderHandler = (props, isValidInput) => {
   if (!props.props.authenticated) {
-    props.props.toggleSignIn()
+    emitter.emit(TOGGLE_SIGN_IN)
   } else if (!isValidInput) {
     return
   } else if (props.props.game.status !== 3) {
@@ -120,9 +120,7 @@ const placeOrderHandler = (props, isValidInput) => {
   }
 }
 const notify = (props, isValidInput) => {
-  if (isValidInput && props.props.authenticated && props.props.game.status === 3) {
-    toast('Order has been added successfully')
-  } else if (!isValidInput && props.props.authenticated) {
+  if (!isValidInput && props.props.authenticated) {
     toast('Stake is not Valid')
   } else if (props.props.authenticated && props.props.game.status !== 3) {
     toast('Game is finished')
@@ -133,6 +131,9 @@ const notify = (props, isValidInput) => {
 const handleClick = (props, isValidInput) => {
   placeOrderHandler(props, isValidInput)
   notify(props, isValidInput)
+}
+const handleChange = () => {
+  emitter.emit(TOGGLE_SIGN_IN)
 }
 
 const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
@@ -150,9 +151,9 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
       <ActiveUnderline activeTab={activeTab} />
       <Container>
         <StyledForm>
-          <SelectField title="Outcome" options={teams} selected={selected} onChange={e => onSelectorChange(e.target.value)} />
-          <TextField type="number" title="Odd" onChange={onChangeHandler} value={odd} typeStyle={['odd', 'place-order-input-1']} />
-          <TextField title="Stake" icon="BX" onChange={onChangeHandler} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
+          <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
+          <TextField type="number" title="Odd" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField title="Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
         <StyledInfo>
@@ -177,7 +178,7 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
         </StyledInfo>
       </Container>
 
-      {props.signInOpened && (
+      {/* {props.signInOpened && (
       <Route
         path="/"
         render={() => (
@@ -200,7 +201,7 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
           />
           )}
       />
-      )}
+      )} */}
 
     </div>
   )

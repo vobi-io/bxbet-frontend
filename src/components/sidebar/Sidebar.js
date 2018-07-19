@@ -5,7 +5,7 @@ import { slide as Menu } from 'react-burger-menu'
 import burgerNavIcon from '../../resources/assets/img/icons/burger-navigation.svg'
 import { SearchField } from '../form'
 import InfoList from './InfoList'
-import enhance from './enhance'
+import enhance from './sidebarEnhance'
 
 const SidebarContainer = styled.div`
     width: 59px;
@@ -33,7 +33,7 @@ const SidebarContainer = styled.div`
         width: 315px;
     }
 
-    
+
 
     & .bm-icon{
         width: 26px !important;

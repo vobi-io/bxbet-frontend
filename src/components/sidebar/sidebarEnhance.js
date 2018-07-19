@@ -1,7 +1,12 @@
 import { compose, withStateHandlers, renderNothing, branch, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 
-import query from './query.graphql'
+import query from './gameMany.graphql'
+import { refetchOn, catchEmitOn, withMe } from '../../hocs'
+import { FINISH_GAME_FROM_SOCKET,
+  FINISH_GAME,
+ } from '../../eventTypes'
+
 
 export default compose(
     graphql(query),
@@ -22,5 +27,14 @@ export default compose(
           loading,
           data,
         })
-    )
+    ),
+    withMe(),
+    refetchOn([FINISH_GAME]),
+    catchEmitOn([FINISH_GAME_FROM_SOCKET], (props, args) => {
+      if (props.me && props.me._id !== args.fromUserId &&
+          ((args.order && props.game._id === args.order.game) ||
+          (args.game && props.game._id === args.game._id))) {
+        props.data.refetch()
+      }
+    })
 )

@@ -1,5 +1,5 @@
 query GameMany {
-  gameMany {
+  gameMany (sort: STATUS_DESC){
     _id
     gameId
     homeTeam

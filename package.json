@@ -11,6 +11,7 @@
     "start:local": "NODE_ENV=development_local ./node_modules/.bin/webpack-dev-server --progress --profile --colors",
     "start:docker": "HOST=0.0.0.0 NODE_ENV=development_local ./node_modules/.bin/webpack-dev-server --progress --profile --colors --host 0.0.0.0 --port 9000",
     "start:test": "NODE_ENV=testing ./node_modules/.bin/webpack-dev-server --progress --profile --colors",
+    "socket:prod": "NODE_ENV=production pm2 start socket/index.js --name socket",
     "lint": "eslint --ext js --ext jsx src || exit 0",
     "dev": "webpack-dashboard -- webpack-dev-server --progress --profile --colors",
     "serv-dist": "http-server ./dist",

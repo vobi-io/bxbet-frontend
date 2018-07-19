@@ -13,9 +13,8 @@ import AvailableOdds from '../../components/availableOdds'
 import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
-import { refetchOn } from '../../hocs'
 import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
-
+import { withMe } from '../../hocs'
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
 
@@ -84,8 +83,9 @@ const HomePage = ({
   buttonSwitcher,
   onPlaceOrder,
   game,
+  me,
 }) => {
-  const teams = ['Draw', game.homeTeam, game.awayTeam]
+  const teams = [game.homeTeam, game.awayTeam, 'Draw']
 
   return (
     <Wrapper>
@@ -99,6 +99,7 @@ const HomePage = ({
             activeButton3={activeButton3}
             onSelectorChange={onSelectorChange}
             selected={selected}
+            toggleSignIn={toggleSignIn}
           />
           <Brick />
           <Cover
@@ -108,7 +109,7 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook game={game} />
+            <OrderBook game={game} me={me} />
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder
@@ -149,15 +150,18 @@ const HomePage = ({
             data={someData}
             game={game}
             teams={teams}
+            me={me}
           />
           <MarketSentiments
-            gameId={game.gameId}
+            game={game}
             teams={teams}
+            me={me}
           />
           <AvailableOdds
             data={tableData}
-            gameId={game.gameId}
+            game={game}
             teams={teams}
+            me={me}
           />
         </VerticalWrapper>
       </Container>
@@ -166,6 +170,7 @@ const HomePage = ({
 }
 
 export default compose(
+  withMe(),
   gqlCompose(
     graphql(gameById, {
       name: 'data',
@@ -208,5 +213,5 @@ export default compose(
       }),
     }
   ),
-  refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
+  // refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
 )(placeOrderEnhancer(HomePage))

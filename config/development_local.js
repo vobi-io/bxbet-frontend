@@ -1,5 +1,5 @@
 module.exports = {
-  apiUrl: 'https://bx.vobi.io',
-  apiSocketUrl: 'http://bx.vobi.io',
-  apiGraphqlUrl: 'https://bx.vobi.io/graphql',
+  apiUrl: 'http://localhost:8005',
+  apiSocketUrl: 'https://wsbx.vobi.io/',
+  apiGraphqlUrl: 'http://localhost:8005/graphql',
 }

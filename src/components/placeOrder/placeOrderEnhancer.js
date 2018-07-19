@@ -1,6 +1,7 @@
 import React from 'react'
 import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
 import { graphql } from 'react-apollo'
+import { toast } from 'react-toastify'
 import { mutation } from '../../hocs'
 import placeOrderMutation from './placeOrder.graphql'
 import getBalanceQuery from '../header/getBalance.graphql'
@@ -15,7 +16,7 @@ export default compose(
       activeTab: 'buy',
       odd: 1.5,
       stake: 0,
-      selected: props.data.gameById.homeTeam,
+      selected: props.data.gameById ? props.data.gameById.homeTeam : null,
       isValidInput: false,
       getBalance,
       isLiabilitiesActive: true,
@@ -28,7 +29,6 @@ export default compose(
         const newState = {}
         const value = e.target.value
 
-        // debugger
         if (e.target.name === 'odd') {
           newState.odd = value // parseFloat(value) || ' '
         } else {
@@ -59,6 +59,11 @@ export default compose(
         }
         return newState
       },
+      notification: () => (props) => {
+        if (props.isValidInput && props.game.status === 3) {
+          toast('Order has been added successfully')
+        }
+      },
       resetToDefault: () => (props, getBalance) => {
         let newState = {}
         newState = {
@@ -77,19 +82,30 @@ export default compose(
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, ...props }) => async () => {
+    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, notification, ...props }) => async () => {
       const gameId = game.gameById.gameId
-      const teams = ['Draw', game.gameById.homeTeam, game.gameById.awayTeam]
+      const teams = [game.gameById.homeTeam, game.gameById.awayTeam, 'Draw']
 
       const orderType = activeTab === 'buy' ? 0 : 1
       const oddFloat = parseFloat(odd)
       const amount = parseFloat(stake)
       let outcome
 
-      for (let i = 0; i < teams.length; i++) {
-        if (teams[i] === selected) {
-          outcome = i
-        }
+      // for (let i = 0; i < teams.length; i++) {
+      //   if (teams[i] === selected && i === 0) {
+      //     outcome = 1
+      //   } else if (teams[i] === selected && i === 1) {
+      //     outcome = 2
+      //   } else if (teams[i] === selected && i === 2) {
+      //     outcome = 0
+      //   }
+      // }
+      if (teams[0] === selected) {
+        outcome = 1
+      } else if (teams[1] === selected) {
+        outcome = 2
+      } else if (teams[2] === selected) {
+        outcome = 0
       }
 
       const variables = {
@@ -100,6 +116,7 @@ export default compose(
         gameId,
       }
       await placeOrder(variables)
+      notification(props)
       resetToDefault(props, getBalance)
     },
     placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
