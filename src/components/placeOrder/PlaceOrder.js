@@ -9,7 +9,7 @@ import { TextField, SelectField } from '../form'
 import Button from '../button'
 import authAware from '../../authAware'
 import emitter from '../../eventEmitter'
-import TOGGLE_SIGN_IN from '../../eventTypes'
+import { TOGGLE_SIGN_IN } from '../../eventTypes'
 
 const Container = styled.div`
 border-radius: 0 0 6px 6px;

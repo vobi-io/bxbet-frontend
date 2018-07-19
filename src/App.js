@@ -135,7 +135,7 @@ export default compose(
   ),
   lifecycle({
     componentDidMount() {
-      emitter.addListener(TOGGLE_SIGN_IN, (...args) => {
+      emitter.addListener(TOGGLE_SIGN_IN, () => {
         this.props.toggleSignIn()
       })
     },

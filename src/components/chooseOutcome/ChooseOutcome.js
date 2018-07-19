@@ -5,7 +5,7 @@ import authAware from '../../authAware'
 import Card from '../card'
 import Button from '../button'
 import emitter from '../../eventEmitter'
-import TOGGLE_SIGN_IN from '../../eventTypes'
+import { TOGGLE_SIGN_IN } from '../../eventTypes'
 
 const StyledContainer = styled.div`
     display: flex;
