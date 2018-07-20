@@ -74,6 +74,7 @@ const MarketSentiments = ({ pieData }) => {
   const data = pieData()
   const percents = data.percentages
   const titles = data.titles
+  const betsOnTeams = data.betsOnTeams
   const chartData = {
     datasets: [{
       data: percents,
@@ -84,7 +85,7 @@ const MarketSentiments = ({ pieData }) => {
       ],
     }],
   }
-
+  console.log(percents)
   const options = {
     cutoutPercentage: 80,
     tooltips: { enabled: false },
@@ -108,7 +109,7 @@ const MarketSentiments = ({ pieData }) => {
                  <div key={index} className="chart_item">
                    <div className="item_top_section">
                      <div className="color" style={{ backgroundColor: chartData.datasets[0].backgroundColor[index] }} />
-                     <div>{isNaN(item) ? 0 : item}%</div>
+                     <div>{isNaN(item) ? 0 : item}%{' '}{'('}{isNaN(item) ? 0 : betsOnTeams[index]}{')'}</div>
                    </div>
                    <div className="info_title">
                      {titles[index]}
