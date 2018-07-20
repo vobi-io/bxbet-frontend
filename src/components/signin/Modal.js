@@ -11,6 +11,8 @@ import signInMutation from '../../graphql/SignIn.graphql'
 import { setToken } from '../../services/auth'
 import { withForm, FieldError } from '../form'
 
+import Logo from '../../resources/assets/img/bx-logo-color-horizontal.png'
+
 const styles = {
   overlay: {
     backgroundColor: 'rgb(216, 216, 216, 0.48)',
@@ -38,7 +40,9 @@ const ModalHeader = styled.h1`
   text-align: center;
   font-size: 36px;
   margin: 0;
+  margin-top: 30px;
   padding: 0;
+  font-family: Montserrat;
 `
 
 const SecondaryHeader = styled.h3`
@@ -49,6 +53,7 @@ const SecondaryHeader = styled.h3`
   margin: 0;
   padding: 0;
   font-weight: 600;
+  font-family: Montserrat;
 `
 
 const Divider = styled.div`
@@ -75,6 +80,18 @@ const CloseIcon = styled.span`
   }
 `
 
+const Img = styled.img`
+  width: 132px;
+  height: 40px;
+  position: absolute;
+  top: 13px;
+`
+const Form = styled.form`
+  label{
+    font-family: Montserrat !important;
+  }
+`
+
 const SignInContent = ({
   onSubmit,
   submissionError,
@@ -87,13 +104,14 @@ const SignInContent = ({
   openSignup,
   onRequestClose,
 }) => (
-  <div>
+  <div style={{ fontFamily: 'Montserrat' }}>
+    <Img src={Logo} alt="Logo" />
     <CloseIcon onClick={onRequestClose}>&times;</CloseIcon>
     <ModalHeader>Log in</ModalHeader>
     <Divider mt={'22px'} />
     {submissionError && <Error message={submissionError} />}
     {submitting && <Loading message="Signing in..." />}
-    <form onSubmit={onSubmit} method="post">
+    <Form onSubmit={onSubmit} method="post">
       <TextField
         fullWidth
         flat
@@ -113,13 +131,13 @@ const SignInContent = ({
       />
       {submitted && getError('password') && <FieldError>{getError('password')[0]}</FieldError>}
       <Divider mt={'15px'} />
-      <Button bg={'#0f334b'} color={'#fff'} block lg type="submit" disabled={submitting || !valid}>
+      <Button bg={'#0f334b'} color={'#fff'} fontFamily={'Montserrat'} block lg type="submit" disabled={submitting || !valid}>
         {submitting ? 'Signing in...' : 'Sign in'}
       </Button>
-    </form>
+    </Form>
     <Divider mt={'28px'} />
     <SecondaryHeader>
-      Not have a BEX.BET account yet?{' '}
+      You don't have an BX MVP account yet? Please{' '}
       <Span
         onClick={() => {
           openSignup()
@@ -158,7 +176,7 @@ const SignInContentContainer = compose(
 
         window.location.href = '/'
       } catch (e) {
-        setSubmissionError(e.message)
+        setSubmissionError(e.message.replace('GraphQL error:', '').trim())
       }
     },
   }),
