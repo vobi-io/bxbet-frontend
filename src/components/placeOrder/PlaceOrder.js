@@ -152,8 +152,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
       <Container>
         <StyledForm>
           <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
-          <TextField type="number" title="Odd" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
-          <TextField title="Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
+          <TextField type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField title="Buyers' Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
         <StyledInfo>
