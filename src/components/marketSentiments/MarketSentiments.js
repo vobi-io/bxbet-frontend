@@ -85,7 +85,6 @@ const MarketSentiments = ({ pieData }) => {
       ],
     }],
   }
-  console.log(percents)
   const options = {
     cutoutPercentage: 80,
     tooltips: { enabled: false },
