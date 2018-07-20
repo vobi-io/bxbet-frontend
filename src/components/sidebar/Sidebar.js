@@ -24,6 +24,10 @@ const SidebarContainer = styled.div`
     padding: 15px;
     }
 
+    & .bm-overlay {
+      top: 0
+    }
+
     & nav.bm-item-list {
     width: 100%;
     }
@@ -42,14 +46,37 @@ const SidebarContainer = styled.div`
         margin-top: 15px;
     }
 `
+const CloseButton = styled.div`
+  white-space: nowrap;
+  font-size: 40px;
+  color: white;
+  display: flex !important;
+  justify-content: flex-end;
+  span {
+    cursor: pointer;
+  }
+`
+const StyledMenu = styled(Menu)`
+  height: 100vh !important;
+  top: 0;
+`
+const Img = styled.img`
+  width: 26px;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  cursor: pointer;
+`
 
-const Sidebar = ({ data, loading }) => (
+const Sidebar = ({ data, loading, isOpen, toggle }) => (
   <SidebarContainer>
-    <Menu customBurgerIcon={<img src={burgerNavIcon} />}>
+    <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
+    <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={isOpen} >
+      <CloseButton><span onClick={() => { toggle() }} >&times;</span></CloseButton>
       <SearchField />
       <InfoList data={data} loading={loading} />
-    </Menu>
+    </StyledMenu>
   </SidebarContainer>
-    )
+)
 
 export default enhance(Sidebar)

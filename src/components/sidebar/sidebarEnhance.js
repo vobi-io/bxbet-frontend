@@ -1,4 +1,4 @@
-import { compose, withStateHandlers, renderNothing, branch, withProps } from 'recompose'
+import { compose, withStateHandlers, renderNothing, branch, withProps, withHandlers, lifecycle } from 'recompose'
 import { graphql } from 'react-apollo'
 
 import query from './gameMany.graphql'
@@ -23,10 +23,14 @@ export default compose(
 
     ),
     withStateHandlers(
-        ({ data, loading }) => ({
-          loading,
-          data,
-        })
+      ({ data, loading }) => ({
+        loading,
+        data,
+        isOpen: false,
+      }),
+      {
+        toggle: ({ isOpen }) => () => ({ isOpen: !isOpen }),
+      }
     ),
     withMe(),
     refetchOn([FINISH_GAME]),
