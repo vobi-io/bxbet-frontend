@@ -141,7 +141,6 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectChan
   onChangeHandler, odd, stake, isValidInput, toggleButtons,
   placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
     <div>
-      {console.log(selected)}
       <div style={{ display: 'flex' }}>
         <StyledTab green onClick={() => toggleActiveButton('buy')}>
           BUY
