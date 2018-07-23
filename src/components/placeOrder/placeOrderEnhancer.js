@@ -28,7 +28,7 @@ export default compose(
         const newState = {}
         const value = e.target.value
 
-        if (e.target.name === 'odd') {
+        if (e.target.name === "buyers' odds") {
           newState.odd = value // parseFloat(value) || ' '
         } else {
           newState.stake = parseFloat(value) || ' '
