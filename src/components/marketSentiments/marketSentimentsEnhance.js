@@ -1,4 +1,5 @@
-import { compose, withHandlers, branch, renderNothing } from 'recompose'
+import { compose, withHandlers, branch, renderNothing, shouldUpdate, shallowEqual } from 'recompose'
+import _ from 'lodash'
 import { graphql } from 'react-apollo'
 // import refetchData from '../../hocs/refetchData'
 
@@ -9,16 +10,18 @@ import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET,
  } from '../../eventTypes'
 
 export default compose(
-    graphql(gameReportQuery, {
-      name: 'data',
-      options: ({ game }) => {
-        let variables = { }
-        if (game && game.gameId) {
-          variables = { gameId: game.gameId }
-        }
-        return { variables }
-      },
-    }),
+  // shouldUpdate(shallowEqual),
+  graphql(gameReportQuery, {
+    name: 'data',
+    options: ({ game }) => {
+      let variables = { }
+      if (game && game.gameId) {
+        variables = { gameId: game.gameId }
+      }
+      return { variables }
+    },
+  }),
+  shouldUpdate((props, nextProps) => !_.isEqual(nextProps.data, props.data)),
     // branch(
     //   ({ data: { loading } }) => loading,
     //   renderNothing,

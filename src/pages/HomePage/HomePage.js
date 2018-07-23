@@ -67,7 +67,9 @@ const HomePage = ({
   activeButton2,
   activeButton3,
   onSelectorChange,
-  selected,
+  selectedOutcome,
+
+  onOddClick,
 
   // place order props
   toggleActiveButton,
@@ -75,6 +77,8 @@ const HomePage = ({
   onChangeHandler,
   odd,
   stake,
+  odd1,
+  stakeAmount,
   isValidInput,
   toggleButtons,
   placeOrderCalculation,
@@ -98,7 +102,7 @@ const HomePage = ({
             activeButton2={activeButton2}
             activeButton3={activeButton3}
             onSelectorChange={onSelectorChange}
-            selected={selected}
+            selected={selectedOutcome}
             toggleSignIn={toggleSignIn}
           />
           <Brick />
@@ -109,7 +113,7 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook game={game} me={me} selected={selected} />
+            <OrderBook game={game} me={me} selected={selectedOutcome} />
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder
@@ -124,10 +128,12 @@ const HomePage = ({
                 gameId={game.gameId}
                 toggleActiveButton={toggleActiveButton}
                 activeTab={activeTab}
-                selected={selected}
+                selected={selectedOutcome}
                 onSelectorChange={onSelectorChange}
                 onChangeHandler={onChangeHandler}
                 odd={odd}
+                odd1={odd1}
+                amount={stakeAmount}
                 stake={stake}
                 isValidInput={isValidInput}
                 toggleButtons={toggleButtons}
@@ -161,6 +167,7 @@ const HomePage = ({
             data={tableData}
             game={game}
             teams={teams}
+            handleClick={onOddClick}
             me={me}
           />
         </VerticalWrapper>
@@ -200,7 +207,9 @@ export default compose(
       signInOpened: false,
       signUpOpened: false,
       signUpWithEmailOpened: false,
-      selected: game ? game.homeTeam : null,
+      selectedOutcome: game ? game.homeTeam : null,
+      odd1: 1.5,
+      stakeAmount: 0,
     }),
     {
       toggleSignIn: ({ signInOpened }) => () => ({
@@ -212,7 +221,8 @@ export default compose(
       toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
         signUpWithEmailOpened: !signUpWithEmailOpened,
       }),
-      onSelectorChange: () => selected => ({ selected }),
+      onSelectorChange: () => selectedOutcome => ({ selectedOutcome }),
+      onOddClick: () => (odd, amount) => ({ odd1: odd, stakeAmount: amount }),
     }
   ),
   // refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),

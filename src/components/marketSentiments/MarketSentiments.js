@@ -121,7 +121,7 @@ const MarketSentiments = ({ pieData }) => {
       </div>
     </Container>
       )
-
+      console.log('renderMarket')
 
   return <Card title="Market Sentiments" width="30%"><Body /> </Card>
 }

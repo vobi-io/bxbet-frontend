@@ -81,13 +81,13 @@ const TableItem = styled.div`
   }
 `
 
-const AvailableOdds = ({ sortedData, teams }) => {
+const AvailableOdds = ({ sortedData, teams, handleClick }) => {
   const Body = () => {
     const tableArray = []
     let index = 0
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
-        <div className="table-item" key={i}>
+        <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount)}>
           <span className={arr.length === i + 1 ? 'green bigOnes' : 'bigOnes'}>{obj.odd}</span>
           <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}</span>
         </div>

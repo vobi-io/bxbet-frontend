@@ -1,5 +1,5 @@
 import React from 'react'
-import { compose, withStateHandlers, withHandlers, renderNothing, branch } from 'recompose'
+import { compose, withStateHandlers, withHandlers, renderNothing, branch, lifecycle } from 'recompose'
 import { graphql } from 'react-apollo'
 import { toast } from 'react-toastify'
 import { mutation } from '../../hocs'
@@ -28,7 +28,7 @@ export default compose(
         const newState = {}
         const value = e.target.value
 
-        if (e.target.name === 'odd') {
+        if (e.target.name === "buyers' odds") {
           newState.odd = value // parseFloat(value) || ' '
         } else {
           newState.stake = parseFloat(value) || ' '
@@ -71,7 +71,7 @@ export default compose(
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, notification, ...props }) => async () => {
+    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selectedOutcome, resetToDefault, notification, ...props }) => async () => {
       const gameId = game.gameById.gameId
       const teams = [game.gameById.homeTeam, game.gameById.awayTeam, 'Draw']
 
@@ -89,11 +89,11 @@ export default compose(
       //     outcome = 0
       //   }
       // }
-      if (teams[0] === selected) {
+      if (teams[0] === selectedOutcome) {
         outcome = 1
-      } else if (teams[1] === selected) {
+      } else if (teams[1] === selectedOutcome) {
         outcome = 2
-      } else if (teams[2] === selected) {
+      } else if (teams[2] === selectedOutcome) {
         outcome = 0
       }
 
@@ -114,7 +114,7 @@ export default compose(
       let profit
 
       if (activeTab === 'buy') {
-        profit = Math.floor(oddFloat * amount - amount)
+        profit = Math.floor((oddFloat * amount) - amount)
         return isNaN(profit) ? '0 BX' : `${profit} BX`
       }
       if (isLiabilitiesActive) {
@@ -136,6 +136,16 @@ export default compose(
         )
       }
       return <div className="circle" />
+    },
+  }),
+  lifecycle({
+    componentWillReceiveProps({ odd1, stakeAmount }) {
+      if (this.props.odd1 !== odd1 || this.props.stakeAmount !== stakeAmount) {
+        this.setState({ odd: odd1, stake: stakeAmount })
+        console.log('odd1', odd1)
+        console.log('stakeamount,', stakeAmount)
+      }
+      return true
     },
   })
 )
