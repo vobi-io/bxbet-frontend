@@ -10,6 +10,7 @@ import Button from '../button'
 import authAware from '../../authAware'
 import emitter from '../../eventEmitter'
 import { TOGGLE_SIGN_IN } from '../../eventTypes'
+import placeOrderEnhancer from './placeOrderEnhancer'
 
 const Container = styled.div`
 border-radius: 0 0 6px 6px;
@@ -136,10 +137,11 @@ const handleChange = () => {
   emitter.emit(TOGGLE_SIGN_IN)
 }
 
-const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
-  onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons,
+const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectChange,
+  onChangeHandler, odd, stake, isValidInput, toggleButtons,
   placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
     <div>
+      {console.log(selected)}
       <div style={{ display: 'flex' }}>
         <StyledTab green onClick={() => toggleActiveButton('buy')}>
           BUY
@@ -151,7 +153,7 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
       <ActiveUnderline activeTab={activeTab} />
       <Container>
         <StyledForm>
-          <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
+          <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectChange(e.target.value) : () => handleChange(props)} />
           <TextField type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
           <TextField title="Buyers' Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
@@ -177,32 +179,6 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
           </div>
         </StyledInfo>
       </Container>
-
-      {/* {props.signInOpened && (
-      <Route
-        path="/"
-        render={() => (
-          <SignInModal
-            isOpen={props.signInOpened}
-            openSignup={props.props.toggleSignUpWithEmail}
-            onRequestClose={props.props.toggleSignIn}
-          />
-          )}
-      />
-      )}
-      {props.signUpWithEmailOpened && (
-      <Route
-        path="/"
-        render={() => (
-          <SignUpWithEmail
-            isOpen={props.signUpWithEmailOpened}
-            openLogin={props.toggleSignIn}
-            onRequestClose={props.toggleSignUpWithEmail}
-          />
-          )}
-      />
-      )} */}
-
     </div>
   )
 
@@ -211,8 +187,7 @@ const PlaceOrder = ({
     gameId,
     toggleActiveButton,
     activeTab,
-    selected,
-    onSelectorChange,
+    onSelectChange,
     onChangeHandler,
     odd, stake,
     isValidInput, toggleButtons,
@@ -220,6 +195,7 @@ const PlaceOrder = ({
     isLiabilitiesActive,
     isPayoutActive, buttonSwitcher,
     signInOpened,
+    selected,
     ...rest }) => (
       <Card title={'Bet Slip'} width="100%">
         <CardBody
@@ -228,7 +204,7 @@ const PlaceOrder = ({
           toggleActiveButton={toggleActiveButton}
           activeTab={activeTab}
           selected={selected}
-          onSelectorChange={onSelectorChange}
+          onSelectChange={onSelectChange}
           onChangeHandler={onChangeHandler}
           odd={odd}
           stake={stake}
@@ -244,4 +220,4 @@ const PlaceOrder = ({
       </Card>
 )
 
-export default authAware(PlaceOrder)
+export default authAware(placeOrderEnhancer(PlaceOrder))

@@ -13,7 +13,6 @@ import AvailableOdds from '../../components/availableOdds'
 import MarketSentiments from '../../components/marketSentiments'
 import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
-import placeOrderEnhancer from '../../components/placeOrder/placeOrderEnhancer'
 import { withMe } from '../../hocs'
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/ptrn.png'
@@ -56,36 +55,16 @@ const tableData = [
 ]
 
 const HomePage = ({
-  signInOpened,
-  signUpOpened,
-  signUpWithEmailOpened,
-  toggleSignIn,
-  toggleSignUp,
-  toggleSignUpWithEmail,
   // choose outcome props
-  activeButton1,
-  activeButton2,
-  activeButton3,
   onSelectorChange,
   selectedOutcome,
 
   onOddClick,
 
   // place order props
-  toggleActiveButton,
-  activeTab,
-  onChangeHandler,
-  odd,
-  stake,
-  odd1,
-  stakeAmount,
-  isValidInput,
-  toggleButtons,
-  placeOrderCalculation,
-  isLiabilitiesActive,
-  isPayoutActive,
-  buttonSwitcher,
-  onPlaceOrder,
+  availableAmount,
+  availableActiveTab,
+  availableOdd,
   game,
   me,
 }) => {
@@ -98,12 +77,8 @@ const HomePage = ({
         <VerticalWrapper>
           <ChooseOutcome
             teams={teams}
-            activeButton1={activeButton1}
-            activeButton2={activeButton2}
-            activeButton3={activeButton3}
             onSelectorChange={onSelectorChange}
             selected={selectedOutcome}
-            toggleSignIn={toggleSignIn}
           />
           <Brick />
           <Cover
@@ -117,31 +92,12 @@ const HomePage = ({
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder
-                signInOpened={signInOpened}
-                signUpOpened={signUpOpened}
-                toggleSignIn={toggleSignIn}
-                toggleSignUp={toggleSignUp}
-                signUpWithEmailOpened={signUpWithEmailOpened}
-                toggleSignUpWithEmail={toggleSignUpWithEmail}
                 teams={teams}
                 game={game}
                 gameId={game.gameId}
-                toggleActiveButton={toggleActiveButton}
-                activeTab={activeTab}
-                selected={selectedOutcome}
-                onSelectorChange={onSelectorChange}
-                onChangeHandler={onChangeHandler}
-                odd={odd}
-                odd1={odd1}
-                amount={stakeAmount}
-                stake={stake}
-                isValidInput={isValidInput}
-                toggleButtons={toggleButtons}
-                placeOrderCalculation={placeOrderCalculation}
-                isLiabilitiesActive={isLiabilitiesActive}
-                isPayoutActive={isPayoutActive}
-                buttonSwitcher={buttonSwitcher}
-                onPlaceOrder={onPlaceOrder}
+                availableOdd={availableOdd}
+                availableAmount={availableAmount}
+                availableActiveTab={availableActiveTab}
               />
               <Brick />
               <YourBetes
@@ -204,26 +160,15 @@ export default compose(
   ),
   withStateHandlers(
     ({ game }) => ({
-      signInOpened: false,
-      signUpOpened: false,
-      signUpWithEmailOpened: false,
       selectedOutcome: game ? game.homeTeam : null,
-      odd1: 1.5,
-      stakeAmount: 0,
+      availableOdd: 1.5,
+      availableAmount: 0,
+      availableActiveTab: 'buy',
     }),
     {
-      toggleSignIn: ({ signInOpened }) => () => ({
-        signInOpened: !signInOpened,
-      }),
-      toggleSignUp: ({ signUpOpened }) => () => ({
-        signUpOpened: !signUpOpened,
-      }),
-      toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
-        signUpWithEmailOpened: !signUpWithEmailOpened,
-      }),
       onSelectorChange: () => selectedOutcome => ({ selectedOutcome }),
-      onOddClick: () => (odd, amount) => ({ odd1: odd, stakeAmount: amount }),
+      onOddClick: () => (odd, amount, activeTab) => ({ availableOdd: odd, availableAmount: amount, availableActiveTab: activeTab }),
     }
   ),
   // refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
-)(placeOrderEnhancer(HomePage))
+)(HomePage)

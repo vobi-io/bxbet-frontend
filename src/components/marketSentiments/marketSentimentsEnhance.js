@@ -1,4 +1,4 @@
-import { compose, withHandlers, branch, renderNothing, shouldUpdate, shallowEqual } from 'recompose'
+import { compose, withHandlers } from 'recompose'
 import _ from 'lodash'
 import { graphql } from 'react-apollo'
 // import refetchData from '../../hocs/refetchData'
@@ -21,7 +21,7 @@ export default compose(
       return { variables }
     },
   }),
-  shouldUpdate((props, nextProps) => !_.isEqual(nextProps.data, props.data)),
+
     // branch(
     //   ({ data: { loading } }) => loading,
     //   renderNothing,

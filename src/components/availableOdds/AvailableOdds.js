@@ -74,6 +74,7 @@ const TableItem = styled.div`
     .table-item {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
   }
   .buy-items {
@@ -87,13 +88,13 @@ const AvailableOdds = ({ sortedData, teams, handleClick }) => {
     let index = 0
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
-        <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount)}>
+        <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount, 'buy')}>
           <span className={arr.length === i + 1 ? 'green bigOnes' : 'bigOnes'}>{obj.odd}</span>
           <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}</span>
         </div>
       ))
       const Sell = sortedData[key].sell.map((obj, i) => (
-        <div className="table-item" key={i}>
+        <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount, 'sell')}>
           <span className={i === 0 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
           <span className={i === 0 ? 'red' : ''}>{obj.amount}</span>
         </div>

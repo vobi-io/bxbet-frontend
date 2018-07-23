@@ -18,6 +18,7 @@ export default compose(
       stake: 0,
       isValidInput: false,
       getBalance,
+      selected: props.game ? props.game.homeTeam : null,
       isLiabilitiesActive: true,
       isPayoutActive: false,
       props,
@@ -38,6 +39,7 @@ export default compose(
         }
         return newState
       },
+      setDefaultData: () => ({ odd, stake, activeTab }) => ({ odd, stake, activeTab }),
       toggleButtons: () => (e) => {
         let newState = {}
         if (e.target.value === 'liabilities') {
@@ -53,12 +55,13 @@ export default compose(
         }
         return newState
       },
-      notification: () => (props) => {
-        if (props.isValidInput && props.game.status === 3) {
+      onSelectChange: () => selected => ({ selected }),
+      notification: () => (game, isValidInput) => {
+        if (isValidInput && game.status === 3) {
           toast('Order has been added successfully')
         }
       },
-      resetToDefault: () => (props, getBalance) => ({
+      resetToDefault: () => getBalance => ({
         activeTab: 'buy',
         odd: 1.5,
         stake: 0,
@@ -66,34 +69,24 @@ export default compose(
         isLiabilitiesActive: true,
         isPayoutActive: false,
         getBalance,
-        props,
       }),
     }
   ),
   withHandlers({
-    onPlaceOrder: ({ data: game, placeOrder, getBalance, odd, stake, activeTab, selectedOutcome, resetToDefault, notification, ...props }) => async () => {
-      const gameId = game.gameById.gameId
-      const teams = [game.gameById.homeTeam, game.gameById.awayTeam, 'Draw']
+    onPlaceOrder: ({ game, placeOrder, getBalance, odd, stake, activeTab, selected, resetToDefault, notification, isValidInput, ...props }) => async () => {
+      const gameId = game.gameId
+      const teams = [game.homeTeam, game.awayTeam, 'Draw']
 
       const orderType = activeTab === 'buy' ? 0 : 1
       const oddFloat = parseFloat(odd)
       const amount = parseFloat(stake)
       let outcome
 
-      // for (let i = 0; i < teams.length; i++) {
-      //   if (teams[i] === selected && i === 0) {
-      //     outcome = 1
-      //   } else if (teams[i] === selected && i === 1) {
-      //     outcome = 2
-      //   } else if (teams[i] === selected && i === 2) {
-      //     outcome = 0
-      //   }
-      // }
-      if (teams[0] === selectedOutcome) {
+      if (teams[0] === selected) {
         outcome = 1
-      } else if (teams[1] === selectedOutcome) {
+      } else if (teams[1] === selected) {
         outcome = 2
-      } else if (teams[2] === selectedOutcome) {
+      } else if (teams[2] === selected) {
         outcome = 0
       }
 
@@ -105,8 +98,8 @@ export default compose(
         gameId,
       }
       await placeOrder(variables)
-      notification(props)
-      resetToDefault(props, getBalance)
+      notification(game, isValidInput)
+      resetToDefault(getBalance)
     },
     placeOrderCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
       const oddFloat = parseFloat(odd)
@@ -139,11 +132,9 @@ export default compose(
     },
   }),
   lifecycle({
-    componentWillReceiveProps({ odd1, stakeAmount }) {
-      if (this.props.odd1 !== odd1 || this.props.stakeAmount !== stakeAmount) {
-        this.setState({ odd: odd1, stake: stakeAmount })
-        console.log('odd1', odd1)
-        console.log('stakeamount,', stakeAmount)
+    componentWillReceiveProps({ availableOdd, availableAmount, availableActiveTab }) {
+      if (this.props.availableOdd !== availableOdd || this.props.availableAmount !== availableAmount || this.props.availableActiveTab !== availableActiveTab) {
+        this.props.setDefaultData({ odd: availableOdd, stake: availableAmount, activeTab: availableActiveTab })
       }
       return true
     },
