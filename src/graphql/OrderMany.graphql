@@ -3,10 +3,12 @@ query OrderMany($game: MongoID){
     orderType
     odd
     amount
+    outcome
   }
   buyOrders: orderMany(limit: 10, filter: { game: $game, orderType: 0}, sort: ODD_DESC){
     orderType
     odd
     amount
+    outcome
   }
 }

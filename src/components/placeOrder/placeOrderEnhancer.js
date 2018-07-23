@@ -16,7 +16,6 @@ export default compose(
       activeTab: 'buy',
       odd: 1.5,
       stake: 0,
-      selected: props.data.gameById ? props.data.gameById.homeTeam : null,
       isValidInput: false,
       getBalance,
       isLiabilitiesActive: true,
@@ -39,11 +38,6 @@ export default compose(
         }
         return newState
       },
-      onSelectorChange: () => (val) => {
-        const newState = {}
-        newState.selected = val
-        return newState
-      },
       toggleButtons: () => (e) => {
         let newState = {}
         if (e.target.value === 'liabilities') {
@@ -64,21 +58,16 @@ export default compose(
           toast('Order has been added successfully')
         }
       },
-      resetToDefault: () => (props, getBalance) => {
-        let newState = {}
-        newState = {
-          activeTab: 'buy',
-          odd: 1.5,
-          stake: 0,
-          isValidInput: false,
-          isLiabilitiesActive: true,
-          isPayoutActive: false,
-          getBalance,
-          selected: props.game.homeTeam,
-          props,
-        }
-        return newState
-      },
+      resetToDefault: () => (props, getBalance) => ({
+        activeTab: 'buy',
+        odd: 1.5,
+        stake: 0,
+        isValidInput: false,
+        isLiabilitiesActive: true,
+        isPayoutActive: false,
+        getBalance,
+        props,
+      }),
     }
   ),
   withHandlers({

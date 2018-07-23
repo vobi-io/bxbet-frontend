@@ -49,6 +49,12 @@ const Brick = styled.div`
 
 
 const OrderBook = ({ ...props }) => {
+  let selectedOutcome
+  if (props.game.homeTeam === props.selected) {
+    selectedOutcome = 1
+  } else if (props.game.awayTeam === props.selected) {
+    selectedOutcome = 2
+  } else selectedOutcome = 0
   const getTable = (props) => {
     const StyledTitle = styled.div`
       text-transform: uppercase;
@@ -70,18 +76,22 @@ const OrderBook = ({ ...props }) => {
         text-align: center;
       }
     `
-    const printData = data => data.map((item, index) => (
-      <div className="rows" key={index}>
-        <div className="odds">
-          {item.odd}
+    const printData = data => data.map((item, index) => {
+      if (item.outcome !== selectedOutcome) {
+        return null
+      }
+      return (
+        <div className="rows" key={index}>
+          <div className="odds">
+            {item.odd}
+          </div>
+          <Line />
+          <div className="amount">
+            {item.amount} BX
+          </div>
         </div>
-        <Line />
-        <div className="amount">
-          {item.amount} BX
-        </div>
-      </div>
-    ))
-
+      )
+    })
 
     return (
       <Container>

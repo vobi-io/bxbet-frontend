@@ -109,7 +109,7 @@ const HomePage = ({
         </VerticalWrapper>
         <VerticalWrapper>
           <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook game={game} me={me} />
+            <OrderBook game={game} me={me} selected={selected} />
             <Brick />
             <div style={{ width: '100%' }}>
               <PlaceOrder
@@ -196,10 +196,11 @@ export default compose(
     }
   ),
   withStateHandlers(
-    () => ({
+    ({ game }) => ({
       signInOpened: false,
       signUpOpened: false,
       signUpWithEmailOpened: false,
+      selected: game ? game.homeTeam : null,
     }),
     {
       toggleSignIn: ({ signInOpened }) => () => ({
@@ -211,6 +212,7 @@ export default compose(
       toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
         signUpWithEmailOpened: !signUpWithEmailOpened,
       }),
+      onSelectorChange: () => selected => ({ selected }),
     }
   ),
   // refetchOn(['placeOrder', 'placeOrderFromSocket', 'finishGame', 'finishGameFromSocket']),
