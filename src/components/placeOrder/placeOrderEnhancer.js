@@ -39,7 +39,7 @@ export default compose(
         }
         return newState
       },
-      setDefaultData: () => ({ odd, stake, activeTab }) => ({ odd, stake, activeTab }),
+      setDefaultData: () => ({ odd, stake, activeTab, isValidInput }) => ({ odd, stake, activeTab, isValidInput }),
       toggleButtons: () => (e) => {
         let newState = {}
         if (e.target.value === 'liabilities') {
@@ -133,8 +133,10 @@ export default compose(
   }),
   lifecycle({
     componentWillReceiveProps({ availableOdd, availableAmount, availableActiveTab }) {
-      if (this.props.availableOdd !== availableOdd || this.props.availableAmount !== availableAmount || this.props.availableActiveTab !== availableActiveTab) {
-        this.props.setDefaultData({ odd: availableOdd, stake: availableAmount, activeTab: availableActiveTab })
+      if (availableOdd === 0 || availableAmount === 0) {
+        return null
+      } else if (this.props.availableOdd !== availableOdd || this.props.availableAmount !== availableAmount || this.props.availableActiveTab !== availableActiveTab) {
+        this.props.setDefaultData({ odd: availableOdd, stake: availableAmount, activeTab: availableActiveTab, isValidInput: true })
       }
       return true
     },
