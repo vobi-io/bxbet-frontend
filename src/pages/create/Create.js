@@ -49,12 +49,12 @@ const StyledDatePicker = styled.div`
       height: 40px;
       border-radius: 3px;
       background-color: #E7EAED;
-      font-family: Myriad Pro;
+      font-family: Montserrat;
       font-size: 14px;
       color: #314b5b;
       border: none;
       ::placeholder {
-          font-family: Myriad Pro;
+          font-family: Montserrat;
           font-size: 14px;
           color: #314b5b;
       }
@@ -69,7 +69,7 @@ const StyledDatePicker = styled.div`
 `
 
 const StyledLabel = styled.p`
-    font-family: Myriad Pro;
+    font-family: Montserrat;
     font-size: 14px;
     color: white;
     width: 25%;

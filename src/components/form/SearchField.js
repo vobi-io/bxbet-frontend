@@ -9,7 +9,7 @@ const StyledInput = styled.input`
     height: 35px;
     background-color: #1a567e;
     border: solid 1px #265271;
-    font-family: Open Sans;
+    font-family: Montserrat;
     font-size: 14px;
     font-weight: bold;
     color: white;

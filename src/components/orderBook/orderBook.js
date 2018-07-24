@@ -11,7 +11,7 @@ const Container = styled.div`
       border-radius: 5px;
       background-color: #0f334b;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
-      font-family: Open Sans;
+      font-family: Montserrat;
       font-size: 14px;
       color: white;
       overflow: hidden;

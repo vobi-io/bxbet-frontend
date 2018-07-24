@@ -21,12 +21,12 @@ function SelectField(props) {
         opacity: 0.9;
         border-radius: 3px;
         background-color: #ffffff;
-        font-family: Myriad Pro;
+        font-family: Montserrat;
         font-size: 14px;
         color: #314b5b;
         border: none;
         ::placeholder {
-            font-family: Myriad Pro;
+            font-family: Montserrat;
             font-size: 14px;
             color: #314b5b;
         }
