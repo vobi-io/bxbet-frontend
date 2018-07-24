@@ -28,6 +28,7 @@ border-top: solid 1px #92acfe;
   & .odds, & .amount {
     width: 100%;
     text-align: center;
+    color: ${p => (p.title === 'buy' ? '#7fac30' : '#ed2b3b')};
   }
 }
 `
@@ -100,7 +101,7 @@ const OrderBook = ({ ...props }) => {
           <div> Odds </div>
           <div> Amount </div>
         </StyledSubTitle>
-        <StyledContent>
+        <StyledContent title={props.title}>
           {props.data && printData(props.data)}
         </StyledContent>
       </Container>
