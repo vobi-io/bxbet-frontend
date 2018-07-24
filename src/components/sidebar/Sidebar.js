@@ -6,6 +6,7 @@ import burgerNavIcon from '../../resources/assets/img/icons/burger-navigation.sv
 import { SearchField } from '../form'
 import InfoList from './InfoList'
 import enhance from './sidebarEnhance'
+import bxLogo from '../../resources/assets/img/LG_SM.png'
 
 const SidebarContainer = styled.div`
     width: 59px;
@@ -67,14 +68,27 @@ const Img = styled.img`
   left: 15px;
   cursor: pointer;
 `
+const Div = styled.div`
+  position: relative;
+  min-height: 95%;
+  padding-bottom: 30px;
+  margin-bottom: 8px;
+`
+const Logo = styled.img`
+  position: absolute;
+  bottom: 0;
+`
 
 const Sidebar = ({ data, loading, isOpen, toggle }) => (
   <SidebarContainer>
     <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
     <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={isOpen} >
-      <CloseButton><span onClick={() => { toggle() }} >&times;</span></CloseButton>
-      <SearchField />
-      <InfoList data={data} loading={loading} />
+      <Div>
+        <CloseButton><span onClick={() => { toggle() }} >&times;</span></CloseButton>
+        <SearchField />
+        <InfoList data={data} loading={loading} />
+        <Logo src={bxLogo} alt="logo" style={{ position: 'absolute', bottom: 0 }} />
+      </Div>
     </StyledMenu>
   </SidebarContainer>
 )
