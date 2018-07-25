@@ -144,13 +144,13 @@ const AvailableOdds = ({ sortedData, teams, handleClick }) => {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
         <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount, 'buy')}>
           <span className={arr.length === i + 1 ? 'green bigOnes' : 'bigOnes'}>{obj.odd}</span>
-          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}</span>
+          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}{' '}BX</span>
         </div>
       ))
       const Sell = sortedData[key].sell.map((obj, i) => (
         <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount, 'sell')}>
           <span className={i === 0 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
-          <span className={i === 0 ? 'red' : ''}>{obj.amount}</span>
+          <span className={i === 0 ? 'red' : ''}>{obj.amount}{' '}BX</span>
         </div>
       ))
       tableArray.push(
