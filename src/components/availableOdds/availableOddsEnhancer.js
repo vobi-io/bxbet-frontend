@@ -47,15 +47,15 @@ export default compose(
 
       const returnSortedArray = arr => arr.sort((a, b) => a.odd - b.odd)
       const isEmpty = arr => !(arr.length > 0)
-      sortedData.drawRow.buy = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
-      sortedData.drawRow.sell = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
+      sortedData.drawRow.buy = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
+      sortedData.drawRow.sell = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
 
-      sortedData.homeRow.buy = isEmpty(!gameData.homeTeamBuy) ? returnSortedArray(gameData.homeTeamBuy) : []
-      sortedData.homeRow.sell = isEmpty(!gameData.homeTeamSell) ? returnSortedArray(gameData.homeTeamSell) : []
+      sortedData.homeRow.buy = isEmpty(!gameData.homeTeamSell) ? returnSortedArray(gameData.homeTeamSell) : []
+      sortedData.homeRow.sell = isEmpty(!gameData.homeTeamBuy) ? returnSortedArray(gameData.homeTeamBuy) : []
 
 
-      sortedData.awayRow.buy = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
-      sortedData.awayRow.sell = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []
+      sortedData.awayRow.buy = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []
+      sortedData.awayRow.sell = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
 
       for (const key in sortedData) {
         if (sortedData[key].sell.length === 0) {
