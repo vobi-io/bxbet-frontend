@@ -18,7 +18,8 @@ export default compose(
       (props) => {
         const data = props.data.gameMany
         const loading = props.data.loading
-        return { data, loading }
+        const newData = data
+        return { data, loading, newData }
       }
 
     ),
@@ -30,8 +31,23 @@ export default compose(
       }),
       {
         toggle: ({ isOpen }) => () => ({ isOpen: !isOpen }),
+        onChangeHandler: ({ data }) => (val) => {
+          const newData1 = []
+          if (val.length === 0) {
+            return { newData: data }
+          }
+          data.map((item) => {
+            if (item.homeTeam.toLowerCase().includes(val.toLowerCase()) || item.awayTeam.toLowerCase().includes(val.toLowerCase())) {
+              newData1.push(item)
+            }
+            return true
+          })
+          return { newData: newData1 }
+        },
       }
     ),
+    withHandlers({
+    }),
     withMe(),
     refetchOn([FINISH_GAME]),
     catchEmitOn([FINISH_GAME_FROM_SOCKET], (props, args) => {

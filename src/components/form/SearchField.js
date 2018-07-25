@@ -27,9 +27,9 @@ const StyledSearchIcon = styled.img`
     cursor: pointer;
 `
 
-const SearchField = () => (
+const SearchField = props => (
   <form>
-    <StyledInput type="search" placeholder="search" />
+    <StyledInput type="search" placeholder="search" onChange={e => props.onChange(e.target.value)} />
     <StyledSearchIcon src={searchIcon} alt="Search" />
   </form>
     )

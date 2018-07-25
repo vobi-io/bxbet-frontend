@@ -79,14 +79,14 @@ const Logo = styled.img`
   bottom: 0;
 `
 
-const Sidebar = ({ data, loading, isOpen, toggle }) => (
+const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData }) => (
   <SidebarContainer>
     <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
     <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={isOpen} >
       <Div>
         <CloseButton><span onClick={() => { toggle() }} >&times;</span></CloseButton>
-        <SearchField />
-        <InfoList data={data} loading={loading} />
+        <SearchField onChange={onChangeHandler} />
+        <InfoList data={newData} loading={loading} />
         <Logo src={bxLogo} alt="logo" style={{ position: 'absolute', bottom: 0 }} />
       </Div>
     </StyledMenu>
