@@ -125,8 +125,9 @@ const HomePage = ({
             data={tableData}
             game={game}
             teams={teams}
-            handleClick={onOddClick}
+            onOddClick={onOddClick}
             me={me}
+            onSelectorChange={onSelectorChange}
           />
         </VerticalWrapper>
       </Container>

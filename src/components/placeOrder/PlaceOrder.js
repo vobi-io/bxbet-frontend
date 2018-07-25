@@ -137,7 +137,7 @@ const handleChange = () => {
   emitter.emit(TOGGLE_SIGN_IN)
 }
 
-const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectChange,
+const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange,
   onChangeHandler, odd, stake, isValidInput, toggleButtons,
   placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
     <div>
@@ -152,7 +152,7 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectChan
       <ActiveUnderline activeTab={activeTab} />
       <Container>
         <StyledForm>
-          <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectChange(e.target.value) : () => handleChange(props)} />
+          <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
           <TextField type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
           <TextField title="Buyers' Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
@@ -203,7 +203,7 @@ const PlaceOrder = ({
           toggleActiveButton={toggleActiveButton}
           activeTab={activeTab}
           selected={selected}
-          onSelectChange={onSelectorChange}
+          onSelectorChange={onSelectorChange}
           onChangeHandler={onChangeHandler}
           odd={odd}
           stake={stake}

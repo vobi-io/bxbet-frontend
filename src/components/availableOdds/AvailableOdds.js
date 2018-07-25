@@ -136,19 +136,34 @@ const SellHeadContainer = styled.div`
   font-family: Montserrat;
   font-weight: bold;
 `
-const AvailableOdds = ({ sortedData, teams, handleClick }) => {
+const handleClick = (onOddClick, onSelectorChange, odd, amount, activeTab, key, teams) => {
+  let team = ''
+  if (key === 'homeRow') {
+    team = teams[0]
+  } else if (key === 'awayRow') {
+    team = teams[1]
+  } else {
+    team = teams[2]
+  }
+  onOddClick(odd, amount, activeTab)
+  if (odd === 0 || amount === 0) {
+    return
+  }
+  onSelectorChange(team)
+}
+const AvailableOdds = ({ sortedData, teams, onOddClick, onSelectorChange }) => {
   const Body = () => {
     const tableArray = []
     let index = 0
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
-        <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount, 'buy')}>
+        <div className="table-item" key={i} onClick={() => handleClick(onOddClick, onSelectorChange, obj.odd, obj.amount, 'buy', key, teams)}>
           <span className={arr.length === i + 1 ? 'green bigOnes' : 'bigOnes'}>{obj.odd}</span>
           <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}{' '}BX</span>
         </div>
       ))
       const Sell = sortedData[key].sell.map((obj, i) => (
-        <div className="table-item" key={i} onClick={() => handleClick(obj.odd, obj.amount, 'sell')}>
+        <div className="table-item" key={i} onClick={() => handleClick(onOddClick, onSelectorChange, obj.odd, obj.amount, 'sell', key, teams)}>
           <span className={i === 0 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
           <span className={i === 0 ? 'red' : ''}>{obj.amount}{' '}BX</span>
         </div>
