@@ -186,7 +186,7 @@ const PlaceOrder = ({
     gameId,
     toggleActiveButton,
     activeTab,
-    onSelectChange,
+    onSelectorChange,
     onChangeHandler,
     odd, stake,
     isValidInput, toggleButtons,
@@ -203,7 +203,7 @@ const PlaceOrder = ({
           toggleActiveButton={toggleActiveButton}
           activeTab={activeTab}
           selected={selected}
-          onSelectChange={onSelectChange}
+          onSelectChange={onSelectorChange}
           onChangeHandler={onChangeHandler}
           odd={odd}
           stake={stake}

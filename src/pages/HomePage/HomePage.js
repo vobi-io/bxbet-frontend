@@ -98,6 +98,8 @@ const HomePage = ({
                 availableOdd={availableOdd}
                 availableAmount={availableAmount}
                 availableActiveTab={availableActiveTab}
+                selected={selectedOutcome}
+                onSelectorChange={onSelectorChange}
               />
               <Brick />
               <YourBetes

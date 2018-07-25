@@ -18,7 +18,6 @@ export default compose(
       stake: 0,
       isValidInput: false,
       getBalance,
-      selected: props.game ? props.game.homeTeam : null,
       isLiabilitiesActive: true,
       isPayoutActive: false,
       props,
@@ -55,7 +54,6 @@ export default compose(
         }
         return newState
       },
-      onSelectChange: () => selected => ({ selected }),
       notification: () => (game, isValidInput) => {
         if (isValidInput && game.status === 3) {
           toast('Order has been added successfully')
