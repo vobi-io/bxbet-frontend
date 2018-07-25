@@ -49,16 +49,13 @@ export default compose(
       const isEmpty = arr => !(arr.length > 0)
       sortedData.drawRow.buy = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
       sortedData.drawRow.sell = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
-      sortedData.drawRow.sell = sortedData.drawRow.sell.reverse()
 
       sortedData.homeRow.buy = isEmpty(!gameData.homeTeamBuy) ? returnSortedArray(gameData.homeTeamBuy) : []
       sortedData.homeRow.sell = isEmpty(!gameData.homeTeamSell) ? returnSortedArray(gameData.homeTeamSell) : []
-      sortedData.homeRow.sell = sortedData.homeRow.sell.reverse()
 
 
       sortedData.awayRow.buy = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
       sortedData.awayRow.sell = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []
-      sortedData.awayRow.sell = sortedData.awayRow.sell.reverse()
 
       for (const key in sortedData) {
         if (sortedData[key].sell.length === 0) {
@@ -67,7 +64,7 @@ export default compose(
           }
         } else if (sortedData[key].sell.length < 3 && sortedData[key].sell.length > 0) {
           for (let i = sortedData[key].sell.length; i < 3; i++) {
-            sortedData[key].sell.push({ odd: 0, amount: 0 })
+            sortedData[key].sell.unshift({ odd: 0, amount: 0 })
           }
         }
         if (sortedData[key].buy.length === 0) {
