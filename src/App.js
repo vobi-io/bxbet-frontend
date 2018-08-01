@@ -100,6 +100,7 @@ export default compose(
         const user = { id: this.props.me._id }
         const socket = startSocket(user)
         socket.on('update', (data) => {
+          console.log('Updatee socket', data)
           switch (data.type) {
           case 'finishGame':
             emitter.emit(FINISH_GAME_FROM_SOCKET, data)

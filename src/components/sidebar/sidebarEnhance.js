@@ -52,8 +52,7 @@ export default compose(
     refetchOn([FINISH_GAME]),
     catchEmitOn([FINISH_GAME_FROM_SOCKET], (props, args) => {
       if (props.me && props.me._id !== args.fromUserId &&
-          ((args.order && props.game._id === args.order.game) ||
-          (args.game && props.game._id === args.game._id))) {
+          (args.type === 'finishGame' || args.type === 'createGame')) {
         props.data.refetch()
       }
     })
