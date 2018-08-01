@@ -25,16 +25,19 @@ const StyledItem = styled.div`
         font-family: Montserrat;
         font-size: 14px;
         color: #0f334b;
+        max-width: 115px;
     }
   `
 
-const MarketInsights = ({ game, teams }) => {
+const MarketInsights = ({ game, teams, insightsData }) => {
+  let bets = []
+  bets = insightsData()
   const { status } = game
   function Body() {
     const Data = teams.map((team, index) => (
       <StyledItem key={index}>
         <BlueBrick active={index === status} />
-        <span className="item">{team} {index !== 2 ? 'Wins' : null}</span>
+        <span className="item">{team} {index !== 2 ? 'Wins' : null} {' - '} {bets[index]}</span>
       </StyledItem>
         ))
 
