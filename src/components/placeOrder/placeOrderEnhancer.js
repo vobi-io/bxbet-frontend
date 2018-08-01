@@ -17,6 +17,7 @@ export default compose(
       odd: 1.5,
       stake: 0,
       isValidInput: false,
+      oddIsValid: true,
       getBalance,
       isLiabilitiesActive: true,
       isPayoutActive: false,
@@ -30,6 +31,9 @@ export default compose(
 
         if (e.target.name === "buyers' odds") {
           newState.odd = value // parseFloat(value) || ' '
+          if (value < 1.01 || value > 99) {
+            newState.oddIsValid = false
+          } else newState.oddIsValid = true
         } else {
           newState.stake = parseFloat(value) || ' '
           if (value <= 0 || (value > getBalance.getBalance.amount && activeTab === 'buy')) {
