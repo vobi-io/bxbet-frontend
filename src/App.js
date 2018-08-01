@@ -26,6 +26,7 @@ const App = ({
   toggleSignUp,
   toggleSignUpWithEmail,
   toggleHeaderActivePage,
+  me,
 }) => (
   <div id="main-container">
     <Sidebar />
@@ -34,6 +35,7 @@ const App = ({
         exact
         render={props => <Header
           {...props}
+          me={me}
           toggleSignIn={toggleSignIn}
           toggleSignUp={toggleSignUp}
           brandName="BX.BET"
