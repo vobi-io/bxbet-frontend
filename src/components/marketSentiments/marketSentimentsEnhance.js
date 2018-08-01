@@ -29,7 +29,6 @@ export default compose(
     withHandlers({
       pieData: ({ data, teams }) => () => {
         let percentages = []
-        let betsOnTeams = []
         const gameReportData = data.gameReport || []
         const homeTeam = gameReportData.homeTeam
         const awayTeam = gameReportData.awayTeam
@@ -44,9 +43,8 @@ export default compose(
         }
 
         const total = data.gameReport ? data.gameReport.total : 0
-        betsOnTeams = [homeTeam, awayTeam, draw]
-        percentages = calculatePercents(gameReportData.total, homeTeam, awayTeam, draw)
-        return { percentages, titles, totalGame: total, betsOnTeams }
+        percentages = calculatePercents(gameReportData.total)
+        return { percentages, titles, totalGame: total }
       },
     }),
     refetchOn([PLACE_ORDER, FINISH_GAME]),
