@@ -192,7 +192,7 @@ const SignUpContentContainer = compose(
 
         window.location.href = '/'
       } catch (e) {
-        setSubmissionError(e.message)
+        setSubmissionError(e.message.replace('GraphQL error:', '').trim())
       }
 
       // history.push("/")
