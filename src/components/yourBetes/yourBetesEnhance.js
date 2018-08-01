@@ -82,16 +82,16 @@ export default compose(
             status: 'Matched',
             outcome: out,
           })
+        } else {
+          obj = {
+            stake: item.amount,
+            odd: item.odd,
+            orderType: item.orderType === 0 ? 'Buy' : 'Sell',
+            status,
+            outcome: out,
+          }
+          formatedData.push(obj)
         }
-        obj = {
-          stake: item.amount,
-          odd: item.odd,
-          orderType: item.orderType === 0 ? 'Buy' : 'Sell',
-          status,
-          outcome: out,
-        }
-
-        formatedData.push(obj)
         return true
       })
       return formatedData
