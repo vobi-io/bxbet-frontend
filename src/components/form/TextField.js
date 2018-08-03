@@ -7,10 +7,10 @@ justify-content: space-between;
 align-items: center;
 `
 const StyledLabel = styled.label `
-font-family: Myriad Pro;
+font-family: Montserrat;
 font-size: 14px;
 color: white;
-width: 25%;
+width: 37%;
 `
 
 const StyledInput = styled.input `
@@ -20,19 +20,19 @@ const StyledInput = styled.input `
     opacity: 0.9;
     border-radius: 3px;
     background-color: #ffffff;
-    font-family: Myriad Pro;
+    font-family: Montserrat;
     font-size: 14px;
     color: #314b5b;
     border: ${props => props.isValidInput ? 'none' : '2px solid red'};
     ::placeholder {
-        font-family: Myriad Pro;
+        font-family: Montserrat;
         font-size: 14px;
         color: #314b5b;
     }
     padding-left: 16px;
 `
 const Icon = styled.div `
-    font-family: Myriad Pro;
+    font-family: Montserrat;
     font-size: 14px;
     color: #314b5b;
     right: 505px;

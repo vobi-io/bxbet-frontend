@@ -16,7 +16,7 @@ function Cover(props) {
     justify-content: center;
     align-items: center;
     background-image: url(${Stadium});
-    font-family: Open Sans;
+    font-family: Montserrat;
     font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;

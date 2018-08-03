@@ -49,7 +49,7 @@ const TableItem = styled.div`
       opacity: 0.9;
       border-radius: 3px;
       background-image: linear-gradient(to top, #ffffff, #d7d7d7 51%, #ffffff 99%);
-      font-family: Myriad Pro;
+      font-family: Montserrat;
       font-size: 14px;
     }
     .bigOnes {
@@ -74,28 +74,98 @@ const TableItem = styled.div`
     .table-item {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
   }
   .buy-items {
     margin-right: 15px;
   }
 `
-
-const AvailableOdds = ({ sortedData, teams }) => {
+const Odd = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+  opacity: 0.9;
+  border-radius: 3px;
+  background-image: linear-gradient(to top,#32b6ff,#0687d9 51%,#32b6ff 99%);
+  color: #ffffff;
+  font-weight: bold;
+  font-family: Montserrat;
+  margin-bottom: 6px;
+  width: 50px;
+  height: 35px;
+  font-size: 14px;
+`
+const Stake = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+  opacity: 0.9;
+  border-radius: 3px;
+  background-image: linear-gradient(to top,#32b6ff,#0687d9 51%,#32b6ff 99%);
+  color: #ffffff;
+  font-weight: bold;
+  font-family: Montserrat;
+  font-size: 14px;
+`
+const FlexDiv = styled.div`
+  display: flex;
+  width: 100%;
+`
+const BuyHeadContainer = styled.div`
+  text-align: center;
+  margin-left: 181px;
+  padding: 10px;
+  width: 142px;
+  background-image: linear-gradient(to bottom,#7fac30,#288702 99%);
+  color: white;
+  border-radius: 3px;
+  font-family: Montserrat;
+  font-weight: bold;
+`
+const SellHeadContainer = styled.div`
+  text-align: center;
+  margin-left: 22px;
+  padding: 10px;
+  width: 142px;
+  background-image: linear-gradient(to bottom,#ed2b3b,#9f041b);
+  color: white;
+  border-radius: 3px;
+  font-family: Montserrat;
+  font-weight: bold;
+`
+const handleClick = (onOddClick, onSelectorChange, odd, amount, activeTab, key, teams) => {
+  let team = ''
+  if (key === 'homeRow') {
+    team = teams[0]
+  } else if (key === 'awayRow') {
+    team = teams[1]
+  } else {
+    team = teams[2]
+  }
+  onOddClick(odd, amount, activeTab)
+  if (odd === 0 || amount === 0) {
+    return
+  }
+  onSelectorChange(team)
+}
+const AvailableOdds = ({ sortedData, teams, onOddClick, onSelectorChange }) => {
   const Body = () => {
     const tableArray = []
     let index = 0
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
-        <div className="table-item" key={i}>
+        <div className="table-item" key={i} onClick={() => handleClick(onOddClick, onSelectorChange, obj.odd, obj.amount, 'buy', key, teams)}>
           <span className={arr.length === i + 1 ? 'green bigOnes' : 'bigOnes'}>{obj.odd}</span>
-          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}</span>
+          <span className={arr.length === i + 1 ? 'green' : ''}>{obj.amount}{' '}BX</span>
         </div>
       ))
       const Sell = sortedData[key].sell.map((obj, i) => (
-        <div className="table-item" key={i}>
+        <div className="table-item" key={i} onClick={() => handleClick(onOddClick, onSelectorChange, obj.odd, obj.amount, 'sell', key, teams)}>
           <span className={i === 0 ? 'red bigOnes' : 'bigOnes'}>{obj.odd}</span>
-          <span className={i === 0 ? 'red' : ''}>{obj.amount}</span>
+          <span className={i === 0 ? 'red' : ''}>{obj.amount}{' '}BX</span>
         </div>
       ))
       tableArray.push(
@@ -110,6 +180,10 @@ const AvailableOdds = ({ sortedData, teams }) => {
               <div className="sell-items">{Sell}</div>
             </div>
           </div>
+          <div style={{ marginLeft: '15px' }}>
+            <Odd>Odd</Odd>
+            <Stake>Stake</Stake>
+          </div>
         </TableItem>
       )
       index += 1
@@ -119,6 +193,10 @@ const AvailableOdds = ({ sortedData, teams }) => {
 
   return (
     <Card title="Available odds" width="53.5%" bgColor="#0f334b">
+      <FlexDiv>
+        <BuyHeadContainer>Buy</BuyHeadContainer>
+        <SellHeadContainer>Sell</SellHeadContainer>
+      </FlexDiv>
       <Body />
     </Card>
   )

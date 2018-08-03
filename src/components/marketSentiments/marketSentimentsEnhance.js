@@ -1,4 +1,5 @@
-import { compose, withHandlers, branch, renderNothing } from 'recompose'
+import { compose, withHandlers } from 'recompose'
+import _ from 'lodash'
 import { graphql } from 'react-apollo'
 // import refetchData from '../../hocs/refetchData'
 
@@ -9,16 +10,18 @@ import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET,
  } from '../../eventTypes'
 
 export default compose(
-    graphql(gameReportQuery, {
-      name: 'data',
-      options: ({ game }) => {
-        let variables = { }
-        if (game && game.gameId) {
-          variables = { gameId: game.gameId }
-        }
-        return { variables }
-      },
-    }),
+  // shouldUpdate(shallowEqual),
+  graphql(gameReportQuery, {
+    name: 'data',
+    options: ({ game }) => {
+      let variables = { }
+      if (game && game.gameId) {
+        variables = { gameId: game.gameId }
+      }
+      return { variables }
+    },
+  }),
+
     // branch(
     //   ({ data: { loading } }) => loading,
     //   renderNothing,
@@ -27,9 +30,12 @@ export default compose(
       pieData: ({ data, teams }) => () => {
         let percentages = []
         const gameReportData = data.gameReport || []
-        const titles = [`${teams[0]} Wins`, `${teams[1]} Wins`, 'Draw']
+        const homeTeam = gameReportData.homeTeam
+        const awayTeam = gameReportData.awayTeam
+        const draw = gameReportData.draw
 
-        const calculatePercents = (total, homeTeam, awayTeam, draw) => {
+        const titles = [`${teams[0]} Wins`, `${teams[1]} Wins`, 'Draw']
+        const calculatePercents = (total) => {
           const drawPercent = Math.floor((draw / total) * 100)
           const homeTeamPercent = Math.floor((homeTeam / total) * 100)
           const awayTeamPercent = Math.floor((awayTeam / total) * 100)
@@ -37,8 +43,7 @@ export default compose(
         }
 
         const total = data.gameReport ? data.gameReport.total : 0
-
-        percentages = calculatePercents(gameReportData.total, gameReportData.homeTeam, gameReportData.awayTeam, gameReportData.draw)
+        percentages = calculatePercents(gameReportData.total)
         return { percentages, titles, totalGame: total }
       },
     }),

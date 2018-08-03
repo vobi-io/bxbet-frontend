@@ -58,6 +58,11 @@ const NavItem = styled.li`
   opacity: 0.7;
   text-transform: uppercase;
   border-bottom: ${props => (props.isActive ? '3px solid #0f334b' : 'none')};
+  pointer-events: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? 'none' : '')};
+  padding-bottom: ${props => (props.role === undefined ? '22px' : '')};
+  padding-top: ${props => (props.role === undefined ? '17px' : '')};
+  padding-bottom: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? '3px' : '')};
+  padding-top: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? '17px' : '')};
 `
 
 const NavCircle = styled.div`
@@ -68,6 +73,7 @@ const NavCircle = styled.div`
   background-color: #758590;
   display: inline-block;
   align-self: center;
+  margin-top: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? '-17px' : '0px')}
 `
 
 const NavLink = styled(Link)`
@@ -78,10 +84,20 @@ const NavLink = styled(Link)`
   &:hover {
     opacity: 1;
   }
-`
+  color: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? '#66686b' : '#2f3033')}
+  `
 const LogoLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
+`
+const Span = styled.span`
+  color: #66686b;
+  font-size: 11px;
+  transition: 0.2s;
+`
+const FlexDiv = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const Header = ({
@@ -93,6 +109,7 @@ const Header = ({
   location,
   getBalance,
   refetchDataHandler,
+  me,
 }) => (
   <HeaderParent>
     {console.log(refetchDataHandler())}
@@ -121,9 +138,12 @@ const Header = ({
             )}
             {authenticated && (
               centeredPages.map((item, index, fullObj) => (
-                <NavItem key={item.title} isActive={item.to === location.pathname}>
-                  <NavLink to={item.to}>{item.title}</NavLink>
-                  {index < fullObj.length - 1 ? <NavCircle /> : null}
+                <NavItem key={item.title} isActive={item.to === location.pathname} role={index > 0 ? me.role : undefined}>
+                  <FlexDiv>
+                    <NavLink to={item.to} role={index > 0 ? me.role : undefined}>{item.title}</NavLink>
+                    {index > 0 && me.role !== 'superAdmin' ? <Span>{' '}(Coming Soon)</Span> : null}
+                  </FlexDiv>
+                  {index < fullObj.length - 1 ? <NavCircle role={index === 1 ? me.role : undefined} /> : null}
                 </NavItem>
               ))
             )}

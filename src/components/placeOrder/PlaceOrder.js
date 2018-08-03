@@ -10,6 +10,7 @@ import Button from '../button'
 import authAware from '../../authAware'
 import emitter from '../../eventEmitter'
 import { TOGGLE_SIGN_IN } from '../../eventTypes'
+import placeOrderEnhancer from './placeOrderEnhancer'
 
 const Container = styled.div`
 border-radius: 0 0 6px 6px;
@@ -108,10 +109,10 @@ const StyledToastContainer = styled(ToastContainer)`
     opacity: 0.8;
   }
 `
-const placeOrderHandler = (props, isValidInput) => {
+const placeOrderHandler = (props, isValidInput, oddIsValid) => {
   if (!props.props.authenticated) {
     emitter.emit(TOGGLE_SIGN_IN)
-  } else if (!isValidInput) {
+  } else if (!isValidInput || !oddIsValid) {
     return
   } else if (props.props.game.status !== 3) {
     return
@@ -119,25 +120,26 @@ const placeOrderHandler = (props, isValidInput) => {
     props.props.onPlaceOrder()
   }
 }
-const notify = (props, isValidInput) => {
-  if (!isValidInput && props.props.authenticated) {
-    toast('Stake is not Valid')
+const notify = (props, isValidInput, oddIsValid) => {
+  if (!oddIsValid && props.props.authenticated) {
+    toast('Odd is not valid')
+  } else if (!isValidInput && props.props.authenticated) {
+    toast('Stake is not valid')
   } else if (props.props.authenticated && props.props.game.status !== 3) {
     toast('Game is finished')
-  } else {
-    return
   }
+  return
 }
-const handleClick = (props, isValidInput) => {
-  placeOrderHandler(props, isValidInput)
-  notify(props, isValidInput)
+const handleClick = (props, isValidInput, oddIsValid) => {
+  placeOrderHandler(props, isValidInput, oddIsValid)
+  notify(props, isValidInput, oddIsValid)
 }
 const handleChange = () => {
   emitter.emit(TOGGLE_SIGN_IN)
 }
 
-const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
-  onSelectorChange, onChangeHandler, odd, stake, isValidInput, toggleButtons,
+const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange,
+  onChangeHandler, odd, stake, isValidInput, oddIsValid, toggleButtons,
   placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
     <div>
       <div style={{ display: 'flex' }}>
@@ -152,8 +154,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
       <Container>
         <StyledForm>
           <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
-          <TextField type="number" title="Odd" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} typeStyle={['odd', 'place-order-input-1']} />
-          <TextField title="Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
+          <TextField type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} isValidInput={oddIsValid} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField title="Buyers' Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
         <StyledInfo>
@@ -172,37 +174,11 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected,
             <div>{placeOrderCalculation()}</div>
           </div>
           <div style={{ width: '100%' }}>
-            <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput)} />
+            <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput, oddIsValid)} />
             <StyledToastContainer toastClassName={'toastClassName'} position="bottom-left" />
           </div>
         </StyledInfo>
       </Container>
-
-      {/* {props.signInOpened && (
-      <Route
-        path="/"
-        render={() => (
-          <SignInModal
-            isOpen={props.signInOpened}
-            openSignup={props.props.toggleSignUpWithEmail}
-            onRequestClose={props.props.toggleSignIn}
-          />
-          )}
-      />
-      )}
-      {props.signUpWithEmailOpened && (
-      <Route
-        path="/"
-        render={() => (
-          <SignUpWithEmail
-            isOpen={props.signUpWithEmailOpened}
-            openLogin={props.toggleSignIn}
-            onRequestClose={props.toggleSignUpWithEmail}
-          />
-          )}
-      />
-      )} */}
-
     </div>
   )
 
@@ -211,7 +187,6 @@ const PlaceOrder = ({
     gameId,
     toggleActiveButton,
     activeTab,
-    selected,
     onSelectorChange,
     onChangeHandler,
     odd, stake,
@@ -220,6 +195,8 @@ const PlaceOrder = ({
     isLiabilitiesActive,
     isPayoutActive, buttonSwitcher,
     signInOpened,
+    selected,
+    oddIsValid,
     ...rest }) => (
       <Card title={'Bet Slip'} width="100%">
         <CardBody
@@ -233,6 +210,7 @@ const PlaceOrder = ({
           odd={odd}
           stake={stake}
           isValidInput={isValidInput}
+          oddIsValid={oddIsValid}
           toggleButtons={toggleButtons}
           placeOrderCalculation={placeOrderCalculation}
           isLiabilitiesActive={isLiabilitiesActive}
@@ -244,4 +222,4 @@ const PlaceOrder = ({
       </Card>
 )
 
-export default authAware(PlaceOrder)
+export default authAware(placeOrderEnhancer(PlaceOrder))

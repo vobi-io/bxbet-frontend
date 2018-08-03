@@ -12,6 +12,8 @@ import signUpMutation from '../../../graphql/SignUp.graphql'
 import { setToken } from '../../../services/auth'
 import { withForm, FieldError } from '../../form'
 
+import Logo from '../../../resources/assets/img/bx-logo-color-horizontal.png'
+
 const styles = {
   overlay: {
     backgroundColor: 'rgb(216, 216, 216, 0.48)',
@@ -40,6 +42,7 @@ const ModalHeader = styled.h1`
   font-size: 36px;
   margin: 0;
   padding: 0;
+  margin-top: 30px;
 `
 
 const SecondaryHeader = styled.h3`
@@ -75,6 +78,17 @@ const CloseIcon = styled.span`
     color: #696969;
   }
 `
+const Img = styled.img`
+  width: 132px;
+  height: 40px;
+  position: absolute;
+  top: 13px;
+`
+const Form = styled.form`
+  label{
+    font-family: Montserrat !important;
+  }
+`
 
 const validations = {
   email: ['required', 'email'],
@@ -95,13 +109,14 @@ const SignUpContent = ({
   getValue,
   onSubmit,
 }) => (
-  <div>
+  <div style={{ fontFamily: 'Montserrat' }}>
+    <Img src={Logo} alt="Logo" />
     <CloseIcon onClick={onRequestClose}>&times;</CloseIcon>
     <ModalHeader>Sign up</ModalHeader>
     <Divider mt={'22px'} />
     {submissionError && <Error message={submissionError} />}
     {submitting && <Loading message="Signing up..." />}
-    <form onSubmit={onSubmit} method="post">
+    <Form onSubmit={onSubmit} method="post">
       <TextField
         fullWidth
         flat
@@ -134,7 +149,7 @@ const SignUpContent = ({
       <Button bg={'#0f334b'} color={'#fff'} block lg type="submit" disabled={submitting || (submitted && !valid)}>
         {submitting ? 'Signing up...' : 'Sign up'}
       </Button>
-    </form>
+    </Form>
     <Divider mt={'28px'} />
     <SecondaryHeader>
       Already have a BX.BET account?{' '}
@@ -177,7 +192,7 @@ const SignUpContentContainer = compose(
 
         window.location.href = '/'
       } catch (e) {
-        setSubmissionError(e.message)
+        setSubmissionError(e.message.replace('GraphQL error:', '').trim())
       }
 
       // history.push("/")

@@ -84,7 +84,6 @@ const MarketSentiments = ({ pieData }) => {
       ],
     }],
   }
-
   const options = {
     cutoutPercentage: 80,
     tooltips: { enabled: false },
@@ -121,7 +120,6 @@ const MarketSentiments = ({ pieData }) => {
       </div>
     </Container>
       )
-
 
   return <Card title="Market Sentiments" width="30%"><Body /> </Card>
 }

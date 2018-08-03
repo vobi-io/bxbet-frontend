@@ -87,14 +87,14 @@ const ProfileMenu = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-family: 'Proxima Nova';
+  font-family: Montserrat;
   cursor: pointer;
   &:hover {
     background: #f2f2f2;
   }
 `
 const Balance = styled.div`
-  font-family: Open Sans;
+  font-family: Montserrat;
   font-size: 14px;
   color: #183f5a;
   display: flex;

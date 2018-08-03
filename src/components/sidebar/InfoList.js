@@ -21,7 +21,7 @@ const InfoList = (props) => {
 
     & span{
         opacity: 0.5;
-        font-family: Open Sans;
+        font-family: Montserrat;
         font-size: 12px;
         color: white;
     }

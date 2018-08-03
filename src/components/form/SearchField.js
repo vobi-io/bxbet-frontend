@@ -9,7 +9,7 @@ const StyledInput = styled.input`
     height: 35px;
     background-color: #1a567e;
     border: solid 1px #265271;
-    font-family: Open Sans;
+    font-family: Montserrat;
     font-size: 14px;
     font-weight: bold;
     color: white;
@@ -27,9 +27,9 @@ const StyledSearchIcon = styled.img`
     cursor: pointer;
 `
 
-const SearchField = () => (
+const SearchField = props => (
   <form>
-    <StyledInput type="search" placeholder="search" />
+    <StyledInput type="search" placeholder="search" onChange={e => props.onChange(e.target.value)} />
     <StyledSearchIcon src={searchIcon} alt="Search" />
   </form>
     )

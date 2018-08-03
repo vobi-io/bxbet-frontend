@@ -8,25 +8,25 @@ function SelectField(props) {
     align-items: center;
   `
   const StyledLabel = styled.label`
-    font-family: Myriad Pro;
+    font-family: Montserrat;
     font-size: 14px;
     color: white;
-    width: 24%;
+    width: 35%;
   `
 
   const StyledSelect = styled.select`
         width: 100%;
-        margin-left: 3.7%;
+        margin-left: 4%;
         height: 40px;
         opacity: 0.9;
         border-radius: 3px;
         background-color: #ffffff;
-        font-family: Myriad Pro;
+        font-family: Montserrat;
         font-size: 14px;
         color: #314b5b;
         border: none;
         ::placeholder {
-            font-family: Myriad Pro;
+            font-family: Montserrat;
             font-size: 14px;
             color: #314b5b;
         }

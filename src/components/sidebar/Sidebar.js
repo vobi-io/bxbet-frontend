@@ -6,6 +6,7 @@ import burgerNavIcon from '../../resources/assets/img/icons/burger-navigation.sv
 import { SearchField } from '../form'
 import InfoList from './InfoList'
 import enhance from './sidebarEnhance'
+import bxLogo from '../../resources/assets/img/LG_SM.png'
 
 const SidebarContainer = styled.div`
     width: 59px;
@@ -22,6 +23,10 @@ const SidebarContainer = styled.div`
     display: flex;
     justify-content: center;
     padding: 15px;
+    }
+
+    & .bm-overlay {
+      top: 0
     }
 
     & nav.bm-item-list {
@@ -42,14 +47,50 @@ const SidebarContainer = styled.div`
         margin-top: 15px;
     }
 `
+const CloseButton = styled.div`
+  white-space: nowrap;
+  font-size: 40px;
+  color: white;
+  display: flex !important;
+  justify-content: flex-end;
+  span {
+    cursor: pointer;
+  }
+`
+const StyledMenu = styled(Menu)`
+  height: 100vh !important;
+  top: 0;
+`
+const Img = styled.img`
+  width: 26px;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  cursor: pointer;
+`
+const Div = styled.div`
+  position: relative;
+  min-height: 95%;
+  padding-bottom: 30px;
+  margin-bottom: 8px;
+`
+const Logo = styled.img`
+  position: absolute;
+  bottom: 0;
+`
 
-const Sidebar = ({ data, loading }) => (
+const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData }) => (
   <SidebarContainer>
-    <Menu customBurgerIcon={<img src={burgerNavIcon} />}>
-      <SearchField />
-      <InfoList data={data} loading={loading} />
-    </Menu>
+    <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
+    <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={isOpen} >
+      <Div>
+        <CloseButton><span onClick={() => { toggle() }} >&times;</span></CloseButton>
+        <SearchField onChange={onChangeHandler} />
+        <InfoList data={newData} loading={loading} />
+        <Logo src={bxLogo} alt="logo" style={{ position: 'absolute', bottom: 0 }} />
+      </Div>
+    </StyledMenu>
   </SidebarContainer>
-    )
+)
 
 export default enhance(Sidebar)
