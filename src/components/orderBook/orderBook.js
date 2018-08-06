@@ -8,7 +8,7 @@ import enhance from './orderBookEnhance'
 
 const Container = styled.div`
   width: 100%;
-  height: 318px;
+  height: 478px;
   font-family: Montserrat;
   font-size: 14px;
   color: white;
