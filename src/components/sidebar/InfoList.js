@@ -3,12 +3,13 @@ import styled from 'styled-components'
 
 import { Link } from 'react-router-dom'
 
+import TimeIcon from '../cover/TimeIcon'
+
 const InfoList = (props) => {
   const ItemContainer = styled.div`
-    background-color: #44555d;
+    background-color: #091f2d;
     margin-bottom: 3px;
     display: flex;
-    padding: 6px;
     align-items: center;
 
     & h2{
@@ -20,20 +21,30 @@ const InfoList = (props) => {
     }
 
     & span{
-        opacity: 0.5;
-        font-family: Montserrat;
-        font-size: 12px;
-        color: white;
+       margin-right: 18px;
+       color: #6e7e8a;
+       font-size: 11px;
     }
   `
 
   const Status = styled.div`
-    width: 9px;
-    height: 9px;
-    margin: 0 14px 0 9px;
-    border-radius: 5px;
-    background-color: ${props => props.status === 3 ? '#30ff00' : '#000'};
-    border: solid 1px #000000;
+    width: 1px;
+    height: 56px;
+    margin-right: 15px;
+    background-color: ${props => props.status === 3 ? '#37d697' : '#f01150'};
+  `
+  const FlexDiv = styled.div`
+    display: flex;
+    margin-top: 5px;
+  `
+  const Time = styled.span`
+    font-family: Montserrat;
+    font-size: 11px;
+    color: white;
+    color: #6e7e8a;
+    margin: 0px;
+    margin-left: 4px;
+    margin-top: -2px;
   `
 
   const timeFormater = (timestamp) => {
@@ -58,9 +69,13 @@ const InfoList = (props) => {
             {item.homeTeam} - {item.awayTeam}
           </h2>
         </Link>
-        <span>
-          {timeFormater(item.startDate)}
-        </span>
+        <FlexDiv>
+          <span>2/6</span>
+          <TimeIcon />
+          <Time>
+            {timeFormater(item.startDate)}
+          </Time>
+        </FlexDiv>
       </div>
     </ItemContainer>
         ))

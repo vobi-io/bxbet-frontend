@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Card from '../card'
 import { TextField, SelectField } from '../form'
 import Button from '../button'
 import authAware from '../../authAware'
@@ -13,14 +12,13 @@ import { TOGGLE_SIGN_IN } from '../../eventTypes'
 import placeOrderEnhancer from './placeOrderEnhancer'
 
 const Container = styled.div`
-border-radius: 0 0 6px 6px;
-background-color: #0f334b;
-box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
-display: flex;
-padding: 20px;
+  display: flex;
+  background-color: #091f2d;
+  margin: 11px;
+  padding: 9px;
 `
 const StyledInfo = styled.div`
-width: 100%;
+width: 60%;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
@@ -29,6 +27,7 @@ text-align: center;
 color: white;
 font-family: Montserrat;
 font-size: 18px;
+margin-left: 9px;
 
 .calculations{
   display: flex;
@@ -39,41 +38,36 @@ font-size: 18px;
 }
 `
 const Brick = styled.div`
-width: 20px;
+width: 9px;
 `
 
 const StyledForm = styled.div`
 width: 100%;
-& > div {
-  margin-bottom: 4px;
+& > div:not(:last-child){
+  margin-bottom: 12px;
 }
 `
 const StyledTab = styled.button`
-background-image: ${props => (props.green ? 'linear-gradient(to bottom, #7fac30, #288702 99%)' : 'linear-gradient(to bottom, #ed2b3b, #9f041b)')};
-height: 33px;
-width: 183px;
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 6px 6px 0 0;
-margin-right: 6px;
-color: white;
 font-family: Montserrat;
-font-size: 18px;
-border: none;
-cursor: pointer;
+  cursor: pointer;
+  width: 93px;
+  height: 32px;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: bold;
+  color: #6e7e8a;
+  background: transparent;
+  border: solid 1px #6e7e8a;
+  color: ${props => (props.activeTab && '#37d697')};
+  border: solid 1px ${props => (props.activeTab && '#37d697')};
+  margin-left: ${props => props.sell && '14px'};
 `
 
-const ActiveUnderline = styled.div`
-width: 100%;
-height: 7px;
-background-color: ${args => (args.activeTab === 'buy' ? '#288702' : '#9f041b')};
-border-radius: 0 6px 0 0;
-align-self: flex-end;
-`
 
 const StyledButtons = styled.form`
 text-align: left;
+margin-top: 8px;
 input{
   opacity: 0;
   cursor: pointer;
@@ -84,7 +78,7 @@ input{
   width: 15px;
   height: 15px;
   border-radius: 15px;
-  border: 3px solid green;
+  border: 3px solid #37d697;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,14 +87,14 @@ input{
   div{
     width: 7px;
     height: 7px;
-    background-color: green;
+    background-color: #37d697;
     border-radius: 8px;
   }
 }
 `
 const StyledToastContainer = styled(ToastContainer)`
   .toastClassName {
-    background-color: #0f334b;
+    background-color: #122d3e;
     color: white;
     font-size: bold;
   }
@@ -108,6 +102,86 @@ const StyledToastContainer = styled(ToastContainer)`
     color: #ffffff;
     opacity: 0.8;
   }
+  &.Toastify__toast-container--bottom-left {
+    bottom: 1em;
+    left: 4em !important;
+  }
+`
+const Card = styled.div`
+  background-color: #122d3e;
+  font-family: Montserrat;
+  width: 100%;
+`
+const Title = styled.div`
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 23px;
+  margin-left: 14px;
+  margin-top: 20px;
+`
+const Potentials = styled.div`
+  width: 192px;
+  background-color: #122d3e;
+  height: 150px;
+  margin-right: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+const PotentialReturn = styled.div`
+  border: solid 1px #37d697;
+  opacity: 0.9;
+  border-radius: 3px;
+  height: 56px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+const PotentialReturnLable = styled.div`
+  background-color: #091f2d;
+  width: 116px;
+  font-family: Montserrat;
+  font-size: 10px;
+  color: #37d697;
+  margin-top: -21px;
+  padding: 0px 9px 0px 9px;
+`
+
+const OrderCalcuationResult = styled.span`
+  font-family: Montserrat;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 3px;
+`
+const Divider = styled.div`
+  width: 1px;
+  height: 150px;
+  background-color: #6e7e8a;
+`
+const Potential = styled.div`
+  width: 80px;
+  height: 28px;
+  border-radius: 3px;
+  background-color: #091f2d;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: ${props => (props.win ? 'bold' : 'normal')};
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: ${props => (props.win ? '27px' : '0xp')}
+`
+const PotentialLable = styled.span`
+  font-family: Montserrat;
+  font-size: 11px;
+  color: #6e7e8a;
 `
 const placeOrderHandler = (props, isValidInput, oddIsValid) => {
   if (!props.props.authenticated) {
@@ -142,36 +216,46 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
   onChangeHandler, odd, stake, isValidInput, oddIsValid, toggleButtons,
   placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
     <div>
-      <div style={{ display: 'flex' }}>
-        <StyledTab green onClick={() => toggleActiveButton('buy')}>
+      <Title>Betslip</Title>
+      <div style={{ display: 'flex', marginLeft: '14px', marginBottom: '18px' }}>
+        <StyledTab activeTab={activeTab === 'buy'} onClick={() => toggleActiveButton('buy')}>
           BUY
         </StyledTab>
-        <StyledTab onClick={() => toggleActiveButton('sell')}>
+        <StyledTab sell activeTab={activeTab === 'sell'} onClick={() => toggleActiveButton('sell')}>
           SELL
         </StyledTab>
       </div>
-      <ActiveUnderline activeTab={activeTab} />
       <Container>
         <StyledForm>
           <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
-          <TextField type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} isValidInput={oddIsValid} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField odd type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} isValidInput={oddIsValid} typeStyle={['odd', 'place-order-input-1']} />
           <TextField title="Buyers' Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
+        <Potentials>
+          <PotentialLable>Potential Win:</PotentialLable>
+          <Potential win>198 BX</Potential>
+          <PotentialLable>Potential Lose:</PotentialLable>
+          <Potential>398 BX</Potential>
+        </Potentials>
+        <Divider />
         <StyledInfo>
           <div className="calculations">
             {
               activeTab === 'buy' ?
-                <div className="profit_text">
-                Profit:
-              </div>
+                <PotentialReturn>
+                  <PotentialReturnLable>POTENTIAL RETURN:</PotentialReturnLable>
+                  <OrderCalcuationResult>{placeOrderCalculation()}</OrderCalcuationResult>
+                </PotentialReturn>
               :
-                <StyledButtons onChange={toggleButtons}>
-                  {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
-                  {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isPayoutActive} value="payout" /> Payout <br />
-                </StyledButtons>
+                <div style={{ width: '100%' }}>
+                  <StyledButtons onChange={toggleButtons}>
+                    {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
+                    {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isPayoutActive} value="payout" /> Payout <br />
+                  </StyledButtons>
+                  <div style={{ marginTop: '5px', textAlign: 'right' }}>{placeOrderCalculation()}</div>
+                </div>
           }
-            <div>{placeOrderCalculation()}</div>
           </div>
           <div style={{ width: '100%' }}>
             <Button cta text="Place Order" onClick={() => handleClick(props, isValidInput, oddIsValid)} />
@@ -198,7 +282,7 @@ const PlaceOrder = ({
     selected,
     oddIsValid,
     ...rest }) => (
-      <Card title={'Bet Slip'} width="100%">
+      <Card>
         <CardBody
           teams={teams}
           gameId={gameId}

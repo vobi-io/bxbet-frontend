@@ -115,10 +115,10 @@ const styles = {
     marginRight: '8px',
   },
   balanceCounter: {
-    fontFamily: 'Montserrat',
     fontSize: '18px',
-    color: '#078cff',
+    color: '#37d697',
     marginRight: '16px',
+    fontWeight: 'bold',
   },
   deviderLine: {
     width: '1px',

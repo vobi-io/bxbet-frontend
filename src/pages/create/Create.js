@@ -9,7 +9,7 @@ import createEnhance from './createEnhance'
 
 const Container = styled.div`
       border-radius: 6px;
-      background-color: #0f334b;
+      background-color: #122d3e;
       box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
       display: flex;
       padding: 20px;
@@ -44,7 +44,7 @@ const StyledDatePicker = styled.div`
     align-items: center;
 
     & > div {
-      width: 100%;
+      width: 68.5%;
       margin-left: 4%;
       height: 40px;
       border-radius: 3px;

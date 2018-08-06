@@ -30,7 +30,7 @@ const App = ({
 }) => (
   <div id="main-container">
     <Sidebar />
-    <div id="conten-container">
+    <div id="conten-container" style={{ zIndex: 0 }}>
       <Route
         exact
         render={props => <Header

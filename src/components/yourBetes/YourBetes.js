@@ -1,29 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
+import BuyIcon from '../availableOdds/BuyIcon'
+import SellIcon from '../availableOdds/SellIcon'
 
-import Card from '../card'
 import enhance from './yourBetesEnhance'
-import returnFlagUrl from '../../hocs/returnFlagUrl/returnFlagUrl'
 
 const Container = styled.div`
-  border-radius: 6px;
-  background-color: #0f334b;
-  box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
+  margin: 11px;
+  background-color: #091f2d;
   display: flex;
   flex-direction: column;
   padding: 14px;
-  min-height: 183px;
+  min-height: 306px;
+  max-height: 306px;
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
-  max-height: ${p => (p.isScrollable ? '171px' : '')};
 `
 const StyledRow = styled.div`
   font-family: Montserrat;
   font-size: 14px;
-  color: ${props => (props.status === 'Sell' ? '#cc3c40' : '#fff')};
+  color: #ffffff;
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin-bottom: ${props => (props.head ? '30px' : '0px')}
+  .head{
+    color: #6e7e8a;
+  }
 
   & > div > .flag {
     width: 32px;
@@ -43,9 +46,8 @@ const StyledRow = styled.div`
 `
 const Line = styled.div`
   height: 1px;
-  opacity: 0.2;
-  background-color: #447491;
-  margin: 8px 0;
+  background-color: #4b5963;
+  margin: 11px 0;
 `
 const Message = styled.div`
   color: #ffffff;
@@ -54,34 +56,83 @@ const Message = styled.div`
   font-family: Montserrat;
   margin-top: 60px;
 `
+const ComponentContainer = styled.div`
+  min-width: 49.6%;
+  background-color: #122d3e;
+  margin-right: 11px;
+  font-family: Montserrat;
+`
+const Title = styled.div`
+  margin-top: 31px;
+  margin-left: 15px
+  margin-bottom: 27px;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+`
+const OrderType = styled.div`
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  color: ${props => (props.orderType === 'Buy' ? '#37d697' : '#f01150')};
+`
+const Div = styled.div`
+  border-radius: 2px;
+  background-color: #122d3e;
+  width: fit-content;
+  padding: 3px 10px;
+`
+const StatusContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const StatusDot = styled.div`
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 8px;
+  background-color: ${props => (props.status === 'Open' ? '#37d697' : '#f01150')}
+`
+const FlexDiv = styled.div`
+  display: flex;
+  justify-content: ${props => (props.stake ? 'flex-end' : 'center')};
+  align-content: center;
+`
 
 const YourBetes = ({ yourBetesData, teams, ...props }) => {
   const data = yourBetesData()
   function Body() {
     return (
       <Container isScrollable={!!(data.length > 3)}>
-        <StyledRow>
-          <div>Outcome</div>
+        <StyledRow head>
+          <div style={{ width: '150px' }} className="head">Outcome</div>
           <div className="rigth-side">
-            <div>Buy/Sell</div>
-            <div>Odds</div>
-            <div>Stake</div>
-            <div>Status</div>
+            <div className="head">Buy/Sell</div>
+            <div className="head">Odds</div>
+            <div className="head">Stake</div>
+            <div className="head">Status</div>
           </div>
         </StyledRow>
-        <Line />
         {props.me && data && data.map((item, index) => (
           <div key={index}>
             <StyledRow status={item.orderType}>
               <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
-                {returnFlagUrl(teams[item.outcome], true)}
+                {/* {returnFlagUrl(teams[item.outcome], true)} */}
                 <span>{teams[item.outcome]}</span>
               </div>
               <div className="rigth-side">
-                <div>{item.orderType}</div>
-                <div>{item.odd}</div>
-                <div>{item.stake} BX </div>
-                <div>{item.status}</div>
+                <OrderType orderType={item.orderType}>
+                  {item.orderType === 'Buy' && <BuyIcon />}
+                  {item.orderType === 'Sell' && <SellIcon />}
+                  <span style={{ marginLeft: 5 }}>{item.orderType}</span>
+                </OrderType>
+                <FlexDiv><Div>{item.odd}</Div></FlexDiv>
+                <FlexDiv stake><Div>{item.stake} BX </Div></FlexDiv>
+                <StatusContainer><StatusDot status={item.status} />{item.status}</StatusContainer>
               </div>
             </StyledRow>
             <Line />
@@ -95,9 +146,10 @@ const YourBetes = ({ yourBetesData, teams, ...props }) => {
   }
 
   return (
-    <Card title={'Your Orders'} width="100%">
+    <ComponentContainer>
+      <Title>Your Bets</Title>
       <Body />
-    </Card>
+    </ComponentContainer>
   )
 }
 

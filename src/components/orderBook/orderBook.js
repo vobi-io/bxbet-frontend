@@ -1,34 +1,42 @@
 import React from 'react'
 import styled from 'styled-components'
+import BuyIcon from '../availableOdds/BuyIcon'
+import SellIcon from '../availableOdds/SellIcon'
+import ChooseOutcome from '../chooseOutcome'
 
-import Card from '../card'
 import enhance from './orderBookEnhance'
-// import sortData from './sortData'
 
 const Container = styled.div`
-      width: 100%;
-      height: 488px;
-      border-radius: 5px;
-      background-color: #0f334b;
-      box-shadow: 0px 3px 9.5px 0.5px rgba(7, 140, 255, 0.1);
-      font-family: Montserrat;
-      font-size: 14px;
-      color: white;
-      overflow: hidden;
-    `
+  width: 100%;
+  height: 318px;
+  font-family: Montserrat;
+  font-size: 14px;
+  color: white;
+  overflow: hidden;
+  background-color: #091f2d;
+`
 
 const StyledContent = styled.div`
-border-top: solid 1px #92acfe;
 
 & .rows {
   display: flex;
-  border-bottom: solid 1px #92acfe;
+  border-bottom: solid 1px #4b5963;
   align-items: center;
+  height: 39px;
 
-  & .odds, & .amount {
+  & .odds {
     width: 100%;
-    text-align: center;
-    color: ${p => (p.title === 'buy' ? '#7fac30' : '#ed2b3b')};
+    text-align: left;
+    color: ${p => (p.title === 'buy' ? '#37d697' : '#f01150')};
+    font-size: 14px;
+    font-weight: bold;
+  }
+  & .amount {
+    width: 100%;
+    text-align: right;
+    color: ${p => (p.title === 'buy' ? '#37d697' : '#f01150')};
+    font-size: 14px;
+    color: #ffffff;
   }
 }
 `
@@ -40,14 +48,42 @@ background-color: #92acfe;
 `
 
 const StyledTables = styled.div`
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    `
+  display: flex;
+  justify-content: center;
+  margin: 11px;
+`
 const Brick = styled.div`
       width: 2%;
     `
-
+const ComponentContainer = styled.div`
+  min-width: 50.566%;
+  background-color: #122d3e;
+  margin-right: 11px;
+  font-family: Montserrat;
+`
+const TitleContainer = styled.div`
+  min-width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px
+  margin-top: 20px;
+  margin-bottom: 18px;
+`
+const Title = styled.div`
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+`
+const SubTitle = styled.span`
+  font-size: 10px;
+  color: #6e7e8a;
+`
+const FlexDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 const OrderBook = ({ ...props }) => {
   let selectedOutcome
@@ -58,16 +94,14 @@ const OrderBook = ({ ...props }) => {
   } else selectedOutcome = 0
   const getTable = (props) => {
     const StyledTitle = styled.div`
-      text-transform: uppercase;
-      color: white;
-      height: 32px;
-      background-image: ${props.title === 'buy' ? 'linear-gradient(to bottom, #7fac30, #288702 99%)' : 'linear-gradient(to bottom, #ed2b3b, #9f041b);'};
-      font-family: Montserrat;
-      font-size: 16px;
       display: flex;
+      font-size: 16px;
+      font-weight: bold;
+      color: ${props.title === 'buy' ? '#37d697' : '#f01150'};
+      width: ${props.title === 'buy' ? '54px' : '58px'};
+      justify-content: space-between;
+      text-transform: uppercase;
       align-items: center;
-      justify-content: center;
-      border-radius: 5px 5px 0 0;
     `
     const StyledSubTitle = styled.div`
       display: flex;
@@ -75,6 +109,7 @@ const OrderBook = ({ ...props }) => {
       & > div {
         width: 100%;
         text-align: center;
+        color: #6e7e8a;
       }
     `
     const printData = data => data.map((item, index) => {
@@ -86,7 +121,6 @@ const OrderBook = ({ ...props }) => {
           <div className="odds">
             {item.odd}
           </div>
-          <Line />
           <div className="amount">
             {item.amount} BX
           </div>
@@ -96,14 +130,20 @@ const OrderBook = ({ ...props }) => {
 
     return (
       <Container>
-        <StyledTitle>{props.title}</StyledTitle>
-        <StyledSubTitle>
-          <div> Odds </div>
-          <div> Amount </div>
-        </StyledSubTitle>
-        <StyledContent title={props.title}>
-          {props.data && printData(props.data)}
-        </StyledContent>
+        <div style={{ margin: '16px 22px' }}>
+          <StyledTitle>
+            {props.title === 'buy' && <BuyIcon />}
+            {props.title === 'sell' && <SellIcon />}
+            <span>{props.title}</span>
+          </StyledTitle>
+          <StyledSubTitle>
+            <div style={{ textAlign: 'left' }}> Odds </div>
+            <div style={{ textAlign: 'right' }}> Amount </div>
+          </StyledSubTitle>
+          <StyledContent title={props.title}>
+            {props.data && printData(props.data)}
+          </StyledContent>
+        </div>
       </Container>
     )
   }
@@ -116,7 +156,22 @@ const OrderBook = ({ ...props }) => {
     </StyledTables>
     )
 
-  return <Card title={'Order Book'} width="100%"><Tables /> </Card>
+  return (
+    <ComponentContainer>
+      <FlexDiv>
+        <TitleContainer>
+          <Title>Choose Outcome Please</Title>
+          <SubTitle>ORDER BOOK</SubTitle>
+        </TitleContainer>
+        <ChooseOutcome
+          teams={props.teams}
+          onSelectorChange={props.onSelectorChange}
+          selected={selectedOutcome}
+        />
+      </FlexDiv>
+      <Tables />
+    </ComponentContainer>
+  )
 }
 
 export default enhance(OrderBook)
