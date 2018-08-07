@@ -4,15 +4,16 @@ import { slide as Menu } from 'react-burger-menu'
 
 import burgerNavIcon from '../../resources/assets/img/icons/burger-navigation.svg'
 import { SearchField } from '../form'
-import InfoList from './InfoList'
 import enhance from './sidebarEnhance'
+import GroupedItems from './GroupedItems'
 import bxLogo from '../../resources/assets/img/LG_SM.png'
 
 const SidebarContainer = styled.div`
     width: 59px;
     height: 100vh;
     position: fixed;
-    background-image: linear-gradient(179deg, #0f334b 1%, #265271);
+    background-color: #122d3e;
+    z-index: 1;
 
     & button{
         width: 59px !important;
@@ -23,6 +24,7 @@ const SidebarContainer = styled.div`
     display: flex;
     justify-content: center;
     padding: 15px;
+    background-color: #122d3e;
     }
 
     & .bm-overlay {
@@ -34,7 +36,6 @@ const SidebarContainer = styled.div`
     }
 
     & .bm-menu-wrap{
-        background-image: linear-gradient(179deg, #0f334b 1%, #265271);
         width: 315px;
     }
 
@@ -47,16 +48,7 @@ const SidebarContainer = styled.div`
         margin-top: 15px;
     }
 `
-const CloseButton = styled.div`
-  white-space: nowrap;
-  font-size: 40px;
-  color: white;
-  display: flex !important;
-  justify-content: flex-end;
-  span {
-    cursor: pointer;
-  }
-`
+
 const StyledMenu = styled(Menu)`
   height: 100vh !important;
   top: 0;
@@ -78,15 +70,41 @@ const Logo = styled.img`
   position: absolute;
   bottom: 0;
 `
+const Title = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  font-family: Montserrat;
+`
+const SearchContainer = styled.div`
+  height: 60px;
+  background-color: #091f2d;
+  position: relative;
+  margin-left: -15px;
+  margin-top: -15px;
+  width: 254px;
+  display: flex !important;
+  align-items: center;
+  margin-bottom: 29px;
+  padding: 0px 15px;
+`
+const Close = styled.span`
+  color: #ffffff;
+  font-size: 35px;
+  cursor: pointer;
+`
 
 const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData }) => (
   <SidebarContainer>
     <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
     <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={isOpen} >
-      <Div>
-        <CloseButton><span onClick={() => { toggle() }} >&times;</span></CloseButton>
+      <SearchContainer>
+        <Close onClick={() => { toggle() }} >&times;</Close>
         <SearchField onChange={onChangeHandler} />
-        <InfoList data={newData} loading={loading} />
+      </SearchContainer>
+      <Div>
+        <Title>FootBall</Title>
+        <GroupedItems data={newData} loading={loading} />
         <Logo src={bxLogo} alt="logo" style={{ position: 'absolute', bottom: 0 }} />
       </Div>
     </StyledMenu>

@@ -2,10 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import authAware from '../../authAware'
 
-import Card from '../card'
 import Button from '../button'
 import emitter from '../../eventEmitter'
 import { TOGGLE_SIGN_IN } from '../../eventTypes'
+
+const Container = styled.div`
+  background: transparent;
+  margin-top: 10px;
+  margin-right: 11px;
+`
 
 const StyledContainer = styled.div`
     display: flex;
@@ -46,11 +51,11 @@ const Buttons = ({
   <StyledContainer>
     <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
       <div className="buttons">
-        <Button text={stringShorter(teams[0])} activeButton={selected === teams[0]} onClick={() => { handleClick(props, onSelectorChange, teams[0]) }} />
+        <Button outcome text={stringShorter(teams[0])} activeButton={selected === 1} onClick={() => { handleClick(props, onSelectorChange, teams[0]) }} />
         <Brick />
-        <Button text={stringShorter(teams[1])} activeButton={selected === teams[1]} onClick={() => { handleClick(props, onSelectorChange, teams[1]) }} />
+        <Button outcome text={stringShorter(teams[1])} activeButton={selected === 2} onClick={() => { handleClick(props, onSelectorChange, teams[1]) }} />
         <Brick />
-        <Button text={'Draw'} activeButton={selected === 'Draw'} onClick={() => { handleClick(props, onSelectorChange, 'Draw') }} />
+        <Button outcome text={'Draw'} activeButton={selected === 0} onClick={() => { handleClick(props, onSelectorChange, 'Draw') }} />
       </div>
     </div>
   </StyledContainer>
@@ -62,13 +67,13 @@ const ChooseOutcome = ({
   selected,
   ...props
 }) =>
-  <Card title={'Outcome'} width="100%" >
+  <Container>
     <Buttons
       teams={teams}
       onSelectorChange={onSelectorChange}
       selected={selected}
       props={props}
     />
-  </Card>
+  </Container>
 
 export default authAware(ChooseOutcome)

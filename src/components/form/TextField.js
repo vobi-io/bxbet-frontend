@@ -9,7 +9,7 @@ align-items: center;
 const StyledLabel = styled.label `
 font-family: Montserrat;
 font-size: 14px;
-color: white;
+color: #6e7e8a;
 width: 37%;
 `
 
@@ -19,11 +19,13 @@ const StyledInput = styled.input `
     height: 38px;
     opacity: 0.9;
     border-radius: 3px;
-    background-color: #ffffff;
+    background-color: transparent;
     font-family: Montserrat;
     font-size: 14px;
-    color: #314b5b;
-    border: ${props => props.isValidInput ? 'none' : '2px solid red'};
+    font-weight: ${props => (props.odd ? 'bold' : '')};
+    color: ${props => (props.odd ? '#37d697' : '#ffffff')};
+    outline: none;
+    border: ${props => (props.isValidInput ? 'solid 1px #4b5963' : '2px solid red')};
     ::placeholder {
         font-family: Montserrat;
         font-size: 14px;
@@ -40,7 +42,7 @@ const Icon = styled.div `
     width: 0;
 `
 
-const TextField = ({ title, value, onChange, icon, isValidInput, typeStyle, type }) => (
+const TextField = ({ title, value, onChange, icon, isValidInput, typeStyle, type, odd }) => (
   <Container>
     <StyledLabel>{title}</StyledLabel>
     <StyledInput
@@ -50,6 +52,7 @@ const TextField = ({ title, value, onChange, icon, isValidInput, typeStyle, type
       value={value}
       onChange={onChange}
       isValidInput={isValidInput === undefined ? true : isValidInput}
+      odd={odd}
     />
     {icon
       ? <Icon>{icon}</Icon>

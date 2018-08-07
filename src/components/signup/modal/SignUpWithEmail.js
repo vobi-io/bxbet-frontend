@@ -61,7 +61,7 @@ const Divider = styled.div`
 
 const Span = styled.span`
   display: inline-block;
-  color: #0f334b;
+  color: #122d3e;
   cursor: pointer;
 `
 
@@ -146,7 +146,7 @@ const SignUpContent = ({
       />
       {submitted && errors.confirmPassword && <FieldError>{errors.confirmPassword[0]}</FieldError>}
       <Divider mt={'15px'} />
-      <Button bg={'#0f334b'} color={'#fff'} block lg type="submit" disabled={submitting || (submitted && !valid)}>
+      <Button bg={'#122d3e'} color={'#fff'} block lg type="submit" disabled={submitting || (submitted && !valid)}>
         {submitting ? 'Signing up...' : 'Sign up'}
       </Button>
     </Form>

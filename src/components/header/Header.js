@@ -18,6 +18,7 @@ const StyledHeader = styled.span`
   width: 100%;
   height: 57px;
   // border: 1px solid #CCCCCC;
+  z-index: 1;
 `
 const HeaderParent = styled.span`
   display: flex;
@@ -28,14 +29,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
-
-const BrandName = styled.span`
-  font-size: 28px;
-  font-weight: bold;
-  color: #2f3033;
-  font-family: Montserrat;
-  line-height: 33px;
 `
 
 const Nav = styled.ul`

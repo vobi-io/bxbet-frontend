@@ -15,12 +15,15 @@ import gameById from './query/gameById.graphql'
 import gameOne from './query/gameOne.graphql'
 import { withMe } from '../../hocs'
 import Flag from '../../resources/assets/img/germany-flag.png'
-import pattern from '../../resources/assets/img/ptrn.png'
+import pattern from '../../resources/assets/img/geometric-forms.png'
+
 
 const Container = styled.div`
   width: 100%;
-  background-color: rgba(231, 231, 231, 0.7);
-  padding: 5px 26px 26px 26px;
+  background-color: #091f2d;
+  padding: 5px 17px 17px 17px;
+  background-image: url(${pattern});
+  background-repeat: no-repeat;
 `
 const Wrapper = styled.div`
   display: flex;
@@ -32,18 +35,6 @@ const VerticalWrapper = styled.div`
   margin-top: 13px;
   justify-content: space-between;
   width: 100%;
-`
-const Brick = styled.div`
-  height: 10px;
-  width: 20px;
-`
-const BackgroundPattern = styled.div`
-  width: 685px;
-  height: 399px;
-  position: absolute;
-  z-index: -1;
-  right: 0;
-  background-image: url(${pattern});
 `
 
 const someData = ['Germany Wins', 'England Wins', 'Draw']
@@ -72,55 +63,15 @@ const HomePage = ({
 
   return (
     <Wrapper>
-      <BackgroundPattern />
       <Container>
         <VerticalWrapper>
-          <ChooseOutcome
-            teams={teams}
-            onSelectorChange={onSelectorChange}
-            selected={selectedOutcome}
-          />
-          <Brick />
           <Cover
-            text={`${game.homeTeam} vs ${game.awayTeam}`
-          }
+            homeTeam={game.homeTeam}
+            awayTeam={game.awayTeam}
+            date={game.startDate}
           />
         </VerticalWrapper>
         <VerticalWrapper>
-          <div style={{ display: 'flex', width: '100%' }}>
-            <OrderBook game={game} me={me} selected={selectedOutcome} />
-            <Brick />
-            <div style={{ width: '100%' }}>
-              <PlaceOrder
-                teams={teams}
-                game={game}
-                gameId={game.gameId}
-                availableOdd={availableOdd}
-                availableAmount={availableAmount}
-                availableActiveTab={availableActiveTab}
-                selected={selectedOutcome}
-                onSelectorChange={onSelectorChange}
-              />
-              <Brick />
-              <YourBetes
-                teams={teams}
-                game={game}
-              />
-            </div>
-          </div>
-        </VerticalWrapper>
-        <VerticalWrapper>
-          <MarketInsights
-            data={someData}
-            game={game}
-            teams={teams}
-            me={me}
-          />
-          <MarketSentiments
-            game={game}
-            teams={teams}
-            me={me}
-          />
           <AvailableOdds
             data={tableData}
             game={game}
@@ -128,6 +79,29 @@ const HomePage = ({
             onOddClick={onOddClick}
             me={me}
             onSelectorChange={onSelectorChange}
+          />
+          <PlaceOrder
+            teams={teams}
+            game={game}
+            gameId={game.gameId}
+            availableOdd={availableOdd}
+            availableAmount={availableAmount}
+            availableActiveTab={availableActiveTab}
+            selected={selectedOutcome}
+            onSelectorChange={onSelectorChange}
+          />
+        </VerticalWrapper>
+        <VerticalWrapper>
+          <OrderBook
+            game={game}
+            me={me}
+            selected={selectedOutcome}
+            teams={teams}
+            onSelectorChange={onSelectorChange}
+          />
+          <YourBetes
+            teams={teams}
+            game={game}
           />
         </VerticalWrapper>
       </Container>
