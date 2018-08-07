@@ -1,0 +1,11 @@
+query GameMany {
+  gameMany (sort: STATUS_DESC){
+    _id
+    gameId
+    homeTeam
+    awayTeam
+    startDate
+    endDate
+    status
+  }
+}

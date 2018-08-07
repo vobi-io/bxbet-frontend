@@ -120,7 +120,7 @@ export default compose(
     }) => async (event) => {
       event.preventDefault()
 
-      console.log(errors)
+      // console.log(errors)
 
       setSubmissionError('')
       setSubmitting(true)

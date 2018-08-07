@@ -1,0 +1,12 @@
+query GameById($_id: MongoID!) {
+  gameById(_id: $_id){
+    _id,
+    gameId,
+    homeTeam,
+    awayTeam,
+    category,
+    startDate,
+    endDate,
+    status
+  }
+}

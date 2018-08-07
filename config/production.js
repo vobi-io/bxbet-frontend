@@ -1,5 +1,5 @@
 module.exports = {
-  apiUrl: 'https://apidev.bxbet.com/',
-  apiSocketUrl: 'https://apidev.bxbet.com/',
-  apiGraphqlUrl: 'https://apidev.bxbet.com/graphql',
+  apiUrl: 'https://bx.vobi.io',
+  apiSocketUrl: 'https://wsbx.vobi.io/',
+  apiGraphqlUrl: 'https://bx.vobi.io/graphql',
 }

@@ -1,26 +1,44 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Button(props) {
-  const StyledButon = styled.div`
-    height: ${props.cta ? '54px' : '39px'};
+const StyledButon = styled.button`
+    height: ${({ buttonType }) => (buttonType === 'cta' ? '41px' : '39px')};
     width: 100%;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    box-shadow: ${props.active ? '0px 3px 9.5px 0.5px rgba(0,0,0,0.1)' : props.cta ? 'box-shadow: 0px 1px 5px 0 rgba(0, 0, 0, 0.5)' : null} ;
-    border: ${props.main ? 'solid 1px #265271' : null};
-    color: ${!props.main ? '#fff' : '#265271'};
-    background-image: ${props.active ? 'linear-gradient(#265271, #265271)' : props.cta ? 'linear-gradient(to bottom, #fa7a0a, #f43003)' : null};
-    font-family: Montserrat;
+    align-items: center;                                                                                                                                                                                                                                                                                                                                                                                                            
     font-size: 16px;
+    border: ${({ buttonType }) => buttonType !== 'active' || buttonType !== 'cta' ? 'solid 1px #265271' : 'none'};
+    color: ${({ buttonType }) => buttonType === 'active' || buttonType === 'cta' ? '#091f2d' : '#265271'};
+    background-color: ${({ buttonType }) => buttonType === 'cta' ? '#37d697' : null};
+    background: ${({ buttonType }) => (buttonType === 'outcome' || buttonType === 'active' ? 'transparent' : null)};
+    border: ${({ buttonType }) => (buttonType === 'outcome' ? '1px solid #4b5963' : null)};
+    color: ${({ buttonType }) => (buttonType === 'outcome' ? '#4b5963' : null)};
+    color: ${({ buttonType }) => (buttonType === 'active' ? '#37d697' : null)};
+    border: ${({ buttonType }) => (buttonType === 'active' ? '1px solid #37d697' : null)};
+    min-width: ${({ buttonType }) => (buttonType === 'outcome' || 'active' ? '105px' : null)};
+    height: ${({ buttonType }) => (buttonType === 'outcome' || 'active' ? '40px' : null)};
+    font-size: ${({ buttonType }) => (buttonType === 'outcome' || 'active' ? '14px' : '')};
+
+    font-family: Montserrat;
     cursor: pointer;
+    &:focus {outline:0;}
   `
 
+const Button = (props) => {
+  let buttonType = 'regular'
+  if (props.activeButton) {
+    buttonType = 'active'
+  } else if (props.cta) {
+    buttonType = 'cta'
+  } else if (props.outcome) {
+    buttonType = 'outcome'
+  }
+
   return (
-    <StyledButon>
+    <StyledButon onClick={props.onClick} buttonType={buttonType}>
       {props.text}
     </StyledButon>
   )

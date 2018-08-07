@@ -1,0 +1,5 @@
+mutation createGame($homeTeam: String, $awayTeam: String, $category: String, $startDate: Date, $endDate: Date){
+  createGame(homeTeam: $homeTeam, awayTeam: $awayTeam, category: $category, startDate: $startDate, endDate: $endDate){
+    _id
+  }
+}

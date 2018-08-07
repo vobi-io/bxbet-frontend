@@ -1,0 +1,9 @@
+query GameOne{
+  gameOne (sort: STATUS_DESC){
+    _id
+    homeTeam
+    awayTeam
+    gameId
+    status
+  }
+}

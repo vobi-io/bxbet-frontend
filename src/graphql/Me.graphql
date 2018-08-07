@@ -1,5 +1,8 @@
-query me {
+query Me {
   me {
+    _id
     email
+    blockChain
+    role
   }
 }

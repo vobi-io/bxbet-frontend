@@ -30,9 +30,15 @@ const errorLink = onError(({ operation, graphQLErrors, networkError }) => {
   }
 
   if (graphQLErrors) {
-    graphQLErrors.map(({ message, locations, path }) =>
+    graphQLErrors.map(({ message, locations, path }) => {
+      if (message === 'User not authorized') {
+        if (localStorage.token) {
+          localStorage.clear()
+          window.location.href = '/'
+        }
+      }
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-    )
+    })
   }
 
   if (networkError) {

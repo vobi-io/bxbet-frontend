@@ -20,7 +20,7 @@ const NavLink = styled.a`
   transition: 0.2s;
   cursor: pointer;
   &:hover {
-    color: #06c953;
+    color: #32b6ff;
   }
 `
 
@@ -34,8 +34,8 @@ const NavItemRegister = styled(NavItem)`
 `
 
 const Register = styled(NavLink)`
-  border: 3px solid #2F3033;
-  padding: 12px 32px;
+  border: 2px solid #2F3033;
+  padding: 6px 20px;
   font-family: Montserrat;	
   font-size: 14px;	
   font-weight: bold;	
@@ -43,8 +43,8 @@ const Register = styled(NavLink)`
   text-align: center;
   
   &:hover {
-    color: #06c953;
-    border-color: #06c953;
+    color: #32b6ff;
+    border-color: #32b6ff;
   }
 `
 

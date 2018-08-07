@@ -30,44 +30,43 @@ const Div = styled.div`
     flex-direction: column;
     margin-top: 14.5px;
 `
-const InstructionsContent = props => {
-   if(props.img === "browse"){
-       return(
-           <Container>
-                <BrowseIcon/>
-                <Div>
-                    <Title>{props.instructionsContent.title}</Title>
-                    <Desc>{props.instructionsContent.description}</Desc>
-                </Div>
-           </Container>
-       )
-   }else if(props.img ==="security"){
-       return(
-           <Container>
-                <SecurityIcon />
-                <Div>
-                    <Title>{props.instructionsContent.title}</Title>
-                    <Desc>{props.instructionsContent.description}</Desc>
-                </Div>
-           </Container>
-       )
-   }else{
-       return(
-           <Container>
-                <EventIcon />
-                <Div>
-                    <Title>{props.instructionsContent.title}</Title>
-                    <Desc>{props.instructionsContent.description}</Desc>
-                </Div>
-           </Container>
-       )
-   }
+const InstructionsContent = (props) => {
+  if (props.img === 'browse') {
+    return (
+      <Container>
+        <BrowseIcon />
+        <Div>
+          <Title>{props.instructionsContent.title}</Title>
+          <Desc>{props.instructionsContent.description}</Desc>
+        </Div>
+      </Container>
+    )
+  } else if (props.img === 'security') {
+    return (
+      <Container>
+        <SecurityIcon />
+        <Div>
+          <Title>{props.instructionsContent.title}</Title>
+          <Desc>{props.instructionsContent.description}</Desc>
+        </Div>
+      </Container>
+    )
+  }
+  return (
+    <Container>
+      <EventIcon />
+      <Div>
+        <Title>{props.instructionsContent.title}</Title>
+        <Desc>{props.instructionsContent.description}</Desc>
+      </Div>
+    </Container>
+  )
 }
 
 
 InstructionsContent.propTypes = {
-    img: PropTypes.string.isRequired,
-    instructionsContent: PropTypes.object.isRequired,
+  img: PropTypes.string.isRequired,
+  instructionsContent: PropTypes.object.isRequired,
 }
 
 export default InstructionsContent

@@ -1,0 +1,6 @@
+mutation PlaceOrder($gameId: Float!, $orderType: Float!, $amount: Float!, $odd: Float!, $outcome: Float!){
+  placeOrder(gameId: $gameId, orderType:$orderType, amount: $amount, odd: $odd, outcome: $outcome){
+    _id
+    player
+  }
+}
