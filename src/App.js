@@ -8,6 +8,7 @@ import Header from './components/header'
 import FourOFour from './pages/errors/404'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
+import Overlay from './components/overlay'
 import Create from './pages/create'
 import { withMe, listenerOn } from './hocs'
 import emitter from './eventEmitter'
@@ -17,6 +18,7 @@ import { PLACE_ORDER_FROM_SOCKET, FINISH_GAME_FROM_SOCKET, CREATE_GAME, TOGGLE_S
  } from './eventTypes'
 // import placeOrderEnhancer from './components/informationDynamic/enhance'
 
+// import placeOrderEnhancer from './components/informationDynamic/enhance'
 // const homePageWithPlaceOrderEnhancer = placeOrderEnhancer(HomePage)
 
 const App = ({
@@ -26,11 +28,14 @@ const App = ({
   toggleSignUp,
   toggleSignUpWithEmail,
   toggleHeaderActivePage,
+  overLay,
+  closeOverlay,
   me,
 }) => (
   <div id="main-container">
     <Sidebar />
-    <div id="conten-container" style={{ zIndex: 0 }}>
+    {overLay !== true && <Overlay closeOverlay={closeOverlay} />}
+    <div id="conten-container">
       <Route
         exact
         render={props => <Header
@@ -123,6 +128,7 @@ export default compose(
       signInOpened: false,
       signUpOpened: false,
       signUpWithEmailOpened: false,
+      overLay: localStorage.accepted === 'true' || false,
     }),
     {
       toggleSignIn: ({ signInOpened }) => () => ({
@@ -134,6 +140,10 @@ export default compose(
       toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
         signUpWithEmailOpened: !signUpWithEmailOpened,
       }),
+      closeOverlay: () => () => {
+        localStorage.setItem('accepted', true)
+        return { overLay: true }
+      },
     }
   ),
   lifecycle({
