@@ -8,6 +8,7 @@ import Header from './components/header'
 import FourOFour from './pages/errors/404'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/sidebar'
+import Overlay from './components/overlay'
 import Create from './pages/create'
 import { withMe, listenerOn } from './hocs'
 import emitter from './eventEmitter'
@@ -27,10 +28,13 @@ const App = ({
   toggleSignUp,
   toggleSignUpWithEmail,
   toggleHeaderActivePage,
+  overLay,
+  closeOverlay,
   me,
 }) => (
   <div id="main-container">
     <Sidebar />
+    {overLay !== true && <Overlay closeOverlay={closeOverlay} />}
     <div id="conten-container">
       <Route
         exact
@@ -124,6 +128,7 @@ export default compose(
       signInOpened: false,
       signUpOpened: false,
       signUpWithEmailOpened: false,
+      overLay: localStorage.accepted === 'true' || false,
     }),
     {
       toggleSignIn: ({ signInOpened }) => () => ({
@@ -135,6 +140,10 @@ export default compose(
       toggleSignUpWithEmail: ({ signUpWithEmailOpened }) => () => ({
         signUpWithEmailOpened: !signUpWithEmailOpened,
       }),
+      closeOverlay: () => () => {
+        localStorage.setItem('accepted', true)
+        return { overLay: true }
+      },
     }
   ),
   lifecycle({
