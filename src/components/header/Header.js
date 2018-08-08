@@ -18,7 +18,7 @@ const StyledHeader = styled.span`
   width: 100%;
   height: 57px;
   // border: 1px solid #CCCCCC;
-  z-index: 1;
+  z-index: 0;
 `
 const HeaderParent = styled.span`
   display: flex;

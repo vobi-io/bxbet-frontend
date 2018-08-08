@@ -24,11 +24,19 @@ const Container = styled.div`
   padding: 5px 17px 17px 17px;
   background-image: url(${pattern});
   background-repeat: no-repeat;
+  @media only screen and (min-height: 1100px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 `
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  @media only screen and (min-height: 1100px) {
+    height: 95.3vh;
+  }
 `
 const VerticalWrapper = styled.div`
   display: flex;
