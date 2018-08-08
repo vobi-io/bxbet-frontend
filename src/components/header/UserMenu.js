@@ -76,7 +76,7 @@ const UserDropDown = styled.div.attrs({
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
   margin-top: 42px;
-  margin-left: -11px;
+  margin-left: 45px;
   &:hover {
     display: block;
   }
