@@ -103,7 +103,7 @@ const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData }) => (
         <SearchField onChange={onChangeHandler} />
       </SearchContainer>
       <Div>
-        <Title>FootBall</Title>
+        <Title>Football</Title>
         <GroupedItems data={newData} loading={loading} />
         <Logo src={bxLogo} alt="logo" style={{ position: 'absolute', bottom: 0 }} />
       </Div>
