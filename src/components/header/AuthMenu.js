@@ -27,6 +27,7 @@ const NavLink = styled.a`
 const NavItem = styled.li`
   float: left;
   padding: 22px 15px;
+  font-family: Montserrat;
 `
 
 const NavItemRegister = styled(NavItem)`
@@ -36,10 +37,10 @@ const NavItemRegister = styled(NavItem)`
 const Register = styled(NavLink)`
   border: 2px solid #2F3033;
   padding: 6px 20px;
-  font-family: Montserrat;	
-  font-size: 14px;	
-  font-weight: bold;	
-  line-height: 18px;	
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
   text-align: center;
   
   &:hover {

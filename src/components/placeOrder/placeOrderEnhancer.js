@@ -122,6 +122,20 @@ export default compose(
       }
       return profit
     },
+    potentialCalculation: ({ odd, stake, activeTab, isLiabilitiesActive, isPayoutActive }) => () => {
+      const potentials = {}
+      if (activeTab === 'buy') {
+        potentials.win = Math.floor((odd * stake) - stake)
+        potentials.loss = stake
+        return potentials
+      }
+      if (isLiabilitiesActive) {
+        potentials.win = stake
+        potentials.loss = Math.floor((odd * stake) - stake)
+        return potentials
+      }
+      return potentials
+    },
     buttonSwitcher: () => (checked) => {
       if (checked) {
         return (

@@ -13,8 +13,10 @@ const TitleLine = styled.div`
 const Title = styled.div`
   background-color: #122d3e;
   color: #6e7e8a;
-  margin-top: -10px;
   padding: 0px 5px;
+  font-family: Montserrat;
+  margin-top: -7px;
+  font-size: 13px;
 `
 
 const GroupedItems = ({ data, loading }) => {

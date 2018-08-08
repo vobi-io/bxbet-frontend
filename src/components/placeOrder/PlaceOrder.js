@@ -66,30 +66,40 @@ font-family: Montserrat;
 
 
 const StyledButtons = styled.form`
-text-align: left;
-margin-top: 8px;
-input{
-  opacity: 0;
-  cursor: pointer;
-  margin-right: 10px;
-  margin-bottom: 7px;
-}
-.circle{
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  border: 3px solid #37d697;
+  text-align: left;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(20px);
-  cursor: pointer;
-  div{
-    width: 7px;
-    height: 7px;
-    background-color: #37d697;
-    border-radius: 8px;
+  margin-top: -16px;
+  background-color: #091f2d;
+  width: 140px;
+  padding: 0 5px;
+  font-size: 10px;
+  color: #37d697;
+  font-weight: bold;
+  justify-content: space-between;
+  input{
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    margin-top: 5px;
+    margin-left: 2px;
+    margin-right: 5px;
   }
+  .circle{
+    width: 13px;
+    height: 13px;
+    border-radius: 15px;
+    border: 2px solid #37d697;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(20px);
+    cursor: pointer;
+    div{
+      width: 5px;
+      height: 5px;
+      background-color: #37d697;
+      border-radius: 8px;
+    }
 }
 `
 const StyledToastContainer = styled(ToastContainer)`
@@ -214,7 +224,7 @@ const handleChange = () => {
 
 const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorChange,
   onChangeHandler, odd, stake, isValidInput, oddIsValid, toggleButtons,
-  placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, ...props }) => (
+  placeOrderCalculation, isLiabilitiesActive, isPayoutActive, buttonSwitcher, potentialCalculation, ...props }) => (
     <div>
       <Title>Betslip</Title>
       <div style={{ display: 'flex', marginLeft: '14px', marginBottom: '18px' }}>
@@ -234,9 +244,9 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
         <Brick />
         <Potentials>
           <PotentialLable>Potential Win:</PotentialLable>
-          <Potential win>198 BX</Potential>
+          <Potential win>{isNaN(potentialCalculation().win) ? '0 BX' : `${potentialCalculation().win} BX`}</Potential>
           <PotentialLable>Potential Lose:</PotentialLable>
-          <Potential>398 BX</Potential>
+          <Potential>{isNaN(potentialCalculation().loss) ? '0 BX' : `${potentialCalculation().loss} BX`}</Potential>
         </Potentials>
         <Divider />
         <StyledInfo>
@@ -249,11 +259,17 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
                 </PotentialReturn>
               :
                 <div style={{ width: '100%' }}>
-                  <StyledButtons onChange={toggleButtons}>
-                    {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isLiabilitiesActive} value="liabilities" /> Liabilities <br />
-                    {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isPayoutActive} value="payout" /> Payout <br />
-                  </StyledButtons>
-                  <div style={{ marginTop: '5px', textAlign: 'right' }}>{placeOrderCalculation()}</div>
+                  <PotentialReturn>
+                    <StyledButtons onChange={toggleButtons}>
+                      <div style={{ marginTop: '-25px' }}>
+                        {buttonSwitcher(isLiabilitiesActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isLiabilitiesActive} value="liabilities" /> <lable>Liabilities</lable>
+                      </div>
+                      <div style={{ marginTop: '-25px' }}>
+                        {buttonSwitcher(isPayoutActive)}<input type="radio" name="sell_type" onChange={() => {}} checked={isPayoutActive} value="payout" /><lable>Payout</lable>
+                      </div>
+                    </StyledButtons>
+                    <OrderCalcuationResult>{placeOrderCalculation()}</OrderCalcuationResult>
+                  </PotentialReturn>
                 </div>
           }
           </div>
@@ -281,6 +297,7 @@ const PlaceOrder = ({
     signInOpened,
     selected,
     oddIsValid,
+    potentialCalculation,
     ...rest }) => (
       <Card>
         <CardBody
@@ -302,6 +319,7 @@ const PlaceOrder = ({
           buttonSwitcher={buttonSwitcher}
           signInOpened={signInOpened}
           props={rest}
+          potentialCalculation={potentialCalculation}
         />
       </Card>
 )
