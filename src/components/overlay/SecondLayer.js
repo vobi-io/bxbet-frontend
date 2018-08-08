@@ -54,6 +54,7 @@ const SecondLayer = () => (
       Please visit our main page and register for the token sale. This is a
       different account than the one, you are using for the MVP.
     </Text>
+    <Text>Please visit our main website to register for the token sale.<a href="www.bx.bet">www.bx.bet</a></Text>
     <Text>If you have additional questions, please join our telegram group.</Text>
     <LinkDiv href="https://t.me/bxbet" target="_blank">
       <SocialIcon src={Telegram} alt="telegram" />

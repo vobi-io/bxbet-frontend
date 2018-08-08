@@ -67,12 +67,6 @@ const Circle = styled.div`
 const SocialIcons = styled.img`
   width: ${props => (props.fb || props.tw ? '31' : '35')}px;
   height: ${props => (props.fb || props.tw ? '31' : '35')}px;
-  :not(:last-child){
-    margin-right: 20px;
-  }
-  :nth-child(3) {
-    margin-left: 20px;
-  }
 `
 const Arrow = styled.img`
   width: 70px;
@@ -88,7 +82,11 @@ const Main = styled.div`
   height: 63%;
   margin-top: 10%;
 `
-
+const Anchor = styled.a`
+  :not(:last-child){
+    margin-right: 20px;
+  }
+`
 const Overlay = ({ onRightClick, onLeftClick, active, acceptClick, closeOverlay }) => (
   <Background>
     <Container>
@@ -115,11 +113,11 @@ const Overlay = ({ onRightClick, onLeftClick, active, acceptClick, closeOverlay 
           <Circle filled={active === 3} />
         </FlexRow>
         <FlexRow jcenter alcenter marginTop={18}>
-          <SocialIcons fb src={FacebookLogo} alt="facebook" />
-          <MediumLogo />
-          <SocialIcons src={TelegramLogo} alt="telegram" />
-          <SocialIcons src={YoutubeLogo} alt="youtube" />
-          <SocialIcons tw src={TwitterLogo} alt="twitter" />
+          <Anchor href="https://www.facebook.com/BXBET/" target="_blank"><SocialIcons fb src={FacebookLogo} alt="facebook" /></Anchor>
+          <Anchor href=" https://medium.com/bxbet" target="_blank"><MediumLogo /></Anchor>
+          <Anchor href=" https://t.me/bxbet" target="_blank"><SocialIcons src={TelegramLogo} alt="telegram" /></Anchor>
+          <Anchor href="https://youtu.be/qLY431v0vrI" target="_blank"><SocialIcons src={YoutubeLogo} alt="youtube" /></Anchor>
+          <Anchor href="https://twitter.com/BXBETico" target="_blank"><SocialIcons tw src={TwitterLogo} alt="twitter" /></Anchor>
         </FlexRow>
       </Footer>
     </Container>

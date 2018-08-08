@@ -43,26 +43,27 @@ const FourthLayer = ({ closeOverlay }) => (
   <Container>
     <Title>How does it work?</Title>
     <Text lg>
-      Our MVP offers full blockchain based betting and implements the functionality of
-      a betting exchange.
+      Our MVP offers full blockchain based betting and implements the functionality of a betting exchange.
     </Text>
     <Text>
-      You can use your initial stake of BX-Tokens to place buy or sell orders on the
+      You can use your initial stake of BX tokens to place buy or sell orders on the
       outcome of a betting market. To place an order you can either:
     </Text>
     <Text>
-      Click on one of the available offers in the „available offers“ tab and then adjust
-      your order in the bet slip and then finally place it or
+      Click on one of the available offers in the „available offers“ tab and then adjust your order in the bet slip,
+      then place the bet
     </Text>
-    <Text>directly set the „Outcome“ , your „Odds“ and the „Stake“ in the Betslip</Text>
+    <Text>
+      Directly set the „Outcome“, your „Odds“ and the „Stake“ in the bet slip
+    </Text>
     <Text>
       For a more detailed explanation on the functionality of a betting exchange,
       especially the differences between BUY and SELL orders, please visit
     </Text>
     <Link href="https://bx.bet/en/exchange/">BX.bet/exchange.</Link>
     <Text>
-      After the event took place, the market will be automatically resolved and the
-      Smart Contract distributes all winnings.
+      After the event takes place, the market will be automatically resolved and the Smart Contract will distribute
+      all winnings
     </Text>
     <Button onClick={() => closeOverlay()} >Accept and start</Button>
   </Container>

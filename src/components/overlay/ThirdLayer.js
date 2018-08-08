@@ -29,9 +29,9 @@ const ThirdLayer = () => (
   <Container>
     <Title fontSize={16}>How to start?</Title>
     <Title marginTop={25}>Register</Title>
-    <Text>Please use the „Sign up“ Button to register for the usage of the MVP.</Text>
+    <Text>Please use the „Sign Up“ button to register for the usage of the MVP.</Text>
     <Title marginTop={25}>Login</Title>
-    <Text>After you registered, you can login.</Text>
+    <Text>After you have registered, you can login.</Text>
     <Title marginTop={25}>Receive your initial BX Tokens</Title>
     <Text>
       You will see that you have an initial stake of 20.000 BX Tokens in your account
@@ -40,7 +40,7 @@ const ThirdLayer = () => (
     <FlexRow>
       <Title>NOTE:</Title>
       <Text>
-        This is a dummy BX currency and not the one you can buy in our token
+        This is a dummy BX currency that has no value and not the one you can buy in our token
         sale
       </Text>
     </FlexRow>
