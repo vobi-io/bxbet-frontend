@@ -82,7 +82,7 @@ const SearchContainer = styled.div`
   position: relative;
   margin-left: -15px;
   margin-top: -15px;
-  width: 254px;
+  width: 100%;
   display: flex !important;
   align-items: center;
   margin-bottom: 29px;
