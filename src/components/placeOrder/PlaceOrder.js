@@ -238,8 +238,8 @@ const CardBody = ({ toggleActiveButton, activeTab, teams, selected, onSelectorCh
       <Container>
         <StyledForm>
           <SelectField title="Outcome" options={teams} selected={selected} onChange={props.props.authenticated ? e => onSelectorChange(e.target.value) : () => handleChange(props)} />
-          <TextField odd type="number" title="Buyers' Odds" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} isValidInput={oddIsValid} typeStyle={['odd', 'place-order-input-1']} />
-          <TextField title="Buyers' Stake" icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
+          <TextField odd type="number" title={activeTab === 'buy' ? 'Odds' : "Buyers' Odds"} onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={odd} isValidInput={oddIsValid} typeStyle={['odd', 'place-order-input-1']} />
+          <TextField title={activeTab === 'buy' ? 'Stake' : "Buyers' Stake"} icon="BX" onChange={props.props.authenticated ? onChangeHandler : () => handleChange(props)} value={stake} isValidInput={isValidInput} typeStyle={'stake'} />
         </StyledForm>
         <Brick />
         <Potentials>
