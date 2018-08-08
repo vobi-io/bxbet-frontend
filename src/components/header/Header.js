@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import authAware from '../../authAware'
 import AuthMenu from './AuthMenu'
 import UserMenu from './UserMenu'
-import Logo from '../../resources/assets/img/bx-logo-color-horizontal.png'
+import Logo from '../../resources/assets/img/bxbetlogoMain.png'
 import headerEnhance from './headerEnhance'
 
 const StyledHeader = styled.span`

@@ -6,7 +6,7 @@ import burgerNavIcon from '../../resources/assets/img/icons/burger-navigation.sv
 import { SearchField } from '../form'
 import enhance from './sidebarEnhance'
 import GroupedItems from './GroupedItems'
-import bxLogo from '../../resources/assets/img/LG_SM.png'
+import bxLogo from '../../resources/assets/img/bxbetlogoSidebar.png'
 
 const SidebarContainer = styled.div`
     width: 59px;
@@ -69,6 +69,7 @@ const Div = styled.div`
 const Logo = styled.img`
   position: absolute;
   bottom: 0;
+  width: 70px;
 `
 const Title = styled.span`
   font-size: 16px;
