@@ -25,7 +25,7 @@ const StyledInput = styled.input `
     font-weight: ${props => (props.odd ? 'bold' : '')};
     color: ${props => (props.odd ? '#37d697' : '#ffffff')};
     outline: none;
-    border: ${props => (props.isValidInput ? 'solid 1px #4b5963' : '2px solid red')};
+    border: ${props => (props.isValidInput ? 'solid 1px #4b5963' : '2px solid #f01150')};
     ::placeholder {
         font-family: Montserrat;
         font-size: 14px;
