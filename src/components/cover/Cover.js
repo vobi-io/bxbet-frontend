@@ -75,6 +75,9 @@ function Cover(props) {
     @media only screen and (max-width: 1024px) {
       margin-left: -27px;
     }
+    @media only screen and (max-width: 768px) {
+      margin-left: -55px;
+    }
   `
   const dateFormater = (timestamp) => {
     const date = new Date()
