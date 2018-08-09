@@ -28,13 +28,14 @@ export default compose(
         loading,
         data,
         isOpen: false,
+        value: '',
       }),
       {
         toggle: ({ isOpen }) => () => ({ isOpen: !isOpen }),
         onChangeHandler: ({ data }) => (val) => {
           const newData1 = []
           if (val.length === 0) {
-            return { newData: data }
+            return { newData: data, value: val }
           }
           data.map((item) => {
             if (item.homeTeam.toLowerCase().includes(val.toLowerCase()) || item.awayTeam.toLowerCase().includes(val.toLowerCase())) {
@@ -42,8 +43,9 @@ export default compose(
             }
             return true
           })
-          return { newData: newData1 }
+          return { newData: newData1, value: val }
         },
+        clearOnClick: ({ data }) => () => ({ newData: data, value: '' }),
       }
     ),
     withHandlers({

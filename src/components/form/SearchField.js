@@ -39,7 +39,7 @@ const StyledForm = styled.form`
 
 const SearchField = props => (
   <StyledForm>
-    <StyledInput type="search" placeholder="Search" onChange={e => props.onChange(e.target.value)} />
+    <StyledInput value={props.value} type="search" placeholder="Search" onChange={e => props.onChange(e.target.value)} />
     <StyledSearchIcon src={searchIcon} alt="Search" />
   </StyledForm>
     )

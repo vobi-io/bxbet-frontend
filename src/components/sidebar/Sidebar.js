@@ -35,7 +35,7 @@ const SidebarContainer = styled.div`
     & .bm-overlay {
       top: 0;
       display: none;
-      @media only screen and (max-width: 500px) {
+      @media only screen and (max-width: 1024px) {
         display: block;
       }
     }
@@ -116,13 +116,13 @@ const Close = styled.span`
 `
 const winWidth = window.innerWidth
 
-const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData }) => (
+const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData, value, clearOnClick }) => (
   <SidebarContainer>
     <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
     <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={winWidth > 1024 ? true : isOpen} >
       <SearchContainer>
-        <Close onClick={() => { toggle() }} >&times;</Close>
-        <SearchField onChange={onChangeHandler} />
+        <Close onClick={() => clearOnClick()} >&times;</Close>
+        <SearchField value={value} onChange={onChangeHandler} />
       </SearchContainer>
       <Div>
         <Title>Football</Title>
