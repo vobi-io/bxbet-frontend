@@ -28,6 +28,10 @@ const StyledButon = styled.button`
       margin-bottom: ${({ buttonType }) => (buttonType === 'outcome' || buttonType === 'active' ? '5px' : null)};
     }
 
+    :hover{
+      background-color: ${({ buttonType }) => (buttonType === 'cta' ? '#5fe2b4' : null)};
+      border: ${({ buttonType }) => (buttonType === 'outcome' ? '1px solid #37d697' : null)};
+    }
     font-family: Montserrat;
     cursor: pointer;
     &:focus {outline:0;}

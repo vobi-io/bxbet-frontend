@@ -77,7 +77,7 @@ const Img = styled.img`
 `
 const Div = styled.div`
   position: relative;
-  min-height: 95%;
+  min-height: 90%;
   padding-bottom: 30px;
   margin-bottom: 8px;
 `

@@ -23,7 +23,15 @@ const StyledRow = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  margin-bottom: ${props => (props.head ? '30px' : '0px')}
+  @media only screen and (max-width: 500px) {
+    min-width: 400px;
+  }
+  cursor: ${props => (props.head ? null : 'pointer')};
+  margin-bottom: ${props => (props.head ? '30px' : '0px')};
+  padding: ${props => (props.head ? null : '5px 0px')};
+  :hover {
+    background-color: ${props => (props.head ? null : '#1f3c4f')};
+  }
   .head{
     color: #6e7e8a;
   }

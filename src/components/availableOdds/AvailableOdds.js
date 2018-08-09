@@ -100,6 +100,9 @@ const OrderContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  :hover{
+    background-color: #1f3c4f;
+  }
 `
 const Odd = styled.span`
   color: #ffffff;
