@@ -12,6 +12,7 @@ function SelectField(props) {
     font-size: 14px;
     color: #6e7e8a;
     width: 35%;
+    min-width: 31%;
   `
 
   const StyledSelect = styled.select`

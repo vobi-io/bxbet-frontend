@@ -17,11 +17,13 @@ import { withMe } from '../../hocs'
 import Flag from '../../resources/assets/img/germany-flag.png'
 import pattern from '../../resources/assets/img/geometric-forms.png'
 
-
+// padding: 5px 17px 17px 17px;
 const Container = styled.div`
-  width: 100%;
+  width: 98.5%;
   background-color: #091f2d;
-  padding: 5px 17px 17px 17px;
+  padding-left: 1%;
+  padding-right: 0.5%;
+  padding-bottom: 17px;
   background-image: url(${pattern});
   background-repeat: no-repeat;
   @media only screen and (min-height: 1100px) {
@@ -43,6 +45,9 @@ const VerticalWrapper = styled.div`
   margin-top: 13px;
   justify-content: space-between;
   width: 100%;
+  @media only screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 `
 
 const someData = ['Germany Wins', 'England Wins', 'Draw']

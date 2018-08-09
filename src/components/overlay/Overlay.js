@@ -31,7 +31,7 @@ const Background = styled.div`
   justify-content: center;
 `
 const Container = styled.div`
-  width: 759px;
+  max-width: 759px;
   position: fixed;
   top: 0;
   height: 100vh;
@@ -40,6 +40,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 `
 const Logo = styled.img`
   width: 150px;
@@ -47,6 +48,7 @@ const Logo = styled.img`
 `
 const Footer = styled.div`
   margin-bottom: 20px;
+  margin-top: 20px;
 `
 const FlexRow = styled.div`
   display: flex;
@@ -79,7 +81,6 @@ const Arrow = styled.img`
 `
 const Main = styled.div`
   width: 70%;
-  height: 63%;
   margin-top: 10%;
 `
 const Anchor = styled.a`

@@ -9,7 +9,12 @@ import GroupedItems from './GroupedItems'
 import bxLogo from '../../resources/assets/img/bxbetlogoSidebar.png'
 
 const SidebarContainer = styled.div`
-    width: 59px;
+  @media only screen and (max-width: 1024px) {
+    width: 7%;
+  }
+  @media only screen and (max-width: 500px) {
+    width: 17.69%;
+  }
     height: 100vh;
     position: fixed;
     background-color: #122d3e;
@@ -28,7 +33,11 @@ const SidebarContainer = styled.div`
     }
 
     & .bm-overlay {
-      top: 0
+      top: 0;
+      display: none;
+      @media only screen and (max-width: 500px) {
+        display: block;
+      }
     }
 
     & nav.bm-item-list {
@@ -36,7 +45,13 @@ const SidebarContainer = styled.div`
     }
 
     & .bm-menu-wrap{
-        width: 315px;
+        width: 20% !important;
+        @media only screen and (max-width: 1024px) {
+          width: 27% !important;
+        }
+        @media only screen and (max-width: 500px) {
+          width: 250px !important;
+        }
     }
 
 
@@ -94,11 +109,12 @@ const Close = styled.span`
   font-size: 35px;
   cursor: pointer;
 `
+const winWidth = window.innerWidth
 
 const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData }) => (
   <SidebarContainer>
     <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
-    <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={isOpen} >
+    <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={winWidth > 1024 ? true : isOpen} >
       <SearchContainer>
         <Close onClick={() => { toggle() }} >&times;</Close>
         <SearchField onChange={onChangeHandler} />

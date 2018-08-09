@@ -19,6 +19,12 @@ const StyledHeader = styled.span`
   height: 57px;
   // border: 1px solid #CCCCCC;
   z-index: 0;
+  @media only screen and (max-width: 768px) {
+    height: auto;
+  }
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `
 const HeaderParent = styled.span`
   display: flex;
@@ -55,6 +61,9 @@ const NavItem = styled.li`
   padding-bottom: ${props => (props.role !== 'superAdmin' && props.role !== undefined && props.index !== 0 ? '0px' : null)};
   padding-top: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? '17px' : '22px')};
   padding-top: ${props => (props.role === undefined ? '17px' : '')};
+  @media only screen and (max-width: 500px) {
+    text-align: left;
+  }
 `
 
 const NavCircle = styled.div`
@@ -66,6 +75,9 @@ const NavCircle = styled.div`
   display: inline-block;
   align-self: center;
   margin-top: ${props => (props.role !== 'superAdmin' && props.role !== undefined ? '-17px' : '0px')}
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `
 
 const NavLink = styled(Link)`

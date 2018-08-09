@@ -60,6 +60,9 @@ const ComponentContainer = styled.div`
   background-color: #122d3e;
   margin-right: 11px;
   font-family: Montserrat;
+  @media only screen and (max-width: 1024px) {
+    margin-bottom: 10px;
+  }
 `
 const TitleContainer = styled.div`
   min-width: 40%;
@@ -112,6 +115,12 @@ const OrderBook = ({ ...props }) => {
         color: #6e7e8a;
       }
     `
+    const Div = styled.div`
+      margin: 16px 22px;
+      @media only screen and (max-width: 500px) {
+        margin: 16px 3px;
+      }
+    `
     const printData = data => data.map((item, index) => {
       if (item.outcome !== selectedOutcome) {
         return null
@@ -130,7 +139,7 @@ const OrderBook = ({ ...props }) => {
 
     return (
       <Container>
-        <div style={{ margin: '16px 22px' }}>
+        <Div>
           <StyledTitle>
             {props.title === 'buy' && <BuyIcon />}
             {props.title === 'sell' && <SellIcon />}
@@ -143,7 +152,7 @@ const OrderBook = ({ ...props }) => {
           <StyledContent title={props.title}>
             {props.data && printData(props.data)}
           </StyledContent>
-        </div>
+        </Div>
       </Container>
     )
   }

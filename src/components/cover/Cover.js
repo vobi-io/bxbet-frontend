@@ -18,6 +18,9 @@ function Cover(props) {
     font-size: 29px;
     text-transform: uppercase;
     color: #ffffff;
+    @media only screen and (max-width: 500px) {
+      justify-content: center;
+    }
   `
   const LeftSide = styled.div`
     width: 50%;
@@ -25,6 +28,9 @@ function Cover(props) {
   const RightSide = styled.div`
     width: 50%;
     height: 50px;
+    @media only screen and (max-width: 500px) {
+      display: none;
+    }
   `
   const DateContainer = styled.div`
     display: flex;
@@ -34,6 +40,10 @@ function Cover(props) {
   `
   const FlexRow = styled.div`
     display: flex;
+    @media only screen and (max-width: 500px) {
+      flex-direction: ${props => (props.teams && 'column')};
+      align-items: ${props => (props.teams && 'center')};
+    }
   `
   const VSContainer = styled.div` 
     height: 50px;
@@ -49,6 +59,11 @@ function Cover(props) {
     align-items: center;
     font-weight: bold;
     font-size: 22px;
+    @media only screen and (max-width: 500px) {
+      width: 40px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
   `
   const Span = styled.span`
     margin-left: 5px;
@@ -57,6 +72,9 @@ function Cover(props) {
   const Img = styled.img`
     margin-top: -95px;
     margin-left: 12px;
+    @media only screen and (max-width: 1024px) {
+      margin-left: -27px;
+    }
   `
   const dateFormater = (timestamp) => {
     const date = new Date()
@@ -80,7 +98,7 @@ function Cover(props) {
   return (
     <StyledCover>
       <LeftSide>
-        <FlexRow>
+        <FlexRow teams>
           <span>{props.homeTeam}</span>
           <VSContainer><span>VS</span></VSContainer>
           <span>{props.awayTeam}</span>

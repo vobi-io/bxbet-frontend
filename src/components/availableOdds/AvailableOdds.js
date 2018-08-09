@@ -18,8 +18,9 @@ const TableItem = styled.div`
   .country-info {
     display: flex;
     align-items: center;
-    width: 90px;
+    min-width: 80px;
     margin-right: 3px;
+    width: 9%;
 
     img,
     .flag {
@@ -68,6 +69,9 @@ const Container = styled.div`
   background-color: #122d3e;
   margin-right: 11px;
   font-family: Montserrat;
+  @media only screen and (max-width: 1024px) {
+    margin-bottom: 10px;
+  }
 `
 const Title = styled.div`
   margin-top: 20px;
@@ -79,6 +83,7 @@ const Title = styled.div`
   font-weight: 500;
 `
 const Body = styled.div`
+  overflow-x: auto;
   background-color: #091f2d;
   margin: 11px;
   min-height: 150px;
@@ -122,7 +127,8 @@ const FlexColumn = styled.div`
 const Line = styled.div`
   height: 1px;
   background-color: #4b5963;
-  display: ${props => (props.index === 2 ? 'none' : '')}
+  display: ${props => (props.index === 2 ? 'none' : '')};
+  min-width: 555px;
 `
 const LableBuy = styled.div`
   display: flex;

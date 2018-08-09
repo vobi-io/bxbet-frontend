@@ -13,6 +13,7 @@ const Container = styled.div`
   padding: 14px;
   height: 466px;
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
+  overflow-x: auto;
 `
 const StyledRow = styled.div`
   font-family: Montserrat;
@@ -40,13 +41,19 @@ const StyledRow = styled.div`
     & > div {
       width: 100%;
       text-align: center;
+      @media only screen and (max-width: 500px) {
+        min-width: 80px;
     }
+  }
   }
 `
 const Line = styled.div`
   height: 1px;
   background-color: #4b5963;
   margin: 11px 0;
+  @media only screen and (max-width: 500px) {
+    min-width: 392px;
+  }
 `
 const Message = styled.div`
   color: #ffffff;
@@ -56,7 +63,7 @@ const Message = styled.div`
   margin-top: 60px;
 `
 const ComponentContainer = styled.div`
-  min-width: 49.6%;
+  min-width: 48.6%;
   background-color: #122d3e;
   margin-right: 11px;
   font-family: Montserrat;
@@ -77,17 +84,26 @@ const OrderType = styled.div`
   justify-content: center;
   align-items: center;
   color: ${props => (props.orderType === 'Buy' ? '#37d697' : '#f01150')};
+  @media only screen and (max-width: 500px) {
+    min-width: 80px;
+  }
 `
 const Div = styled.div`
   border-radius: 2px;
   background-color: #122d3e;
   width: fit-content;
   padding: 3px 10px;
+  @media only screen and (max-width: 500px) {
+    min-width: 50px;
+  }
 `
 const StatusContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media only screen and (max-width: 500px) {
+    min-width: 80px;
+  }
 `
 const StatusDot = styled.div`
   width: 6px;
@@ -101,7 +117,14 @@ const FlexDiv = styled.div`
   justify-content: ${props => (props.stake ? 'flex-end' : 'center')};
   align-content: center;
 `
-
+const Country = styled.div`
+  display: flex;
+  width: 150px;
+  align-items: center;
+  @media only screen and (max-width: 500px) {
+    min-width: 80px;
+  }
+`
 const YourBetes = ({ yourBetesData, teams, ...props }) => {
   const data = yourBetesData()
   function Body() {
@@ -119,10 +142,10 @@ const YourBetes = ({ yourBetesData, teams, ...props }) => {
         {props.me && data && data.map((item, index) => (
           <div key={index}>
             <StyledRow status={item.orderType}>
-              <div style={{ display: 'flex', width: '150px', alignItems: 'center' }}>
+              <Country>
                 {/* {returnFlagUrl(teams[item.outcome], true)} */}
                 <span>{teams[item.outcome]}</span>
-              </div>
+              </Country>
               <div className="rigth-side">
                 <OrderType orderType={item.orderType}>
                   {item.orderType === 'Buy' && <BuyIcon />}

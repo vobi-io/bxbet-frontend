@@ -18,6 +18,9 @@ const StyledUserMenu = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 0px;
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `
 
 const AvatarContainer = styled.div`
@@ -133,13 +136,18 @@ const styles = {
     textTransform: 'uppercase',
   },
 }
+const Line = styled.div`
+  @media only screen and (max-width: 500px) {
+    display: none;
+  }
+`
 
 const UserMenu = ({ email, signOut, balanceCounter, userImageUrl }) => (
   <StyledUserMenu>
     <Balance>
       <p style={styles.balance}> Balance: </p>
       <p style={styles.balanceCounter}>{balanceCounter} BX</p>
-      <div style={styles.deviderLine} />
+      <Line style={styles.deviderLine} />
     </Balance>
     <AvatarContainer>
       {userImageUrl ? <Avatar src={userImageUrl} alt={email} /> : <UserIcon />}

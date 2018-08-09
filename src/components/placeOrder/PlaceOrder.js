@@ -16,6 +16,10 @@ const Container = styled.div`
   background-color: #091f2d;
   margin: 11px;
   padding: 9px;
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 const StyledInfo = styled.div`
 width: 60%;
@@ -28,6 +32,11 @@ color: white;
 font-family: Montserrat;
 font-size: 18px;
 margin-left: 9px;
+@media only screen and (max-width: 500px) {
+  width: 100%;
+  margin: 0;
+  margin-top: 10px;
+}
 
 .calculations{
   display: flex;
@@ -140,6 +149,10 @@ const Potentials = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media only screen and (max-width: 500px) {
+    margin: 0;
+    margin-top: 10px;
+  }
 `
 const PotentialReturn = styled.div`
   border: solid 1px #37d697;
@@ -173,6 +186,9 @@ const Divider = styled.div`
   width: 1px;
   height: 150px;
   background-color: #6e7e8a;
+  @media only screen and (max-width: 500px) {
+    display: none;
+  }
 `
 const Potential = styled.div`
   width: 80px;

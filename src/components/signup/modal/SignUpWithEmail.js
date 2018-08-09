@@ -21,6 +21,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1,
   },
   content: {
     backgroundColor: '#ffffff',

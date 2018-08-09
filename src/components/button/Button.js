@@ -21,6 +21,12 @@ const StyledButon = styled.button`
     min-width: ${({ buttonType }) => (buttonType === 'outcome' || 'active' ? '105px' : null)};
     height: ${({ buttonType }) => (buttonType === 'outcome' || 'active' ? '40px' : null)};
     font-size: ${({ buttonType }) => (buttonType === 'outcome' || 'active' ? '14px' : '')};
+    @media only screen and (max-width: 500px) {
+      margin-bottom: ${({ buttonType }) => (buttonType === 'oucome' || buttonType === 'active' ? '5px' : null)};
+    }
+    @media only screen and (max-width: 1350px) {
+      margin-bottom: ${({ buttonType }) => (buttonType === 'outcome' || buttonType === 'active' ? '5px' : null)};
+    }
 
     font-family: Montserrat;
     cursor: pointer;

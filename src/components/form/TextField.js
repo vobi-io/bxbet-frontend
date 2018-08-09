@@ -10,7 +10,7 @@ const StyledLabel = styled.label `
 font-family: Montserrat;
 font-size: 14px;
 color: #6e7e8a;
-width: 37%;
+min-width: 31%
 `
 
 const StyledInput = styled.input `

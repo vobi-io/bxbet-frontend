@@ -10,6 +10,9 @@ const Container = styled.div`
   background: transparent;
   margin-top: 10px;
   margin-right: 11px;
+  @media only screen and (max-width: 1350px) {
+    width: 100%;
+  }
 `
 
 const StyledContainer = styled.div`
@@ -17,13 +20,27 @@ const StyledContainer = styled.div`
     height: 100%;
 
     .buttons{
-      width: 100%;
+      width: 94%;
       display: flex;
+      @media only screen and (max-width: 1350px) {
+        flex-wrap: wrap;
+      }
+      @media only screen and (max-width: 1024px) {
+        flex-wrap: no-wrap;
+      }
     }
   `
 const Brick = styled.div`
     width: 13px;
   `
+const Div = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  @meida only screen and (max-width: 1300px) {
+    justify-content: flex-end;
+  }
+`
 
 const stringShorter = (word) => {
   if (word.length > 20) {
@@ -49,7 +66,7 @@ const Buttons = ({
     ...props
 }) => (
   <StyledContainer>
-    <div style={{ display: 'flex', height: '57px', alignItems: 'center', width: '100%' }}>
+    <Div>
       <div className="buttons">
         <Button outcome text={stringShorter(teams[0])} activeButton={selected === 1} onClick={() => { handleClick(props, onSelectorChange, teams[0]) }} />
         <Brick />
@@ -57,7 +74,7 @@ const Buttons = ({
         <Brick />
         <Button outcome text={'Draw'} activeButton={selected === 0} onClick={() => { handleClick(props, onSelectorChange, 'Draw') }} />
       </div>
-    </div>
+    </Div>
   </StyledContainer>
   )
 
