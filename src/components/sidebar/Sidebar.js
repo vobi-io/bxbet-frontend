@@ -77,7 +77,12 @@ const Img = styled.img`
 `
 const Div = styled.div`
   position: relative;
-  min-height: 90%;
+  @media only screen and (max-height: 1200px) {
+    min-height: 90%;
+  }
+  @media only screen and (max-height: 700px) {
+    min-height: 85%;
+  }
   padding-bottom: 30px;
   margin-bottom: 8px;
 `
