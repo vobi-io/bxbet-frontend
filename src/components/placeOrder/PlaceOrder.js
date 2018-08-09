@@ -116,6 +116,9 @@ const StyledToastContainer = styled(ToastContainer)`
     background-color: #122d3e;
     color: white;
     font-size: bold;
+    @media only screen and (max-width: 500px) {
+      width: 220px;
+    }
   }
   .Toastify__close-button--default {
     color: #ffffff;
