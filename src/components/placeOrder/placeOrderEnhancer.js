@@ -129,7 +129,7 @@ export default compose(
         potentials.loss = stake
         return potentials
       }
-      if (isLiabilitiesActive) {
+      if (isLiabilitiesActive || isPayoutActive) {
         potentials.win = stake
         potentials.loss = Math.floor((odd * stake) - stake)
         return potentials

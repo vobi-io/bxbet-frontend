@@ -20,6 +20,7 @@ import pattern from '../../resources/assets/img/geometric-forms.png'
 // padding: 5px 17px 17px 17px;
 const Container = styled.div`
   width: 98.5%;
+  height: 100%;
   background-color: #091f2d;
   padding-left: 1%;
   padding-right: 0.5%;
