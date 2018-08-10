@@ -22,7 +22,7 @@ const StyledHeader = styled.span`
   @media only screen and (max-width: 768px) {
     height: auto;
   }
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 620px) {
     flex-direction: column;
   }
 `

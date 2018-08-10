@@ -12,6 +12,9 @@ const Container = styled.div`
   flex-direction: column;
   padding: 14px;
   height: 466px;
+  @media only screen and (max-width: 1420px) {
+    height: 527px;
+  }
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
   overflow-x: auto;
 `

@@ -28,7 +28,7 @@ function Cover(props) {
   const RightSide = styled.div`
     width: 50%;
     height: 50px;
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 690px) {
       display: none;
     }
   `

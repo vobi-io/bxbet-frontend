@@ -46,7 +46,7 @@ const VerticalWrapper = styled.div`
   margin-top: 13px;
   justify-content: space-between;
   width: 100%;
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: 1239px) {
     flex-direction: column;
   }
 `

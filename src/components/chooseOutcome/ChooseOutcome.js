@@ -22,11 +22,8 @@ const StyledContainer = styled.div`
     .buttons{
       width: 94%;
       display: flex;
-      @media only screen and (max-width: 1350px) {
+      @media only screen and (max-width: 1420px) {
         flex-wrap: wrap;
-      }
-      @media only screen and (max-width: 1024px) {
-        flex-wrap: no-wrap;
       }
     }
   `
@@ -37,8 +34,11 @@ const Div = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  @meida only screen and (max-width: 1300px) {
+  @media only screen and (max-width: 1420px) {
     justify-content: flex-end;
+  }
+  @media only screen and (max-width: 1024px) {
+    justify-content: normal;
   }
 `
 
