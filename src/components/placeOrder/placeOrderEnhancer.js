@@ -152,7 +152,11 @@ export default compose(
       if (availableOdd === 0 || availableAmount === 0) {
         return null
       } else if (this.props.availableOdd !== availableOdd || this.props.availableAmount !== availableAmount || this.props.availableActiveTab !== availableActiveTab) {
-        this.props.setDefaultData({ odd: availableOdd, stake: availableAmount, activeTab: availableActiveTab, isValidInput: true })
+        if (availableAmount >= 100) {
+          this.props.setDefaultData({ odd: availableOdd, stake: 100, activeTab: availableActiveTab, isValidInput: true })
+        } else {
+          this.props.setDefaultData({ odd: availableOdd, stake: availableAmount, activeTab: availableActiveTab, isValidInput: true })          
+        }
       }
       return true
     },
