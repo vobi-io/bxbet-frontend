@@ -11,7 +11,7 @@ import signInMutation from '../../graphql/SignIn.graphql'
 import { setToken } from '../../services/auth'
 import { withForm, FieldError } from '../form'
 
-import Logo from '../../resources/assets/img/bx-logo-color-horizontal.png'
+import Logo from '../../resources/assets/img/bxbetlogoMain.png'
 
 const styles = {
   overlay: {
