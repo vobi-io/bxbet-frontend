@@ -29,7 +29,7 @@ export default compose(
         const newState = {}
         const value = e.target.value
 
-        if (e.target.name === "buyers' odds") {
+        if (e.target.name === "buyers' odds" || e.target.name === 'odds') {
           newState.odd = value // parseFloat(value) || ' '
           if (value < 1.01 || value > 99) {
             newState.oddIsValid = false
