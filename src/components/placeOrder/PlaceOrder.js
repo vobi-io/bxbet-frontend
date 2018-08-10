@@ -113,11 +113,13 @@ const StyledButtons = styled.form`
 `
 const StyledToastContainer = styled(ToastContainer)`
   .toastClassName {
-    background-color: #122d3e;
+    background-color: #091f2d;
     color: white;
-    font-size: bold;
+    font-weight: bold;
+    font-family: Montserrat;
     @media only screen and (max-width: 500px) {
       width: 220px;
+      font-size: 13px;
     }
   }
   .Toastify__close-button--default {
@@ -126,7 +128,10 @@ const StyledToastContainer = styled(ToastContainer)`
   }
   &.Toastify__toast-container--bottom-left {
     bottom: 1em;
-    left: 4em !important;
+    left: 15em !important;
+    @media only screen and (max-width: 1000px) {
+      left: 4em !important;
+    }
   }
 `
 const Card = styled.div`
