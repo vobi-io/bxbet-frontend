@@ -18,7 +18,7 @@ const TableItem = styled.div`
   .country-info {
     display: flex;
     align-items: center;
-    min-width: 80px;
+    min-width: 90px;
     margin-right: 3px;
     width: 9%;
 
