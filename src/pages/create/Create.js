@@ -14,6 +14,12 @@ const Container = styled.div`
       display: flex;
       padding: 20px;
       width: 700px;
+      @media only screen and (max-width: 800px) {
+        width: 500px;
+      }
+      @media only screen and (max-width: 600px) {
+        width: 280px;
+      }
       margin: 16px auto;
       display: flex;
       flex-direction: column;
@@ -44,7 +50,10 @@ const StyledDatePicker = styled.div`
     align-items: center;
 
     & > div {
-      width: 68.5%;
+      width: 62.7%;
+      @media only screen and (max-width: 500px) {
+        width: 59.5%;
+      }
       margin-left: 4%;
       height: 40px;
       border-radius: 3px;
