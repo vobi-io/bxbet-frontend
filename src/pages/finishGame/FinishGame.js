@@ -12,6 +12,12 @@ const Container = styled.div`
       display: flex;
       padding: 20px;
       width: 700px;
+      @media only screen and (max-width: 800px) {
+        width: 500px;
+      }
+      @media only screen and (max-width: 600px) {
+        width: 280px;
+      }
       margin: 16px auto;
       display: flex;
       flex-direction: column;
