@@ -37,9 +37,6 @@ const Div = styled.div`
   @media only screen and (max-width: 1420px) {
     justify-content: flex-end;
   }
-  @media only screen and (max-width: 1024px) {
-    justify-content: normal;
-  }
 `
 
 const stringShorter = (word) => {
