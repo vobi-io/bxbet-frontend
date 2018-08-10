@@ -9,12 +9,7 @@ import GroupedItems from './GroupedItems'
 import bxLogo from '../../resources/assets/img/bxbetlogoSidebar.png'
 
 const SidebarContainer = styled.div`
-  @media only screen and (max-width: 1024px) {
-    width: 7%;
-  }
-  @media only screen and (max-width: 500px) {
-    width: 17.69%;
-  }
+    width: 59px;
     height: 100vh;
     position: fixed;
     background-color: #122d3e;
