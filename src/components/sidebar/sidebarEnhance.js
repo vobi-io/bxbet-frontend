@@ -29,6 +29,7 @@ export default compose(
         data,
         isOpen: false,
         value: '',
+        width: window.innerWidth,
       }),
       {
         toggle: ({ isOpen }) => () => ({ isOpen: !isOpen }),
@@ -46,9 +47,18 @@ export default compose(
           return { newData: newData1, value: val }
         },
         clearOnClick: ({ data }) => () => ({ newData: data, value: '' }),
+        updateWidth: () => () => ({ width: window.innerWidth }),
       }
     ),
     withHandlers({
+    }),
+    lifecycle({
+      componentDidMount() {
+        window.addEventListener('resize', this.props.updateWidth)
+      },
+      componentWillUnmount() {
+        window.removeEventListener('resize', this.props.updateWidth)
+      },
     }),
     withMe(),
     refetchOn([FINISH_GAME]),

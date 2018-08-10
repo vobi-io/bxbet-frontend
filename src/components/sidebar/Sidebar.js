@@ -114,12 +114,11 @@ const Close = styled.span`
   font-size: 35px;
   cursor: pointer;
 `
-const winWidth = window.innerWidth
 
-const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData, value, clearOnClick }) => (
+const Sidebar = ({ loading, isOpen, toggle, onChangeHandler, newData, value, clearOnClick, width }) => (
   <SidebarContainer>
     <Img src={burgerNavIcon} alt="img" onClick={() => { toggle() }} />
-    <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={winWidth > 1024 ? true : isOpen} >
+    <StyledMenu customBurgerIcon={false} customCrossIcon={false} isOpen={width > 1024 ? true : isOpen} >
       <SearchContainer>
         <Close onClick={() => clearOnClick()} >&times;</Close>
         <SearchField value={value} onChange={onChangeHandler} />
