@@ -12,6 +12,9 @@ const InfoList = (props) => {
     display: flex;
     align-items: center;
 
+    :hover {
+      background-color: #1f3c4f;
+    }
     & h2{
         font-family: Montserrat;
         font-size: 14px;
