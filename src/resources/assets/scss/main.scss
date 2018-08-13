@@ -12,6 +12,10 @@ body {
   // margin-left: 59px;
   margin-left: 20%;
   width: 80%;
+  @media only screen and (max-width: 1239px) {
+    margin-left: 25%;
+    width: 75%;
+  }
   @media only screen and (max-width: 1024px) {
     margin-left: 59px;
     width: calc(100% - 59px);

@@ -41,6 +41,9 @@ const SidebarContainer = styled.div`
 
     & .bm-menu-wrap{
         width: 20% !important;
+        @media only screen and (max-width: 1239px) {
+          width: 25% !important;
+        }
         @media only screen and (max-width: 1024px) {
           width: 35% !important;
         }

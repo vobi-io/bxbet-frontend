@@ -19,7 +19,7 @@ const StyledHeader = styled.span`
   height: 57px;
   // border: 1px solid #CCCCCC;
   z-index: 0;
-  @media only screen and (max-width: 950px) {
+  @media only screen and (max-width: 1180px) {
     height: auto;
   }
   @media only screen and (max-width: 620px) {
