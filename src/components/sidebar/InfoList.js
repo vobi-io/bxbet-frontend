@@ -49,6 +49,12 @@ const InfoList = (props) => {
     margin-left: 4px;
     margin-top: -2px;
   `
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  `
 
   const timeFormater = (timestamp) => {
     const date = new Date()
@@ -65,21 +71,21 @@ const InfoList = (props) => {
 
   const List = () => props.data.map((item, index) => (
     <ItemContainer key={index}>
-      <Status status={item.status} />
-      <div>
-        <Link to={`/${item._id}`} style={{ textDecoration: 'none' }}>
+      <StyledLink to={`/${item._id}`} style={{ textDecoration: 'none' }}>
+        <Status status={item.status} />
+        <div>
           <h2>
             {item.homeTeam} - {item.awayTeam}
           </h2>
-        </Link>
-        <FlexDiv>
-          <span>2/6</span>
-          <TimeIcon />
-          <Time>
-            {timeFormater(item.startDate)}
-          </Time>
-        </FlexDiv>
-      </div>
+          <FlexDiv>
+            <span>2/6</span>
+            <TimeIcon />
+            <Time>
+              {timeFormater(item.startDate)}
+            </Time>
+          </FlexDiv>
+        </div>
+      </StyledLink>
     </ItemContainer>
         ))
 
