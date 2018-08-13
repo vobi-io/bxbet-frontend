@@ -57,12 +57,11 @@ const InfoList = (props) => {
   `
 
   const timeFormater = (timestamp) => {
-    const date = new Date()
-
-    const day = date.getDay(timestamp)
-    const month = date.getMonth(timestamp)
-    const hour = date.getHours(timestamp)
-    const minute = date.getMinutes(timestamp)
+    const date = new Date(timestamp * 1000)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const hour = date.getHours()
+    const minute = date.getMinutes()
 
     const Text = `${day}/${month} ${hour}:${minute}`
 

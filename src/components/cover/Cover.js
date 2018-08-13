@@ -80,20 +80,20 @@ function Cover(props) {
     }
   `
   const dateFormater = (timestamp) => {
-    const date = new Date()
+    const date = new Date(timestamp * 1000)
 
-    const day = date.getDay(timestamp)
-    const month = date.getMonth(timestamp)
-    const year = date.getFullYear(timestamp)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
 
     const Text = `${day}/${month}/${year}`
 
     return Text
   }
   const timeFormater = (timestamp) => {
-    const date = new Date()
-    const hour = date.getHours(timestamp)
-    const minute = date.getMinutes(timestamp)
+    const date = new Date(timestamp)
+    const hour = date.getHours()
+    const minute = date.getMinutes()
     const Text = `${hour}:${minute}`
     return Text
   }
