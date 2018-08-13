@@ -75,6 +75,9 @@ const Div = styled.div`
   @media only screen and (max-height: 1200px) {
     min-height: 90%;
   }
+  @media only screen and (max-height: 950px) {
+    min-height: 88%;
+  }
   @media only screen and (max-height: 700px) {
     min-height: 85%;
   }
