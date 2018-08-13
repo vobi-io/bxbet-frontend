@@ -126,12 +126,13 @@ const LittleTitles = styled.div`
 const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: ${props => (props.alignCenter ? 'center' : null)}
 `
 const Line = styled.div`
   height: 1px;
   background-color: #4b5963;
   display: ${props => (props.index === 2 ? 'none' : '')};
-  min-width: 555px;
+  min-width: 566px;
 `
 const LableBuy = styled.div`
   display: flex;
@@ -174,14 +175,22 @@ const AvailableOdds = ({ sortedData, teams, onOddClick, onSelectorChange }) => {
     for (const key in sortedData) {
       const Buy = sortedData[key].buy.map((obj, i, arr) => (
         <OrderContainer key={i} onClick={() => handleClick(onOddClick, onSelectorChange, obj.odd, obj.amount, 'buy', key, teams)}>
-          <Odd green={arr.length === i + 1 ? 'green' : ''}>{obj.odd}</Odd>
-          <Amount>{obj.amount}{' '}{'BX'}</Amount>
+          {obj.amount !== 0 &&
+            <FlexColumn alignCenter>
+              <Odd green={arr.length === i + 1 ? 'green' : ''}>{obj.odd}</Odd>
+              <Amount>{obj.amount}{' '}{'BX'}</Amount>
+            </FlexColumn>
+          }
         </OrderContainer>
       ))
       const Sell = sortedData[key].sell.map((obj, i) => (
         <OrderContainer key={i} onClick={() => handleClick(onOddClick, onSelectorChange, obj.odd, obj.amount, 'sell', key, teams)}>
-          <Odd red={i === 0 ? 'red' : ''}>{obj.odd}</Odd>
-          <Amount>{obj.amount}{' '}{'BX'}</Amount>
+          {obj.amount !== 0 &&
+            <FlexColumn alignCenter>
+              <Odd red={i === 0 ? 'red' : ''}>{obj.odd}</Odd>
+              <Amount>{obj.amount}{' '}{'BX'}</Amount>
+            </FlexColumn>
+          }
         </OrderContainer>
       ))
       tableArray.push(
