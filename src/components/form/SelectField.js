@@ -28,6 +28,7 @@ function SelectField(props) {
     color: #ffffff;
     border: solid 1px #4b5963;
     overflow: hidden;
+    min-width: 0;
     ::placeholder {
         font-family: Montserrat;
         font-size: 14px;
