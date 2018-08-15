@@ -25,6 +25,13 @@ const SidebarContainer = styled.div`
     justify-content: center;
     padding: 15px;
     background-color: #122d3e;
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #1f3c4f;
+        outline: 1px solid slategrey;
+      }
     }
 
     & .bm-overlay {

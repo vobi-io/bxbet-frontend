@@ -87,6 +87,15 @@ const Body = styled.div`
   background-color: #091f2d;
   margin: 11px;
   min-height: 150px;
+  ::-webkit-scrollbar {
+    height: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #1f3c4f;
+    outline: 1px solid slategrey;
+  }
+ 
+ 
 `
 const OrderContainer = styled.div`
   font-family: Montserrat;

@@ -17,6 +17,13 @@ const Container = styled.div`
   }
   overflow: ${p => (p.isScrollable ? 'auto' : 'hidden')};
   overflow-x: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #1f3c4f;
+    outline: 1px solid slategrey;
+  }
 `
 const StyledRow = styled.div`
   font-family: Montserrat;
