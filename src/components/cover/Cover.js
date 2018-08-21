@@ -91,7 +91,7 @@ function Cover(props) {
     return Text
   }
   const timeFormater = (timestamp) => {
-    const date = new Date(timestamp)
+    const date = new Date(timestamp * 1000)
     const hour = date.getHours()
     const minute = date.getMinutes()
     const Text = `${hour}:${minute}`
