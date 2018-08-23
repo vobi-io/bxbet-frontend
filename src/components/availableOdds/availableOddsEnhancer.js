@@ -78,6 +78,26 @@ export default compose(
         }
       }
 
+      for (const key in sortedData) {
+        sortedData[key].buy.map((item, index, arr) => {
+          if (index === 0) return null
+          if (item.amount === 0) {
+            // arr.splice(index, 1)
+            // arr.unshift(item)
+            arr.splice(0, 0, arr.splice(index, 1)[0])
+          }
+          return true
+        })
+        sortedData[key].sell.map((item, index, arr) => {
+          if (index === 2) return null
+          if (item.amount === 0) {
+            // arr.push(arr.splice(index, 1)[0])
+            arr.splice(3, 0, arr.splice(index, 1)[0])
+          }
+          return true
+        })
+      }
+      console.log(sortedData)
       return { sortedData }
     })
   ),
