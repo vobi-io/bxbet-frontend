@@ -45,59 +45,39 @@ export default compose(
       }
       const gameData = getGameMaxOdds ? JSON.parse(JSON.stringify(getGameMaxOdds)) : isEmptyData
 
-      const returnSortedArray = arr => arr.sort((a, b) => a.odd - b.odd)
+      const sellSortedArray = arr => arr.filter(i => i.amount > 0).sort((a, b) => a.odd - b.odd)
+      const buySortedArray = arr => arr.filter(i => i.amount > 0).sort((a, b) => b.odd - a.odd)
       const isEmpty = arr => !(arr.length > 0)
-      sortedData.drawRow.buy = isEmpty(!gameData.drawSell) ? returnSortedArray(gameData.drawSell) : []
-      sortedData.drawRow.sell = isEmpty(!gameData.drawBuy) ? returnSortedArray(gameData.drawBuy) : []
+      sortedData.drawRow.buy = isEmpty(!gameData.drawSell) ? buySortedArray(gameData.drawSell) : []
+      sortedData.drawRow.sell = isEmpty(!gameData.drawBuy) ? sellSortedArray(gameData.drawBuy) : []
 
-      sortedData.homeRow.buy = isEmpty(!gameData.homeTeamSell) ? returnSortedArray(gameData.homeTeamSell) : []
-      sortedData.homeRow.sell = isEmpty(!gameData.homeTeamBuy) ? returnSortedArray(gameData.homeTeamBuy) : []
+      sortedData.homeRow.buy = isEmpty(!gameData.homeTeamSell) ? buySortedArray(gameData.homeTeamSell) : []
+      sortedData.homeRow.sell = isEmpty(!gameData.homeTeamBuy) ? sellSortedArray(gameData.homeTeamBuy) : []
 
 
-      sortedData.awayRow.buy = isEmpty(!gameData.awayTeamSell) ? returnSortedArray(gameData.awayTeamSell) : []
-      sortedData.awayRow.sell = isEmpty(!gameData.awayTeamBuy) ? returnSortedArray(gameData.awayTeamBuy) : []
+      sortedData.awayRow.buy = isEmpty(!gameData.awayTeamSell) ? buySortedArray(gameData.awayTeamSell) : []
+      sortedData.awayRow.sell = isEmpty(!gameData.awayTeamBuy) ? sellSortedArray(gameData.awayTeamBuy) : []
 
-      for (const key in sortedData) {
-        if (sortedData[key].sell.length === 0) {
-          for (let i = 0; i < 3; i++) {
-            sortedData[key].sell.push({ odd: 0, amount: 0 })
-          }
-        } else if (sortedData[key].sell.length < 3 && sortedData[key].sell.length > 0) {
-          for (let i = sortedData[key].sell.length; i < 3; i++) {
-            sortedData[key].sell.unshift({ odd: 0, amount: 0 })
-          }
-        }
-        if (sortedData[key].buy.length === 0) {
-          for (let i = 0; i < 3; i++) {
-            sortedData[key].buy.push({ odd: 0, amount: 0 })
-          }
-        } else if (sortedData[key].buy.length < 3 && sortedData[key].buy.length > 0) {
-          for (let i = sortedData[key].buy.length; i < 3; i++) {
-            sortedData[key].buy.unshift({ odd: 0, amount: 0 })
+      const fillEmpty = (data, type) => {
+        if (data.length < 3) {
+          const length = data.length
+
+          for (let i = length; i < 3; i++) {
+            if (type === 'sell') {
+              data.push({ odd: 0, amount: 0 })
+            } else {
+              data.unshift({ odd: 0, amount: 0 })
+            }
           }
         }
+        return data
       }
 
       for (const key in sortedData) {
-        sortedData[key].buy.map((item, index, arr) => {
-          if (index === 0) return null
-          if (item.amount === 0) {
-            // arr.splice(index, 1)
-            // arr.unshift(item)
-            arr.splice(0, 0, arr.splice(index, 1)[0])
-          }
-          return true
-        })
-        sortedData[key].sell.map((item, index, arr) => {
-          if (index === 2) return null
-          if (item.amount === 0) {
-            // arr.push(arr.splice(index, 1)[0])
-            arr.splice(3, 0, arr.splice(index, 1)[0])
-          }
-          return true
-        })
+        sortedData[key].sell = fillEmpty(sortedData[key].sell, 'sell')
+        sortedData[key].buy = fillEmpty(sortedData[key].buy, 'buy')
       }
-      console.log(sortedData)
+
       return { sortedData }
     })
   ),
