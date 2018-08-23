@@ -89,28 +89,51 @@ const StyledLabel = styled.p`
 const Create = ({ categories, homeTeam, awayTeam, startDate, endDate, category, onChangeHandler, onStartDateSelection, onEndDateSelection, onSelectorChange, createGame, ...rest }) =>
 
    (
-     <Container>
-       <StyledTitle>Create</StyledTitle>
-       <Line />
-       <StyledForm>
-         <TextField title="Team One" value={homeTeam} onChange={onChangeHandler} />
-         <TextField title="Team Two" value={awayTeam} onChange={onChangeHandler} />
-         <StyledDatePicker>
-           <StyledLabel>
-             Start Date
-          </StyledLabel>
-           <DatePicker selected={startDate} dateFormat="DD/MM/YYYY" onChange={onStartDateSelection} />
-         </StyledDatePicker>
-         <StyledDatePicker>
-           <StyledLabel>
-             End Date
-          </StyledLabel>
-           <DatePicker selected={endDate} dateFormat="DD/MM/YYYY" onChange={onEndDateSelection} />
-         </StyledDatePicker>
-         <SelectField title="Category" selected={category} options={categories} onChange={onSelectorChange} />
-       </StyledForm>
-       <Button text="Create Game" cta onClick={createGame} />
-     </Container>
+     <div>
+       <style>
+         {`.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+          padding-left: 0;
+          padding-right: 0;
+          }`
+         }
+       </style>
+        <Container>
+          <StyledTitle>Create</StyledTitle>
+          <Line />
+          <StyledForm>
+            <TextField title="Team One" value={homeTeam} onChange={onChangeHandler} />
+            <TextField title="Team Two" value={awayTeam} onChange={onChangeHandler} />
+            <StyledDatePicker>
+              <StyledLabel>
+                Start Date
+              </StyledLabel>
+              <DatePicker
+                selected={startDate}
+                showTimeSelect
+                dateFormat="LLL"
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                onChange={onStartDateSelection}
+              />
+            </StyledDatePicker>
+            <StyledDatePicker>
+              <StyledLabel>
+                End Date
+              </StyledLabel>
+              <DatePicker
+                selected={endDate}
+                showTimeSelect
+                dateFormat="LLL"
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                onChange={onEndDateSelection}
+              />
+            </StyledDatePicker>
+            <SelectField title="Category" selected={category} options={categories} onChange={onSelectorChange} />
+          </StyledForm>
+          <Button text="Create Game" cta onClick={createGame} />
+        </Container>
+     </div>
   )
 
 export default createEnhance(Create)
