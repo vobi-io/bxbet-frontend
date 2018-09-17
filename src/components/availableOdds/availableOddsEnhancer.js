@@ -46,7 +46,7 @@ export default compose(
       const gameData = getGameMaxOdds ? JSON.parse(JSON.stringify(getGameMaxOdds)) : isEmptyData
 
       const sellSortedArray = arr => arr.filter(i => i.amount > 0).sort((a, b) => a.odd - b.odd)
-      const buySortedArray = arr => arr.filter(i => i.amount > 0).sort((a, b) => b.odd - a.odd)
+      const buySortedArray = arr => arr.filter(i => i.amount > 0).sort((a, b) => a.odd - b.odd)
       const isEmpty = arr => !(arr.length > 0)
       sortedData.drawRow.buy = isEmpty(!gameData.drawSell) ? buySortedArray(gameData.drawSell) : []
       sortedData.drawRow.sell = isEmpty(!gameData.drawBuy) ? sellSortedArray(gameData.drawBuy) : []
